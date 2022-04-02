@@ -51,7 +51,7 @@ class ArticleController extends AbstractController
         //             'id'=>$produit->getId()
         //         ], Response::HTTP_SEE_OTHER);
         // }
-        return $this->renderForm('leSekoya/shop/show.html.twig', [
+        return $this->renderForm('lest/shop/show.html.twig', [
             'article'=>$article,
             'articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),
             'form' => $form,
@@ -78,10 +78,11 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             12
         );
+        // dd($pagination);
         // return $this->renderForm('main/article/index_1.html.twig', [
         // return $this->renderForm('main/article/index.html.twig', [
             // dd($categoryRepository->parents());
-        return $this->renderForm('leSekoya/shop/index.html.twig', [
+        return $this->renderForm('lest/shop/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,
             'breadcrumb'=>[

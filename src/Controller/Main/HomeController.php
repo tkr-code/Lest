@@ -22,7 +22,7 @@ class HomeController extends AbstractController
     {
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
-      return  $this->renderForm("leSekoya/home/index.html.twig", [
+      return  $this->renderForm("lest/home/index.html.twig", [
             'form'=>$form,
             'articles'=>[
                 'rand'=>$articleRepository->findRand(),

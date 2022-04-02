@@ -41,7 +41,7 @@ class ContactController extends AbstractController
             $this->addFlash('success',$message);
             return $this->redirectToRoute('contact');
         }
-        return $this->renderForm('lesekoya/contact/index.html.twig', [
+        return $this->renderForm('lest/contact/index.html.twig', [
             'form_contact' =>$formContact
         ]);
     }
