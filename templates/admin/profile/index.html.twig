@@ -1,0 +1,97 @@
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/image.html.twig" as image %}
+{% import "macros/alertes.html.twig" as alerte %}
+{% import "macros/roles.html.twig" as roles %}
+{% import "macros/link.html.twig" as link %}
+
+
+{% extends "admin/base.html.twig" %}
+
+{% block title %}Profile utilisateur{% endblock %}
+
+{% block breadcrumb %}
+    {{ utils.breadcrumb('Profile')}}
+{% endblock %}
+
+{% block body %}
+{% for item in app.flashes('success') %}
+  {{ alerte.alert(item,'success')}}
+{% endfor %}
+  <div class="row">
+    <div class="col-md-3">
+      <!-- Profile Image -->
+      <div class="card card-primary card-outline">
+        <div class="card-body box-profile">
+          <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle"
+                  src="{{ asset('img/user/' ~ app.user.personne.avatar|default('empty.png') ) }}"
+                  alt="{{ app.user.personne.firstName ~ ' ' ~ app.user.personne.lastName  }}">
+          </div>
+          <h3 class="profile-username text-center">{{app.user.personne.lastName | title}} {{app.user.personne.firstname | title }} <a href="{{ path('profile_edit') }}"><i class="fas fa-pencil-alt text-success"></i></a> </h3>
+          <hr>
+          <p>{{app.user.email}} {{link.pencil(path('profile_edit_password'))}} <br>
+            Modifier le mot de passe {{link.pencil()}}
+          </p>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+      <!-- About Me Box -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">About Me</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+          <p class="text-muted">{{ app.user.adresse|default('adresse manquante')}}</p>
+
+          <hr>
+
+          <strong><i class="fas fa-pencil-alt mr-1"></i> Compte</strong>
+          <p class="text-muted">
+          {% for item in app.user.roles %}
+            <span class="tag tag-danger">{{ roles.role(item) }}  </span>
+          {% endfor %}
+          </p>
+         </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header p-2">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link {% if app.request.query.get('tab') is null or app.request.query.get('tab') == '' %}active{% endif %}" href="#activity" data-toggle="tab">
+                Activity</a>
+            </li>
+          </ul>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="active tab-pane" id="activity">
+
+            </div>
+          </div>
+          <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+{% endblock %}
+
+{% block javascripts %}
+  <script>
+   $(document).ready(function(){
+     $('.mon-profile').addClass('active')
+   })
+  </script>
+{% endblock %}
