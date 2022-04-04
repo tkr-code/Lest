@@ -54,6 +54,7 @@ class Category
     private $parentCategory;
 
 
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -143,4 +144,5 @@ class Category
 
         return $this;
     }
+
 }

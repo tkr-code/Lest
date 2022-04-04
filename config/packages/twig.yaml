@@ -7,6 +7,8 @@ twig:
         locales: '%app.locales%'
         search_form: '@App\Twig\SearchExtension'
         navs: '@App\Twig\NavExtension'
+        categories: '@App\Twig\CategoryExtention'
+        parentCategorys: '@App\Twig\CategoryParentExtention'
         site: 
             name: 'leSekoya'
             email: 'leseoya@gmail.com'

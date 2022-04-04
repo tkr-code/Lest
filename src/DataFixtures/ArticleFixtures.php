@@ -27,6 +27,11 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 'articles'=>
                 [
                     [
+                        'title' => 'Mini pc','price' => '150000',
+                        'buy' => '120000',
+                        'etat'=>'Tendance'
+                    ],
+                    [
                         'title' => 'Hp probook','price' => '150000',
                         'buy' => '120000',
                         'etat'=>'Tendance'
@@ -59,63 +64,63 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     ]
                 ]
             ],
-            [
-                'cat'=>'Samsung',
-                'articles'=>
-                [
-                    [
-                        'title' => 'Galaxy S6 edge','price' => '300000',
-                        'buy' => '250000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Galaxy S7 edge','price' => '400000',
-                        'buy' => '250000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Galaxy S5','price' => '190000',
-                        'buy' => '250000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'J 6 2020','price' => '120000',
-                        'buy' => '100000',
-                        'etat'=>"Tendance"
-                    ]
-                ]
-            ],
-            [
-                'cat'=>'Iphone',
-                'articles'=>
-                [
-                    [
-                        'title' => 'Iphone 13','price' => '900000',
-                        'buy' => '700000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Iphone 12','price' => '760000',
-                        'buy' => '700000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Iphone 11','price' => '800000',
-                        'buy' => '700000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Iphone 8','price' => '400000',
-                        'buy' => '700000',
-                        'etat'=>'Top'
-                    ],
-                    [
-                        'title' => 'Airpod','price' => '40000',
-                        'buy' => '30000',
-                        'etat'=>'Tendance'
-                    ]
-                ]
-            ],
+            // [
+            //     'cat'=>'Samsung',
+            //     'articles'=>
+            //     [
+            //         [
+            //             'title' => 'Galaxy S6 edge','price' => '300000',
+            //             'buy' => '250000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Galaxy S7 edge','price' => '400000',
+            //             'buy' => '250000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Galaxy S5','price' => '190000',
+            //             'buy' => '250000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'J 6 2020','price' => '120000',
+            //             'buy' => '100000',
+            //             'etat'=>"Tendance"
+            //         ]
+            //     ]
+            // ],
+            // [
+            //     'cat'=>'Iphone',
+            //     'articles'=>
+            //     [
+            //         [
+            //             'title' => 'Iphone 13','price' => '900000',
+            //             'buy' => '700000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Iphone 12','price' => '760000',
+            //             'buy' => '700000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Iphone 11','price' => '800000',
+            //             'buy' => '700000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Iphone 8','price' => '400000',
+            //             'buy' => '700000',
+            //             'etat'=>'Top'
+            //         ],
+            //         [
+            //             'title' => 'Airpod','price' => '40000',
+            //             'buy' => '30000',
+            //             'etat'=>'Tendance'
+            //         ]
+            //     ]
+            // ],
         ];
 
             foreach ($articles as $value) {

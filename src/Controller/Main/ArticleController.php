@@ -59,8 +59,8 @@ class ArticleController extends AbstractController
     }
     /**
      * @Route("/boutique", name="articles")
-     * @Route("/boutique/{parent}", name="articles_parent")
-     * @Route("/boutique/{parent}/{category}", name="articles_category")
+     * "/boutique/{parent}", name="articles_parent"
+     * @Route("/boutique/{category}", name="articles_category")
      */
     public function index(string $parent = null, string $category = null, ParentCategoryRepository $parentCategoryRepository, Request $request, PaginatorInterface $paginator, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
@@ -89,6 +89,9 @@ class ArticleController extends AbstractController
                 'parent'=>ucfirst($parent),
                 'category'=>ucfirst($category)
             ],
+            'categorie'=>$categoryRepository->findOneBy([
+                'title'=>'ordinateurs'
+            ]),
             'category'=>$categoryRepository->findAll(),
             'category_parents'=>$parentCategoryRepository->etat(true),
             'top_articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),

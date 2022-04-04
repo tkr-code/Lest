@@ -17,20 +17,25 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
                 'parent'=>'parent_informatique',
                 'cat'=>[
                     'Ordinateurs',
-                    'Claviers & Souris',
+                    'Claviers et Souris',
                     'Clé usb',
                     'Cable Hdmi',
-                    'info Accessoires'
+                    'Accessoires',
+                    'Imprimante et accessoires',
+                    'Mémoire',
+                    'Reseaux',
+                    'Ecran PC',
+                    'Ordinateur de Bureau'
                 ]
             ],            
-            [
-                'parent'=>'parent_smartphone',
-                'cat'=>[
-                    'Samsung',
-                    'Iphone',
-                    'Autre marque',
-                ]
-            ],            
+            // [
+            //     'parent'=>'parent_smartphone',
+            //     'cat'=>[
+            //         'Samsung',
+            //         'Iphone',
+            //         'Autre marque',
+            //     ]
+            // ],            
         ];
         foreach ($categories as $key => $value) {
             $parent = $this->getReference($value['parent']);
