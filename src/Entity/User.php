@@ -80,11 +80,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
-     * @ORM\OneToMany(targetEntity=Adress::class, mappedBy="user", cascade={"persist"})
-     */
-    private $adresses;
-
-    /**
      * @ORM\OneToOne(targetEntity=Client::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $client;
@@ -127,16 +122,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $is_active = true;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull
+     * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $adresse;
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->orders = new ArrayCollection();
-        $this->adresses = new ArrayCollection();
         $this->created_at = new \DateTime();
         $this->favoris = new ArrayCollection();
     }
@@ -320,35 +314,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isVerified;
     }
 
-    /**
-     * @return Collection|Adress[]
-     */
-    public function getAdresses(): Collection
-    {
-        return $this->adresses;
-    }
-
-    public function addAdress(Adress $adress): self
-    {
-        if (!$this->adresses->contains($adress)) {
-            $this->adresses[] = $adress;
-            $adress->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdress(Adress $adress): self
-    {
-        if ($this->adresses->removeElement($adress)) {
-            // set the owning side to null (unless already changed)
-            if ($adress->getUser() === $this) {
-                $adress->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getClient(): ?Client
     {
@@ -481,12 +446,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAdresse(): ?Adresse
     {
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse(?Adresse $adresse): self
     {
         $this->adresse = $adresse;
 

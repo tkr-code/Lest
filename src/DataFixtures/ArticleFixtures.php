@@ -29,22 +29,24 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'title' => 'Mini pc','price' => '150000',
                         'buy' => '120000',
-                        'etat'=>'Tendance'
+                        'etat'=>'Tendance',
+                        'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Hp probook','price' => '150000',
                         'buy' => '120000',
-                        'etat'=>'Tendance'
+                        'etat'=>'Tendance',
+                        'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Dell Lattitude','price' => '200000',
                         'buy' => '150000',
-                        'etat'=>'Tendance'
+                        'etat'=>'Tendance',
+                        'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Mac probook','price' => '300000',
-                        'buy' => '200000',
-                        'etat'=>'Tendance'
+                        'buy' => '200000','etat'=>'Tendance','brand'=>'Hp'
                     ],
                 ]
             ],
@@ -55,12 +57,13 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'title' => 'Clé Usb 32 go','price' => '10000',
                         'buy' => '6000',
-                        'etat'=>'Top'
+                        'etat'=>'Top',
+                        'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Clé Usb 4 go','price' => '4000',
                         'buy' => '3000',
-                        'etat'=>'Top'
+                        'etat'=>'Top','brand'=>'Hp'
                     ]
                 ]
             ],
@@ -135,7 +138,9 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 ->setEtat($value['etat'])
                 ->setDescription('Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae consequatur dicta,')
                 ->setQuantity(10)
+                // ->setBrand($this->getReference('brand_'.$value))
                 ->setQtyReel(10);
+                $this->addReference('_article_'. str_replace(' ','_', $value['title']),$article);
                 $manager->persist($article);
                 }
             }

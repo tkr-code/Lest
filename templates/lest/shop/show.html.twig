@@ -68,7 +68,7 @@
 
 						<div class="col-md-6">
 							<div class="product-details sticky-content" style="">
-								<h1 class="product-title">Black denim dungaree dress</h1>
+								<h1 class="product-title">{{ article.title }}</h1>
 								<!-- End .product-title -->
 
 								<div class="ratings-container">
@@ -82,14 +82,13 @@
 								<!-- End .rating-container -->
 
 								<div class="product-price">
-									<span class="new-price">$60.00</span>
-									<span class="old-price">$80.00</span>
+									<span class="new-price">{{ article.formatterPrice }}</span>
+									<span class="old-price">{{ article.formatterPrice }}</span>
 								</div>
 								<!-- End .product-price -->
 
 								<div class="product-content">
-									<p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing. Sed lectus.
-									</p>
+									<p>{{ article.description|nl2br }}</p>
 								</div>
 								<!-- End .product-content -->
 
@@ -98,13 +97,13 @@
 
 									<div class="product-nav product-nav-thumbs">
 										<a href="#" class="active">
-											<img src="assets/images/products/single/masonry/1-thumb.jpg" alt="product desc">
+											<img src="{{ asset('assets/images/products/single/masonry/1-thumb.jpg') }}" alt="product desc">
 										</a>
 										<a href="#">
-											<img src="assets/images/products/single/masonry/2-thumb.jpg" alt="product desc">
+											<img src="{{ asset('assets/images/products/single/masonry/2-thumb.jpg') }}" alt="product desc">
 										</a>
 										<a href="#">
-											<img src="assets/images/products/single/masonry/3-thumb.jpg" alt="product desc">
+											<img src="{{ asset('assets/images/products/single/masonry/3-thumb.jpg') }}" alt="product desc">
 										</a>
 									</div>
 									<!-- End .product-nav -->
@@ -398,30 +397,30 @@
 				<h2 class="title text-center mb-4">You May Also Like</h2>
 				<!-- End .title text-center -->
 				<div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow owl-loaded owl-drag" data-toggle="owl" data-owl-options="{
-						                            &quot;nav&quot;: false,
-						                            &quot;dots&quot;: true,
-						                            &quot;margin&quot;: 20,
-						                            &quot;loop&quot;: false,
-						                            &quot;responsive&quot;: {
-						                                &quot;0&quot;: {
-						                                    &quot;items&quot;:1
-						                                },
-						                                &quot;480&quot;: {
-						                                    &quot;items&quot;:2
-						                                },
-						                                &quot;768&quot;: {
-						                                    &quot;items&quot;:3
-						                                },
-						                                &quot;992&quot;: {
-						                                    &quot;items&quot;:4
-						                                },
-						                                &quot;1200&quot;: {
-						                                    &quot;items&quot;:4,
-						                                    &quot;nav&quot;: true,
-						                                    &quot;dots&quot;: false
-						                                }
-						                            }
-						                        }">
+												                            &quot;nav&quot;: false,
+												                            &quot;dots&quot;: true,
+												                            &quot;margin&quot;: 20,
+												                            &quot;loop&quot;: false,
+												                            &quot;responsive&quot;: {
+												                                &quot;0&quot;: {
+												                                    &quot;items&quot;:1
+												                                },
+												                                &quot;480&quot;: {
+												                                    &quot;items&quot;:2
+												                                },
+												                                &quot;768&quot;: {
+												                                    &quot;items&quot;:3
+												                                },
+												                                &quot;992&quot;: {
+												                                    &quot;items&quot;:4
+												                                },
+												                                &quot;1200&quot;: {
+												                                    &quot;items&quot;:4,
+												                                    &quot;nav&quot;: true,
+												                                    &quot;dots&quot;: false
+												                                }
+												                            }
+												                        }">
 					<!-- End .product -->
 
 					<!-- End .product -->
@@ -488,14 +487,14 @@
 
 										<div class="product-nav product-nav-thumbs">
 											<a href="#" class="active">
-												<img src="assets/images/products/product-4-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-4-thumb.jpg') }}" alt="product desc">
 											</a>
 											<a href="#">
-												<img src="assets/images/products/product-4-2-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-4-2-thumb.jpg') }}" alt="product desc">
 											</a>
 
 											<a href="#">
-												<img src="assets/images/products/product-4-3-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-4-3-thumb.jpg') }}" alt="product desc">
 											</a>
 										</div>
 										<!-- End .product-nav -->
@@ -508,7 +507,7 @@
 									<figure class="product-media">
 										<span class="product-label label-out">Out of Stock</span>
 										<a href="product.html">
-											<img src="assets/images/products/product-6.jpg" alt="Product image" class="product-image">
+											<img src="{{ asset('assets/images/products/product-6.jpg') }}" alt="Product image" class="product-image">
 										</a>
 
 										<div class="product-action-vertical">
@@ -564,7 +563,7 @@
 									<figure class="product-media">
 										<span class="product-label label-top">Top</span>
 										<a href="product.html">
-											<img src="assets/images/products/product-11.jpg" alt="Product image" class="product-image">
+											<img src="{{ asset('assets/images/products/product-11.jpg') }}" alt="Product image" class="product-image">
 										</a>
 
 										<div class="product-action-vertical">
@@ -614,14 +613,14 @@
 
 										<div class="product-nav product-nav-thumbs">
 											<a href="#" class="active">
-												<img src="assets/images/products/product-11-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-11-thumb.jpg') }}" alt="product desc">
 											</a>
 											<a href="#">
-												<img src="assets/images/products/product-11-2-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-11-2-thumb.jpg') }}" alt="product desc">
 											</a>
 
 											<a href="#">
-												<img src="assets/images/products/product-11-3-thumb.jpg" alt="product desc">
+												<img src="{{ asset('assets/images/products/product-11-3-thumb.jpg') }}" alt="product desc">
 											</a>
 										</div>
 										<!-- End .product-nav -->
@@ -633,7 +632,7 @@
 								<div class="product product-7">
 									<figure class="product-media">
 										<a href="product.html">
-											<img src="assets/images/products/product-10.jpg" alt="Product image" class="product-image">
+											<img src="{{ asset('assets/images/products/product-10.jpg') }}" alt="Product image" class="product-image">
 										</a>
 
 										<div class="product-action-vertical">
@@ -688,7 +687,7 @@
 								<div class="product product-7">
 									<figure class="product-media">
 										<a href="product.html">
-											<img src="assets/images/products/product-7.jpg" alt="Product image" class="product-image">
+											<img src="{{ asset('assets/images/products/product-7.jpg') }}" alt="Product image" class="product-image">
 										</a>
 
 										<div class="product-action-vertical">

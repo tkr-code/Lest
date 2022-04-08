@@ -22,10 +22,10 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
-        if($slug !== $article->getSlug() || $category !== $article->getCategory()->getTitle() ){
+        if($slug !== $article->getSlug() || $category !== strtolower($article->getCategory()->getTitle()) ){
             return $this->redirectToRoute('articles_show',
                 [
-                    'category'=>$article->getCategory()->getTitle(),
+                    'category'=>strtolower($article->getCategory()->getTitle()),
                     'slug'=>$article->getSlug(),
                     'id'=>$article->getId()
                 ],301);
@@ -90,7 +90,7 @@ class ArticleController extends AbstractController
                 'category'=>ucfirst($category)
             ],
             'categorie'=>$categoryRepository->findOneBy([
-                'title'=>'ordinateurs'
+                'title'=>$category
             ]),
             'category'=>$categoryRepository->findAll(),
             'category_parents'=>$parentCategoryRepository->etat(true),

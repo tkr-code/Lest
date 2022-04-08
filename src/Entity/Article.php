@@ -123,6 +123,11 @@ class Article
      */
     private $qty_reel;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="articles")
+     */
+    private $brand;
+
 
     public function __construct()
     {
@@ -422,6 +427,18 @@ class Article
     public function setQtyReel(int $qty_reel): self
     {
         $this->qty_reel = $qty_reel;
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

@@ -69,7 +69,7 @@
                     value="{{ item.quantite }}">
                   <small id="helpId" class="text-muted">En Stock: {{ item.article.quantity }} </small>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group mt-1 col-md-2">
                   <button type="submit" class="btn btn-success ml-1">
                     Appliquer
                   </button>
@@ -183,7 +183,7 @@
                       </div>
                       <div class="col-md-6">
                       <h5>
-                        {{ total|number_format(2,'.',' ') }} {{ site.current }}
+                        {{ total|number_format(0,' ',' ') }} {{ site.current }}
                       </h5> 
                       </div>
                       <div class="col-md-6">
@@ -234,7 +234,9 @@
         <div class="card">
           <div class="card-body text-center">
             <a class="btn bg-primary bnt-primary p-5 rounded-circle" href="#">
-              <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i>
+              {# <i class="fa fa-cart-arrow-down fa-4x" aria-hidden="true"></i> #}
+              {# <i class="las la-shopping-cart"></i> #}
+              <i class="icon-shopping-cart fa-4x"></i>
             </a>
             <h3>{{'Empty cart'|trans }}</h3>
             <p>Ajouter au moins un article au panier</p>

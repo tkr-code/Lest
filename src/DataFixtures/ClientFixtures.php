@@ -6,10 +6,12 @@ use App\Entity\Client;
 use App\Entity\User;
 use App\Entity\Personne;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Proxies\__CG__\App\Entity\Adresse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ClientFixtures extends Fixture
+class ClientFixtures extends Fixture implements DependentFixtureInterface
 {
     private $passwordEncoder;
     public function __construct( UserPasswordHasherInterface $userPasswordHasherInterface)
@@ -35,18 +37,30 @@ class ClientFixtures extends Fixture
             
         ];
         foreach ($clients as $value) {
+            
             $user = new User();
             $user->isVerified(true);
             $personne = new Personne();
             $personne->setFirstName($value['first_name'])
             ->setLastName($value['last_name']);
-            $user->setPhoneNumber('781278288')
-            ->setAdresse('Sacre coeur 2, 11000');
+            $user->setPhoneNumber('781278288');
             $user->setEmail($value['email']);
+            $adresse = new Adresse();
+        $adresse
+            ->setLastName($value['last_name'])
+            ->setFirstName($value['first_name'])
+            ->setCity('Dakar')
+            ->setRue('Sacre coeur')
+            ->setTel('781278288')
+            ->setCodePostal('11000');
+            $user->setAdresse($adresse);
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
+            // ->setAdresse($this->getReference('adresse_client_1'))
+            // ->setAdresse($this->getReference('adresse_client_1'))
             ->setPersonne($personne);
             $client = new Client();
+            // $client->setAdresse($this->getReference('adresse_client_1'));
             $this->addReference('client_'.$value['email'],$user);
             // $client->setUser($this->getReference('client_'.$value['email']));
             $user->setClient($client);
@@ -55,4 +69,12 @@ class ClientFixtures extends Fixture
 
         $manager->flush();
     }
+
+    public function getDependencies()
+    {
+        return[
+            AdresseFixtures::class
+        ];
+    }
+
 }

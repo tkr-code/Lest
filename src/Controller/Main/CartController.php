@@ -39,7 +39,7 @@ class CartController extends AbstractController
      */
     public function checkout():Response
     {
-        return $this->render('lesekoya/cart/checkout.html.twig',[
+        return $this->render('lest/cart/checkout.html.twig',[
 
         ]);
     }
@@ -93,7 +93,7 @@ class CartController extends AbstractController
         $formPayment = $this->createForm(Payment1Type::class,$payment);
         if ($request->request->count() > 0) {
             $cartService->addPost($request->request->get('article_id'),$request->request->get('qty'));
-            $this->addFlash('success','panier modiifer');
+            $this->addFlash('success',"Le produit a été modifié avec succès.");
             return $this->redirectToRoute('cart_index');
         }
 

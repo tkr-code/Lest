@@ -8,7 +8,7 @@
         {% endfor %}
         <ul class="card-product__imgOverlay">
             <li>
-                <a href="{{ path('articles_show', { category: item.category.title, slug: item.slug, id: item.id}) }}">
+                <a href="{{ path('articles_show', { category: item.category.slug, slug: item.slug, id: item.id}) }}">
                     <button><i class="ti-search"></i></button></li>
                 </a>
             <li>

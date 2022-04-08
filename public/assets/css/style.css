@@ -678,7 +678,7 @@ blockquote.text-white cite span {
     font-size     : 1.3rem;
     line-height   : 1.5;
     letter-spacing: 0;
-    color         : #777;
+    color         : #fff;
     margin-bottom : .1rem
 }
 
@@ -862,7 +862,7 @@ blockquote.text-white cite span {
 }
 
 .header-menu a {
-    color: inherit
+    color: #333
 }
 
 .header-menu a:hover,
@@ -16297,7 +16297,7 @@ button:focus {
 }
 
 .table.table-cart .total-col {
-    width: 80px
+    width: 120px
 }
 
 .table.table-cart .quantity-col {

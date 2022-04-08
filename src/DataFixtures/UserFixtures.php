@@ -2,14 +2,16 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Adresse;
 use App\Entity\Personne;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private $em;
     private $passwordEncoder;
@@ -45,8 +47,16 @@ class UserFixtures extends Fixture
             $personne->setFirstName($value['first_name'])
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
-            $user->setPhoneNumber('781278288')
-            ->setAdresse('');
+            $user->setPhoneNumber('781278288');
+            $adresse = new Adresse();
+        $adresse
+            ->setLastName($value['last_name'])
+            ->setFirstName($value['first_name'])
+            ->setCity('Dakar')
+            ->setRue('Sacre coeur')
+            ->setTel('781278288')
+            ->setCodePostal('11000');
+            $user->setAdresse($adresse);
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
             ->setRoles($value['roles'])
             ->setPersonne($personne);
@@ -55,5 +65,11 @@ class UserFixtures extends Fixture
             $this->addReference('user_'.$key,$user);
         }
         $this->em->flush();
+    }
+    public function getDependencies()
+    {
+        return[
+            AdresseFixtures::class
+        ];
     }
 }
