@@ -79,7 +79,9 @@ class Category
     }
     public function getSlug()
     {
-        return str_replace(' ','-',$this->title);
+        $Slugify = new Slugify();
+        
+        return $Slugify->slugify($this->title);
     }
 
     public function setTitle(string $title): self

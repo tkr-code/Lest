@@ -34,6 +34,17 @@ class CartController extends AbstractController
     }
     /**
      * checkout
+     * @Route("/store/checkout", name="checkout_store")
+     * @return void
+     */
+    public function checkoutStore():Response
+    {
+        return $this->render('leSekoya/cart/checkout.html.twig',[
+
+        ]);
+    }
+    /**
+     * checkout
      * @Route("/checkout", name="checkout")
      * @return void
      */
@@ -101,6 +112,37 @@ class CartController extends AbstractController
         $formDeliverySpace = $this->createForm(DeliverySpaceType::class, $deliverySpace);
         $formDeliverySpace->handleRequest($request);
         return $this->renderForm('lest/cart/index.html.twig',[
+            'items'=>$cartService->getFullCart(),
+            'total'=>$cartService->getTotal(),
+            'form'=>$form,
+            'cities'=>$cityRepository->findbyCountryName(),
+            'streets'=>$streetRepository->findbyCity(),
+            'form_payment'=>$formPayment,
+            'form_delivery_space'=>$formDeliverySpace,
+            'rand_articles'=>$articleRepository->findRand(),
+            'methodPayment'=>$paymentMethodRepository->findAll()
+
+        ]);
+    }
+    /**
+     * @Route("store/cart", name="store_cart_index")
+     */
+    public function indexStore( PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository,StreetRepository $streetRepository, CartService $cartService, Request $request, CityRepository $cityRepository): Response
+    {
+        $search = new ArticleSearch();
+        $form = $this->createForm(ArticleSearchType::class,$search);
+        $payment = new Payment();
+        $formPayment = $this->createForm(Payment1Type::class,$payment);
+        if ($request->request->count() > 0) {
+            $cartService->addPost($request->request->get('article_id'),$request->request->get('qty'));
+            $this->addFlash('success',"Le produit a été modifié avec succès.");
+            return $this->redirectToRoute('cart_index');
+        }
+
+        $deliverySpace = new DeliverySpace();
+        $formDeliverySpace = $this->createForm(DeliverySpaceType::class, $deliverySpace);
+        $formDeliverySpace->handleRequest($request);
+        return $this->renderForm('leSekoya/cart/index.html.twig',[
             'items'=>$cartService->getFullCart(),
             'total'=>$cartService->getTotal(),
             'form'=>$form,

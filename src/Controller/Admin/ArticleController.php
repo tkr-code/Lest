@@ -145,8 +145,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}", name="article_show", methods={"GET"})
      */
-    public function show(Article $article): Response
+    public function show(Article $article, int $id): Response
     {
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
         return $this->render('admin/article/show.html.twig', [
             'article' => $article,
         ]);

@@ -90,10 +90,9 @@ class ProfileController extends AbstractController
             }
             $user->setPersonne($personne);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success','profil modify');
+            $this->addFlash('success','Votre profile a été modifié avec succès.');
             return $this->redirectToRoute('profile_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->renderForm('admin/profile/edit.html.twig', [
             'user' => $user,
             'form' => $form,

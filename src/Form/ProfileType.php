@@ -26,7 +26,7 @@ class ProfileType extends AbstractType
                 'label'=>false
             ])
             ->add('phone_number',NumberType::class)
-            ->add('adresse',TextType::class)
+            ->add('adresse',AdresseType::class)
             ->add('avatar',FileType::class,[
                 'label'=>'avatar ( jpg or png )  ',
                 'multiple'=>false,

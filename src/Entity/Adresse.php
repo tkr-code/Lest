@@ -52,6 +52,11 @@ class Adresse
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pays;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -147,6 +152,18 @@ class Adresse
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): self
+    {
+        $this->pays = $pays;
 
         return $this;
     }

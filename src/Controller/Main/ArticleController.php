@@ -22,10 +22,10 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
-        if($slug !== $article->getSlug() || $category !== strtolower($article->getCategory()->getTitle()) ){
+        if($slug !== $article->getSlug() || $category !== $article->getCategory()->getSlug() ){
             return $this->redirectToRoute('articles_show',
                 [
-                    'category'=>strtolower($article->getCategory()->getTitle()),
+                    'category'=>strtolower($article->getCategory()->getSlug()),
                     'slug'=>$article->getSlug(),
                     'id'=>$article->getId()
                 ],301);

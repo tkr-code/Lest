@@ -1,12 +1,12 @@
 {% import "macros/search.html.twig" as search %}
 {% import "macros/alertes.html.twig" as alert %}
 
-{% extends "leSekoya/base.html.twig" %}
+{% extends "lest/base.html.twig" %}
 
 
 {% block title %} {{'Order confirmation'|trans }} - {{ order.number }} {% endblock %}
 
-{% block body %}
+{% block main %}
 <style>
   .loader{
     display:none;

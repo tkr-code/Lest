@@ -111,6 +111,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $phone_number;
 
+        /**
+     * 
+     * @ORM\OneToMany(targetEntity=Phone::class, mappedBy="user")
+     */
+    private $phones;
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -133,6 +139,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->orders = new ArrayCollection();
         $this->created_at = new \DateTime();
         $this->favoris = new ArrayCollection();
+        $this->phones = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -454,6 +462,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAdresse(?Adresse $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Phone[]
+     */
+    public function getPhones(): Collection
+    {
+        return $this->phones;
+    }
+
+    public function addPhone(Phone $phone): self
+    {
+        if (!$this->phones->contains($phone)) {
+            $this->phones[] = $phone;
+            $phone->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhone(Phone $phone): self
+    {
+        if ($this->phones->removeElement($phone)) {
+            // set the owning side to null (unless already changed)
+            if ($phone->getUser() === $this) {
+                $phone->setUser(null);
+            }
+        }
 
         return $this;
     }

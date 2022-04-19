@@ -25,7 +25,7 @@
     {{'To'|trans}}
     <address>
     <strong>{{ order.user.personne.firstName ~ ' ' ~ order.user.personne.lastName }}</strong><br>
-    {{ order.user.adresse }}<br>
+    {{ order.user.adresse.rue }}<br>
     {{'Phone'|trans}}: {{ order.user.phoneNumber }}<br>
     {{'Email'|trans}}: {{ order.user.email }}
     </address>
@@ -35,7 +35,7 @@
     <b>{{'Invoice'|trans}} #{{ order.number }}</b><br>
     <br>
     <b>{{'Order'|trans}} ID:</b> #{{ order.id}} <br>
-    <b>{{'Payment Due'|trans}}:</b> {{ order.paymentDue | date('d/m/Y') }} <br>
+    <b>{{'Payment Due'|trans}}:</b> {{ order.paymentDue | date_format_fr|capitalize }} <br>
 </div>
 <!-- /.col -->
 </div>
