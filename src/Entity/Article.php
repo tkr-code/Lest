@@ -24,6 +24,10 @@ class Article
         'Populaire'=>'Populaire',
         'Meilleurs ventes'=>'Meilleurs ventes'
     ];
+    const LABEL =[
+        'New'=>'New',
+        'Top'=>'Top'
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -127,6 +131,11 @@ class Article
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="articles")
      */
     private $brand;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $label;
 
 
     public function __construct()
@@ -439,6 +448,18 @@ class Article
     public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): self
+    {
+        $this->label = $label;
 
         return $this;
     }

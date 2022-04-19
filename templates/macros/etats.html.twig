@@ -21,3 +21,14 @@
         <span class="badge">{{etat}}</span>
     {% endif %}
 {% endmacro %}
+
+{% macro articleLabel(label) %}
+    {% if label == 'New' %}
+        <span class="product-label label-new">{{'New'|trans}}</span>
+        {% elseif label == 'Top' %}
+        <span class="product-label label-top">{{'Top'|trans}}</span>
+        {% elseif label == 'Out' %}
+        <span class="product-label label-out">{{'Stock'|trans}}</span>
+    {% endif %}
+    
+{% endmacro %}

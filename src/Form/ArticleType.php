@@ -51,6 +51,14 @@ class ArticleType extends AbstractType
                     'placeholder'=>'The descripsion greater 10 characters',
                 ]
             ])
+
+            ->add('label',ChoiceType::class,[
+                'choices'=>Article::LABEL,
+                'required'=>false,
+                'attr'=>[
+                    'class'=>'select2'
+                ]
+            ])
             ->add('etat',ChoiceType::class,[
                 'choices'=>Article::etats,
                 'required'=>false,

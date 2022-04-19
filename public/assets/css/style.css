@@ -6,7 +6,12 @@ html {
     -ms-text-size-adjust    : 100%;
     font-size-adjust        : 100%
 }
-
+.widget-category .widget-body a{
+    color: #333
+}
+.widget-category .widget-body a.active{
+    color: #ee9211
+}
 html,
 body {
     height: 100%

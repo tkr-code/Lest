@@ -1,30 +1,24 @@
 <div class="col-6 col-md-4 col-lg-4 col-xl-3">
 	<div class="product product-7 text-center">
 		<figure class="product-media">
-			<span class="product-label label-new">{{'New'|trans}}</span>
-			<span class="product-label label-out">Out of Stock</span>
-			<span class="product-label label-top">Top</span>
+			{% import "macros/etats.html.twig" as etats %}
+			{{ etats.articleLabel(item.label) }}
 			<a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
 				{% for item in item.images|slice(0,1) %}
 					<img
 					class="product-image" src="{{ asset('img/article/' ~ item.name )|imagine_filter('square') }}" alt="{{ item.name }}">
-					{# <img src="assets/images/products/product-4.jpg" alt="Product image" class="product-image"> #}
 				{% else %}
-					{# <img class="card-img" src="{{ asset('img/vide.png')}}" alt=""> #}
 					<img src="{{ asset('img/vide.png')}}" alt="Product image" class="product-image">
 				{% endfor %}
 			</a>
 
-			<div class="product-action-vertical">
+			<div class="product-action-vertical">				
 				<a href="#" class="btn-product-icon btn-wishlist btn-expandable">
 					<span>{{'add to wishlist'|trans}}</span>
 				</a>
 				<a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view">
 					<span>{{'Quick view'|trans}}</span>
 				</a>
-				{# <a href="#" class="btn-product-icon btn-compare" title="Compare">
-					<span>{{'Compare'|trans}}</span>
-				</a> #}
 			</div>
 			<!-- End .product-action-vertical -->
 
@@ -55,7 +49,7 @@
 			<!-- End .product-price -->
 			<div class="ratings-container">
 				<div class="ratings">
-					<div class="ratings-val" style="width: 20%;"></div>
+					<div class="ratings-val" style="width: 25%;"></div>
 					<!-- End .ratings-val -->
 				</div>
 				<!-- End .ratings -->
@@ -67,16 +61,11 @@
 
 
 			<div class="product-nav product-nav-thumbs">
-				<a href="#" class="active">
-					<img src="{{ asset('assets/images/products/product-4-thumb.jpg') }}" alt="product desc">
+				{% for item in item.images|slice(1,4) %}
+				<a href="#" {{ loop.index == 0 ? 'class="active"':'' }}>
+					<img src="{{ asset('img/article/' ~ item.name ) }}" alt="">
 				</a>
-				<a href="#">
-					<img src="{{ asset('assets/images/products/product-4-2-thumb.jpg') }}" alt="product desc">
-				</a>
-
-				<a href="#">
-					<img src="{{ asset('assets/images/products/product-4-3-thumb.jpg') }}" alt="product desc">
-				</a>
+				{% endfor %}
 			</div>
 			<!-- End .product-nav -->
 		</div>

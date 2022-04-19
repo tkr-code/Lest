@@ -13,22 +13,22 @@
 			-
 			{{ app_name }}
 		</title>
-		<meta name="keywords" content="HTML5 Template">
+		<meta name="keywords" content="Boutique - e-commerce - eCommerce">
 		<meta name="description" content="{{app_name}} - eCommerce">
 		<meta
 		name="author" content="p-themes">
 		<!-- Favicon -->
 		<link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
 		<link
-		rel="icon" type="image/png" sizes="32x32" href="img/lest-logo.png">
+		rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/lest-logo.png') }}">
 		{# <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png"> #}
-		<link rel="manifest" href="assets/images/icons/site.html">
-		<link rel="mask-icon" href="assets/images/icons/safari-pinned-tab.svg" color="#666666">
-		<link rel="shortcut icon" href="assets/images/icons/favicon.ico">
-		<meta name="apple-mobile-web-app-title" content="Molla">
-		<meta name="application-name" content="Molla">
+		<link rel="manifest" href="{{ asset('assets/images/icons/site.html') }}">
+		<link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
+		<link rel="shortcut icon" href="{{ asset('img/lest-logo.png') }}">
+		<meta name="apple-mobile-web-app-title" content="Lest">
+		<meta name="application-name" content="Lest">
 		<meta name="msapplication-TileColor" content="#cc9966">
-		<meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+		<meta name="msapplication-config" content="{{ asset('assets/images/icons/browserconfig.xml') }}">
 		<meta name="theme-color" content="#ffffff">
 		<link
 		rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
@@ -113,13 +113,13 @@
 										<a href="#" class="search-toggle" role="button">
 											<i class="icon-search"></i>
 										</a>
-										<form action="#" method="get">
+										<form action="{{ path('articles') }}" method="get">
 											<div class="header-search-wrapper search-wrapper-wide">
 												<label for="q" class="sr-only">Search</label>
 												<button class="btn btn-primary" type="submit">
 													<i class="icon-search"></i>
 												</button>
-												<input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+												<input type="search" class="form-control" name="mots" id="mots" placeholder="Search product ..." value="{{ app.request.get('mots') }}" required>
 											</div>
 											<!-- End .header-search-wrapper -->
 										</form>
@@ -263,16 +263,16 @@
 								<div class="header-center">
 									<nav class="main-nav">
 										<ul class="menu sf-arrows">
-											<li class="active">
+											<li {{ app.request.get('_route') == 'home' ? 'class="active"': '' }} >
 												<a href="{{ path('home') }}">{{'Home'|trans}}</a>
 											</li>
-											<li>
+											<li {{ ( app.request.get('_route') == 'articles' or app.request.get('_route') == 'articles_category'  ) ? 'class="active"': '' }}>
 												<a href="{{ path('articles') }}">{{'Shop'|trans}}</a>
 											</li>
-											<li>
+											<li {{ app.request.get('_route') == 'contact' ? 'class="active"': '' }}>
 												<a href="{{ path('contact') }}">{{'Contact'|trans}}</a>
 											</li>
-											<li>
+											<li {{ ( app.request.get('_route') == 'about' ) ? 'class="active"': '' }}>
 												<a href="{{ path('home') }}">{{'About'|trans}}</a>
 											</li>
 										</ul>

@@ -1,5 +1,9 @@
 {% extends "lest/base.html.twig" %}
-
+{% block head %}
+	<link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-3.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">
+{% endblock %}
+{% import "macros/search.html.twig" as search %}
 {% block main %}
 	<main class="main">
 		<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -105,32 +109,15 @@
 							<div class="row justify-content-center">
 								{% for item in articles %}
 									{% include "lest/shop/_article.html.twig" %}
-									
+								{% else %}
+										
 								{% endfor %}
 							</div>
 							<!-- End .row -->
 						</div>
 						<!-- End .products -->
-
-
 						<nav aria-label="Page navigation">
 							{{ knp_pagination_render(articles) }}
-							{# <ul class="pagination justify-content-center">
-																												        <li class="page-item disabled">
-																												            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
-																												                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
-																												            </a>
-																												        </li>
-																												        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-																												        <li class="page-item"><a class="page-link" href="#">2</a></li>
-																												        <li class="page-item"><a class="page-link" href="#">3</a></li>
-																												        <li class="page-item-total">of 6</li>
-																												        <li class="page-item">
-																												            <a class="page-link page-link-next" href="#" aria-label="Next">
-																												                Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
-																												            </a>
-																												        </li>
-																												    </ul> #}
 						</nav>
 					</div>
 					<!-- End .col-lg-9 -->
@@ -140,6 +127,30 @@
 							<div class="widget widget-clean">
 								<label>Filters:</label>
 								<a href="#" class="sidebar-filter-clear">Clean All</a>
+							</div>
+							<div class="widget widget-category widget-collapsible">
+								<h3 class="widget-title">
+									<a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="false" aria-controls="widget-1" class="collapsed">
+										Category
+									</a>
+								</h3>
+								<!-- End .widget-title -->
+
+								<div class="collapse show" id="widget-1" style="">
+									<div class="widget-body">
+										<div class="filter-items filter-items-count">
+											{% for item in categories.all %}
+											<div class="filter-item">
+												<a href="{{path('articles_category',{category:item.slug|lower}) }}"  {{ item.slug == app.request.get('category') ? 'class="active"':'' }} >{{ item.title }}</a>
+												<span class="item-count">{{ item.articles|length }}</span>
+											</div>
+											{% endfor %}
+										</div>
+										<!-- End .filter-items -->
+									</div>
+									<!-- End .widget-body -->
+								</div>
+								<!-- End .collapse -->
 							</div>
 							<!-- End .widget widget-clean -->
 							{% if app.request.get('_route') == 'articles_category' %}
@@ -153,11 +164,8 @@
 
 									<div class="collapse show" id="widget-1">
 										<div class="widget-body">
-											<div
-												class="filter-items filter-items-count">
-												{# <pre>
-																																					{{ dump(categorie.brands) }}
-																																				</pre> #}
+											<div class="filter-items filter-items-count">
+
 												{% for item in categorie.brands %}
 													<div class="filter-item">
 														<div class="custom-control custom-checkbox">
@@ -168,89 +176,6 @@
 														<span class="item-count">100</span>
 													</div>
 												{% endfor %}
-
-												{#
-																																				<!-- End .filter-item -->
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-1">
-																																						<label class="custom-control-label" for="cat-1">Dresses</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">3</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-2">
-																																						<label class="custom-control-label" for="cat-2">T-shirts</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">0</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-3">
-																																						<label class="custom-control-label" for="cat-3">Bags</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">4</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-4">
-																																						<label class="custom-control-label" for="cat-4">Jackets</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">2</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-5">
-																																						<label class="custom-control-label" for="cat-5">Shoes</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">2</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-6">
-																																						<label class="custom-control-label" for="cat-6">Jumpers</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">1</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-7">
-																																						<label class="custom-control-label" for="cat-7">Jeans</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">1</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																								
-																																				<div class="filter-item">
-																																					<div class="custom-control custom-checkbox">
-																																						<input type="checkbox" class="custom-control-input" id="cat-8">
-																																						<label class="custom-control-label" for="cat-8">Sportwear</label>
-																																					</div>
-																																					<!-- End .custom-checkbox -->
-																																					<span class="item-count">0</span>
-																																				</div>
-																																				<!-- End .filter-item -->
-																																				#}
 											</div>
 											<!-- End .filter-items -->
 										</div>
@@ -260,7 +185,6 @@
 								</div>
 								<!-- End .category parent-->
 							{% endif %}
-
 
 							<div class="widget widget-collapsible">
 								<h3 class="widget-title">

@@ -55,6 +55,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setCity('Dakar')
             ->setRue('Sacre coeur')
             ->setTel('781278288')
+            ->setPays('Sénegal')
             ->setCodePostal('11000');
             $user->setAdresse($adresse);
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))

@@ -17,6 +17,7 @@ class AdresseFixtures extends Fixture
             ->setCity('Dakar')
             ->setRue('Sacre coeur')
             ->setTel('781278288')
+            ->setPays('Senegal')
             ->setCodePostal('11000')
         ;
         $this->addReference('adresse_client_1',$adresse);
