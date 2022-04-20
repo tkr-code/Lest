@@ -1,7 +1,8 @@
 {% extends "lest/base.html.twig" %}
+
 {% block head %}
 	<link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-3.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">	
 {% endblock %}
 {% import "macros/search.html.twig" as search %}
 {% block main %}
@@ -109,8 +110,8 @@
 							<div class="row justify-content-center">
 								{% for item in articles %}
 									{% include "lest/shop/_article.html.twig" %}
-								{% else %}
-										
+									{% else %}
+
 								{% endfor %}
 							</div>
 							<!-- End .row -->
@@ -140,10 +141,10 @@
 									<div class="widget-body">
 										<div class="filter-items filter-items-count">
 											{% for item in categories.all %}
-											<div class="filter-item">
-												<a href="{{path('articles_category',{category:item.slug|lower}) }}"  {{ item.slug == app.request.get('category') ? 'class="active"':'' }} >{{ item.title }}</a>
-												<span class="item-count">{{ item.articles|length }}</span>
-											</div>
+												<div class="filter-item">
+													<a href="{{path('articles_category',{category:item.slug|lower}) }}" {{ item.slug == app.request.get('category') ? 'class="active"':'' }}>{{ item.title }}</a>
+													<span class="item-count">{{ item.articles|length }}</span>
+												</div>
 											{% endfor %}
 										</div>
 										<!-- End .filter-items -->
@@ -225,4 +226,51 @@
 		<!-- End .page-content -->
 	</main>
 	<!-- End .main -->
+{% endblock %}
+
+{% block javascripts %}
+<script>
+	$(document).ready(function(){
+		//Ajoute un article au panier
+		$(document).on('click','.js-btn-add',function(e){
+			e.preventDefault();
+			let id = $(this).data('id')
+			$.ajax({
+				url:"{{ path('cart_add_ajax')}}",
+				method:'POST',
+				type:'json',
+				beforeSend:function(){
+
+				},
+				data:{
+					id: id,
+				},
+				success:function(data){
+					console.log(data)
+					if(data == 'success'){
+						alert('Le produit a été ajouté au panier.')
+					}else{
+						alert('Une erreur est survenu.')
+					}
+				},
+				error:function(){
+					alert('Une erreur est survenu.')
+				}
+			})
+		})
+
+		Swal.fire({
+			title: 'Auto close alert!',
+			html: 'I will close in <b></b> milliseconds.',
+			didOpen: () => {
+				Swal.showLoading()				
+			},
+			}).then((result) => {
+			/* Read more about handling dismissals below */
+			if (result.dismiss === Swal.DismissReason.timer) {
+				console.log('I was closed by the timer')
+			}
+			})
+	})
+</script>
 {% endblock %}

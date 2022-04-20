@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CartController extends AbstractController
 {
@@ -163,6 +164,20 @@ class CartController extends AbstractController
     {
         $cartService->add($id);
         return $this->redirectToRoute('cart_index');
+    }
+    /**
+     * @Route("cart/add-ajax", name="cart_add_ajax", methods={"GET","POST"})
+     */
+    public function addAjax(CartService $cartService, Request $request)
+    {
+        $id =  $request->get('id');
+        if(!empty($id)){
+            $cartService->add($id);
+            return new JsonResponse('success');
+        }
+        else{
+            return new JsonResponse('erreur');
+        }
     }
     /**
      * @Route("/cart/shipping/add/{id}", name="shipping_add")

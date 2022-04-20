@@ -36,6 +36,8 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+		<!-- Sweetalert 2 -->
+		<link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 		<link
 		rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
 		<!-- Main CSS File -->
@@ -43,6 +45,24 @@
 		</head>
 
 		<body>
+			<style>
+				.js-loader{
+					z-index: 1041;
+					position: fixed;
+					margin: 0 auto;
+
+					width: 200px;
+					height: 40px;
+					background: red;
+					left: 0;
+					right: 0;
+					top: 50%;
+    				/* transform: translate(-50%, 50%); */
+				}
+			</style>
+			<div class="js-loader">
+
+			</div>
 			<div class="page-wrapper">
 				{% block header %}
 					<header class="header header-intro-clearance header-3">
@@ -1017,8 +1037,9 @@
 			<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
 			<script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
 			{% block foot %}{% endblock %}
+			<!-- sweetalert2 -->
+			<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 			<!-- Main JS File -->
-
 			<script src="{{asset('assets/js/main.js') }}"></script>
 			<script src="{{asset('assets/js/demos/demo-3.js') }}"></script>
 			{% block javascripts %}{% endblock %}

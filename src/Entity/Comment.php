@@ -49,6 +49,11 @@ class Comment
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rating;
+
 
 
 
@@ -101,6 +106,18 @@ class Comment
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
