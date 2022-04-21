@@ -152,6 +152,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getArrayResult();
             // ->getResult();
     }
+
     
     public function findQueryBuilder()
     {

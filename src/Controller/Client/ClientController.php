@@ -8,6 +8,7 @@ use App\Entity\Payment;
 use App\Form\ClientType;
 use App\Entity\OrderItem;
 use App\Entity\ArticleSearch;
+use App\Entity\Comment;
 use App\Entity\DeliverySpace;
 use App\Entity\Shipping;
 use App\Form\ArticleSearchType;

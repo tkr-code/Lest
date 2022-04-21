@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\ArticleBuy;
+use App\Entity\Article;
+use App\Entity\Client;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +19,18 @@ class ArticleBuyRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ArticleBuy::class);
+    }
+    public function findQuery(){
+        return $this->createQueryBuilder('o');
+    }
+    public function isBuy(Client $client, Article $article){
+        $query = $this->findQuery();
+        $query
+            ->where('o.article = :article_id and o.client = :client_id' )
+            ->setParameter('article_id',$article->getId())
+            ->setParameter('client_id',$client->getId())
+            ;
+        return $query->getQuery()->getResult();
     }
 
     // /**

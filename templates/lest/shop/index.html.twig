@@ -4,7 +4,6 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-3.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">	
 {% endblock %}
-{% import "macros/search.html.twig" as search %}
 {% block main %}
 	<main class="main">
 		<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -240,17 +239,28 @@
 				method:'POST',
 				type:'json',
 				beforeSend:function(){
-
+					$('.js-loader-text').text('Ajout au panier en cour ...')
+					$('.js-loader').css('display','flex')
 				},
 				data:{
 					id: id,
 				},
 				success:function(data){
-					console.log(data)
-					if(data == 'success'){
-						alert('Le produit a été ajouté au panier.')
+					$('.js-loader').css('display','none')
+					if(data){
+						//Alert success
+						Swal.fire({
+							position: 'top-end',
+							icon: 'success',
+							title: 'Le produit a été ajouté au panier.',
+							showConfirmButton: false,
+							timer: 1500
+							})
 					}else{
-						alert('Une erreur est survenu.')
+						Swal.fire({
+							icon: 'error',
+							title: 'Une erreur est survenu.',
+						})
 					}
 				},
 				error:function(){
@@ -258,19 +268,6 @@
 				}
 			})
 		})
-
-		Swal.fire({
-			title: 'Auto close alert!',
-			html: 'I will close in <b></b> milliseconds.',
-			didOpen: () => {
-				Swal.showLoading()				
-			},
-			}).then((result) => {
-			/* Read more about handling dismissals below */
-			if (result.dismiss === Swal.DismissReason.timer) {
-				console.log('I was closed by the timer')
-			}
-			})
 	})
 </script>
 {% endblock %}

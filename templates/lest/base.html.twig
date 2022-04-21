@@ -41,7 +41,8 @@
 		<link
 		rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
 		<!-- Main CSS File -->
-		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> {% block head %}{% endblock %}
+		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> 
+		{% block head %}{% endblock %}
 		</head>
 
 		<body>
@@ -49,19 +50,30 @@
 				.js-loader{
 					z-index: 1041;
 					position: fixed;
-					margin: 0 auto;
-
-					width: 200px;
-					height: 40px;
-					background: red;
-					left: 0;
-					right: 0;
-					top: 50%;
-    				/* transform: translate(-50%, 50%); */
+					width: 100%;
+					height: 100%;
+					background: #97383863;
+					display: none;
+					justify-content: center;
+					align-items: center;
+				}
+				.js-loader p{
+					text-align:center
+				}
+				.js-loader-content{
+					padding: 10px;
+					width:300px;
+					background:#fff;
+					border-radius: 15px
 				}
 			</style>
-			<div class="js-loader">
-
+			<div class="js-loader js-loader-hide">
+			<div class="text-center js-loader-content">
+				<div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+				<p class="js-loader-text">Chargement...</p>
+			</div>
 			</div>
 			<div class="page-wrapper">
 				{% block header %}
@@ -108,7 +120,6 @@
 									<!-- End .top-menu -->
 								</div>
 								<!-- End .header-right -->
-
 							</div>
 							<!-- End .container -->
 						</div>

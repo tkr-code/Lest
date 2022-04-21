@@ -4,9 +4,13 @@ namespace App\Controller\Main;
 
 use App\Entity\Article;
 use App\Entity\ArticleSearch;
+use App\Entity\Comment;
 use App\Form\ArticleSearchType;
+use App\Form\CommentType;
+use App\Repository\ArticleBuyRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use App\Repository\ParentCategoryRepository;
 use Cocur\Slugify\Slugify;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,41 +24,57 @@ class ArticleController extends AbstractController
     /**
      * @Route("boutique/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
      */
-    public function show(Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
+    public function show(CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
         if($slug !== $article->getSlug() || $category !== $article->getCategory()->getSlug() ){
             return $this->redirectToRoute('articles_show',
                 [
-                    'category'=>strtolower($article->getCategory()->getSlug()),
+                    'category'=>$article->getCategory()->getSlug(),
                     'slug'=>$article->getSlug(),
                     'id'=>$article->getId()
                 ],301);
         }
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search);
-        // $comment = new Comment();
-        // $comment->setProduit($produit);
         
-        // $comment->setAdmin($this->getUser());
-        // $form = $this->createForm(CommentType::class, $comment);
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $entityManager = $this->getDoctrine()->getManager();
-        //     $entityManager->persist($comment);
-        //     $entityManager->flush();
-        //     $this->addFlash('success','Commentaire enregistré');
-        //     return $this->redirectToRoute('articles_show',
-        //         [
-        //             'category'=>$category,
-        //             'slug'=>$slug,
-        //             'id'=>$produit->getId()
-        //         ], Response::HTTP_SEE_OTHER);
-        // }
+        $comment = new Comment();
+        $comment->setArticle($article);
+        $comment->setRating('40');
+        $formComment = $this->createForm(CommentType::class, $comment);
+        $formComment->handleRequest($request);
+        
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
+            if(!empty($this->getUser())){
+                $comment->setUser($this->getUser());
+            }else{
+                return $this->redirectToRoute('app_login');
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            $this->addFlash('success','Commentaire enregistré');
+            return $this->redirectToRoute('articles_show',
+                [
+                    'category'=>$article->getCategory()->getSlug(),
+                    'slug'=>$article->getSlug(),
+                    'id'=>$article->getId()
+                ],Response::HTTP_SEE_OTHER);
+        }
+        $user = $this->getUser();
+        $isBuy = false;
+        if($user)
+        {               
+           $isBuy = $articleBuyRepository->isBuy($user->getClient(),$article);
+           
+        }
         return $this->renderForm('lest/shop/show.html.twig', [
+        // return $this->renderForm('leSekoya/shop/show.html.twig', [
             'article'=>$article,
             'articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),
             'form' => $form,
+            'formComment' => $formComment,
+            'is_buy'=>$isBuy,
+            'rating'=>$commentRepository->rating($article)
         ]);
     }
     /**

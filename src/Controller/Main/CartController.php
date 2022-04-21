@@ -173,10 +173,10 @@ class CartController extends AbstractController
         $id =  $request->get('id');
         if(!empty($id)){
             $cartService->add($id);
-            return new JsonResponse('success');
+            return new JsonResponse(true);
         }
         else{
-            return new JsonResponse('erreur');
+            return new JsonResponse(false);
         }
     }
     /**
