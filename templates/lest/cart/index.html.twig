@@ -9,13 +9,6 @@
 
 {% block main %}
 <main class="main">
-    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">{{'Shopping Cart'|trans}}<span>{{'Shop'|trans}}</span>
-            </h1>
-        </div>
-        <!-- End .container -->
-    </div>
     <!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
@@ -60,7 +53,7 @@
                                                 <a href="#">
                                                     {% for img in item.article.images|slice(0,1) %}
                                                     <img src="{{ asset('img/article/' ~ img.name) }}"
-                                                        alt="{{ item.article.name }}">
+                                                        alt="{{ item.article.title }}">
                                                     {% else %}
                                                     <img src="{{ asset('img/vide.png') }}"
                                                         alt="{{ item.article.title }}">
@@ -77,7 +70,8 @@
 
                                     </td>
                                     <td class="price-col">{{ item.article.price|number_format(0,'.',' ') }}
-                                        {{ site.current}}</td>
+                                        {{ site.current}}
+                                    </td>
                                     <td class="quantity-col">
                                         <form class="form-row" action="" method="post">
                                             <div class="form-group col-md-8">
@@ -102,15 +96,16 @@
                                             </div>
                                         </form>
                                     </td>
+                                
+                                    <td class="total-col">{{ (item.article.price * item.quantite) |
+                                        number_format(0,'.',' ') ~ ' ' ~ site.current }}
+                                    </td>
+                                    <td class="remove-col">
+                                        <a href="{{ path('cart_delete',{id:item.article.id}) }}" class="btn-remove">
+                                            <i class="icon-close text-danger"></i>
+                                        </a>
+                                    </td>
                                 </tr>
-                                </td>
-                                <td class="total-col">{{ (item.article.price * item.quantite) |
-                                    number_format(0,'.',' ') ~ ' ' ~ site.current }}</td>
-                                <td class="remove-col">
-                                    <a href="{{ path('cart_delete',{id:item.article.id}) }}" class="btn-remove">
-                                        <i class="icon-close text-danger"></i>
-                                    </a>
-                                </td>
                             </tbody>
                             </tr>
                             {% endfor %}
@@ -191,22 +186,15 @@
                     </div>
                     <!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
-                        <form action="{{ path('order_client_new') }}" method="post" >
+                        <form action="{{ path('order_client_new') }}" id="form_order_client_new" method="post" >
                             <div class="summary summary-cart">
                                 <h3 class="summary-title">{{'Cart Total'|trans}}</h3>
                                 <!-- End .summary-title -->
                                 <div class="row">
                                     <div class="col-md-12">
+                                        <p class="h6 mt-3">Lieu de livraison</p>
                                         {% if app.request.session.get('shipping') %}
                                                         <div class="shipping_box">
-                                                            <div class="form-group loader-city">
-                                                                <select class="custom-select" name="city" id="select-city">
-                                                                    {% for item in cities %}
-                                                                    <option name="city" value="{{ item.id}}">{{ item.name }}
-                                                                    </option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div>
                                                             <div class="form-group">
                                                                 <div id="loader-select-street" class="text-center loader">
                                                                     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
@@ -214,7 +202,7 @@
                                                                 <div id="js-select-street">
                                                                     <select required class="custom-select select-street"
                                                                         id="streets" name="street">
-                                                                        <option value="">Choisir le lieu de livraison
+                                                                        <option value="0">Choisir le lieu de livraison
                                                                         </option>
                                                                         <option selected value="{{ delivery.id }}">{{
                                                                             delivery.name }}</option>
@@ -230,7 +218,8 @@
                                                                     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                                                                 </div>
                                                                 <div class="card-body  js-amount">
-                                                                    <p>Montant de la livraison: <br/>
+                                                                    <p>Montant de la livraison:</p>
+                                                                    <p class="text-center">
                                                                         <span class="text-danger font-weight-bold">
                                                                             {{
                                                                             delivery.shippingAmount.amount|number_format(2,'.','
@@ -244,14 +233,14 @@
                                                         </div>
                                                         {% else %}
                                                         <div class="shipping_box">
-                                                            <div class="form-group loader-city">
+                                                            {# <div class="form-group loader-city">
                                                                 <select class="custom-select" name="city" id="select-city">
                                                                     {% for item in cities %}
                                                                     <option name="city" value="{{ item.id}}">{{ item.name }}
                                                                     </option>
                                                                     {% endfor %}
                                                                 </select>
-                                                            </div>
+                                                            </div> #}
                                                             <div class="form-group">
                                                                 <div id="loader-select-street" class="text-center loader">
                                                                     <i class="fas fa-2x fa-sync-alt fa-spin"></i>
@@ -259,7 +248,7 @@
                                                                 <div id="js-select-street">
                                                                     <select required class="custom-select select-street"
                                                                         id="streets" name="street">
-                                                                        <option value="">Choisir le lieu de livraison
+                                                                        <option value="0">Choisir le lieu de livraison
                                                                         </option>
                                                                         {% for item in streets %}
                                                                         <option value="{{ item.id }}">{{ item.name }}
@@ -279,7 +268,7 @@
                                                         {% endif %}
                                     </div>
                                     <div class="col-lg-12">
-                                        <p class="h4">Methode de paiment</p>
+                                        <p class="h6 mt-3">Methode de paiment</p>
                                         <ul>
                                         {% for item in methodPayment %}
                                         <li class="filter-list">
@@ -301,57 +290,9 @@
                                                 {{ total|number_format(0,'.',' ') }}
                                                 {{ site.current }}
                                             </td>
-                                        </tr>
-                                        <!-- End .summary-subtotal -->
-                                        <tr class="summary-shipping">
-
-                                            <td>Adresse de livraison:</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-
-                                        <tr class="summary-shipping-ro">
-                                            <td class="w-100">
-                                                <div class="custom-control custom-radio">
-                                                    <input disabled type="radio" id="free-shipping" name="shipping"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="free-shipping">{{'Free
-                                                        Shipping'|trans}}</label>
-                                                </div>
-                                                <!-- End .custom-control -->
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        
-                                                    </div>
-                                                </div>
-
-                                            </td>
-
-                                        </tr>
-                                        <!-- End .summary-shipping-row -->
-
-                                        <tr class="summary-shipping-row">
-                                            <td>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="standart-shipping" name="shipping"
-                                                        class="custom-control-input">
-                                                    <label class="custom-control-label" for="standart-shipping">Votre
-                                                        adresse:</label>
-                                                </div>
-                                                <!-- End .custom-control -->
-                                            </td>
-                                            <td>1 500
-                                                {{ site.current }}</td>
-                                        </tr>
-                                        <!-- End .summary-shipping-row -->
-
-                                        <tr class="summary-shipping-estimate">
-                                            <td>Estimate for Your Country<br>
-                                                <a href="dashboard.html">Change address</a>
-                                            </td>
-                                            <td>&nbsp;</td>
-                                        </tr>
+                                        </tr>                                  
+                                          
                                         <!-- End .summary-shipping-estimate -->
-
                                         <tr class="summary-total">
                                             <td>Total:</td>
                                             <td>
@@ -371,7 +312,7 @@
                                 </table>
                                 <!-- End .table table-summary -->
 
-                                <button type="submit"
+                                <button type="submit" id="btn-submit-order"
                                     class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO
                                     CHECKOUT</button>
                             </div>
@@ -390,7 +331,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body text-center">
-                                <a class="btn bg-primary bnt-primary p-5 rounded-circle" href="#">
+                                <a class="btn bg-primary btn-primary p-5 rounded-circle" href="#">
                                     <i class="icon-shopping-cart" style="font-size:7rem"></i>
                                 </a>
                                 <h3>{{'Empty cart'|trans }}</h3>
@@ -417,6 +358,29 @@
             let total = {{ total }} + val;
         return total
     }
+    $(document).on('click','#btn-submit-order',function(e){
+        e.preventDefault()
+        if($('#streets').val() == '0')
+        {
+            Swal.fire(
+               'Oups !',
+                'Choississez un lieu de livraison',
+                'warning'
+            )
+            return
+        }
+        if($('input[name="method"]').is(':checked'))
+        {
+            $('#form_order_client_new').submit()
+        }else{
+            Swal.fire(
+               'Oups !',
+                'Choississez un moyen de paiment',
+                'warning'
+            )
+            return
+        }
+    })
     $(document).on('change', '#select-city', function () {
         //on recupere l'id de la ville
         let value = $(this).val()
@@ -462,7 +426,6 @@
             $('#loader-street-amount').hide()
             $('.total').text(data.total)
             $('.js-show-amount').text(data.amount2)
-            console.log(data.total)
         }
       })
     })

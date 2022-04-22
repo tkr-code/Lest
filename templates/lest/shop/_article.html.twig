@@ -12,11 +12,14 @@
 				{% endfor %}
 			</a>
 
-			<div class="product-action-vertical">				
-				<a href="#" class="btn-product-icon btn-wishlist btn-expandable">
+			<div class="product-action-vertical">
+				<pre>
+					{{ dump(item.favori) }}
+				</pre>				
+				<a href="{{ path('favoris_add',{id:item.id}) }}" class="btn-product-icon btn-wishlist btn-expandable">
 					<span>{{'add to wishlist'|trans}}</span>
 				</a>
-				<a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view">
+				<a href="#" class="btn-product-icon btn-quickview" title="Quick view">
 					<span>{{'Quick view'|trans}}</span>
 				</a>
 			</div>
@@ -49,7 +52,7 @@
 			<!-- End .product-price -->
 			<div class="ratings-container">
 				<div class="ratings">
-					<div class="ratings-val" style="width: 25%;"></div>
+					<div class="ratings-val" style="width: {{ rating(item) }}%;"></div>
 					<!-- End .ratings-val -->
 				</div>
 				<!-- End .ratings -->

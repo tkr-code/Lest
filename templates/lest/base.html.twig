@@ -36,6 +36,8 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+		<link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
+
 		<!-- Sweetalert 2 -->
 		<link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 		<link
@@ -47,6 +49,12 @@
 
 		<body>
 			<style>
+				.icon-fff{
+					color:#fff
+				}
+				.loader {
+					display: none;
+				}
 				.js-loader{
 					z-index: 1041;
 					position: fixed;
@@ -89,6 +97,7 @@
 								<!-- End .header-left -->
 
 								<div class="header-right">
+									
 
 									<ul class="top-menu">
 										<li>
@@ -159,8 +168,20 @@
 								</div>
 
 								<div class="header-right">
+
+									{% if is_granted('ROLE_CLIENT') %}								
+									<div class="account">
+										<a href="{{ path('client_index') }}" title="My account">
+											<div class="icon icon-fff">
+												<i class="icon-user"></i>
+											</div>
+											<p>Account</p>
+										</a>
+									</div>
+									{% endif %}
+
 									<div class="wishlist">
-										<a href="wishlist.html" title="Wishlist">
+										<a href="{{ path('favoris_index') }}" title="Wishlist">
 											<div class="icon">
 												<i class="icon-heart-o"></i>
 												<span class="wishlist-count badge">3</span>
@@ -183,69 +204,52 @@
 
 										<div class="dropdown-menu dropdown-menu-right">
 											<div class="dropdown-cart-products">
+												{% for cart in cartAll() %}
 												<div class="product">
 													<div class="product-cart-details">
 														<h4 class="product-title">
-															<a href="{{ path('articles') }}">Beige knitted elastic runner shoes</a>
+															<a href="{{ path('articles') }}">{{cart.article.title}}</a>
 														</h4>
 
 														<span class="cart-product-info">
-															<span class="cart-product-qty">1</span>
-															x $84.00
+															<span class="cart-product-qty">{{ cart.quantite }}</span> 
+															x {{ cart.article.price|number_format(0,'.',' ') }} {{ site.current_name}}
 														</span>
 													</div>
 													<!-- End .product-cart-details -->
-
 													<figure class="product-image-container">
 														<a href="{{ path('articles') }}" class="product-image">
-															<img src="assets/images/products/cart/product-1.jpg" alt="product">
+														{% for img in cart.article.images|slice(0,1) %}
+															<img src="{{ asset('img/article/' ~ img.name) }}" alt="product">
+														{% else %}
+															<img src="{{ asset('img/vide.png') }}"
+															alt="{{ cart.article.title }}">
+														{% endfor %}
 														</a>
 													</figure>
-													<a href="#" class="btn-remove" title="Remove Product">
+													<a  href="{{ path('cart_delete',{id:cart.article.id}) }}" class="btn-remove" title="Remove Product">
 														<i class="icon-close"></i>
 													</a>
 												</div>
-												<!-- End .product -->
-
-												<div class="product">
-													<div class="product-cart-details">
-														<h4 class="product-title">
-															<a href="{{ path('articles') }}">Blue utility pinafore denim dress</a>
-														</h4>
-
-														<span class="cart-product-info">
-															<span class="cart-product-qty">1</span>
-															x $76.00
-														</span>
-													</div>
-													<!-- End .product-cart-details -->
-
-													<figure class="product-image-container">
-														<a href="{{ path('articles') }}" class="product-image">
-															<img src="assets/images/products/cart/product-2.jpg" alt="product">
-														</a>
-													</figure>
-													<a href="#" class="btn-remove" title="Remove Product">
-														<i class="icon-close"></i>
-													</a>
+												{% else %}
+													<div class="text-center">
+													<h5>{{'Empty cart'|trans }}</h5>
+													<h6>Ajouter au moins un article au panier</h6>
 												</div>
 												<!-- End .product -->
+												{% endfor %}												
 											</div>
 											<!-- End .cart-product -->
 
 											<div class="dropdown-cart-total">
 												<span>Total</span>
 
-												<span class="cart-total-price">$160.00</span>
+												<span class="cart-total-price">{{ cartTotal()|number_format(0,'', ' ') }} {{  site.current_name}}</span>
 											</div>
 											<!-- End .dropdown-cart-total -->
 
 											<div class="dropdown-cart-action">
 												<a href="{{ path('cart_index') }}" class="btn btn-primary">View Cart</a>
-												<a href="checkout.html" class="btn btn-outline-primary-2">
-													<span>Checkout</span>
-													<i class="icon-long-arrow-right"></i>
-												</a>
 											</div>
 											<!-- End .dropdown-cart-total -->
 										</div>

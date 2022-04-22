@@ -51,6 +51,12 @@ class ArticleRepository extends ServiceEntityRepository
         } 
         return $query->getQuery();
     }
+
+    public function showPagination(){
+        $query = $this->findQueryBuilder();
+        // $query->
+        return $query->getQuery();
+    }
         /**
      * Recheche les articles en fonctions du formulaire
      *

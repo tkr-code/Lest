@@ -12,16 +12,16 @@ class PaymentMethodFixtures extends Fixture
     {
         $payment_methods = 
             [
-                [
-                    'name' => 'Orange Money',
-                    'description' => 's sifteo edmodo ifttt zimbra',
-                    'instructions' => 'ovity jajah plickers sifteo edmodo ifttt zimbra.'
-                ],
-                [
-                    'name' => 'Wave',
-                    'description' => 't zimbra.',
-                    'instructions' => 'lickers sifteo edmodo ifttt zimbra.'
-                ],
+                // [
+                //     'name' => 'Orange Money',
+                //     'description' => 's sifteo edmodo ifttt zimbra',
+                //     'instructions' => 'ovity jajah plickers sifteo edmodo ifttt zimbra.'
+                // ],
+                // [
+                //     'name' => 'Wave',
+                //     'description' => 't zimbra.',
+                //     'instructions' => 'lickers sifteo edmodo ifttt zimbra.'
+                // ],
                 [
                     'name' => 'Payement à la livraison',
                     'description' => 'Etsy doostttt zimbra.',

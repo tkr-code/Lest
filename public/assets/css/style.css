@@ -898,6 +898,7 @@ blockquote.text-white cite span {
 }
 
 .cart-dropdown,
+.account-dropdown,
 .compare-dropdown {
     display    : flex;
     align-self : stretch;

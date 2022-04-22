@@ -36,6 +36,7 @@
 	<!-- End .breadcrumb-nav -->
 
 	<div class="page-content">
+		{% include "include/_alerte.html.twig" %}
 		<div class="container">
 			<div class="product-details-top">
 				<div class="row">
@@ -59,7 +60,7 @@
 								</a>
 							</figure>
 							<!-- End .product-main-image -->
-
+							{% if article.images[1] is defined %}
 							<div id="product-zoom-gallery" class="product-image-gallery product-gallery-masonry"
 								style="position: relative; height: 552.983px;">
 
@@ -94,6 +95,7 @@
 								{% endif %}
 							</div>
 							<!-- End .product-image-gallery -->
+							{% endif %}
 						</div>
 						<!-- End .product-gallery -->
 					</div>
@@ -106,7 +108,7 @@
 
 							<div class="ratings-container">
 								<div class="ratings">
-									<div class="ratings-val" style="width: {{ rating }}%;"></div>
+									<div class="ratings-val" style="width: {{ rating(article) }}%;"></div>
 									<!-- End .ratings-val -->
 								</div>
 								<!-- End .ratings -->

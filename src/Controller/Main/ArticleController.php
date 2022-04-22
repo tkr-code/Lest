@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("boutique/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
      */
-    public function show(CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
+    public function show(PaginatorInterface $paginatorInterface, CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
         if($slug !== $article->getSlug() || $category !== $article->getCategory()->getSlug() ){
             return $this->redirectToRoute('articles_show',
@@ -65,8 +65,14 @@ class ArticleController extends AbstractController
         if($user)
         {               
            $isBuy = $articleBuyRepository->isBuy($user->getClient(),$article);
-           
         }
+
+        $pagination = $paginatorInterface->paginate(
+            $articleRepository->showPagination(),
+            $request->query->getInt('page',1),
+            1
+        );
+        dump($pagination);
         return $this->renderForm('lest/shop/show.html.twig', [
         // return $this->renderForm('leSekoya/shop/show.html.twig', [
             'article'=>$article,
@@ -74,7 +80,6 @@ class ArticleController extends AbstractController
             'form' => $form,
             'formComment' => $formComment,
             'is_buy'=>$isBuy,
-            'rating'=>$commentRepository->rating($article)
         ]);
     }
     /**
@@ -98,10 +103,6 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             12
         );
-        // dd($pagination);
-        // return $this->renderForm('main/article/index_1.html.twig', [
-        // return $this->renderForm('main/article/index.html.twig', [
-            // dd($categoryRepository->parents());
         return $this->renderForm('lest/shop/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,
