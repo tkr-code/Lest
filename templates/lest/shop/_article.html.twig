@@ -1,4 +1,4 @@
-<div class="col-6 col-md-4 col-lg-4 col-xl-3">
+<div class="col-6 col-md-4 col-lg-4 col-xl-3 article-{{item.id }}">
 	<div class="product product-7 text-center">
 		<figure class="product-media">
 			{% import "macros/etats.html.twig" as etats %}
@@ -13,12 +13,17 @@
 			</a>
 
 			<div class="product-action-vertical">
-				<pre>
-					{{ dump(item.favori) }}
-				</pre>				
-				<a href="{{ path('favoris_add',{id:item.id}) }}" class="btn-product-icon btn-wishlist btn-expandable">
+				{% if app.user %}
+				{% if not isToFavoris(app.user, item) %}				
+				<a href="{{ path('favoris_add',{id:item.id}) }}" data-id="{{ item.id }}" class="btn-product-icon btn-wishlist js-favoris js-add-favoris btn-expandable">
 					<span>{{'add to wishlist'|trans}}</span>
 				</a>
+				{% else %}
+				<a href="{{ path('favoris_remove',{id:item.id}) }}" data-id="{{ item.id }}" class="btn-product-icon btn-wishlist js-favoris  bg-danger js-remove-favoris btn-expandable">
+					<span class="bg-danger text-white">{{'remove to wishlist'|trans}}</span>
+				</a>
+				{% endif %}
+				{% endif %}
 				<a href="#" class="btn-product-icon btn-quickview" title="Quick view">
 					<span>{{'Quick view'|trans}}</span>
 				</a>

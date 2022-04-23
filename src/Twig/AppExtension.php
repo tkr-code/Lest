@@ -7,16 +7,20 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use App\Entity\Article;
+use App\Entity\User;
+use App\Repository\ArticleRepository;
 use App\Service\Cart\CartService;
 
 class AppExtension extends AbstractExtension
 {
     private $commentRepository;
     private $cartService;
-    public function __construct(CartService $cartService, CommentRepository $commentRepository)
+    private $articleRepository;
+    public function __construct(ArticleRepository $articleRepository, CartService $cartService, CommentRepository $commentRepository)
     {
         $this->cartService = $cartService;
         $this->commentRepository = $commentRepository;
+        $this->articleRepository = $articleRepository;
     }
     public function getFilters(): array
     {
@@ -31,11 +35,16 @@ class AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('isToFavoris', [$this, 'isToFavoris']),
             new TwigFunction('cartTotal', [$this, 'cartTotal']),
             new TwigFunction('cartAll', [$this, 'cartAll']),
             new TwigFunction('rating', [$this, 'rating']),
             new TwigFunction('dateFilter', [$this, 'doSomething']),
         ];
+    }
+
+    public function isToFavoris(User $user, Article $article){
+       return $this->articleRepository->isFavoris($user,$article);
     }
 
     public function cartTotal(){

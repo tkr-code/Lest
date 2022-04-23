@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\ArticleSearch;
 use Doctrine\Persistence\ManagerRegistry;
@@ -163,6 +164,30 @@ class ArticleRepository extends ServiceEntityRepository
     public function findQueryBuilder()
     {
         return $this->createQueryBuilder('p');
+    }
+
+       /**
+     * Vérifie si l'article est en favoris en fonction du user
+     *
+     */
+    public function isFavoris(User $user, Article $article){
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT * FROM article_user f
+            WHERE f.article_id = :article_id and f.user_id = :user_id
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery([
+            'article_id'=>$article->getId(),
+            'user_id'=>$user->getId()
+        ]);
+        if(empty($resultSet->fetchAllAssociative())){
+            return false;
+        }else{
+            return true;
+        }
+        return false;
     }
 
     // /**

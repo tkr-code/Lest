@@ -207,11 +207,38 @@ class CartController extends AbstractController
     }
 
     /**
+     * @Route("/cart/delete-ajax", name="cart_delete_ajax", methods="POST")
+     */
+    public function deleteAjax(Request $request, CartService $cartService)
+    {
+        $id =  $request->get('id');
+        if(!empty($id)){
+            $cartService->delete($id);
+            return new JsonResponse(true);
+        }
+        else{
+            return new JsonResponse(false);
+        }
+    }
+
+    /**
      * @Route("/cart/clear", name="cart_clear", methods="GET")
      */
     public function claer(CartService $cartService)
     {
         $cartService->clear();
         return $this->redirectToRoute('cart_index');
+    }
+
+    /**
+     * RECHARGE LE PANIER EN AJAX
+     * @Route("/cart/load", name="cart_load")
+     */
+    public function loadCart(){
+        $reponse = [
+            'count'=>$this->render('lest/cart/ajax/count.html.twig')->getContent(),
+            'cart'=>$this->render('lest/cart/ajax/load.html.twig')->getContent()
+        ];
+        return new JsonResponse($reponse);
     }
 }

@@ -37,4 +37,15 @@ class HomeController extends AbstractController
             ]
         ]);
     }
+    /**
+     * @Route("/test",  name="test")
+     */
+    public function test(UserRepository $userRepository, ArticleRepository $articleRepository): Response
+    {   
+        $article = $articleRepository->find(66);
+        dump(
+            $articleRepository->isFavoris($this->getUser(),$article)
+        );
+        return dd('');
+    }
 }
