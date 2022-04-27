@@ -74,21 +74,20 @@
                                     </td>
                                     <td class="quantity-col">
                                         <form class="form-row" action="" method="post">
-                                            <div class="form-group col-md-8">
+                                            <div class="form-group col-md-12">
                                                 <div class="row">
-                                                    <div class="col-12">
+                                                    <div class="col-md-7 col-7">
                                                         <input type="hidden" name="article_id"
                                                             value="{{ item.article.id }}">
                                                         <input type="number" class="form-control" min="1"
                                                             max="{{ item.article.quantity }}" name="qty"
                                                             value="{{ item.quantite }}">
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <small id="helpId" class="text-muted">En Stock:
+                                                            <small id="helpId" class="text-muted">En Stock:
                                                             {{ item.article.quantity }}
                                                         </small>
-                                                        <button type="submit" class="text-center btn-success mt-1 btn">
-                                                            Appliquer
+                                                    </div>
+                                                    <div class="col-5 col-md-5">
+                                                        <button type="submit" title="Appliquer" class="text-center btn-success mt-1">
                                                             <i class="icon-refresh"></i>
                                                         </button>
                                                     </div>
@@ -109,53 +108,7 @@
                             </tbody>
                             </tr>
                             {% endfor %}
-                            {# <tr>
-                                <td class="product-col">
-                                    <div class="product">
-                                        <figure class="product-media">
-                                            <a href="#">
-                                                <img src="assets/images/products/table/product-2.jpg"
-                                                    alt="Product image">
-                                            </a>
-                                        </figure>
-
-                                        <h3 class="product-title">
-                                            <a href="#">Blue utility pinafore denim dress</a>
-                                        </h3>
-                                        <!-- End .product-title -->
-                                    </div>
-                                    <!-- End .product -->
-                                </td>
-                                <td class="price-col">$76.00</td>
-                                <td class="quantity-col">
-                                    <div class="cart-product-quantity">
-                                        <input type="number" class="form-control" value="1" min="1" max="10" step="1"
-                                            data-decimals="0" required="" style="display: none;">
-                                        <div class="input-group  input-spinner">
-                                            <div class="input-group-prepend">
-                                                <button style="min-width: 26px" class="btn btn-decrement btn-spinner"
-                                                    type="button">
-                                                    <i class="icon-minus"></i>
-                                                </button>
-                                            </div><input type="text" style="text-align: center" class="form-control "
-                                                required="" placeholder="">
-                                            <div class="input-group-append">
-                                                <button style="min-width: 26px" class="btn btn-increment btn-spinner"
-                                                    type="button">
-                                                    <i class="icon-plus"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End .cart-product-quantity -->
-                                </td>
-                                <td class="total-col">$76.00</td>
-                                <td class="remove-col">
-                                    <button class="btn-remove">
-                                        <i class="icon-close"></i>
-                                    </button>
-                                </td>
-                            </tr> #}
+                           
                             </tbody>
                         </table>
                         <!-- End .table table-wishlist -->
@@ -268,18 +221,8 @@
                                                         {% endif %}
                                     </div>
                                     <div class="col-lg-12">
-                                        <p class="h6 mt-3">Methode de paiment</p>
-                                        <ul>
-                                        {% for item in methodPayment %}
-                                        <li class="filter-list">
-                                            <input required class="" value="{{ item.id }}" {{ (
-                                            app.request.session.get('methodPayment') and app.request.session.get('methodPayment')==item.id )
-                                            ? 'checked' :'' }} type="radio" name="method">
-                                            <label for="{{ item.name }}">{{ item.name }}</label>
-                                        </li>
-                                        {% endfor %}
-                    
-                                        </ul>
+                                        <p class="h6 mt-3">Payement à la livraison</p>
+                                        
                                     </div>
                                 </div>
                                 <table class="table table-summary">
@@ -311,7 +254,7 @@
                                     </tbody>
                                 </table>
                                 <!-- End .table table-summary -->
-
+                                
                                 <button type="submit" id="btn-submit-order"
                                     class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO
                                     CHECKOUT</button>
@@ -358,9 +301,24 @@
             let total = {{ total }} + val;
         return total
     }
+    {% if not is_granted('ROLE_CLIENT') %}
+    //Envoyer la comande
     $(document).on('click','#btn-submit-order',function(e){
         e.preventDefault()
-        if($('#streets').val() == '0')
+        Swal.fire({
+            title:'Oups !',
+            text: 'Veillez vous connecter ou creer un compte.',
+            icon:'info',
+            confirmButtonText: 'Se connecter ou creer un compte',
+            }).then((result) => {
+                $('#signin-modal').modal('show')
+        })
+    })
+    {% endif %}
+
+    $(document).on('click','#btn-submit-order',function(e){
+        e.preventDefault()
+       if($('#streets').val() == '0')
         {
             Swal.fire(
                'Oups !',
@@ -369,18 +327,10 @@
             )
             return
         }
-        if($('input[name="method"]').is(':checked'))
-        {
-            $('#form_order_client_new').submit()
-        }else{
-            Swal.fire(
-               'Oups !',
-                'Choississez un moyen de paiment',
-                'warning'
-            )
-            return
-        }
+        $('#form_order_client_new').submit()
+        
     })
+
     $(document).on('change', '#select-city', function () {
         //on recupere l'id de la ville
         let value = $(this).val()

@@ -15,11 +15,14 @@
         <tr>
             <td>#{{ order.id }}
              <a 
-                class="float-right"
+                data-id="{{order.id}}"
+                class="float-right px-1 js-order-view"
                 data-toggle="tooltip"
                 data-placement="bottom"
                 title="Look"
-                href="{{ path('client_order_show', {'id': order.id}) }}"><i class="fa fa-eye text-dark"></i></a>
+                href="{{ path('client_order_show', {'id': order.id}) }}">
+                <i class="fa fa-eye text-dark"></i>
+                </a>
                 
             </td>
             <td>{{ order.number }}</td>

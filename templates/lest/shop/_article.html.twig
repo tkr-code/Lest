@@ -13,7 +13,7 @@
 			</a>
 
 			<div class="product-action-vertical">
-				{% if app.user %}
+			{% if app.user %}
 				{% if not isToFavoris(app.user, item) %}				
 				<a href="{{ path('favoris_add',{id:item.id}) }}" data-id="{{ item.id }}" class="btn-product-icon btn-wishlist js-favoris js-add-favoris btn-expandable">
 					<span>{{'add to wishlist'|trans}}</span>
@@ -23,7 +23,11 @@
 					<span class="bg-danger text-white">{{'remove to wishlist'|trans}}</span>
 				</a>
 				{% endif %}
-				{% endif %}
+			{% else %}
+				<a href="#" class="btn-product-icon btn-wishlist js-favoris-login btn-expandable">
+					<span>{{'add to wishlist'|trans}}</span>
+				</a>
+			{% endif %}
 				<a href="#" class="btn-product-icon btn-quickview" title="Quick view">
 					<span>{{'Quick view'|trans}}</span>
 				</a>

@@ -135,20 +135,15 @@ class AppExtension extends AbstractExtension
                 $mois = 'septembre';
                 break;
             case '10':
-                // code...
                 $mois = 'octobre';
                 break;
             case '11':
-                // code...
                 $mois = 'novembre';
                 break;
             case '12':
-                // code...
                 $mois = 'décembre';
                 break;
-
             default:
-                // code...
                 break;
         }
 

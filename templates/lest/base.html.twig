@@ -181,6 +181,7 @@
 									{% endif %}
 
 									<div class="wishlist">
+									{% if is_granted('ROLE_CLIENT') %}
 										<a href="{{ path('favoris_index') }}" title="Wishlist">
 											<div class="icon">
 												<i class="icon-heart-o"></i>
@@ -188,6 +189,15 @@
 											</div>
 											<p>{{'Wishlist'|trans}}</p>
 										</a>
+										{% else %}
+										<a href="#" class="js-favoris-login" title="Wishlist">
+											<div class="icon">
+												<i class="icon-heart-o"></i>
+												<span class="wishlist-count badge">0</span>
+											</div>
+											<p>{{'Wishlist'|trans}}</p>
+										</a>
+										{% endif %}
 									</div>
 									<!-- End .compare-dropdown -->
 
@@ -996,10 +1006,13 @@
 			<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 			<!-- Main JS File -->
 			<script src="{{asset('assets/js/main.js') }}"></script>
+			<script src="{{asset('js/article.js') }}"></script>			
 			<script src="{{asset('assets/js/demos/demo-3.js') }}"></script>
-			{% block javascripts %}{% endblock %}
+			{% block javascripts %}
+			<script>
+				$(document).ready(function(){
+				})
+			</script>
+			{% endblock %}
 		</body>
-
-
-		<!-- molla/index-3.html  22 Nov 2019 09:55:58 GMT -->
 	</html>

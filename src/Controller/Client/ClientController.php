@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Mime\Address;
@@ -120,7 +121,7 @@ class ClientController extends AbstractController
         $payment = new Payment();
         $payment->setAmount($order->getTotal());
         $payment->setState('In progress');
-        $method = $paymentMethodRepository->find($request->request->get('method'));
+        $method = $paymentMethodRepository->findOneBy(['name'=>'Payement à la livraison']);
         $payment->setPaymentMethod($method);
         // livraison
         $shipping = new Shipping();
@@ -166,6 +167,25 @@ class ClientController extends AbstractController
             'form'=>$form
         ]);
     }
+
+    /**
+     * @Route("/order-ajax-show", name="client_order_show_ajax", methods={"POST"})
+     */
+    public function ordershowAjax(Request $request, OrderRepository $orderRepository): Response
+    {
+        $id = $request->request->get('id');
+        $reponse = [
+            'reponse'=>false
+        ];
+        if(!empty($id))
+        {
+            $reponse = [
+                'content'=>$this->render('admin/order/_order.html.twig',['order'=>$orderRepository->find($id)])->getContent(),
+                'reponse'=>true,
+            ];
+        }
+        return new JsonResponse($reponse);
+    }
     /**
      * buy
      * @Route("/buy", name="client_buy")
@@ -195,14 +215,15 @@ class ClientController extends AbstractController
     /**
      * @Route("/", name="client_index", methods={"GET"})
      */
-    public function index(ClientRepository $clientRepository): Response
+    public function index(OrderRepository $orderRepository, ClientRepository $clientRepository): Response
     {
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search);
-        return $this->renderForm('lest/client/dashboard.html.twig', [
+        return $this->renderForm('client/dashboard.html.twig', [
             'clients' => $clientRepository->findAll(),
             'form'=>$form,
-            'parent_page'=>'Client'
+            'parent_page'=>'Client',
+            'order'=>$orderRepository->find(9)
         ]);
     }
     /**
