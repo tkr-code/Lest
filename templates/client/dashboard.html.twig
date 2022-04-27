@@ -119,12 +119,10 @@
 										<span class="font-weight-normal text-dark">{{ app.user.personne.fullName
                                         }}</span>
 										<br>
-										From your account dashboard you can view your
-										<a href="#tab-orders" class="tab-trigger-link link-underline">recent orders</a>, manage your
-										<a href="#tab-address" class="tab-trigger-link">shipping and billing addresses</a>,
-																																																																		                                    and
-										<a href="#tab-account" class="tab-trigger-link">edit your password and account
-																																																																		                                        details</a>.
+										À partir du tableau de bord de votre compte, vous pouvez afficher
+										<a href="#tab-orders" class="tab-trigger-link link-underline">vos commandes récentes</a>, gérer vos 
+										<a href="#tab-address" class="tab-trigger-link">adresses de livraison et de facturation</a>,
+										<a href="#tab-account" class="tab-trigger-link">et modifier votre mot de passe et les détails de votre compte.</a>.
 									</p>
 								</div>
 								<!-- .End .tab-pane -->
@@ -229,7 +227,7 @@
 														{{ app.user.personne.firstName }}
 														<br>
 														{{ app.user.adresse.city }},
-														{{app.user.adresse.rue ~ app.user.adresse.codePostal }}<br>
+														{{app.user.adresse.rue ~ ' ' ~ app.user.adresse.codePostal }}<br>
 														{{ app.user.adresse.tel }}<br>
 														{{ app.user.email }}<br>
 														<a href="#">Edit

@@ -98,7 +98,15 @@
 						{% endfor %}
 					</tbody>
 				</table>
+
+				
 				<!-- End .table table-wishlist -->
+				{% if app.user.favoris|length > 0 %}
+					<div class="my-5">
+						<a href="{{ path('favoris_clear') }}" class="btn btn-danger js-favoris-clear">Vider la liste des favoris</a>
+						<hr>
+					</div>
+				{% endif %}
 				<div class="wishlist-share">
 					<div class="social-icons social-icons-sm mb-2">
 						<label class="social-label">Share on:</label>
@@ -126,4 +134,27 @@
 		</div>
 		<!-- End .page-content -->
 	</main>
+{% endblock %}
+{% block javascripts %}
+<script>
+$(document).ready(function(){
+	//VIDER LA LISTE DES FAVORIS
+		$(document).on('click','.js-favoris-clear',function(e){
+			e.preventDefault()
+			Swal.fire({
+				title: 'Etes vous sur ?',
+				text: "Vous allez vider la liste des favoris !",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Oui, Vider!'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						window.location.href="{{ path('favoris_clear')}}"
+					}
+				})
+		})
+})
+</script>
 {% endblock %}

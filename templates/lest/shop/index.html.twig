@@ -304,6 +304,7 @@
 					}
 				},
 				error:function(){
+					$('.js-loader').css('display','none')
 					alert('Une erreur est survenu.')
 				}
 			})
@@ -327,6 +328,7 @@
 				},
 				success:function(data){
 					// $().html(remove)
+					loadFavoris()
 					$('.js-loader').css('display','none')
 					if(data){
 						//changer l'icon
@@ -350,6 +352,7 @@
 					}
 				},
 				error:function(){
+					$('.js-loader').css('display','none')
 					alert('Une erreur est survenu.')
 				}
 			})
@@ -373,6 +376,7 @@
 				},
 				success:function(data){
 					// $().html(remove)
+					loadFavoris()
 					$('.js-loader').css('display','none')
 					if(data){
 						//changer l'icon
@@ -409,6 +413,18 @@
 				type:'json',
 				success:function(data){
 					$('.js-cart-load').html(data.cart)
+				}
+			})
+		}
+
+		//CHARGER LE PANIER
+		function loadFavoris(){
+			$.ajax({
+				url:"{{ path('favoris_load_ajax') }}",
+				method:"POST",
+				type:'json',
+				success:function(data){
+					$('.wishlist').html(data)
 				}
 			})
 		}

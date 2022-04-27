@@ -18,7 +18,6 @@ class FavorisController extends AbstractController
      */
     public function index(): Response
     {
-        dump($this->getUser());
         return $this->render('lest/favoris/index.html.twig', [
             'controller_name' => 'FavorisController',
         ]);
@@ -62,6 +61,13 @@ class FavorisController extends AbstractController
         return new JsonResponse(false);
 
     }
+    /**
+     * @Route("/favoris/load-ajax", name="favoris_load_ajax", methods="POST")
+     */
+    public function loadCount(): Response
+    {
+       return new JsonResponse($this->render('lest/favoris/ajax/wishlist.html.twig')->getContent());
+    }
 
     /**
      * @Route("/favoris/remove/{id}", name="favoris_remove")
@@ -75,6 +81,26 @@ class FavorisController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success',"L'article à été supprimé des favoris");
            return $this->redirectToRoute('favoris_index',[]);
+        }
+        
+        return $this->render('lest/favoris/index.html.twig', [
+            'controller_name' => 'FavorisController',
+        ]);
+    }
+    /**
+     * @Route("/favoris/clear", name="favoris_clear")
+     */
+    public function clear(): Response
+    {
+        $user = $this->getUser();
+        if($user){
+        foreach ($user->getFavoris() as $key => $article) {
+                $user->removeFavori($article);
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            $this->addFlash('success',"Tous les articles ont  à été supprimé des favoris");
+            return $this->redirectToRoute('favoris_index',[]);
         }
         
         return $this->render('lest/favoris/index.html.twig', [
