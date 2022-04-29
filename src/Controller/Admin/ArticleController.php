@@ -37,21 +37,6 @@ class ArticleController extends AbstractController
      */
     public function index(ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
-        // $faker = Factory::create();
-        // $category = $categoryRepository->find(2);
-        // for ($i=0; $i < 100; $i++) { 
-        //     $article = new Article();
-        //     $article->setTitle($faker->sentence(3,' '))
-        //     ->setBuyingPrice($faker->numberBetween(1000,500000))
-        //     ->setPrice($faker->numberBetween(1000,500000))
-        //     ->setDescription($faker->sentence(5,' '))
-        //     ->setQuantity($faker->numberBetween(1,20))
-        //     ->setEnabled(true)
-        //     ->setCreatedAt(new \DateTime())
-        //     ->setCategory($category);
-        //     $this->em->persist($article);
-        // }
-        // $this->em->flush();
         return $this->render('admin/article/index.html.twig', [
             'articlesOn' => $articleRepository->findAllOn(),
             'articlesOff' => $articleRepository->findAllOff(),
@@ -140,6 +125,14 @@ class ArticleController extends AbstractController
             'formOption' => $formOption,
             'parent_page'=>'Produit'
         ]);
+    }
+    /**
+     * @Route("/nouveau-produit", name="article_new_produit", methods={"GET","POST"})
+     * @Route("/{id}/edit-produit", name="article_edit_produit", methods={"GET","POST"})
+     */
+    public function newProduit(): Response
+    {
+        return $this->renderForm('admin/article/lest.html.twig', []);
     }
 
     /**

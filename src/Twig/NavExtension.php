@@ -57,7 +57,11 @@ class NavExtension extends AbstractExtension
                             [
                                 'name'=>'New Produit',
                                 'path'=>'article_new',
-                            ]
+                            ],
+                            [
+                                'name'=>'Produit LEST',
+                                'path'=>'article_new_produit',
+                            ],
                         ]
                 ],
                 [

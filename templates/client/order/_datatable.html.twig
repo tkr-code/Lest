@@ -36,7 +36,7 @@
             </td>
             <td>
                 {% if order.state == 'waiting' or order.state == 'in progress' %}
-                <a data-toggle="tooltip" data-placement="bottom" title="Annuller la commande" href="#" class="text-danger">Cancel</a>
+                <a data-toggle="tooltip" data-placement="bottom" data-id="{{order.id}}" title="Annuller la commande" href="#" class="text-danger js-order-canceled">Cancel</a>
                 {% endif %}
             </td>
         </tr>
