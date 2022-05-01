@@ -10,27 +10,32 @@
 {% block title %}New Article{% endblock %}
 
 {% block head %}
-      <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
-  <!-- datatable -->
-  <link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<!-- summernote -->
+<link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
+<!-- datatable -->
+<link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 {% endblock %}
 {% block stylesheets %}
-  {{ head.dataTable() }}
+{{ head.dataTable() }}
 {% endblock %}
 
 {% block breadcrumb %}
-    {{ utils.breadcrumb(action_text,[
-        {
-            path:path('article_index'),
-            name:'Manage Articles'
-        }
-    ])}}
+{{ utils.breadcrumb(action_text,[
+{
+path:path('article_index'),
+name:'Manage Articles'
+}
+])}}
 {% endblock %}
 
 {% block body %}
+<style>
+    .js-loader-marque {
+        display: none;
+    }
+</style>
 {% for item in app.flashes('success') %}
-  {{ alertes.alert(item,'success')}}
+{{ alertes.alert(item,'success')}}
 {% endfor %}
 <div class="row">
     <div class="col-md-12">
@@ -40,104 +45,106 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         {{ include('admin/article/_form.html.twig',{button_label:action}) }}
                     </div>
                     <div class="col-md-3">
-                    
+                        <div class="callout callout-info">
+                            <h5> 
+                                <i class="icon fas fa-exclamation-triangle"></i>
+                                Attention !
+                            </h5>
+                            <p>Les noms des champs avec un ( * ) sont obligatoires.</p>
+                            <p>Le prix d'achat doit être inférieur au prix de vente.</p>
+                            <p>Le produit est active par defaut (Visible dans la boutique côté  client ).</p>
+                            <p>Ajouter des images avec un fond blanc ou sans arrière plan de bonne qualité.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% if app.request.attributes.get('_route') == 'article_edit' %}
-    <div class="col-md-6">
-        <div class="row">
-            {% if app.request.attributes.get('_route') == 'article_edit' %}
-            <div class="col-md-12">
-                <div class="card card-outline card-dark">
-                    <div class="card-header">
-                        <h4>Article option</h4>
-                    </div>
-                    <div class="card-body">
-                        <table id="datatable_1" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for item in article.options %}
-                                <tr>
-                                    <td>{{ item.title }}</td>
-                                    <td>{{ item.content }}</td>
-                                    <td>
-                                        <a class="btn btn-success " href="{{ path('article_option_edit', {'id': item.id,idArticle: article.id }) }}"><i class="fas fa-pencil-alt"></i></a>
-                                        <form method="post" class="d-inline-block" action="{{ path('article_option_delete', {'id': item.id, idArticle: article.id }) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-                                            <button class="btn btn-danger"><i class="fas fa-trash-alt    "></i></button>
-                                            
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <h3>L'article n'as pas d'option</h3>
-                            {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        {{ include ('/admin/article_option/_form.html.twig') }}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-    {% endif %}
 </div>
 {% endblock %}
 {% block foot %}
-    <!-- Summernote -->
-    <script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
-    <script src="{{ asset('js/image.js') }}"></script>
-    
-    {{ foot.dataTable()}}
+<!-- Summernote -->
+<script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('js/image.js') }}"></script>
+
+{{ foot.dataTable()}}
 {% endblock %}
 
 {% block javascripts %}
-    {{ table.jsDataTable('datatable_1') }} 
+{{ table.jsDataTable('datatable_1') }}
+<script>
+    $(document).ready(function () {
+        // cache le loader des marques
+        $('#js-loader-marque').hide()
 
-  <script>
-   $(document).ready(function(){
-       
-        var imagesPreview = function(input, placeToInsertImagePreview) {
-        if (input.files) {
-            var filesAmount = input.files.length;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+        // CHAGER LA MARQUE
+        $(document).on('change', '#article_category', function () {
+            let id = $(this).val()
+            $.ajax({
+                url: '/admin/article/select/brand',
+                method: 'post',
+                type: 'json',
+                data: {
+                    id: id,
+                },
+                beforeSend: function () {
+                    $('#js-loader-marque').css('display', 'initial')
+                    $('#js-select-brands').css('display', 'none')
+                },
+                success: function (data) {
+                    if (data.reponse) {
+                        $('#js-select-brands').html(data.content)
+                    }
+                    $('#js-loader-marque').css('display', 'none')
+                    $('#js-select-brands').css('display', 'initial')
+                }, error: function () {
+                    alert('erreur')
                 }
-                reader.readAsDataURL(input.files[i]);
+            })
+
+        })
+        //AJOUTER UNE OPTIONN
+        $(document).on('click', '.js-add-option', function (e) {
+            e.preventDefault()
+            let option = '';
+            option += '<tr>'
+            option += '<td><input type="text"  name="option_name[]" required="required" placeholder="" class="item_option_name form-control"> </span><span></td>'
+            option += '<td><input type="text"  name="option_content[]" required="required" placeholder="" class=" item_option_content form-control"> </span><span> </td>'
+            option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
+            option += '</tr>'
+            $('#table_option').append(option).animate('heigth')
+        })
+
+        // SUPPRIMER UNE OPTION
+        $(document).on('click', '.js-remove-option', function () {
+            $(this).closest('tr').remove()
+        })
+
+
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
             }
-        }
-    };
+        };
 
-    $('#article_images').on('change', function() {
-        imagesPreview(this, 'div.gallery');
-    });
+        $('#article_images').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
 
-     $('#gestions').addClass(' menu-is-opening menu-open')
-     $('.gestions').addClass('active')
-     $('.gestion-article').addClass('active')
-   })
-  </script>
+        $('#gestions').addClass(' menu-is-opening menu-open')
+        $('.gestions').addClass('active')
+        $('.gestion-article').addClass('active')
+    })
+</script>
 {% endblock %}

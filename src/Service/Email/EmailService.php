@@ -16,10 +16,10 @@ class EmailService
         $id_user = 1;
         $cle_user = 'cleuser1';
         $cle= '';
-        $site = 'Gaboma annonce';
-        $introduction = 'Site de petites annonces.';
-        $link_site = 'https://lesekoya.com';
-        $link_img = $link_site.'/public/img/icons/favicon.png';
+        $site = 'Les professionelle de la technologie.';
+        $introduction = 'Site de vente en ligne.';
+        $link_site = 'https://lest.sn';
+        $link_img = $link_site.'/public/assets/images/lest-jaune.png';
         $message = '';
         $link_contrat = $link_site."/public/doc/condition-d'utilisation-gaboma-annonce.pdf";
         $button_link = $link_site;
@@ -61,6 +61,14 @@ class EmailService
             break;
           case '5':
             // confirmaion user
+            $introduction = '';
+            $button_link ='app_login' ;
+            $button_text = 'Se connecter';
+              $titre = "Avis de création d'un compte utilisateur";
+              $message = 'Un nouveau compte a été crée.';
+            break;
+          case '5.1':
+            // confirmaion user none
             $introduction = '';
             $button_link ='app_login' ;
             $button_text = 'Se connecter';

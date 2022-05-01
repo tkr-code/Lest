@@ -20,6 +20,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use App\Form\ArticleSearchType;
 use App\Service\Email\EmailService;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 class RegistrationController extends AbstractController
 {
@@ -33,7 +36,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function appRegister(EmailService $emailService, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function appRegister(EmailService $emailService, Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
     {
         $search = new ArticleSearch();
         $formSearch = $this->createForm(ArticleSearchType::class,$search);
@@ -42,6 +45,7 @@ class RegistrationController extends AbstractController
         $personne  =  new Personne();
         $personne->setFirstName('Malick')->setLastName('Tounkara');
         $user->setPersonne($personne);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -57,6 +61,8 @@ class RegistrationController extends AbstractController
             $user->setRoles(['ROLE_CLIENT']);
             $client = new Client();
             $user->setClient($client);
+            $user->setIsActive(true);
+            // $user->set
 
             // dd($user);
 
@@ -75,11 +81,18 @@ class RegistrationController extends AbstractController
                         'theme'=>$emailService->theme(1)
                         ])
             );
+
+            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            $this->get("security.token_storage")->setToken($token);
+
+            $event =  new SecurityEvents($request);
+            $eventDispatcherInterface->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
+            $this->addFlash('success','Votre compte a été enregistré. Vous pouvez poursuivre vos achats');
             // do anything else you need here, like send an email
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('articles');
         }
 
-        return $this->render('registration/register_1.html.twig', [
+        return $this->render('registration/lest.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

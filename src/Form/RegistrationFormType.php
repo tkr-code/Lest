@@ -21,34 +21,22 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('personne',PersonneClientType::class,[
+                'label'=>false
+            ])
             ->add('email',EmailType::class,[
-                'label'=>false,
-                'attr'=>[
-                    'placeholder'=>'Votre email',
-                    'value'=>'client10@mail.com'
-                ]
+                'label'=>'Adresse email *'
             ])
             ->add('phone_number',NumberType::class,[
+                'label'=>'Numéro de téléphone *',
                 'attr'=>[
                     'placeholder'=>'Numéro de téléphone',
                     'value'=>'781278288'
                 ],
-                'label'=>false
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label'=>"J'acceptes les conditions",
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+
             ->add('password', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'label'=>false,
-                // 'mapped' => false,
+                'label'=>'Mot de passe *',
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'placeholder'=>'Mot de passe',
@@ -61,42 +49,46 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
             ])
-            ->add('password_verify', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                // 'mapped' => false
-                'label'=>false,
-                'attr' => [
-                    'autocomplete' => 'new-password',
-                    'placeholder'=>'Confirmation de mot de passe',
-                    'value'=>'demarrerr'
-                ],
+            ->add('agreeTerms', CheckboxType::class, [
+                'label'=>" J'acceptes les conditions d'utilisateurs",
+                'mapped' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
                     ]),
                 ],
-            ])
-            ->add('personne',PersonneType::class,[
-                'label'=>false
-            ])
-            ->add('adresse',TextType::class,[
-                'label'=>false,
-                'attr'=>[
-                    'placeholder'=>'Adresse, code postal'
-                ],
-            ])
+            ])            // ->add('password_verify', PasswordType::class, [
+            
+            //     'label'=>false,
+            //     'attr' => [
+            //         'autocomplete' => 'new-password',
+            //         'placeholder'=>'Confirmation de mot de passe',
+            //         'value'=>'demarrerr'
+            //     ],
+            //     'constraints' => [
+            //         new NotBlank([
+            //             'message' => 'Please enter a password',
+            //         ]),
+            //         new Length([
+            //             'min' => 6,
+            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
+            //             // max length allowed by Symfony for security reasons
+            //             'max' => 4096,
+            //         ]),
+            //     ],
+            // ])
+            
+
+            // ->add('adresse',TextType::class,[
+            //     'label'=>false,
+            //     'attr'=>[
+            //         'placeholder'=>'Adresse, code postal'
+            //     ],
+            // ])
             // ->add('adresses',Adress1Type::class,[
             //     'label'=>false,
             //     'mapped'=>false

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class EmailController extends AbstractController
+class EmailTestController extends AbstractController
 {
     private $emailService;
     public function __construct(EmailService $emailService)
@@ -72,6 +72,18 @@ class EmailController extends AbstractController
         return $this->render('email/confirmation.html.twig',
         [
             'theme'=>$emailService->theme(1)
+            ]
+        );
+    }
+
+    /**
+     * @Route("/email/confirmation-none", name="email_register_none")
+     */
+    public function confirmationOut(EmailService $emailService): Response
+    {
+        return $this->render('email/confirmation.html.twig',
+        [
+            'theme'=>$emailService->theme('5.1')
             ]
         );
     }

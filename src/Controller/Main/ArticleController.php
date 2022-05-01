@@ -62,7 +62,7 @@ class ArticleController extends AbstractController
         }
         $user = $this->getUser();
         $isBuy = false;
-        if($user)
+        if($user->getClient())
         {               
            $isBuy = $articleBuyRepository->isBuy($user->getClient(),$article);
         }

@@ -1,0 +1,201 @@
+{% import "macros/table.html.twig" as table %}
+{% import "macros/head.html.twig" as head %}
+{% import "macros/foot.html.twig" as foot %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% import "macros/alertes.html.twig" as alertes %}
+{% import "macros/button.html.twig" as btn %}
+
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New Article
+{% endblock %}
+
+{% block head %}
+	<!-- summernote -->
+	<link
+	rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
+	<!-- datatable -->
+	<link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+{% endblock %}
+{% block stylesheets %}
+	{{ head.dataTable() }}
+{% endblock %}
+
+{% block breadcrumb %}
+	{{ utils.breadcrumb('Ajouter des caracteristiques',[
+        {
+            path:path('article_index'),
+            name:'Manage Articles'
+        }
+    ])}}
+{% endblock %}
+
+{% block body %}
+	{% for item in app.flashes('success') %}
+		{{ alertes.alert(item,'success')}}
+	{% endfor %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					<h4>Ajouter des Caracteristiques</h4>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6 col-md-4 col-lg-4 col-xl-3 article-65">
+							<div class="product product-7 text-center">
+								<figure class="product-media">
+                                    {% for item in article.images | slice(0,1) %}
+                                    <img src="{{ asset('img/article/' ~ item.name ) }}" width="200px" alt="Product Image">
+                                    {% else %}
+                                    <img src="{{ asset('img/vide.png') }}" width="200px" alt="Product Image">
+                                    {% endfor %}
+									<div class="product-action-vertical"></div>
+									<!-- End .product-action -->
+								</figure>
+								<!-- End .product-media -->
+
+								<div class="product-body">
+									<div class="product-cat">
+										{{ article.category.title}}
+									</div>
+									<!-- End .product-cat -->
+									<h3 class="product-title">
+											{{ article.title }}
+									</h3>
+									<!-- End .product-title -->
+									<div class="product-price">
+										{{ article.price |number_format(0,'',' ') }}	F cfa
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+                        	<p class="h4">Ajouter des caracteristiques à votre produit. </p>
+							<button class="btn btn-primary"></button>
+							<table class="table" id="table_option">
+								<thead>
+									<tr>
+										<th>Nom</th>
+										<th>Valeur</th>
+										<th>
+											Action
+										</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+
+							<form method="post" id="add-option-form">
+								<div class="card">
+									<div class="card-body">
+										<div class="form-group">
+											<label for="nom">Nom</label>
+											<input type="text" value="Ecran" class="form-control" id="nom" placeholder="Nom">
+											<small id="help_nom" class="text-danger"></small>
+										</div>
+										<div class="form-group">
+											<label for="valeur">Valeur</label>
+											<input type="text" value="12 pouces" class="form-control" id="valeur" placeholder="Valeur">
+											<small id="help_valeur" class="text-danger"></small>
+										</div>
+										<button type="submit" class="btn btn-primary">Ajouter </button>
+									</div>							
+								</div>
+							</form>
+						</div>
+					</div>
+					<a href="{{ path('article_index') }}" class="btn btn-success">Terminer</a>
+					<a href="{{ path('article_new') }}" class="btn btn-success">Terminer et ajouter un produit</a>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+
+        //AJOUTER UNE OPTIONN
+        $(document).on('click', '.js-add-option', function (e) {
+            e.preventDefault()
+			let tr = $(this).closest('tr').text('essai pour voir')
+			
+            let option = '';
+            option += '<tr>'
+            option += '<td><input type="text"  name="option_name[]" required="required" placeholder="" class="item_option_name form-control"> </span><span></td>'
+            option += '<td><input type="text"  name="option_content[]" required="required" placeholder="" class=" item_option_content form-control"> </span><span> </td>'
+            option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
+            option += '</tr>'
+            $('#table_option').append(option).animate('heigth')
+        })
+
+        // SUPPRIMER UNE OPTION
+        $(document).on('click', '.js-remove-option', function () {
+            $(this).closest('tr').remove()
+        })
+
+        //ENVOYER LE FORMULAIRE D'AJOUT D'UNE OPTION
+        $(document).on('submit','#add-option-form', function (e) {
+            e.preventDefault()
+			let nom = $('#nom').val()
+			let valeur = $('#valeur').val()
+			if(nom == ''){
+				let text = 'Veuillez remplir le champ nom !'
+				Swal.fire(
+				'Oups',
+				text,
+				'error'
+				)
+				$('#help_nom').text(text)
+				return 
+			}
+			if(valeur == ''){
+				let text = 'Veuillez remplir le champ valeur !'
+				Swal.fire(
+				'Oups',
+				text,
+				'error'
+				)
+				$('#help_valeur').text(text)
+				return 
+			}
+			$.ajax({
+				url:"{{ path('article_new_add_option_ajax')}}",
+				method:'post',
+				type:'json',
+				data:{
+					nom:nom,
+					 valeur:valeur
+				},
+				beforeSend:function(){
+
+				},
+				success:function(data){
+					if(data.reponse){
+						let option = '';
+						option += '<tr>'
+						option += '<td>'+ nom +'</td>'
+						option += '<td>'+ valeur+'</td>'
+						option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
+						option += '</tr>'
+						$('#table_option').append(option)
+						alert('ajouter')
+					}
+					else{
+						alert('Une erreur est servenue 2')
+					}
+				},
+				error:function(){
+					alert('Une erreur est servenue 1')
+				}
+			})			
+
+        })
+
+    })
+</script>
+{% endblock %}

@@ -41,25 +41,21 @@
 				<div class="form-tab">
 					<ul class="nav nav-pills nav-fill" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link active" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+							<a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
 								aria-controls="signin-2" aria-selected="false">Sign In</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link " id="register-tab-2" data-toggle="tab" href="#register-2" role="tab"
+							<a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab"
 								aria-controls="register-2" aria-selected="true">Register</a>
 						</li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane fade show active" id="signin-2" role="tabpanel"
+						<div class="tab-pane fade" id="signin-2" role="tabpanel"
 							aria-labelledby="signin-tab-2">
-							<form method="post">
-								{% if error %}
-								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security')
-									}}</div>
-								{% endif %}
+							<form action="{{ path('app_login') }}" method="post">
 								<div class="form-group">
 									<label for="inputEmail">Username or email address *</label>
-									<input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+									<input type="email" value="{{ last_username is defined ?  last_username :'' }}" name="email" id="inputEmail"
 										placeholder="email" class="form-control" autocomplete="email" required
 										autofocus>
 								</div>
@@ -113,7 +109,7 @@
 							<!-- End .form-choice -->
 						</div>
 						<!-- .End .tab-pane -->
-						<div class="tab-pane fade" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+						<div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
 							{% include "registration/_form.html.twig" %}
 							<!-- End .form-footer -->
 							<div class="form-choice">

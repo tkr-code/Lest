@@ -19,6 +19,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            login_link:
+                check_route: login_check
+                signature_properties: ['id']
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 31536000 # 1 week in seconds

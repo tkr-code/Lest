@@ -9,6 +9,7 @@ use App\Form\ArticleType;
 use App\Entity\ArticleOption;
 use App\Form\ArticleOptionType;
 use App\Repository\ArticleRepository;
+use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\fileExists;
@@ -35,7 +36,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="article_index", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
+    public function index(BrandRepository $brandRepository, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
         return $this->render('admin/article/index.html.twig', [
             'articlesOn' => $articleRepository->findAllOn(),
@@ -43,12 +44,35 @@ class ArticleController extends AbstractController
             'articlesTop' => $articleRepository->findEtat('top'),
         ]);
     }
+    /**
+     * @Route("/select/brand", name="article_brand_category_ajax", methods={"POST"})
+     */
+    public function brandToCategoryAjax(Request $request, CategoryRepository $categoryRepository ){
+        $reponse = [
+            'reponse'=>false
+        ];
+        $id = $request->request->get('id');
+        if(!empty($id)){
+            $category  = $categoryRepository->find($id);
+            if($category)
+            {
+                $brands = $category->getBrands();
+                $reponse =[
+                    'reponse'=>true,
+                    'content'=>$this->render('admin/article/ajax/select_brand.html.twig',['brands'=>$brands])->getContent()
+                ];
+                
+                return new JsonResponse($reponse);
+            }
+        }
+        return new JsonResponse($reponse);
+    }
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function form(Request $request, Article $article = null, TranslatorInterface $translator): Response
+    public function form(Request $request, Article $article = null, TranslatorInterface $translator, BrandRepository $brandRepository): Response
     {
         
         $action = 'Update';
@@ -57,6 +81,8 @@ class ArticleController extends AbstractController
             $action = 'Save';
             $action_text = 'Create new ';
             $article = new Article();
+            $article->setEnabled(true)->setTitle('produit 1')->setDescription('produit 1 description')
+            ->setPrice('1500000')->setBuyingPrice('120000')->setQuantity(5)->setLabel('New');
             $formOption = null;
         }else{
                 $articleOption = new ArticleOption();
@@ -106,15 +132,19 @@ class ArticleController extends AbstractController
                 $article->setUpdatedAt(new \DateTime());
             }
             $article->setQtyReel($article->getQuantity());
+            $idBrand = $request->request->get('brand');
+            if($idBrand){
+                $brand = $brandRepository->find($idBrand);
+                if($brand){
+                    $article->setBrand($brand);
+                }
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
             $message = ($action == 'Save') ? $translator->trans('Article cree') : $translator->trans('Article modifier');
             $this->addFlash('success',$message);
-            if ($form->getClickedButton() === $form->get('saveAndAdd')){
-                return $this->redirectToRoute('article_new', [], Response::HTTP_SEE_OTHER);
-            }
-            return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('article_new_add_option', ['id'=>$article->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/article/new.html.twig', [
@@ -126,6 +156,41 @@ class ArticleController extends AbstractController
             'parent_page'=>'Produit'
         ]);
     }
+    
+     /**
+     * @Route("/new/add-option/{id}", name="article_new_add_option", methods={"GET","POST"})
+     */
+    public function newOption(Article $article = null):Response
+    {
+        return $this->renderForm('admin/article/new_add_option.html.twig', [
+            'article' => $article
+        ]);
+    }
+     /**
+     * @Route("/new/add-option-ajax", name="article_new_add_option_ajax", methods={"POST"})
+     */
+    public function newOptionAjax(Request $request):Response
+    {
+        $reponse = [
+            'reponse'=>false
+        ];
+        $nom = $request->request->get('nom');
+        $valeur = $request->request->get('valeur');
+        $articleOption = new ArticleOption();
+        $form = $this->createForm(ArticleOptionType::class,$articleOption);
+        if($nom && $valeur  ){
+            $entityManager = $this->getDoctrine()->getManager();
+            $articleOption->setTitle($nom)->setContent($valeur);
+            $entityManager->persist($articleOption);
+            $entityManager->flush();
+            $reponse = [
+                'reponse'=>true
+            ];
+            return new JsonResponse($reponse);
+        }
+        return new JsonResponse($reponse);
+    }
+
     /**
      * @Route("/nouveau-produit", name="article_new_produit", methods={"GET","POST"})
      * @Route("/{id}/edit-produit", name="article_edit_produit", methods={"GET","POST"})
@@ -191,4 +256,5 @@ class ArticleController extends AbstractController
             return new JsonResponse(['error'=>'Token invalide'],400);
         }
     }
+
 }

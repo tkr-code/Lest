@@ -1,4 +1,4 @@
-{% extends 'lesekoya/base.html.twig' %}
+{% extends 'lest/base.html.twig' %}
 
 {% block title %}{{'Register'|trans}}{% endblock %}
 {% block head %}
@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
     {# <link rel="stylesheet" href="{{ asset('adminlte/plugins/bs-stepper/css/bs-stepper.min.css') }}"> #}
 {% endblock %}
-{% block body %}
+{% block main %}
   <div class="row">
     <div class="col-lg-12">
         {% for flashError in app.flashes('verify_email_error') %}
