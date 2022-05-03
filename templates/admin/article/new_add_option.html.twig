@@ -31,6 +31,11 @@
 {% endblock %}
 
 {% block body %}
+	<style>
+		#error{
+			display: none;
+		}
+	</style>
 	{% for item in app.flashes('success') %}
 		{{ alertes.alert(item,'success')}}
 	{% endfor %}
@@ -71,8 +76,10 @@
 							</div>
 						</div>
 						<div class="col-lg-8">
-                        	<p class="h4">Ajouter des caracteristiques à votre produit. </p>
-							<button class="btn btn-primary"></button>
+							<button type="button" class="btn btn-primary my-2" data-toggle="modal" 
+							data-target="#modal-add-option">
+							<i class="fas fa-plus"></i>		Ajouter
+							</button>
 							<table class="table" id="table_option">
 								<thead>
 									<tr>
@@ -83,26 +90,10 @@
 										</th>
 									</tr>
 								</thead>
-								<tbody></tbody>
+								<tbody>
+									{% include "includes/article/article_option/table_tr.html.twig" %}
+								</tbody>
 							</table>
-
-							<form method="post" id="add-option-form">
-								<div class="card">
-									<div class="card-body">
-										<div class="form-group">
-											<label for="nom">Nom</label>
-											<input type="text" value="Ecran" class="form-control" id="nom" placeholder="Nom">
-											<small id="help_nom" class="text-danger"></small>
-										</div>
-										<div class="form-group">
-											<label for="valeur">Valeur</label>
-											<input type="text" value="12 pouces" class="form-control" id="valeur" placeholder="Valeur">
-											<small id="help_valeur" class="text-danger"></small>
-										</div>
-										<button type="submit" class="btn btn-primary">Ajouter </button>
-									</div>							
-								</div>
-							</form>
 						</div>
 					</div>
 					<a href="{{ path('article_index') }}" class="btn btn-success">Terminer</a>
@@ -111,36 +102,54 @@
 
 			</div>
 		</div>
-
 	</div>
+
+	<div class="modal fade" id="modal-add-option" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ajouter une caracteristiques.</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+				<form method="post" id="add-option-form">
+					<div class="car">
+						<div class="card-body">
+							<div class="form-group">
+								<label for="nom">Nom</label>
+								<input type="text" value="Ecran" class="form-control" id="nom" placeholder="Nom">
+								<small id="help_nom" class="text-danger"></small>
+							</div>
+							<div class="form-group">
+								<label for="valeur">Valeur</label>
+								<input type="text" value="12 pouces" class="form-control" id="valeur" placeholder="Valeur">
+								<small id="help_valeur" class="text-danger"></small>
+							</div>
+							<button type="submit" class="btn btn-primary">Ajouter </button>
+						</div>							
+					</div>
+				</form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     $(document).ready(function () {
-
-        //AJOUTER UNE OPTIONN
-        $(document).on('click', '.js-add-option', function (e) {
-            e.preventDefault()
-			let tr = $(this).closest('tr').text('essai pour voir')
-			
-            let option = '';
-            option += '<tr>'
-            option += '<td><input type="text"  name="option_name[]" required="required" placeholder="" class="item_option_name form-control"> </span><span></td>'
-            option += '<td><input type="text"  name="option_content[]" required="required" placeholder="" class=" item_option_content form-control"> </span><span> </td>'
-            option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
-            option += '</tr>'
-            $('#table_option').append(option).animate('heigth')
-        })
-
-        // SUPPRIMER UNE OPTION
-        $(document).on('click', '.js-remove-option', function () {
-            $(this).closest('tr').remove()
-        })
-
-        //ENVOYER LE FORMULAIRE D'AJOUT D'UNE OPTION
+		const id = "{{ article.id }}"
+		//AJOUTER UNE OPTIONN
         $(document).on('submit','#add-option-form', function (e) {
-            e.preventDefault()
+            e.preventDefault()	
 			let nom = $('#nom').val()
 			let valeur = $('#valeur').val()
 			if(nom == ''){
@@ -168,33 +177,123 @@
 				method:'post',
 				type:'json',
 				data:{
+					id_article : id,
 					nom:nom,
-					 valeur:valeur
+					valeur:valeur
 				},
 				beforeSend:function(){
-
+					$('.js-loader-text').text('Ajout dans la liste des caractéristiques en cour ...')
+					$('.js-loader').css('display','flex')
 				},
 				success:function(data){
 					if(data.reponse){
-						let option = '';
-						option += '<tr>'
-						option += '<td>'+ nom +'</td>'
-						option += '<td>'+ valeur+'</td>'
-						option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
-						option += '</tr>'
-						$('#table_option').append(option)
-						alert('ajouter')
+						loadArticleOption()
+						$('#help_nom').text('')
+						$('#nom').val('')
+						$('#valeur').val('')
+						$('#modal-add-option').modal('hide')
+						swal.fire({
+							title:'Bien joué',
+							icon:'success',
+							text:'La caractéristique a été ajouté au produit',
+							showConfirmButton:false,
+							timer: 1700
+						})
 					}
 					else{
-						alert('Une erreur est servenue 2')
+						$('#help_nom').text(data.error)
+						$('#error').text(data.error)
+						swal.fire({
+							title:'Oups !',
+							icon:'error',
+							text:data.error,
+							showConfirmButton:false,
+							timer: 1700
+						})
 					}
+					$('.js-loader').css('display','none')
 				},
 				error:function(){
-					alert('Une erreur est servenue 1')
+					swalError()
 				}
 			})			
-
         })
+
+        // SUPPRIMER UNE OPTION
+        $(document).on('click', '.js-remove-option', function () {
+			let id_option = $(this).data('id')
+			let token = $(this).data('token')
+
+			Swal.fire({
+				title: 'Est vous sur ?',
+				icon:'question',
+				showCancelButton: true,
+				text:'Cette caractéristique sera supprimée.',
+				confirmButtonText: 'Oui, Supprimer',
+				confirmButtonColor: '#d33',
+				}).then((result) => {
+
+				if (result.isConfirmed) {
+					$.ajax({
+						url:'/admin/article-option/'+id_option +'/delete/'+id+'/article',
+						method:'post',
+						type:'json',
+						beforeSend:function(){
+							$('.js-loader-text').text('Suppression de la liste des caractéristiques en cour ...')
+							$('.js-loader').css('display','flex')
+						},
+						data:{
+							_token:token,
+							ajax:true
+						},
+						success:function(data){
+							if(data.reponse){
+								loadArticleOption()
+								swal.fire({
+									title:'Bien joué',
+									icon:'success',
+									text:'La caractéristique a été supprimé du produit',
+									showConfirmButton:false,
+									timer: 1700
+								})
+							}
+							$('.js-loader').css('display','none')
+						},
+						error:function(){
+							swalError()
+						}
+					})
+				}
+			})
+        })
+
+
+		//CHARGER LES OPTIONS
+		function loadArticleOption() {
+			$.ajax({
+				url:'/admin/article-option/article-option-table-tr/'+id,
+				method:'post',
+				type:'json',
+				beforeSend:function(){
+					$('.js-loader-text').text('Actualisation de la liste des caractéristiques en cour ...')
+					$('.js-loader').css('display','flex')
+				},
+				success:function(data){
+					$('#table_option tbody').html(data)
+					$('.js-loader').css('display','none')
+				}
+			})
+		}
+
+		function swalError(text  = 'Une erreur est servenue.'){
+			swal.fire({
+					title:'Oups !',
+				icon:'error',
+				text:text,
+				showConfirmButton:false,
+				timer: 1700
+			})
+		}
 
     })
 </script>

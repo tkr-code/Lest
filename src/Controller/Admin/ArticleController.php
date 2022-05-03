@@ -8,6 +8,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Entity\ArticleOption;
 use App\Form\ArticleOptionType;
+use App\Repository\ArticleOptionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
@@ -90,7 +91,6 @@ class ArticleController extends AbstractController
                 $formOption->handleRequest($request);
                 if(!$articleOption->getId()){
                     $articleOption->setArticle($article);
-                    $articleOption->setCreatedAt(new \DateTime());
                 }
         if ($formOption->isSubmitted() && $formOption->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -169,24 +169,42 @@ class ArticleController extends AbstractController
      /**
      * @Route("/new/add-option-ajax", name="article_new_add_option_ajax", methods={"POST"})
      */
-    public function newOptionAjax(Request $request):Response
+    public function newOptionAjax(ArticleRepository $articleRepository, ArticleOptionRepository $articleOptionRepository, Request $request):Response
     {
         $reponse = [
-            'reponse'=>false
+            'reponse'=>false,
+            'error'=>'Erreur : 500'
         ];
+        
+        $id_article = $request->request->get('id_article');
         $nom = $request->request->get('nom');
         $valeur = $request->request->get('valeur');
         $articleOption = new ArticleOption();
         $form = $this->createForm(ArticleOptionType::class,$articleOption);
-        if($nom && $valeur  ){
-            $entityManager = $this->getDoctrine()->getManager();
-            $articleOption->setTitle($nom)->setContent($valeur);
-            $entityManager->persist($articleOption);
-            $entityManager->flush();
-            $reponse = [
-                'reponse'=>true
-            ];
-            return new JsonResponse($reponse);
+        if($nom && $valeur && $id_article  ){
+            $article = $articleRepository->find($id_article);
+            if($article){
+                $entityManager = $this->getDoctrine()->getManager();
+                $articleOption->setArticle($article)->setTitle($nom)->setContent($valeur);
+                if($articleOptionRepository->findOneBy([
+                    'title'=>$articleOption->getTitle()
+                ]))
+                {
+                    $reponse =[
+                        'reponse'=>false,
+                        'error'=>'Cette valeur existe !'
+                    ];
+                    return new JsonResponse($reponse);
+                }
+                $entityManager->persist($articleOption);
+                $entityManager->flush();
+                $reponse = [
+                    'reponse'=>true,
+                    'error'=>'Erreur: 500 ',
+                    'id'=>$articleOption->getId()
+                ];
+                return new JsonResponse($reponse);
+            }
         }
         return new JsonResponse($reponse);
     }

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\ArticleOption;
 use App\Form\ArticleOptionType;
 use App\Repository\ArticleOptionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +25,16 @@ class ArticleOptionController extends AbstractController
         return $this->render('article_option/index.html.twig', [
             'article_options' => $articleOptionRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/article-option-table-tr/{id}", name="article_option_table_tr", methods={"POST"})
+     */
+    public function tableTr(Article $article): Response
+    {
+        return new JsonResponse([$this->render('includes/article/article_option/table_tr.html.twig', [
+                'article' => $article,
+                ])->getContent()
+            ]);
     }
 
     /**
@@ -87,8 +99,12 @@ class ArticleOptionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($articleOption);
             $entityManager->flush();
+            if($request->request->get('ajax')){
+                return new JsonResponse([
+                    'reponse'=>true,
+                    ]);
+            }
         }
-
         return $this->redirectToRoute('article_edit', ['id'=>$idArticle], Response::HTTP_SEE_OTHER);
     }
 }

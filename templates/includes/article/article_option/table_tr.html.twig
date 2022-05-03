@@ -1,0 +1,11 @@
+{%  for item in article.options %}
+	<tr>
+		<td>{{item.title }}</td>
+		<td>{{item.content }}</td>
+		<td>
+			<button type="button" data-id="{{ item.id }}" data-token="{{ csrf_token('delete' ~ item.id) }}" class="btn btn-danger js-remove-option">
+				<i class="fas fa-minus"></i>
+			</button>
+		</td>
+	</tr>
+{% endfor %}
