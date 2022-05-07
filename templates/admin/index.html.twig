@@ -46,15 +46,6 @@
             icon:'fas fa-shopping-cart'
             }) }}
         </div>
-        <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
-            {{ cards.infoBox({
-            name:'New Members'|trans,
-            bg:'bg-warning',
-            icon:'fas fa-users'
-            }) }}
-        </div>
-        <!-- /.col -->
     </div>
     <!-- /.row -->
 
@@ -83,7 +74,7 @@
                                 <table class="table m-0">
                                     <thead>
                                         <tr>
-                                            <th>{{'Order number'|trans}}</th>
+                                            <th>{{'number'|trans}}</th>
                                             <th>{{'Customer'|trans}}</th>
                                             <th>{{'Status'|trans}}</th>
                                             <th>{{'Created at'|trans}}</th>
@@ -109,7 +100,7 @@
                                                 {{ etats.order(item.state) }}
                                                 {# <span class="badge badge-success">{{ item.state }}</span> #}
                                             </td>
-                                            <td>{{ item.createdAt|date_format_fr }}</td>
+                                            <td>{{ item.createdAt|date_format_min_fr }}</td>
                                         </tr>
                                         {% else %}
                                         <tr class="text-center">
@@ -133,48 +124,6 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                {% if is_granted('ROLE_ADMIN') %}
-                <div class="col-md-6">
-
-                    <!-- USERS LIST -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">{{'Latest user'|trans}}</h3>
-
-                            <div class="card-tools">
-                                {# <span class="badge badge-danger">8 New Members</span> #}
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <ul class="users-list clearfix">
-                                {% for item in latestUser %}
-
-                                <li>
-                                    <img src="{{ asset('img/user/' ~ item.personne.avatar|default('empty.png')) }}"
-                                        alt="User Image">
-                                    <a class="users-list-name" href="#">{{ item.personne.fullName }}</a>
-                                    <span class="users-list-date">{{ item.lastLoginAt ? item.lastLoginAt|date('D-m-Y H:i') : 'non' }}</span>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <!-- /.users-list -->
-                        </div>
-                        <!-- /.card-body -->
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <div class="card-footer text-center">
-                            <a href="{{ path('user_index') }}">{{'View All Users'|trans}}</a>
-                        </div>
-                        {% endif %}
-                        <!-- /.card-footer -->
-                    </div>
-                    <!--/.card -->
-                </div>
-                <!-- /.col -->
-                {% endif %}
             </div>
             <!-- /.row -->
         </div>
@@ -205,17 +154,14 @@
             </div>
             <!-- /.info-box -->
 
-
             <!-- PRODUCT LIST -->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">{{'Recently Added Products'|trans}}</h3>
-
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
                         </button>
-                    
                     </div>
                 </div>
                 <!-- /.card-header -->

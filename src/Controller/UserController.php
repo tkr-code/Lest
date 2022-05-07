@@ -41,7 +41,6 @@ class UserController extends AbstractController
         $personne->setFirstName('Malick')->setLastName('Tounkara');
         $user->setPersonne($personne);
         $user->setEmail('email@leseokya.com')
-        ->setAdresse('sacre coeur 3')
         ->setPassword('password')
         ->setPhoneNumber('772495592')
         ->isVerified(true);

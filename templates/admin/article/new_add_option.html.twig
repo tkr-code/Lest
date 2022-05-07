@@ -31,11 +31,6 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		#error{
-			display: none;
-		}
-	</style>
 	{% for item in app.flashes('success') %}
 		{{ alertes.alert(item,'success')}}
 	{% endfor %}
@@ -50,11 +45,11 @@
 						<div class="col-6 col-md-4 col-lg-4 col-xl-3 article-65">
 							<div class="product product-7 text-center">
 								<figure class="product-media">
-                                    {% for item in article.images | slice(0,1) %}
-                                    <img src="{{ asset('img/article/' ~ item.name ) }}" width="200px" alt="Product Image">
-                                    {% else %}
-                                    <img src="{{ asset('img/vide.png') }}" width="200px" alt="Product Image">
-                                    {% endfor %}
+									{% for item in article.images | slice(0,1) %}
+										<img src="{{ asset('img/article/' ~ item.name ) }}" width="200px" alt="Product Image">
+									{% else %}
+										<img src="{{ asset('img/vide.png') }}" width="200px" alt="Product Image">
+									{% endfor %}
 									<div class="product-action-vertical"></div>
 									<!-- End .product-action -->
 								</figure>
@@ -66,34 +61,18 @@
 									</div>
 									<!-- End .product-cat -->
 									<h3 class="product-title">
-											{{ article.title }}
+										{{ article.title }}
 									</h3>
 									<!-- End .product-title -->
 									<div class="product-price">
-										{{ article.price |number_format(0,'',' ') }}	F cfa
+										{{ article.price |number_format(0,'',' ') }}
+										F cfa
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-8">
-							<button type="button" class="btn btn-primary my-2" data-toggle="modal" 
-							data-target="#modal-add-option">
-							<i class="fas fa-plus"></i>		Ajouter
-							</button>
-							<table class="table" id="table_option">
-								<thead>
-									<tr>
-										<th>Nom</th>
-										<th>Valeur</th>
-										<th>
-											Action
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% include "includes/article/article_option/table_tr.html.twig" %}
-								</tbody>
-							</table>
+							{% include "includes/article/article_option/table.html.twig" %}
 						</div>
 					</div>
 					<a href="{{ path('article_index') }}" class="btn btn-success">Terminer</a>
@@ -103,198 +82,7 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="modal fade" id="modal-add-option" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Ajouter une caracteristiques.</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-				<form method="post" id="add-option-form">
-					<div class="car">
-						<div class="card-body">
-							<div class="form-group">
-								<label for="nom">Nom</label>
-								<input type="text" value="Ecran" class="form-control" id="nom" placeholder="Nom">
-								<small id="help_nom" class="text-danger"></small>
-							</div>
-							<div class="form-group">
-								<label for="valeur">Valeur</label>
-								<input type="text" value="12 pouces" class="form-control" id="valeur" placeholder="Valeur">
-								<small id="help_valeur" class="text-danger"></small>
-							</div>
-							<button type="submit" class="btn btn-primary">Ajouter </button>
-						</div>							
-					</div>
-				</form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-    $(document).ready(function () {
-		const id = "{{ article.id }}"
-		//AJOUTER UNE OPTIONN
-        $(document).on('submit','#add-option-form', function (e) {
-            e.preventDefault()	
-			let nom = $('#nom').val()
-			let valeur = $('#valeur').val()
-			if(nom == ''){
-				let text = 'Veuillez remplir le champ nom !'
-				Swal.fire(
-				'Oups',
-				text,
-				'error'
-				)
-				$('#help_nom').text(text)
-				return 
-			}
-			if(valeur == ''){
-				let text = 'Veuillez remplir le champ valeur !'
-				Swal.fire(
-				'Oups',
-				text,
-				'error'
-				)
-				$('#help_valeur').text(text)
-				return 
-			}
-			$.ajax({
-				url:"{{ path('article_new_add_option_ajax')}}",
-				method:'post',
-				type:'json',
-				data:{
-					id_article : id,
-					nom:nom,
-					valeur:valeur
-				},
-				beforeSend:function(){
-					$('.js-loader-text').text('Ajout dans la liste des caractéristiques en cour ...')
-					$('.js-loader').css('display','flex')
-				},
-				success:function(data){
-					if(data.reponse){
-						loadArticleOption()
-						$('#help_nom').text('')
-						$('#nom').val('')
-						$('#valeur').val('')
-						$('#modal-add-option').modal('hide')
-						swal.fire({
-							title:'Bien joué',
-							icon:'success',
-							text:'La caractéristique a été ajouté au produit',
-							showConfirmButton:false,
-							timer: 1700
-						})
-					}
-					else{
-						$('#help_nom').text(data.error)
-						$('#error').text(data.error)
-						swal.fire({
-							title:'Oups !',
-							icon:'error',
-							text:data.error,
-							showConfirmButton:false,
-							timer: 1700
-						})
-					}
-					$('.js-loader').css('display','none')
-				},
-				error:function(){
-					swalError()
-				}
-			})			
-        })
-
-        // SUPPRIMER UNE OPTION
-        $(document).on('click', '.js-remove-option', function () {
-			let id_option = $(this).data('id')
-			let token = $(this).data('token')
-
-			Swal.fire({
-				title: 'Est vous sur ?',
-				icon:'question',
-				showCancelButton: true,
-				text:'Cette caractéristique sera supprimée.',
-				confirmButtonText: 'Oui, Supprimer',
-				confirmButtonColor: '#d33',
-				}).then((result) => {
-
-				if (result.isConfirmed) {
-					$.ajax({
-						url:'/admin/article-option/'+id_option +'/delete/'+id+'/article',
-						method:'post',
-						type:'json',
-						beforeSend:function(){
-							$('.js-loader-text').text('Suppression de la liste des caractéristiques en cour ...')
-							$('.js-loader').css('display','flex')
-						},
-						data:{
-							_token:token,
-							ajax:true
-						},
-						success:function(data){
-							if(data.reponse){
-								loadArticleOption()
-								swal.fire({
-									title:'Bien joué',
-									icon:'success',
-									text:'La caractéristique a été supprimé du produit',
-									showConfirmButton:false,
-									timer: 1700
-								})
-							}
-							$('.js-loader').css('display','none')
-						},
-						error:function(){
-							swalError()
-						}
-					})
-				}
-			})
-        })
-
-
-		//CHARGER LES OPTIONS
-		function loadArticleOption() {
-			$.ajax({
-				url:'/admin/article-option/article-option-table-tr/'+id,
-				method:'post',
-				type:'json',
-				beforeSend:function(){
-					$('.js-loader-text').text('Actualisation de la liste des caractéristiques en cour ...')
-					$('.js-loader').css('display','flex')
-				},
-				success:function(data){
-					$('#table_option tbody').html(data)
-					$('.js-loader').css('display','none')
-				}
-			})
-		}
-
-		function swalError(text  = 'Une erreur est servenue.'){
-			swal.fire({
-					title:'Oups !',
-				icon:'error',
-				text:text,
-				showConfirmButton:false,
-				timer: 1700
-			})
-		}
-
-    })
-</script>
+{% block modal %}
+	{% include "includes/article/article_option/modal_add_option.html.twig" %}
 {% endblock %}

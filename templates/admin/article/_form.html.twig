@@ -42,7 +42,9 @@
 	<div class="col-lg-4">
 		{{form_row(form.enabled)}}
 	</div>
-	<div class="gallery"></div>
+	<div class="gallery">
+	<p class="text-center">Prévisualisez vos images</p>
+	</div>
 	<div class="col-lg-12">
 		{% if app.request.attributes.get('_route') == 'article_edit' %}
 			<div class="row">

@@ -6,7 +6,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% endblock %} | {{ app_name }}</title>
+  <title>
+    {% block title %}{% endblock %}
+    |
+    {{ app_name }}</title>
 
   <link rel="shortcut icon" href="{{ asset('assets/images/lest-jaune.png') }}" type="image/png">
 
@@ -20,122 +23,174 @@
   <link rel="stylesheet" href="{{ asset('vendor/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- Sweetalert 2 -->
   <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-    <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-  
+
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-  {% block head %}{% endblock %}
+  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}"> {% block head %}{% endblock %}
 
 </head>
 <style>
+  .label-new {
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: orange;
+  }
 
-.a1{
-  color:#000000eb !important;
-}
-.a1:hover{
-  color:#01796F !important;
-}
-#demo {
-  height:100%;
-  position:relative;
-  overflow:hidden;
-}
+  .label-top {
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: green;
+    color: #fff
+  }
+
+  .gallery-2 div {
+    background: #fff;
+    padding: 5px;
+  }
+
+  .btn-image-delete {
+    right: 0px
+  }
+
+  .a1 {
+    color: #000000eb !important
+  }
+
+  .a1:hover {
+    color: #01796F !important
+  }
+
+  #demo {
+    height: 100%;
+    position: relative;
+    overflow: hidden
+  }
 
 
-.green{
-  background-color:#6fb936;
-}
-        .thumb{
-            margin-bottom: 30px;
-        }
-        
-        .page-top{
-            margin-top:85px;
-        }
+  .green {
+    background-color: #6fb936
+  }
 
-   
-img.zoom {
+  .thumb {
+    margin-bottom: 30px
+  }
+
+  .page-top {
+    margin-top: 85px
+  }
+
+
+  img.zoom {
     width: 100%;
     height: 200px;
-    border-radius:5px;
-    object-fit:cover;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    -ms-transition: all .3s ease-in-out;
-}
-        
- 
-.transition {
-    -webkit-transform: scale(1.2); 
+    border-radius: 5px;
+    object-fit: cover;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out
+  }
+
+
+  .transition {
+    -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -o-transform: scale(1.2);
-    transform: scale(1.2);
-}
-    .modal-header {
-   
-     border-bottom: none;
-}
-    .modal-title {
-        color:#000;
-    }
-    .modal-footer{
-      display:none;  
-    }
+    transform: scale(1.2)
+  }
+
+  .modal-header {
+    border-bottom: none
+  }
+
+  .modal-title {
+    color: #000
+  }
+
+  .modal-footer {
+    display: none
+  }
 
   #js-editor {
-    display: none;
+    display: none
+  }
+
+  #js-loader-marque {
+    display: none
+  }
+
+  .gallery {
+    border-radius: 5px;
+    width: 100%;
+    margin: 3px;
+    background: #ccc !important;
+    padding: 5px
   }
 
   .gallery img {
     width: 100px;
+    margin: 5px
   }
-  .c-1{
-    color: #000!important;
+
+  .c-1 {
+    color: #000 !important
   }
-  .c-1:hover{
-    color:  #0069d9!important;
+
+  .c-1:hover {
+    color: #0069d9 !important
+  }
+
+  #error {
+    display: none
+  }
+
+  .icon-fff {
+    color: #fff
+  }
+
+  .loader {
+    display: none
+  }
+
+  .js-loader {
+    z-index: 1052;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #97383863;
+    display: none;
+    justify-content: center;
+    align-items: center
+  }
+
+  .js-loader p {
+    text-align: center
+  }
+
+  .js-loader-content {
+    padding: 10px;
+    width: 300px;
+    background: #fff;
+    border-radius: 15px
   }
 </style>
-<style>
-				.icon-fff{
-					color:#fff
-				}
-				.loader {
-					display: none;
-				}
-				.js-loader{
-					z-index: 1052;
-					position: fixed;
-					width: 100%;
-					height: 100%;
-					background: #97383863;
-					display: none;
-					justify-content: center;
-					align-items: center;
-				}
-				.js-loader p{
-					text-align:center
-				}
-				.js-loader-content{
-					padding: 10px;
-					width:300px;
-					background:#fff;
-					border-radius: 15px
-				}
-			</style>
-<body class="{{ app.request.attributes.get('_route') == 'admin' ?  'hold-transition sidebar-mini layout-fixed' : 'sidebar-mini sidebar-collapse' }}">
+
+<body
+  class="{{ app.request.attributes.get('_route') == 'admin' ? 'hold-transition sidebar-mini layout-fixed' : 'sidebar-mini sidebar-collapse' }}">
   <div class="js-loader js-loader-hide">
-				<div class="text-center js-loader-content">
-					<div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
-						<span class="sr-only">Loading...</span>
-					</div>
-					<p class="js-loader-text">Chargement...</p>
-				</div>
-			</div>
+    <div class="text-center js-loader-content">
+      <div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <p class="js-loader-text">Chargement...</p>
+    </div>
+  </div>
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -149,7 +204,9 @@ img.zoom {
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+            <i class="fas fa-bars"></i>
+          </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="/" class="nav-link">{{'Home'|trans}}</a>
@@ -218,14 +275,14 @@ img.zoom {
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+								               with font-awesome or any other icon font library -->
             {{ nav.list(navs.getNavs.dashboard,'',parent_page|default('')) }}
             {% if is_granted('ROLE_USER') %}
-              {{ nav.list(navs.getNavs.user,'',parent_page|default('')) }}
+            {{ nav.list(navs.getNavs.user,'',parent_page|default('')) }}
             {% endif %}
 
             {% if is_granted('ROLE_ADMIN') %}
-              {{ nav.list(navs.getNavs.admin,'',parent_page|default('')) }}
+            {{ nav.list(navs.getNavs.admin,'',parent_page|default('')) }}
             {% endif %}
 
             {{ nav.li({path:'app_logout',name:'log out',icon:'fas fa-power-off'}) }}
@@ -244,19 +301,23 @@ img.zoom {
 
       <!-- Main content -->
       <section class="content">
-        <div class="container-fluid">
-          {% block body %}{% endblock %}
-        </div><!-- /.container-fluid -->
+        <div class="container-fluid"> {% block body %}{% endblock %}
+        </div>
+        <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+    {% block modal %}{% endblock %}
     {% block footer %}
     <footer class="main-footer">
-      <strong>Copyright &copy; 2021 <a href="{{ site.link }}">{{ app_name}}.io</a>.</strong>
+      <strong>Copyright &copy; 2021
+        <a href="{{ site.link }}">{{ app_name}}.io</a>.</strong>
       All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.1.0
+        <b>Version</b>
+        3.1.0
       </div>
     </footer>
     {% endblock %}
@@ -292,25 +353,226 @@ img.zoom {
 
   <!-- PAGE PLUGINS -->
   <!-- jQuery Mapael -->
-  <script src="{{ asset('vendor/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
+  <script src="{{ asset('vendor/jquery-mousewheel/jquery.mousewheel.js') }}"> </script>
   <script src="{{ asset('vendor/raphael/raphael.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery-mapael/jquery.mapael.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery-mapael/maps/usa_states.min.js') }}"></script>
   <!-- ChartJS -->
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
   <script>
-    $(document).ready(function () {
-      //Initialize Select2 Elements
+    $(document).ready(function () { // Initialize Select2 Elements
       $('select').select2({
         theme: 'bootstrap4'
       })
+
+      const id = "{{ article.id|default(0) }}"
+      //AJOUTER UNE OPTIONN
+      $(document).on('submit', '#add-option-form', function (e) {
+        e.preventDefault()
+        let nom = $('#nom').val()
+        let valeur = $('#valeur').val()
+        if (nom == '') {
+          let text = 'Veuillez remplir le champ nom !'
+          Swal.fire(
+            'Oups',
+            text,
+            'error'
+          )
+          $('#help_nom').text(text)
+          return
+        }
+        if (valeur == '') {
+          let text = 'Veuillez remplir le champ valeur !'
+          Swal.fire(
+            'Oups',
+            text,
+            'error'
+          )
+          $('#help_valeur').text(text)
+          return
+        }
+        $.ajax({
+          url: "{{ path('article_new_add_option_ajax')}}",
+          method: 'post',
+          type: 'json',
+          data: {
+            id_article: id,
+            nom: nom,
+            valeur: valeur
+          },
+          beforeSend: function () {
+            $('.js-loader-text').text('Ajout dans la liste des caractéristiques en cour ...')
+            $('.js-loader').css('display', 'flex')
+          },
+          success: function (data) {
+            if (data.reponse) {
+              loadArticleOption()
+              $('#help_nom').text('')
+              $('#nom').val('')
+              $('#valeur').val('')
+              $('#modal-add-option').modal('hide')
+              swal.fire({
+                title: 'Bien joué',
+                icon: 'success',
+                text: 'La caractéristique a été ajouté au produit',
+                showConfirmButton: false,
+                timer: 1700
+              })
+            }
+            else {
+              $('#help_nom').text(data.error)
+              $('#error').text(data.error)
+              swal.fire({
+                title: 'Oups !',
+                icon: 'error',
+                text: data.error,
+                showConfirmButton: false,
+                timer: 1700
+              })
+            }
+            $('.js-loader').css('display', 'none')
+          },
+          error: function () {
+            swalError()
+          }
+        })
+      })
+
+      // SUPPRIMER UNE OPTION
+      $(document).on('click', '.js-remove-option', function () {
+        let id_option = $(this).data('id')
+        let token = $(this).data('token')
+
+        Swal.fire({
+          title: 'Est vous sur ?',
+          icon: 'question',
+          showCancelButton: true,
+          text: 'Cette caractéristique sera supprimée.',
+          confirmButtonText: 'Oui, Supprimer',
+          confirmButtonColor: '#d33',
+        }).then((result) => {
+
+          if (result.isConfirmed) {
+            $.ajax({
+              url: '/admin/article-option/' + id_option + '/delete/' + id + '/article',
+              method: 'post',
+              type: 'json',
+              beforeSend: function () {
+                $('.js-loader-text').text('Suppression de la liste des caractéristiques en cour ...')
+                $('.js-loader').css('display', 'flex')
+              },
+              data: {
+                _token: token,
+                ajax: true
+              },
+              success: function (data) {
+                if (data.reponse) {
+                  loadArticleOption()
+                  swal.fire({
+                    title: 'Bien joué',
+                    icon: 'success',
+                    text: 'La caractéristique a été supprimé du produit',
+                    showConfirmButton: false,
+                    timer: 1700
+                  })
+                }
+                $('.js-loader').css('display', 'none')
+              },
+              error: function () {
+                swalError()
+              }
+            })
+          }
+        })
+      })
+
+
+      //CHARGER LES OPTIONS
+      function loadArticleOption() {
+        $.ajax({
+          url: '/admin/article-option/article-option-table-tr/' + id,
+          method: 'post',
+          type: 'json',
+          beforeSend: function () {
+            $('.js-loader-text').text('Actualisation de la liste des caractéristiques en cour ...')
+            $('.js-loader').css('display', 'flex')
+          },
+          success: function (data) {
+            $('#table_option tbody').html(data)
+            $('.js-loader').css('display', 'none')
+          }
+        })
+      }
+
+      function swalError(text = 'Une erreur est servenue.') {
+        swal.fire({
+          title: 'Oups !',
+          icon: 'error',
+          text: text,
+          showConfirmButton: false,
+          timer: 1700
+        })
+      }
+    })
+  </script>
+  <script>
+    $(document).ready(function () {
+      // CHAGER LA MARQUE
+      $(document).on('change', '#article_category', function () {
+        let id = $(this).val()
+        $.ajax({
+          url: '/admin/article/select/brand',
+          method: 'post',
+          type: 'json',
+          data: {
+            id: id,
+          },
+          beforeSend: function () {
+            $('#js-loader-marque').css('display', 'initial')
+            $('#js-select-brands').css('display', 'none')
+          },
+          success: function (data) {
+            if (data.reponse) {
+              $('#js-select-brands').html(data.content)
+            }
+            $('#js-loader-marque').css('display', 'none')
+            $('#js-select-brands').css('display', 'initial')
+          }, error: function () {
+            alert('erreur')
+          }
+        })
+
+      })
+
+
+      var imagesPreview = function (input, placeToInsertImagePreview) {
+        if (input.files) {
+          var filesAmount = input.files.length;
+          for (i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+              $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+            }
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      };
+
+      $('#article_images').on('change', function () {
+        imagesPreview(this, 'div.gallery');
+      });
+      $('#article_edit_images').on('change', function () {
+        imagesPreview(this, 'div.gallery');
+      });
+
+      $('#gestions').addClass(' menu-is-opening menu-open')
+      $('.gestions').addClass('active')
+      $('.gestion-article').addClass('active')
     })
   </script>
   {% block foot %}{% endblock %}
 
-  {% block javascripts %}
-
-  {% endblock %}
+  {% block javascripts %}{% endblock %}
 </body>
 
 </html>

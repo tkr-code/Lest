@@ -6,7 +6,7 @@
 			<a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
 				{% for item in item.images|slice(0,1) %}
 					<img
-					class="product-image" src="{{ asset('img/article/' ~ item.name )|imagine_filter('square') }}" alt="{{ item.name }}">
+					class="product-image" src="{{ asset('img/article/' ~ item.name ) }}" alt="{{ item.name }}">
 				{% else %}
 					<img src="{{ asset('img/vide.png')}}" alt="Product image" class="product-image">
 				{% endfor %}

@@ -10,8 +10,6 @@
 {% block title %}New Article{% endblock %}
 
 {% block head %}
-<!-- summernote -->
-<link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css') }}">
 <!-- datatable -->
 <link rel="stylesheet" href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 {% endblock %}
@@ -20,7 +18,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb(action_text,[
+{{ utils.breadcrumb('Ajouter un produit',[
 {
 path:path('article_index'),
 name:'Manage Articles'
@@ -29,11 +27,6 @@ name:'Manage Articles'
 {% endblock %}
 
 {% block body %}
-<style>
-    .js-loader-marque {
-        display: none;
-    }
-</style>
 {% for item in app.flashes('success') %}
 {{ alertes.alert(item,'success')}}
 {% endfor %}
@@ -41,24 +34,15 @@ name:'Manage Articles'
     <div class="col-md-12">
         <div class="card card-outline card-primary">
             <div class="card-header">
-                <h4>{{ action_text }}</h4>
+                <h4>{{ 'Ajouter un produit' }}</h4>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
-                        {{ include('admin/article/_form.html.twig',{button_label:action}) }}
+                        {{ include('admin/article/_form.html.twig',{button_label:'AJouter un produit'}) }}
                     </div>
                     <div class="col-md-3">
-                        <div class="callout callout-info">
-                            <h5> 
-                                <i class="icon fas fa-exclamation-triangle"></i>
-                                Attention !
-                            </h5>
-                            <p>Les noms des champs avec un ( * ) sont obligatoires.</p>
-                            <p>Le prix d'achat doit être inférieur au prix de vente.</p>
-                            <p>Le produit est active par defaut (Visible dans la boutique côté  client ).</p>
-                            <p>Ajouter des images avec un fond blanc ou sans arrière plan de bonne qualité.</p>
-                        </div>
+                        {% include "includes/article/aides.html.twig" %}
                     </div>
                 </div>
             </div>
@@ -67,8 +51,7 @@ name:'Manage Articles'
 </div>
 {% endblock %}
 {% block foot %}
-<!-- Summernote -->
-<script src="{{ asset('vendor/summernote/summernote-bs4.min.js') }}"></script>
+
 <script src="{{ asset('js/image.js') }}"></script>
 
 {{ foot.dataTable()}}
@@ -76,75 +59,4 @@ name:'Manage Articles'
 
 {% block javascripts %}
 {{ table.jsDataTable('datatable_1') }}
-<script>
-    $(document).ready(function () {
-        // cache le loader des marques
-        $('#js-loader-marque').hide()
-
-        // CHAGER LA MARQUE
-        $(document).on('change', '#article_category', function () {
-            let id = $(this).val()
-            $.ajax({
-                url: '/admin/article/select/brand',
-                method: 'post',
-                type: 'json',
-                data: {
-                    id: id,
-                },
-                beforeSend: function () {
-                    $('#js-loader-marque').css('display', 'initial')
-                    $('#js-select-brands').css('display', 'none')
-                },
-                success: function (data) {
-                    if (data.reponse) {
-                        $('#js-select-brands').html(data.content)
-                    }
-                    $('#js-loader-marque').css('display', 'none')
-                    $('#js-select-brands').css('display', 'initial')
-                }, error: function () {
-                    alert('erreur')
-                }
-            })
-
-        })
-        //AJOUTER UNE OPTIONN
-        $(document).on('click', '.js-add-option', function (e) {
-            e.preventDefault()
-            let option = '';
-            option += '<tr>'
-            option += '<td><input type="text"  name="option_name[]" required="required" placeholder="" class="item_option_name form-control"> </span><span></td>'
-            option += '<td><input type="text"  name="option_content[]" required="required" placeholder="" class=" item_option_content form-control"> </span><span> </td>'
-            option += '<td><button type="button" class="btn btn-danger js-remove-option"><i class="fas fa-minus"></i></button></td>'
-            option += '</tr>'
-            $('#table_option').append(option).animate('heigth')
-        })
-
-        // SUPPRIMER UNE OPTION
-        $(document).on('click', '.js-remove-option', function () {
-            $(this).closest('tr').remove()
-        })
-
-
-        var imagesPreview = function (input, placeToInsertImagePreview) {
-            if (input.files) {
-                var filesAmount = input.files.length;
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-                    reader.onload = function (event) {
-                        $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    }
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-        };
-
-        $('#article_images').on('change', function () {
-            imagesPreview(this, 'div.gallery');
-        });
-
-        $('#gestions').addClass(' menu-is-opening menu-open')
-        $('.gestions').addClass('active')
-        $('.gestion-article').addClass('active')
-    })
-</script>
 {% endblock %}

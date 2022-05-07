@@ -7,6 +7,7 @@ use App\Entity\Image;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Entity\ArticleOption;
+use App\Form\ArticleEditType;
 use App\Form\ArticleOptionType;
 use App\Repository\ArticleOptionRepository;
 use App\Repository\ArticleRepository;
@@ -71,43 +72,68 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function form(Request $request, Article $article = null, TranslatorInterface $translator, BrandRepository $brandRepository): Response
+    public function new(Request $request, TranslatorInterface $translator, BrandRepository $brandRepository): Response
     {
-        
-        $action = 'Update';
-        $action_text = 'Update ';
-        if(!$article){
-            $action = 'Save';
-            $action_text = 'Create new ';
-            $article = new Article();
-            $article->setEnabled(true)->setTitle('produit 1')->setDescription('produit 1 description')
+        $article = new Article();
+        $article
+            ->setEnabled(true)->setTitle('produit 1')->setDescription('produit 1 description')
             ->setPrice('1500000')->setBuyingPrice('120000')->setQuantity(5)->setLabel('New');
-            $formOption = null;
-        }else{
-                $articleOption = new ArticleOption();
-                $formOption = $this->createForm(ArticleOptionType::class, $articleOption);
-                $formOption->handleRequest($request);
-                if(!$articleOption->getId()){
-                    $articleOption->setArticle($article);
-                }
-        if ($formOption->isSubmitted() && $formOption->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($articleOption);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('article_edit', ['id'=>$article->getId()], Response::HTTP_SEE_OTHER);
-        }
-        }
-
-        $action_text .= 'Article'; 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($form->getClickedButton());
+            //on recupere les images transmise
+            $images = $form->get('images')->getData();
+            foreach($images as $image)
+            {
+                //om gener un nouveau nom de fichier
+                $fichier = md5(uniqid()). '.'.$image->guessExtension();
 
+                //on copie le fichier dans le dosiier uploads
+                $image->move( $this->getParameter('article_images_directory'),$fichier);
+                //on stocke l'image dans la base de donnees 
+                $img = new Image();
+                $img->setName($fichier);
+                $article->addImage($img);
+            }
+            if(!$article->getId()){
+                $article->setCreatedAt(new \DateTime());
+            }else{
+                $article->setUpdatedAt(new \DateTime());
+            }
+            $article->setQtyReel($article->getQuantity());
+            $idBrand = $request->request->get('brand');
+            if($idBrand){
+                $brand = $brandRepository->find($idBrand);
+                if($brand){
+                    $article->setBrand($brand);
+                }
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $message = $translator->trans('Article cree') ;
+            $this->addFlash('success',"L'article a été crée.");
+            return $this->redirectToRoute('article_new_add_option', ['id'=>$article->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin/article/new.html.twig', [
+            'article' => $article,
+            'form' => $form,
+            'parent_page'=>'Produit'
+        ]);
+    }
+    /**
+     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Article $article, TranslatorInterface $translator, BrandRepository $brandRepository): Response
+    {
+        $form = $this->createForm(ArticleEditType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             //on recupere les images transmise
             $images = $form->get('images')->getData();
 
@@ -142,17 +168,13 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
-            $message = ($action == 'Save') ? $translator->trans('Article cree') : $translator->trans('Article modifier');
-            $this->addFlash('success',$message);
-            return $this->redirectToRoute('article_new_add_option', ['id'=>$article->getId()], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success',"L'article a été modifier avec succès");
+            return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/article/new.html.twig', [
+        return $this->renderForm('admin/article/edit.html.twig', [
             'article' => $article,
-            'action'=>$action,
-            'action_text'=>$action_text,
             'form' => $form,
-            'formOption' => $formOption,
             'parent_page'=>'Produit'
         ]);
     }

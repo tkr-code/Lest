@@ -22,8 +22,9 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
-class ArticleType extends AbstractType
+class ArticleEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -71,13 +72,6 @@ class ArticleType extends AbstractType
                     'class'=>'select2'
                 ]
             ])
-            // ->add('etat',ChoiceType::class,[
-            //     'choices'=>Article::etats,
-            //     'required'=>false,
-            //     'attr'=>[
-            //         'class'=>'select2'
-            //     ]
-            // ])
             ->add('category',EntityType::class,[
                 'label'=>'Catégorie (*)',
                 'class'=>Category::class,
@@ -88,39 +82,12 @@ class ArticleType extends AbstractType
                 'label'=>'Ajouter une ou plusieurs images (*)',
                 'multiple'=>true,
                 'mapped'=>false,
+                'required'=>false,
                 'constraints'=>[],
                 ])
             ->add('enabled',CheckboxType::class,[
                 'label'=>'Activer',
-            ])
-        ;
-        // $formModififer = function(FormInterface $form, Category $category = null){
-        //     $brands = null === $category ? [] : $category->getBrands();
-        //     // dd($brands);
-        //     $form->add('brand',EntityType::class,[
-        //         'class'=>Brand::class,
-        //         'placeholder'=>'',
-        //         'choices'=>$brands
-        //     ]);
-        // };
-
-        // $builder->addEventListener(
-        //     FormEvents::POST_SET_DATA,
-        //     function(FormEvent $event) use ($formModififer){
-        //         $data = $event->getData();
-        //         dump($data);
-        //         $formModififer($event->getForm(), $data->getCategory());
-        //     }
-        // );
-
-        // $builder->get('category')->addEventListener(
-        //     FormEvents::POST_SUBMIT,
-        //     function(FormEvent $event) use ($formModififer){
-        //         $category  = $event->getForm()->getData();
-        //         $formModififer($event->getForm()->getParent(),$category);
-        //     }
-        // );
-
+            ]);
     }
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -62,9 +62,13 @@ class ArticleController extends AbstractController
         }
         $user = $this->getUser();
         $isBuy = false;
-        if($user->getClient())
-        {               
-           $isBuy = $articleBuyRepository->isBuy($user->getClient(),$article);
+        if($user){
+
+            $client = $user->getClient();
+            if($client)
+            {               
+                $isBuy = $articleBuyRepository->isBuy($client,$article);
+            }
         }
 
         $pagination = $paginatorInterface->paginate(
@@ -72,9 +76,7 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             1
         );
-        dump($pagination);
         return $this->renderForm('lest/shop/show.html.twig', [
-        // return $this->renderForm('leSekoya/shop/show.html.twig', [
             'article'=>$article,
             'articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),
             'form' => $form,

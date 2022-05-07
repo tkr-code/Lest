@@ -1,0 +1,18 @@
+<button type="button" class="btn btn-primary my-2" data-toggle="modal" data-target="#modal-add-option">
+	<i class="fas fa-plus"></i>
+	Ajouter
+</button>
+<table class="table" id="table_option">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Valeur</th>
+			<th>
+				Action
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% include "includes/article/article_option/table_tr.html.twig" %}
+	</tbody>
+</table>

@@ -65,7 +65,8 @@
                             {% endfor %}
                             <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
                             <td>
-                                {{ link.edit(path('user_edit', {'id': user.id}))}}
+                                {{ link.pencil(path('user_edit', {'id': user.id}))}}
+                                {{ link.show(path('user_show', {'id': user.id}))}}
                             </td>
                         </tr>
                     {% else %}
