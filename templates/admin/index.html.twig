@@ -1,5 +1,6 @@
 {% import "macros/breadcrumb.html.twig" as utils %}
 {% import "macros/cards.html.twig" as cards %}
+{% import "macros/modal.html.twig" as modal %}
 
 {% extends 'admin/base.html.twig' %}
 
@@ -77,15 +78,14 @@
                                             <th>{{'number'|trans}}</th>
                                             <th>{{'Customer'|trans}}</th>
                                             <th>{{'Status'|trans}}</th>
-                                            <th>{{'Created at'|trans}}</th>
+                                            <th>Crée le</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for item in lastOrder %}
-
                                         <tr>
                                             <td>{{ item.number }}
-                                                <a class="text-dark" href="{{ path('order_show',{id:item.id}) }}">
+                                                <a class="text-dark js-order-view" href="{{ path('main_order_show',{id:item.id}) }}">
                                                     <i class="fa fa-eye float-right" aria-hidden="true"></i>
                                                 </a>
                                                 {% if is_granted('ROLE_ADMIN') %}
@@ -205,9 +205,12 @@
     <!-- /.row -->
 </div>
 <!--/. container-fluid -->
+{{ modal.orderView() }}
+
 {% endblock %}
 
 {% block foot %}
+    <script src="{{ asset('js/order/order.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

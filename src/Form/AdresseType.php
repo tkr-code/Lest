@@ -28,7 +28,6 @@ class AdresseType extends AbstractType
                     'placeholder'=>'Pays',
                 ]
             ])
-
         ;
     }
 

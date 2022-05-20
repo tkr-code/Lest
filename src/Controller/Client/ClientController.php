@@ -42,6 +42,7 @@ use Symfony\Component\Mime\Address;
 class ClientController extends AbstractController
 {
     private $emailService;
+    private $parent_page = 'Client';
     public function __construct(EmailService $emailService)
     {
         $this->emailService = $emailService;
@@ -244,7 +245,7 @@ class ClientController extends AbstractController
         return $this->renderForm('client/dashboard.html.twig', [
             'clients' => $clientRepository->findAll(),
             'formDetail' => $form,
-            'parent_page' => 'Client',
+            'parent_page' => $this->parent_page,
             'formReset'=>$formReset
         ]);
     }
@@ -330,32 +331,6 @@ class ClientController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    /**
-     * @Route("/edit-order-state-ajax", name="client_edit_order_state_ajax", methods={"POST"})
-     */
-    public function editOrderState(Request $request, OrderRepository $orderRepository): Response
-    {
-        $reponse = [
-            'reponse'=>false
-        ];
-        $id = $request->request->get('id');
-
-        if (!empty($id)) {
-            $order = $orderRepository->find($id);
-            $order->setState('canceled');
-            $this->getDoctrine()->getManager()->flush($order);
-
-            $reponse = [
-                'reponse'=>true,
-                'content'=>$this->render('lest/order/_order.html.twig')->getContent()
-            ];
-            return new JsonResponse($reponse);
-        }
-
-        return new JsonResponse($reponse);
-    }
-
 
     /**
      * @Route("/new", name="client_new", methods={"GET","POST"})

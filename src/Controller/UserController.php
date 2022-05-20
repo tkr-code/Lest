@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Personne;
 use App\Entity\User;
+use App\Form\User1EditType;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
@@ -27,7 +28,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findAllUsers(),
         ]);
     }
 
@@ -74,6 +75,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/client", name="user_show_client", methods={"GET"})
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
@@ -88,7 +90,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(User1EditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

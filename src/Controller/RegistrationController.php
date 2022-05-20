@@ -62,9 +62,6 @@ class RegistrationController extends AbstractController
             $client = new Client();
             $user->setClient($client);
             $user->setIsActive(true);
-            // $user->set
-
-            // dd($user);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

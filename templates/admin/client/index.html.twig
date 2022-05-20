@@ -8,7 +8,6 @@
 {% import "macros/dataTable.html.twig" as dataTable %}
 {% extends 'admin/base.html.twig' %}
 
-
 {% block head %}
 {{ dataTable.css() }}
 {% endblock %}
@@ -16,45 +15,35 @@
 {{ dataTable.js()}}
 {% endblock %}
 
-
 {% block javascripts %}
-{{ table.jsDataTable('datatable_1') }}
+{{ dataTable.script('#datatable_1') }}
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Manage user',[{path:path('order_index'),name:'Manage orders'}])}}
+{{ utils.breadcrumb('Manage client',[{path:path('order_index'),name:'Manage orders'}])}}
 {% endblock %}
-{% block title %}Client index{% endblock %}
+{% block title %}Client{% endblock %}
 
 {% block body %}
 {% for item in app.flashes('success') %}
 {{ alerte.alert(item,'success')}}
 {% endfor %}
 <div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Client unregister</span>
-                <span class="info-box-number">
-                    {{ clients|length }}
-                </span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
     <div class="col-md-12">
         <div class="card card-outline card-primary">
             <div class="card-header">
-                <div class="card-title">Gestion des clients</div>
+                <div class="card-title">Gestion des clients |
+                    <span class="badge-info badge">
+                        {{ clients|length }}
+                    </span>
+                </div>
             </div>
             <div class="card-body">
                 <div class="btn-group">
-                    <a class="btn btn-primary" href="{{ path('user_new') }}">New client
+                    <a class="btn btn-primary" href="{{ path('admin_client_new') }}">New client
                         <i class="fa fa-plus"></i></a>
                 </div>
+                <hr>
                 <table id="datatable_1" class="table">
                     <thead>
                         <tr>
@@ -62,17 +51,18 @@
                             <th>Email</th>
                             <th>Commande</th>
                             <th>Date Creation</th>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <th>Vérifier</th>
-                            <th>actions</th>
+                            {% endif %}
+                            
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for item in clients %}
                         <tr>
                             <td>#{{ item.id }}
-                                <a href="#">
-                                    {{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname }}
-                                </a>
+                                {{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname |capitalize }}
                             </td>
                             <td>
                                 {{ item.user.email }}
@@ -85,12 +75,14 @@
                             <td>
                                 {{ item.user.createdAt|date_format_fr }}
                             </td>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <td>
                                 {{ item.user.isVerified ? 'Yes' : 'No' }}
                             </td>
+                            {% endif %}
                             <td>
-                                {{ link.delete(path('user_show', {'id': item.user.id})) }}
-                                {{ link.edit(path('user_edit', {'id': item.user.id}))}}
+                                {{ link.show(path('user_show_client', {'id': item.user.id})) }}
+                                {{ link.pencil(path('admin_client_edit', {'id': item.user.id}))}}
                             </td>
                         </tr>
                         {% else %}

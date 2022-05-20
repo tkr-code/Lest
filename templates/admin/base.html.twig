@@ -11,7 +11,7 @@
     |
     {{ app_name }}</title>
 
-  <link rel="shortcut icon" href="{{ asset('assets/images/lest-jaune.png') }}" type="image/png">
+  <link rel="shortcut icon" href="{{ asset('img/' ~ site.path_logo) }}" type="image/png">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -194,8 +194,8 @@
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="{{ asset('img/AdminLTELogo.png') }}" alt="{{ app_name }}" height="60"
+    <div class="preloader bg-white flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="{{ asset('img/' ~ site.path_logo) }}" alt="{{ app_name }}" height="60"
         width="60">
     </div>
 
@@ -239,8 +239,8 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="{{ asset('img/AdminLTELogo.png') }}" alt="{{ app_name }}" class="brand-image img-circle elevation-3"
+      <a href="" class="brand-link">
+        <img src="{{ asset('img/' ~ site.path_logo) }}" alt="{{ app_name }}" class="brand-image  img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">{{ app_name }}</span>
       </a>
@@ -271,24 +271,22 @@
           </div>
         </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-								               with font-awesome or any other icon font library -->
-            {{ nav.list(navs.getNavs.dashboard,'',parent_page|default('')) }}
-            {% if is_granted('ROLE_USER') %}
-            {{ nav.list(navs.getNavs.user,'',parent_page|default('')) }}
-            {% endif %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-            {{ nav.list(navs.getNavs.admin,'',parent_page|default('')) }}
-            {% endif %}
-
-            {{ nav.li({path:'app_logout',name:'log out',icon:'fas fa-power-off'}) }}
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          {{ nav.list(navs.getNavs.navs,parent_page|default('')) }}
+          {% if is_granted('ROLE_ADMIN') %}
+          {{ nav.list(navs.getNavs.admin,parent_page|default('')) }}
+          {% endif %}
+          <li class="nav-item">
+              <a id="btn-logout" href="#" type="button" class="nav-link  ">
+                  <i class="fas fa-power-off nav-icon"></i>
+                  <p>log out</p>
+              </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
     </aside>
@@ -361,6 +359,30 @@
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
   <script>
     $(document).ready(function () { // Initialize Select2 Elements
+
+        $(document).on('click','#btn-logout',function(){
+      Swal.fire({
+        title: 'Etes vous sûr?',
+        text: "Vous êtes sur le point de vous déconnecter !  ",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Fermer',
+        confirmButtonText: 'Oui, je confirme!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Déconnection réussie !',
+              showConfirmButton: false,
+              timer: 1500
+            }).then((result)=>{
+              window.location.href="{{ path('app_logout') }}"
+            })
+        }
+      })
+    })
       $('select').select2({
         theme: 'bootstrap4'
       })

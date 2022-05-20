@@ -28,7 +28,6 @@ class User1Type extends AbstractType
                     'placeholder'=>'Email'
                 ]
             ])
-            ->add('adresse',TextType::class)
             ->add('roles',ChoiceType::class,[
                 'attr'=>[
                     'placeholder'=>'Roles'

@@ -30,6 +30,7 @@ class ArticleController extends AbstractController
 {
     private $em;
     private $translator;
+    private $parent_page = 'Produit';
     public function __construct(EntityManagerInterface $entityManagerInterface, TranslatorInterface $translatorInterface)
     {
         $this->em = $entityManagerInterface;
@@ -44,6 +45,7 @@ class ArticleController extends AbstractController
             'articlesOn' => $articleRepository->findAllOn(),
             'articlesOff' => $articleRepository->findAllOff(),
             'articlesTop' => $articleRepository->findEtat('top'),
+            'parent_page'=>$this->parent_page
         ]);
     }
     /**

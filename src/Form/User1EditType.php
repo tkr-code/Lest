@@ -2,38 +2,47 @@
 
 namespace App\Form;
 
-use App\Entity\Client;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientType extends AbstractType
+class User1EditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('personne',PersonneClientType::class,[
+            ->add('personne',PersonneType::class,[
                 'label'=>false
             ])
             ->add('email',EmailType::class,[
-                'label'=>'Email *'
-            ])
-            ->add('phone_number',NumberType::class,[
-                'label'=>'Téléphone *'
-            ])
-            ->add('adresse',AdresseType::class,[
                 'attr'=>[
-                    'placeholder'=>'Adresse'
-                ],
-                'required'=>false
+                    'placeholder'=>'Email'
+                ]
             ])
-            ->add('password',PasswordType::class)
+            ->add('roles',ChoiceType::class,[
+                'attr'=>[
+                    'placeholder'=>'Roles'
+                ],
+                'choices'=>User::roles,
+                'multiple'=>true
+            ])
+
+            ->add('phone_number',NumberType::class,[
+                'attr'=>[
+                    'placeholder'=>'Téléphone'
+                ]
+            ])
             ->add('isVerified')
+
         ;
     }
 
@@ -41,7 +50,7 @@ class ClientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-             'translation_domain'=>'forms',
+            'translation_domain'=>'forms',
 
         ]);
     }

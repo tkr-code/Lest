@@ -25,7 +25,11 @@
     {{'To'|trans}}
     <address>
     <strong>{{ order.user.personne.firstName ~ ' ' ~ order.user.personne.lastName }}</strong><br>
-    {{ order.user.adresse.rue }}<br>
+    {% if order.user.adresse is not null %}
+        {{ order.user.adresse.rue ~ ' ' ~ order.user.adresse.city ~ ' ' ~ order.user.adresse.pays }}
+    {% endif %}
+    
+    <br>
     {{'Phone'|trans}}: {{ order.user.phoneNumber }}<br>
     {{'Email'|trans}}: {{ order.user.email }}
     </address>

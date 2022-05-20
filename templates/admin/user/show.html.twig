@@ -1,218 +1,26 @@
 {% extends 'admin/base.html.twig' %}
+{% import "macros/link.html.twig" as links %}
+{% import "macros/breadcrumb.html.twig" as utils %}
+{% block title %}User
+{% endblock %}
 
-{% block title %}User{% endblock %}
+{% block breadcrumb %}
+	{{ utils.breadcrumb('Afficher un utilisateur',[])}}
+{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-3">
-        <!-- Profile Image -->
-        <div class="card card-primary card-outline">
-            <div class="card-body box-profile">
-                <div class="text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/user/' ~ user.personne.avatar|default('empty.png') ) }}"
-            alt="{{ user.personne.firstName ~ ' ' ~ user.personne.lastName  }}">
-                </div>
-                <h3 class="profile-username text-center">{{ user.personne.fullName }}</h3>
-                <button type="button" id="btn-editor" class="btn btn-success mb-3 btn-block">
-                    <b>Modifier <i class="fas fa-pencil-alt"></i> </b>
-                </button>
-                <div id="js-editor">
-                    <form name="profile" method="post" action="/admin/profile-edit?id=65" novalidate="novalidate"
-                        enctype="multipart/form-data">
-                        <div id="profile">
-                            <fieldset class="form-group">
-                                <div id="profile_personne">
-                                    <div class="form-group"><input type="text" id="profile_personne_firstName"
-                                            name="profile[personne][firstName]" required="required" placeholder="Prénom"
-                                            class="form-control" value="Malick"></div>
-                                    <div class="form-group"><input type="text" id="profile_personne_lastName"
-                                            name="profile[personne][lastName]" required="required" placeholder="Nom"
-                                            class="form-control" value="Tounkara"></div>
-                                </div>
-                            </fieldset>
-                            <div class="form-group"><label for="profile_phone_number" class="required">Phone
-                                    number</label><input type="text" id="profile_phone_number"
-                                    name="profile[phone_number]" required="required" class="form-control"
-                                    value="781278288"></div>
-                            <fieldset class="form-group">
-                                <legend class="col-form-label required">Adresse</legend>
-                                <div id="profile_adresse">
-                                    <div class="form-group"><label for="profile_adresse_rue"
-                                            class="required">Rue</label><input type="text" id="profile_adresse_rue"
-                                            name="profile[adresse][rue]" required="required" placeholder="Rue"
-                                            class="form-control" value="Sacre coeur"></div>
-                                    <div class="form-group"><label for="profile_adresse_city"
-                                            class="required">City</label><input type="text" id="profile_adresse_city"
-                                            name="profile[adresse][city]" required="required" placeholder="Ville"
-                                            class="form-control" value="Dakar"></div>
-                                    <div class="form-group"><label for="profile_adresse_pays"
-                                            class="required">Pays</label><input type="text" id="profile_adresse_pays"
-                                            name="profile[adresse][pays]" required="required" placeholder="Pays"
-                                            class="form-control" value="Sénegal"></div>
-                                </div>
-                            </fieldset>
-                            <div class="form-group"><label for="profile_avatar">avatar ( jpg or png ) </label>
-                                <div class="custom-file"><input type="file" id="profile_avatar" name="profile[avatar]"
-                                        class="custom-file-input" lang="fr"><label for="profile_avatar"
-                                        class="custom-file-label"></label>
-                                </div>
-                            </div><input type="hidden" id="profile__token" name="profile[_token]"
-                                value="fefda9d41f6442abc1.EcaOrV66kannxMl8ACD4B5qgguXys8hscg7iJL_BGj8.VpPd-RiX_tmWlbBPRGGuZqn27aeL16YCGEGwVe2OQFpyks-fEMPV65Hp-Q">
-                        </div>
-                        <div id="show_preview" class="text-center my-3"></div>
-                        <button class="btn btn-success"><i class="fas fa-save"></i> Update </button>
-                    </form>
-                </div>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-    <div class="col-md-9">
-        <div class="card">
-            <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#information"
-                            data-toggle="tab">Information</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#reglage" data-toggle="tab">Reglage</a></li>
-                </ul>
-            </div><!-- /.card-header -->
-            <div class="card-body">
-                <div class="tab-content">
-                    <div class="active tab-pane" id="information">
-                        <div class="row">
-                            <div class="col-md-4 col-12">
-                                <strong><i class="fas fa-user mr-1"></i> compte</strong>
-                                <p class="text-muted">
-                                    Administrateur
-                                    Editeur
-                                </p>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <strong><i class="fas fa-book mr-1"></i> Email</strong>
-                                <p class="text-muted">
-                                    admin@mail.com
-                                </p>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Adresse</strong>
-                                <p class="text-muted">
-                                    Sacre coeur , Dakar Sénegal
+	<div class="card card-outline card-primary">
+		<div class="card-body">
+			{% include "includes/user/user_show.html.twig" %}
 
-                                </p>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <strong><i class="fas fa-phone mr-1"></i> Telephone</strong>
-                                <p class="text-muted">
-                                </p>
-                                <a href="/admin/phone/new" class="btn btn-primary">Ajouter un numero de téléphone !</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.tab-pane -->
-                    <div class="tab-pane" id="reglage">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <strong><i class="fas fas-fa-user-slash mr-1"></i> Modifier mon email</strong>
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, quis.
-                                </p>
-                                <div class="loader-edit-email">
-                                    <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
-                                </div>
-                                <div class="alert-edit-email">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus, qui.</p>
-                                    </div>
-                                    <script>
-                                        $(".alert").alert();
-                                    </script>
-                                </div>
-                                <button id="btn-edit-email" class="btn btn-primary">
-                                    Modifier l'email
-                                </button>
-                                <hr>
-                            </div>
-                            <div class="col-md-6">
-                                <strong><i class="fas fas-fa-user-slash mr-1"></i> Modifier le mot de passe</strong>
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, quis.
-                                </p>
+			{% if app.request.get('_route') == 'user_index' %}
+				{{ links.back(path('user_index'), 'back to user list') }}
+			{% endif %}
+            {% if app.request.get('_route') == 'user_show_client' %}
+			    {{ links.back(path('admin_client_index'), 'back to client list') }}
+            {% endif %}
+            
 
-                                <a href="/admin/profile-edit-password" class="btn btn-primary"> <i
-                                        class="fas fa-edit"></i>
-                                    Modifier le mot de passe
-                                </a>
-                                <hr>
-                            </div>
-                            <div class="col-md-6">
-                                <strong><i class="fas fas-fa-user-slash mr-1"></i> Supprimer mon compte</strong>
-                                <p class="text-muted">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, quis.
-                                </p>
-                                <div class="loader-delete-account">
-                                    <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
-                                </div>
-                                <div class="alert-delete-account">
-                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus, qui.</p>
-                                    </div>
-                                    <script>
-                                        $(".alert").alert();
-                                    </script>
-                                </div>
-                                <button id="btn-delete-account" class="btn btn-danger">
-                                    <i class="fas fa-user-slash"></i> Supprimer mon compte </button>
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.tab-pane -->
-                    <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
-            </div><!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<h1>User</h1>
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ user.id }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <th>Roles</th>
-            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-        </tr>
-        <tr>
-            <th>Password</th>
-            <td>{{ user.password }}</td>
-        </tr>
-        <tr>
-            <th>IsVerified</th>
-            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<a href="{{ path('user_index') }}">back to list</a>
-
-<a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-{{ include('admin/user/_delete_form.html.twig') }}
+		</div>
+	</div>
 {% endblock %}

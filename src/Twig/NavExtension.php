@@ -25,13 +25,47 @@ class NavExtension extends AbstractExtension
     {
         return 
         [
-            'client'=>
+            'navs'=>
             [
-                
-            ],
-            'user'=>
-            [
-
+                [
+                    'name'=>$this->translator->trans('Dashboard'),
+                    'icon'=>'fas fa-tachometer-alt',
+                    'links'=>[
+                        [
+                            'name'=>$this->translator->trans('Dashboard').' 1',
+                            'path'=>'admin'
+                        ]
+                    ]
+                ],
+                [
+                    'id'=>'profile',
+                    'name'=>'Profile',
+                    'icon'=>'fas fa-user',
+                    'path'=>'profile_index',
+                ],
+                [
+                    'name'=>'Lest',
+                    'icon'=>'fa fa-home',
+                    'links'=>
+                        [
+                            [
+                                'name'=>$this->translator->trans('Home'),
+                                'path'=>'home'
+                            ],
+                            [
+                                'name'=>'Produits',
+                                'path'=>'articles'
+                            ],
+                            [
+                                'name'=>'Contact',
+                                'path'=>'contact'
+                            ],
+                            [
+                                'name'=>$this->translator->trans('cart'),
+                                'path'=>'cart_index'
+                            ]
+                        ]
+                ],
                 [
                     'name'=>'Client',
                     'links'=>[
@@ -39,11 +73,26 @@ class NavExtension extends AbstractExtension
                             'name'=>'Clients',
                             'path'=>'admin_client_index'
                         ],
-                        // [
-                        //     'name'=>'Nouveau client',
-                        //     'path'=>'client_new'
-                        // ],
+                        [
+                            'name'=>'Nouveau client',
+                            'path'=>'admin_client_new'
+                        ],
                     ]
+                ],
+                [
+                    'name'=>'Commande',
+                    'icon'=>'fa fa-shopping-bag',
+                    'links'=>
+                        [
+                            [
+                                'name'=>'Commandes',
+                                'path'=>'order_index'
+                            ],
+                            [
+                                'name'=>'new Order',
+                                'path'=>'order_new'
+                            ],
+                        ]
                 ],
                 [
                     'name'=>'Produit',
@@ -64,21 +113,14 @@ class NavExtension extends AbstractExtension
                             ],
                         ]
                 ],
-                [
-                    'name'=>'Commande',
-                    'icon'=>'fa fa-shopping-bag',
-                    'links'=>
-                        [
-                            [
-                                'name'=>'Commandes',
-                                'path'=>'order_index'
-                            ],
-                            [
-                                'name'=>'new Order',
-                                'path'=>'order_new'
-                            ],
-                        ]
-                ],
+            ],
+            'client'=>
+            [
+                
+            ],
+            'user'=>
+            [
+
             ],
             'admin'=>
             [
@@ -151,29 +193,7 @@ class NavExtension extends AbstractExtension
                     'path'=>'profile_index',
                     'icon'=>'fas fa-user'
                 ],
-                [
-                    'name'=>'Lest',
-                    'icon'=>'fa fa-home',
-                    'links'=>
-                        [
-                            [
-                                'name'=>$this->translator->trans('Home'),
-                                'path'=>'home'
-                            ],
-                            [
-                                'name'=>'Produits',
-                                'path'=>'articles'
-                            ],
-                            [
-                                'name'=>'Contact',
-                                'path'=>'contact'
-                            ],
-                            [
-                                'name'=>$this->translator->trans('cart'),
-                                'path'=>'cart_index'
-                            ]
-                        ]
-                ],
+                
             ],
             'editor'=>
             [

@@ -287,16 +287,3 @@
 {% block foot %}
 {{ foot.dataTable()}}
 {% endblock %}
-
-{% block javascripts %}
-{{ table.jsDataTable('datatable_1') }} 
-{# {{table.jsDataTable('datatable_2')  }} #}
-  <script>
-   $(document).ready(function(){
-     //nivagation 
-     $('#gestions').addClass(' menu-is-opening menu-open')
-     $('.gestions').addClass('active')
-     $('.gestion-order').addClass('active')
-   })
-  </script>
-{% endblock %}

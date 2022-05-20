@@ -5,12 +5,14 @@
 {% import "macros/alertes.html.twig" as alerte %}
 {% import "macros/button.html.twig" as btn %}
 {% import "macros/link.html.twig" as link %}
+{% import "macros/dataTable.html.twig" as dataTable %}
+
 
 {% extends 'admin/base.html.twig' %}
 
 
 {% block head %}
-  {{ head.dataTable() }}
+  {{ dataTable.css() }}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -31,7 +33,12 @@
     <div class="col-md-12">
         <div class="card card-outline card-primary">
             <div class="card-header">
-                <h3> <span class="badge badge-info">{{ users|length }}</span> {{'Users'|trans}}</h3> 
+                <div class="card-title"> 
+                    {{'Users'|trans}}
+                    <span class="badge badge-info">
+                        {{ users|length }}
+                    </span> 
+                </div> 
             </div>
             <div class="card-body">
                 <div class="btn-group mb-3">
@@ -85,19 +92,10 @@
 
 {% endblock %}
 {% block foot %}
-{{ foot.dataTable()}}
+{{ dataTable.js()}}
 {% endblock %}
 
 
 {% block javascripts %}
-{{ table.jsDataTable('datatable_1') }} 
-{# {{table.jsDataTable('datatable_2')  }} #}
-  <script>
-   $(document).ready(function(){
-     //nivagation 
-     $('#gestions').addClass(' menu-is-opening menu-open')
-     $('.gestions').addClass('active')
-     $('.gestion-user').addClass('active')
-   })
-  </script>
+{{ dataTable.script('#datatable_1') }} 
 {% endblock %}

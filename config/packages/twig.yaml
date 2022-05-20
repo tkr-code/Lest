@@ -12,6 +12,7 @@ twig:
         site: 
             name: 'lest'
             email: 'lest@gmail.com'
+            path_logo: 'lest-logo.png'
             current_name: 'F cfa'
             current: 'XOF'
             phone_number_1: '+221 78 127 82 88'
