@@ -36,43 +36,28 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
 		<link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
-		<link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
+		<link
+		rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
 
 		<!-- Sweetalert 2 -->
 		<link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
 		<link
 		rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
 		<!-- Main CSS File -->
-		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> 
-		{% block head %}{% endblock %}
+		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> {% block head %}{% endblock %}
 		</head>
 
 		<body>
 			<style>
-				.icon-fff{
-					color:#fff
+				.icon-fff{color:#fff
 				}
-				.loader {
-					display: none;
+				.loader{display:none
 				}
-				.js-loader{
-					z-index: 1041;
-					position: fixed;
-					width: 100%;
-					height: 100%;
-					background: #97383863;
-					display: none;
-					justify-content: center;
-					align-items: center;
+				.js-loader{z-index:1041;position:fixed;width:100%;height:100%;background:#97383863;display:none;justify-content:center;align-items:center
 				}
-				.js-loader p{
-					text-align:center
+				.js-loader p{text-align:center
 				}
-				.js-loader-content{
-					padding: 10px;
-					width:300px;
-					background:#fff;
-					border-radius: 15px
+				.js-loader-content{padding:10px;width:300px;background:#fff;border-radius:15px
 				}
 			</style>
 			<div class="js-loader js-loader-hide">
@@ -97,8 +82,6 @@
 								<!-- End .header-left -->
 
 								<div class="header-right">
-									
-
 									<ul class="top-menu">
 										<li>
 											<a href="#">Links</a>
@@ -169,34 +152,35 @@
 
 								<div class="header-right">
 
-									{% if is_granted('ROLE_CLIENT') %}								
-									<div class="account">
-										<a href="{{ path('client_index') }}" title="My account">
-											<div class="icon icon-fff">
-												<i class="icon-user"></i>
-											</div>
-											<p>{{app.user.personne.fullName}}</p>
-										</a>
-									</div>
+									{% if is_granted('ROLE_CLIENT') %}
+										<div class="account">
+											<a href="{{ path('client_index') }}" title="My account">
+												<div class="icon icon-fff">
+													<i class="icon-user"></i>
+												</div>
+												<p>{{app.user.personne.fullName}}</p>
+											</a>
+										</div>
 									{% endif %}
 
 									<div class="wishlist">
-									{% if is_granted('ROLE_CLIENT') %}
-										<a href="{{ path('favoris_index') }}" title="Wishlist">
-											<div class="icon">
-												<i class="icon-heart-o"></i>
-												<span class="wishlist-count badge">{{ app.user.favoris|length}} </span>
-											</div>
-											<p>{{'Wishlist'|trans}}</p>
-										</a>
+										{% if is_granted('ROLE_CLIENT') %}
+											<a href="{{ path('favoris_index') }}" title="Wishlist">
+												<div class="icon">
+													<i class="icon-heart-o"></i>
+													<span class="wishlist-count badge">{{ app.user.favoris|length}}
+													</span>
+												</div>
+												<p>{{'Wishlist'|trans}}</p>
+											</a>
 										{% else %}
-										<a href="#" class="js-favoris-login" title="Wishlist">
-											<div class="icon">
-												<i class="icon-heart-o"></i>
-												<span class="wishlist-count badge">0</span>
-											</div>
-											<p>{{'Wishlist'|trans}}</p>
-										</a>
+											<a href="#" class="js-favoris-login" title="Wishlist">
+												<div class="icon">
+													<i class="icon-heart-o"></i>
+													<span class="wishlist-count badge">0</span>
+												</div>
+												<p>{{'Wishlist'|trans}}</p>
+											</a>
 										{% endif %}
 									</div>
 									<!-- End .compare-dropdown -->
@@ -248,10 +232,10 @@
 								<div class="header-center">
 									<nav class="main-nav">
 										<ul class="menu sf-arrows">
-											<li {{ app.request.get('_route') == 'home' ? 'class="active"': '' }} >
+											<li {{ app.request.get('_route') == 'home' ? 'class="active"': '' }}>
 												<a href="{{ path('home') }}">{{'Home'|trans}}</a>
 											</li>
-											<li {{ ( app.request.get('_route') == 'articles' or app.request.get('_route') == 'articles_category'  ) ? 'class="active"': '' }}>
+											<li {{ ( app.request.get('_route') == 'articles' or app.request.get('_route') == 'articles_category' ) ? 'class="active"': '' }}>
 												<a href="{{ path('articles') }}">{{'Shop'|trans}}</a>
 											</li>
 											<li {{ app.request.get('_route') == 'contact' ? 'class="active"': '' }}>
@@ -260,16 +244,29 @@
 											<li {{ ( app.request.get('_route') == 'about' ) ? 'class="active"': '' }}>
 												<a href="{{ path('home') }}">{{'About'|trans}}</a>
 											</li>
+											{% if is_granted('ROLE_EDITOR') %}
+												<li class="">
+													<a href="{{ path('admin') }}" class="sf-with-ul">{{'Dashboard'|trans}}</a>
+													<ul style="display: none;">
+														<li>
+															<a href="{{ path('order_index') }}">Commande</a>
+														</li>
+														<li>
+															<a href="{{ path('article_index') }}">Produits</a>
+														</li>
+														<li>
+															<a href="{{ path('admin_client_index') }}">Clients</a>
+														</li>
+													</ul>
+												</li>
+											{% endif %}
+
 										</ul>
 										<!-- End .menu -->
 									</nav>
 									<!-- End .main-nav -->
 								</div>
 								<!-- End .header-center -->
-
-								{# <div class="header-right">
-																                        <i class="la la-lightbulb-o"></i><p>Clearance<span class="highlight">&nbsp;Up to 30% Off</span></p>
-																                    </div> #}
 							</div>
 							<!-- End .container -->
 						</div>
@@ -866,7 +863,7 @@
 													</div>
 													<!-- End .custom-checkbox -->
 
-													<a href="{{ path('app_forgot_password_request') }}"  class="forgot-link">Forgot Your Password?</a>
+													<a href="{{ path('app_forgot_password_request') }}" class="forgot-link">Forgot Your Password?</a>
 												</div>
 												<!-- End .form-footer -->
 											</form>
@@ -962,35 +959,35 @@
 			<!-- End .modal -->
 
 			{# <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
-						        <div class="row justify-content-center">
-						            <div class="col-10">
-						                <div class="row no-gutters bg-white newsletter-popup-content">
-						                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
-						                        <div class="banner-content text-center">
-						                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
-						                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-						                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
-						                            <form action="#">
-						                                <div class="input-group input-group-round">
-						                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
-						                                    <div class="input-group-append">
-						                                        <button class="btn" type="submit"><span>go</span></button>
-						                                    </div><!-- .End .input-group-append -->
-						                                </div><!-- .End .input-group -->
-						                            </form>
-						                            <div class="custom-control custom-checkbox">
-						                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-						                                <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
-						                            </div><!-- End .custom-checkbox -->
-						                        </div>
-						                    </div>
-						                    <div class="col-xl-2-5col col-lg-5 ">
-						                        <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
-						                    </div>
-						                </div>
-						            </div>
-						        </div>
-						    </div> #}
+															        <div class="row justify-content-center">
+															            <div class="col-10">
+															                <div class="row no-gutters bg-white newsletter-popup-content">
+															                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
+															                        <div class="banner-content text-center">
+															                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
+															                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
+															                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
+															                            <form action="#">
+															                                <div class="input-group input-group-round">
+															                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
+															                                    <div class="input-group-append">
+															                                        <button class="btn" type="submit"><span>go</span></button>
+															                                    </div><!-- .End .input-group-append -->
+															                                </div><!-- .End .input-group -->
+															                            </form>
+															                            <div class="custom-control custom-checkbox">
+															                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+															                                <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
+															                            </div><!-- End .custom-checkbox -->
+															                        </div>
+															                    </div>
+															                    <div class="col-xl-2-5col col-lg-5 ">
+															                        <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
+															                    </div>
+															                </div>
+															            </div>
+															        </div>
+															    </div> #}
 			<!-- Plugins JS File --><script src="{{ asset('assets/js/jquery.min.js') }}"> </script>
 			<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 			<script src="{{ asset('assets/js/jquery.hoverIntent.min.js') }}"></script>
@@ -1006,13 +1003,12 @@
 			<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
 			<!-- Main JS File -->
 			<script src="{{asset('assets/js/main.js') }}"></script>
-			<script src="{{asset('js/article.js') }}"></script>			
+			<script src="{{asset('js/article.js') }}"></script>
 			<script src="{{asset('assets/js/demos/demo-3.js') }}"></script>
 			{% block javascripts %}
-			<script>
-				$(document).ready(function(){
-				})
-			</script>
+				<script>
+					$(document).ready(function () {})
+				</script>
 			{% endblock %}
 		</body>
 	</html>

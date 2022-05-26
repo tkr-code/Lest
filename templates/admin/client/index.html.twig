@@ -6,96 +6,136 @@
 {% import "macros/button.html.twig" as btn %}
 {% import "macros/link.html.twig" as link %}
 {% import "macros/dataTable.html.twig" as dataTable %}
+{% import "macros/action.html.twig" as action %}
+{% import "macros/modal.html.twig" as modal %}
 {% extends 'admin/base.html.twig' %}
 
 {% block head %}
-{{ dataTable.css() }}
+	{{ dataTable.css() }}
 {% endblock %}
+
 {% block foot %}
-{{ dataTable.js()}}
+	{{ dataTable.js()}}
 {% endblock %}
 
 {% block javascripts %}
-{{ dataTable.script('#datatable_1') }}
+	{{ dataTable.script('#datatable_1') }}
+	<script>
+		$(document).ready(function () { // VISUSALISE UN CLIENT
+$(document).on('click', '.js-client-view', function (e) {
+e.preventDefault()
+let href = $(this).attr('href')
+$.ajax({
+url: href,
+method: 'POST',
+type: 'json',
+data: {
+ajax: true
+},
+beforeSend: function () {
+$('.js-loader-text').text('Chargement du client en cour ...')
+$('.js-loader').css('display', 'flex')
+},
+success: function (data) {
+$('.js-loader').css('display', 'none')
+if (data.reponse == true) {
+$('#js-modal-view-content').html(data.content)
+$('#js-view-modal').modal('show')
+} else {
+alert('Une erreur est servenue')
+}
+},
+error: function () {
+$('.js-loader').css('display', 'none')
+alert('Une erreur est servenue')
+}
+})
+})
+
+})
+	</script>
+{% endblock %}
+
+{% block modal %}
+	{{ modal.view() }}
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Manage client',[{path:path('order_index'),name:'Manage orders'}])}}
+	{{ utils.breadcrumb('Manage client',[{path:path('order_index'),name:'Manage orders'}])}}
 {% endblock %}
-{% block title %}Client{% endblock %}
+{% block title %}Client
+{% endblock %}
 
 {% block body %}
-{% for item in app.flashes('success') %}
-{{ alerte.alert(item,'success')}}
-{% endfor %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-outline card-primary">
-            <div class="card-header">
-                <div class="card-title">Gestion des clients |
-                    <span class="badge-info badge">
-                        {{ clients|length }}
-                    </span>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="btn-group">
-                    <a class="btn btn-primary" href="{{ path('admin_client_new') }}">New client
-                        <i class="fa fa-plus"></i></a>
-                </div>
-                <hr>
-                <table id="datatable_1" class="table">
-                    <thead>
-                        <tr>
-                            <th>Client</th>
-                            <th>Email</th>
-                            <th>Commande</th>
-                            <th>Date Creation</th>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <th>Vérifier</th>
-                            {% endif %}
-                            
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in clients %}
-                        <tr>
-                            <td>#{{ item.id }}
-                                {{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname |capitalize }}
-                            </td>
-                            <td>
-                                {{ item.user.email }}
-                            </td>
-                            <td>
-                                <a href="{{ path('admin_client_order',{id:item.user.id}) }}">
-                                    {{ item.user.orders|length }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ item.user.createdAt|date_format_fr }}
-                            </td>
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <td>
-                                {{ item.user.isVerified ? 'Yes' : 'No' }}
-                            </td>
-                            {% endif %}
-                            <td>
-                                {{ link.show(path('user_show_client', {'id': item.user.id})) }}
-                                {{ link.pencil(path('admin_client_edit', {'id': item.user.id}))}}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="6">no records found</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+	{% include "includes/_alerte.html.twig" %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					<div class="card-title">Gestion des clients |
+						<span class="badge-info badge">
+							{{ clients|length }}
+						</span>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="btn-group">
+						<a class="btn btn-primary" href="{{ path('admin_client_new') }}">New client
+							<i class="fa fa-plus"></i>
+						</a>
+					</div>
+					<hr>
+					<table id="datatable_1" class="table">
+						<thead>
+							<tr>
+								<th>Client</th>
+								<th>Email</th>
+								<th>Commande</th>
+								<th>Date Creation</th>
+								{% if is_granted('ROLE_ADMIN') %}
+									<th>Vérifier</th>
+								{% endif %}
 
-                {{ link.back(path('admin'), 'back to dashboard') }}
-            </div>
-        </div>
-    </div>
-</div>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in clients %}
+								<tr>
+									<td>#{{ item.id }}
+										{{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname |capitalize }}
+									</td>
+									<td>
+										{{ item.user.email }}
+									</td>
+									<td>
+										<a href="{{ path('admin_client_order',{id:item.user.id}) }}">
+											{{ item.user.orders|length }}
+										</a>
+									</td>
+									<td>
+										{{ item.user.createdAt|date_format_fr }}
+									</td>
+									{% if is_granted('ROLE_ADMIN') %}
+										<td>
+											{{ item.user.isVerified ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-warning">Non</span>' }}
+										</td>
+									{% endif %}
+									<td>
+										{{ action.client(item)}}
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="6">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+                    <hr>
+					{{ link.back(path('admin'), 'back to dashboard') }}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

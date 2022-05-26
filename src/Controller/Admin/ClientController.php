@@ -4,12 +4,15 @@ namespace App\Controller\Admin;
 use App\Entity\Client;
 use App\Entity\Personne;
 use App\Entity\User;
+use App\Form\ClientEditType;
 use App\Form\ClientType;
+use App\Form\UserPasswordType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\OrderRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -97,15 +100,16 @@ class ClientController extends AbstractController
 
         return $this->renderForm('admin/client/new.html.twig', [
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
     /**
      * @Route("/{id}/edit", name="admin_client_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $client): Response
+    public function edit(Request $request, User $client, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
 
-        $form = $this->createForm(ClientType::class, $client);
+        $form = $this->createForm(ClientEditType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -114,8 +118,34 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('admin_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $formPassword = $this->createForm(UserPasswordType::class,$client);
+        $formPassword->handleRequest($request);
+
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            $client->setPassword($userPasswordHasherInterface->hashPassword($client, $formPassword->get('password')->getData()));
+            $this->getDoctrine()->getManager()->flush($client);
+            $this->addFlash('success','Le mot de passe du client a été modifié');
+            return $this->redirectToRoute('admin_client_index',[],Response::HTTP_SEE_OTHER);
+        }
+
         return $this->renderForm('admin/client/edit.html.twig', [
             'form' => $form,
+            'form_password'=>$formPassword,
+            'parent_page'=>$this->parent_page
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="admin_client_show", methods={"GET","POST"})
+     */
+    public function show(User $user): Response
+    {
+        $reponse = [
+            'reponse'=>true,
+            'content'=>$this->render('includes/user/user_show.html.twig', [
+                'user' => $user,
+            ])->getContent()
+        ];
+        return new JsonResponse($reponse);
     }
 }

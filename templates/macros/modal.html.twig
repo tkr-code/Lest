@@ -15,3 +15,20 @@
 		</div>
 	</div>
 {% endmacro %}
+{% macro view() %}
+	<div class="modal fade" id="js-view-modal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog  modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">
+							{# <i class="icon-close"></i> #}
+                            <i class="fas fa-times"></i>
+						</span>
+					</button>
+					<div id="js-modal-view-content"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endmacro %}

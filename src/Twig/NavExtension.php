@@ -107,11 +107,11 @@ class NavExtension extends AbstractExtension
                                 'name'=>'New Produit',
                                 'path'=>'article_new',
                             ],
-                            [
-                                'name'=>'Produit LEST',
-                                'path'=>'article_new_produit',
-                            ],
                         ]
+                ],
+                [
+                    'name'=>'Montant de livraison',
+                    'path'=>'street_index'
                 ],
             ],
             'client'=>
@@ -126,21 +126,8 @@ class NavExtension extends AbstractExtension
             [
                 [
                     'name'=>'Categorie',
-                    'links'=>
-                        [
-                            [
-                                'name'=>'Parent',
-                                'path'=>'admin_parent_category_index'
-                            ],
-                            [
-                                'name'=>'Categories',
-                                'path'=>'category_index'
-                            ],
-                            [
-                                'name'=>'new Category',
-                                'path'=>'category_new'
-                            ]
-                        ]
+                    'name'=>'Categories',
+                    'path'=>'category_index'
                 ],
                 [
                     'name'=>'user',
@@ -165,10 +152,7 @@ class NavExtension extends AbstractExtension
                             'name'=>'pays',
                             'path'=>'home',
                         ],
-                        [
-                            'name'=>'Rue',
-                            'path'=>'street_index'
-                        ],
+                        
                         [
                             'name'=>'Lieu de livraison',
                             'path'=>'admin_delivery_space_index'

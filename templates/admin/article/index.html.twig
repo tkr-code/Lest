@@ -63,9 +63,8 @@
         </ul>
       </div>
       <div class="card-body">
-        <div class="btn-group">
           {{ link.add(path('article_new'),'Create article' )}}
-        </div>
+        <hr>
         <div class="tab-content" id="custom-tabs-three-tabContent">
           <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel"
             aria-labelledby="custom-tabs-three-home-tab">
@@ -79,6 +78,7 @@
             {{ include ("admin/article/_datatable.html.twig",{id:'2',articles: articlesOff}) }}
           </div>
         </div>
+        <hr>
       {{ link.back(path('admin'),'Back to dashboard')}}
 
       </div>

@@ -1,13 +1,8 @@
 $(document).ready(function(){
-	function OrdertoCanceled(event){
-		$(event).text('Canceled')
-		$(event).removeClass('btn-success btn-default btn-info btn').addClass('btn btn-danger')
-	}
-    		//VISUSALISE UNE COMMANDE
+		//VISUSALISE UNE COMMANDE
 		$(document).on('click', '.js-order-view', function (e) {
 			e.preventDefault()
 			let href = $(this).attr('href')
-			alert(href)
 			$.ajax({
 				url: href,
 				method: 'POST',
@@ -39,6 +34,8 @@ $(document).ready(function(){
 		$(document).on('click', '.js-order-canceled', function (e) {
 			e.preventDefault()
 			let id = $(this).data('id')
+			let page = $(this).data('page')
+			alert(page)
 			let href= $(this).attr('href')
 			let token = 'token'
 			Swal.fire({
@@ -71,7 +68,11 @@ $(document).ready(function(){
 									title: 'Modification enregistrée',
 									icon: 'success',
 								}).then((result) => {
-									window.location.href = "/customer?tab=orders"
+									if(page == 'order_index'){
+										window.location.href = "/admin/order/"
+									}else{
+										window.location.href = "/customer?tab=orders"
+									}
 								})
 							} else {
                                 $('.js-loader').css('display', 'none')

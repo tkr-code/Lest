@@ -58,7 +58,7 @@ class ClientController extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address('malick.tounkara.1@gmail.com', 'store2.test'))
             ->to($order->getUser()->getEmail())
-            ->subject('lesekoya - Avis de facture')
+            ->subject('Lest - Avis de facture')
             ->htmlTemplate('email/order.html.twig')
             ->context([
                 'theme' => $this->emailService->theme(4),

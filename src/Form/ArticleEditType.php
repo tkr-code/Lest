@@ -86,6 +86,7 @@ class ArticleEditType extends AbstractType
                 'constraints'=>[],
                 ])
             ->add('enabled',CheckboxType::class,[
+                'required'=>false,
                 'label'=>'Activer',
             ]);
     }
