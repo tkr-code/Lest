@@ -114,21 +114,9 @@ class NavExtension extends AbstractExtension
                     'path'=>'street_index'
                 ],
             ],
-            'client'=>
-            [
-                
-            ],
-            'user'=>
-            [
-
-            ],
             'admin'=>
             [
-                [
-                    'name'=>'Categorie',
-                    'name'=>'Categories',
-                    'path'=>'category_index'
-                ],
+
                 [
                     'name'=>'user',
                     'icon'=>'fas fa-users',
@@ -160,29 +148,10 @@ class NavExtension extends AbstractExtension
                     ]
                 ]
             ],
-            'dashboard'=>
-            [
-                [
-                    'name'=>$this->translator->trans('Dashboard'),
-                    'icon'=>'fas fa-tachometer-alt',
-                    'links'=>[
-                        [
-                            'name'=>$this->translator->trans('Dashboard').' 1',
-                            'path'=>'admin'
-                        ]
-                    ]
-                ],
-                [
-                    'name'=>'Profil',
-                    'path'=>'profile_index',
-                    'icon'=>'fas fa-user'
-                ],
-                
-            ],
             'editor'=>
             [
                 [
-                    'title'=>'Category',
+                    'name'=>'Categorie',
                     'path'=>'category_index',
                     'icon'=>'far fa-circle'
                 ]

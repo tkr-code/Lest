@@ -6,6 +6,7 @@ use App\Entity\Personne;
 use App\Entity\User;
 use App\Form\User1EditType;
 use App\Form\User1Type;
+use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -99,10 +100,20 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
+        
+        $formPassword = $this->createForm(UserPasswordType::class,$user);
+        $formPassword->handleRequest($request);
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            $user->setPassword($userPasswordHasherInterface->hashPassword($user, $formPassword->get('password')->getData()));
+            $this->addFlash('success','Le mot de passe a été enregistré');
+            $this->getDoctrine()->getManager()->flush($user);
+            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->renderForm('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'formPassword' => $formPassword,
         ]);
     }
 

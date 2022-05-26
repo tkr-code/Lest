@@ -275,6 +275,9 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           {{ nav.list(navs.getNavs.navs,parent_page|default('')) }}
+          {% if is_granted('ROLE_EDITOR') %}
+          {{ nav.list(navs.getNavs.editor,parent_page|default('')) }}
+          {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
           {{ nav.list(navs.getNavs.admin,parent_page|default('')) }}
           {% endif %}
