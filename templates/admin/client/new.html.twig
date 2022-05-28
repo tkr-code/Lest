@@ -10,73 +10,76 @@
 
 
 {% block stylesheets %}
-{{ head.dataTable() }}
+	{{ head.dataTable() }}
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Manage user',[
+	{{ utils.breadcrumb('Manage user',[
 {
 path:path('user_index'),
 name:'Manage users'
 }
 ])}}
 {% endblock %}
-{% block title %}{{'New Client'|trans}}{% endblock %}
+{% block title %}
+	{{'New Client'|trans}}
+{% endblock %}
 
 {% block body %}
-<div class="row">
-	<div class="col-12">
-		<div class="card card-outline card-success">
-			<div class="card-header">
-				<div class="card-title">New Client</div>
-			</div>
-			<div class="card-body">
-				{{ form_start(form,{
-				attr:{
-				'novalidate':'novalidate'
-				}
-				}) }}
-				<div class="row">
-					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-6 col-12">
-								{{ form_row(form.personne.firstName)}}
+	<div class="row">
+		<div class="col-12">
+			<div class="card card-outline card-success">
+				<div class="card-header">
+					<div class="card-title">New Client</div>
+				</div>
+				<div class="card-body">
+					{{ form_start(form) }}
+					<div class="row">
+						<div class="col-md-8">
+							<div class="row">
+								<div class="col-md-6 col-12">
+									{{ form_row(form.personne.firstName)}}
+								</div>
+								<div class="col-md-6 col-12">
+									{{ form_row(form.personne.lastName)}}
+								</div>
+								<div class="col-md-6 col-12">
+									{{ form_row(form.email)}}
+								</div>
+								<div class="col-md-6 col-12">
+									{{ form_row(form.phone_number)}}
+								</div>
+								<div class="col-md-4 col-12">
+									{{ form_row(form.adresse.rue)}}
+								</div>
+								<div class="col-md-4 col-12">
+									{{ form_row(form.adresse.city)}}
+								</div>
+								<div class="col-md-4 col-12">
+									{{ form_row(form.adresse.pays)}}
+								</div>
+								<div class="col-md-4 col-12">
+									{{ form_row(form.password)}}
+								</div>
 							</div>
-							<div class="col-md-6 col-12">
-								{{ form_row(form.personne.lastName)}}
-							</div>
-							<div class="col-md-6 col-12">
-								{{ form_row(form.email)}}
-							</div>
-							<div class="col-md-6 col-12">
-								{{ form_row(form.phone_number)}}
-							</div>
-							<div class="col-md-4 col-12">
-								{{ form_row(form.adresse.rue)}}
-							</div>
-							<div class="col-md-4 col-12">
-								{{ form_row(form.adresse.city)}}
-							</div>
-							<div class="col-md-4 col-12">
-								{{ form_row(form.adresse.pays)}}
-							</div>
-							<div class="col-md-4 col-12">
-								{{ form_row(form.password)}}
-							</div>
-		
-							<div class="col-md-6 col-12">
-								{{ form_row(form.isVerified)}}
-							</div>
-						</div>
-						<div class="btn-group">
-							{{ link.back(path('admin_client_index'),'back to client list'|trans) }}
 							<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+							<hr>
+							{{ link.back(path('admin_client_index'),'back to client list'|trans) }}
+						</div>
+						<div class="col-md-4">
+							<div class="callout callout-info">
+								<h5>
+									<i class="icon fas fa-exclamation-triangle"></i>
+									Attention !
+								</h5>
+								<p>Les noms des champs avec un ( * ) sont obligatoires.</p>
+							</div>
 						</div>
 					</div>
+					{{ form_end(form) }}
 				</div>
-				{{ form_end(form) }}
 			</div>
 		</div>
+
 	</div>
-</div>
 {% endblock %}

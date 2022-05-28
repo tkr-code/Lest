@@ -33,6 +33,7 @@ class User1EditType extends AbstractType
                     'placeholder'=>'Roles'
                 ],
                 'choices'=>User::roles,
+                'required'=>true,
                 'multiple'=>true
             ])
 
@@ -41,8 +42,9 @@ class User1EditType extends AbstractType
                     'placeholder'=>'Téléphone'
                 ]
             ])
-            ->add('isVerified')
-
+            ->add('status',ChoiceType::class,[
+                'choices'=>User::status
+            ])
         ;
     }
 

@@ -21,8 +21,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     const roles=[
         // 'Administrateur'=>'ROLE_ADMIN',
         'Editeur'=>'ROLE_EDITOR',
-        'Client'=>'ROLE_CLIENT',
-        'Utilisateur'=>'ROLE_USER'
+        // 'Client'=>'ROLE_CLIENT',
+        // 'Utilisateur'=>'ROLE_USER'
+    ];
+    const status=[
+        'Activer'=>'Activer',
+        'Delete'=>'Delete'
     ];
     /**
      * @ORM\Id
@@ -38,6 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -57,10 +62,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password_verify;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
 
     /**
      * @Assert\Valid
@@ -80,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $orders;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=Client::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $client;
@@ -128,9 +130,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $is_active = true;
 
     /**
+     * @Assert\Valid
      * @ORM\OneToOne(targetEntity=Adresse::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cle;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
 
     public function __construct()
@@ -140,6 +153,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->created_at = new \DateTime();
         $this->favoris = new ArrayCollection();
         $this->phones = new ArrayCollection();
+        $this->status = 'Activer';
 
     }
 
@@ -232,18 +246,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
     public function getPersonne(): ?Personne
     {
         return $this->personne;
@@ -316,11 +318,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-    public function getIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
 
 
     public function getClient(): ?Client
@@ -492,6 +489,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $phone->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCle(): ?string
+    {
+        return $this->cle;
+    }
+
+    public function setCle(string $cle): self
+    {
+        $this->cle = $cle;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -9,6 +9,7 @@ use App\Form\User1Type;
 use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
+use App\Service\Service;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,7 @@ use Symfony\Component\Mailer\MailerInterface;
  */
 class UserController extends AbstractController
 {
+    private $parent_page = 'User';
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -30,32 +32,33 @@ class UserController extends AbstractController
     {
         return $this->render('admin/user/index.html.twig', [
             'users' => $userRepository->findAllUsers(),
+            'parent_page'=>$this->parent_page
         ]);
     }
 
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(MailerInterface $mailerInterface, EmailService $emailService, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function new(MailerInterface $mailerInterface, Service $service, EmailService $emailService, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
         $user = new User();
         $personne = new Personne();
         $personne->setFirstName('Malick')->setLastName('Tounkara');
         $user->setPersonne($personne);
-        $user->setEmail('email@leseokya.com')
+        $user->setEmail('email@lest.com')
         ->setPassword('password')
-        ->setPhoneNumber('772495592')
-        ->isVerified(true);
+        ->setPhoneNumber('772495592');
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($userPasswordHasherInterface->hashPassword($user,$user->getPassword()));
+            $user->setCle($service->aleatoire(100));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             if($form->get('sendEmail')->getData()){
                $email = (new TemplatedEmail())
-                 ->from(new Address('contact@lesekoya.com', 'Création de compte'))
+                 ->from(new Address('contact@lest.com', 'Création de compte'))
                     ->to($user->getEmail())
                     ->subject('Confirmation de compte')
                     ->htmlTemplate('email/new-user.html.twig')
@@ -72,6 +75,7 @@ class UserController extends AbstractController
         return $this->renderForm('admin/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -83,6 +87,7 @@ class UserController extends AbstractController
     {
         return $this->render('admin/user/show.html.twig', [
             'user' => $user,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -114,6 +119,7 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form,
             'formPassword' => $formPassword,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use App\Form\ArticleSearchType;
 use App\Service\Email\EmailService;
+use App\Service\Service;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -36,7 +37,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function appRegister(EmailService $emailService, Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
+    public function appRegister(EmailService $emailService, Service $service, Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
     {
         $search = new ArticleSearch();
         $formSearch = $this->createForm(ArticleSearchType::class,$search);
@@ -58,7 +59,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setRoles(['ROLE_CLIENT']);
+            $user->setRoles(['ROLE_CLIENT'])->setCle($service->aleatoire(100));
             $client = new Client();
             $user->setClient($client);
             $user->setIsActive(true);
@@ -70,7 +71,7 @@ class RegistrationController extends AbstractController
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('contact@lesekoya.com', 'Inscription'))
+                    ->from(new Address('contact@lest.sn', 'Inscription'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('email/confirmation.html.twig')

@@ -28,16 +28,12 @@
 				{{ form_row(form.phone_number)}}
 			</div>
 			<div class="col-md-6 col-12">
-				{{ form_row(form.isVerified)}}
-			</div>
-			<div class="col-md-6 col-12">
 				{{ form_row(form.sendEmail)}}
 			</div>
 		</div>
-		<div class="btn-group">
-			{{ link.back(path('user_index')) }}
 			<button class="btn btn-success">{{ button_label|default('Save') }}</button>
-		</div>
+			<hr>
+			{{ link.back(path('user_index')) }}
 		{{ form_end(form) }}
 	</div>
 </div>

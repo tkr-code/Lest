@@ -14,16 +14,19 @@ class AdresseType extends AbstractType
     {
         $builder
             ->add('rue',TextType::class,[
+                'label'=>'Rue *',
                 'attr'=>[
                     'placeholder'=>'Rue',
                 ]
             ])
             ->add('city',TextType::class,[
+                'label'=>'Ville *',
                 'attr'=>[
                     'placeholder'=>'Ville',
                 ]
             ])
             ->add('pays',TextType::class,[
+                'label'=>'Pays *',
                 'attr'=>[
                     'placeholder'=>'Pays',
                 ]

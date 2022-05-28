@@ -75,6 +75,14 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $adresse = $user->getAdresse();
+            if($adresse){
+                $adresse->setFirstName($user->getPersonne()->getFirstName())
+                ->setLastName($user->getPersonne()->getLastName())
+                ->setTel($form->get('phone_number')->getData())
+                ;
+                $user->setAdresse($adresse);
+            }
 
             $image = $form->get('avatar')->getData();
             // dump($image);

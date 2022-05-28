@@ -118,7 +118,7 @@ class NavExtension extends AbstractExtension
             [
 
                 [
-                    'name'=>'user',
+                    'name'=>'User',
                     'icon'=>'fas fa-users',
                     'links'=>[
                         [

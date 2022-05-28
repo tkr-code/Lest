@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\OrderRepository;
+use App\Service\Service;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -56,23 +57,23 @@ class ClientController extends AbstractController
     /**
      * @Route("/new", name="admin_client_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface, Service $service): Response
     {
         $user = new User();
         $personne = new Personne();
         $personne->setFirstName('Client')->setLastName('Lest');
         $user->setPersonne($personne);
         $user->setEmail('client@mail.com')
-        ->setPassword('password')
         ->setPhoneNumber('772495592')
-        ->isVerified(true);
+        ->setIsActive('Activer')
+        ->setRoles(['ROLE_CLIENT'])
+        ->setCle($service->aleatoire(100));
         $form = $this->createForm(ClientType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $adresse = $user->getAdresse();
             if($adresse){
-
                 $adresse->setFirstName($user->getPersonne()->getFirstName())
                 ->setLastName($user->getPersonne()->getLastName())
                 ->setTel($form->get('phone_number')->getData())
@@ -82,14 +83,12 @@ class ClientController extends AbstractController
             $user->setPassword(
                 $userPasswordHasherInterface->hashPassword(
                     $user,
-                    $form->get('password')->getData()
+                    $user->getPassword()
                 )
             );
-            $user->setRoles(['ROLE_CLIENT']);
             $client = new Client();
             $user->setClient($client);
             $user->setIsActive(true);
-            // dd($user);
 
             $em=  $this->getDoctrine()->getManager();
             $em->persist($user);

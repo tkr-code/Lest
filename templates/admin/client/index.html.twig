@@ -93,7 +93,7 @@ alert('Une erreur est servenue')
 								<th>Commande</th>
 								<th>Date Creation</th>
 								{% if is_granted('ROLE_ADMIN') %}
-									<th>Vérifier</th>
+									<th>Status</th>
 								{% endif %}
 
 								<th>Actions</th>
@@ -118,7 +118,7 @@ alert('Une erreur est servenue')
 									</td>
 									{% if is_granted('ROLE_ADMIN') %}
 										<td>
-											{{ item.user.isVerified ? '<span class="badge badge-success">Oui</span>' : '<span class="badge badge-warning">Non</span>' }}
+											{{ item.user.status  }}
 										</td>
 									{% endif %}
 									<td>
@@ -132,7 +132,7 @@ alert('Une erreur est servenue')
 							{% endfor %}
 						</tbody>
 					</table>
-                    <hr>
+					<hr>
 					{{ link.back(path('admin'), 'back to dashboard') }}
 				</div>
 			</div>

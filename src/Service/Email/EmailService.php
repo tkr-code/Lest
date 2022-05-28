@@ -32,8 +32,8 @@ class EmailService
               $introduction = '';
               $button_link = null;
               $button_text = 'Nos catégories';
-              $titre =$this->translator->trans('Hi! Please confirm your email!');
-              $message = 'Votre compte leSekoya est en attente de confirmation.';
+              $titre ="Email de confirmation";
+              $message = 'Votre compte client lest a été bien enregistré.';
             break;
           case '2':
             // mot de passeoublier

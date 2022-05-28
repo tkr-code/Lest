@@ -32,7 +32,6 @@ class ClientEditType extends AbstractType
                 ],
                 'required'=>false
             ])
-            ->add('isVerified')
         ;
     }
 

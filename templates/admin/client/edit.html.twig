@@ -63,15 +63,10 @@ name:'Manage users'
 								<div class="col-md-6 col-12">
 									{{ form_row(form.adresse.pays)}}
 								</div>
-
-								<div class="col-md-6 col-12">
-									{{ form_row(form.isVerified)}}
-								</div>
 							</div>
-							<div class="btn-group">
-								{{ link.back(path('admin_client_index')) }}
 								<button class="btn btn-success">{{ button_label|default('Save') }}</button>
-							</div>
+								<hr>
+								{{ link.back(path('admin_client_index')) }}
 						</div>
 					</div>
 					{{ form_end(form) }}

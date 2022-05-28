@@ -1,0 +1,85 @@
+{% extends "lest/base.html.twig" %} {% block main %}
+<main class="main">
+    <!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('home') }}">{{'Home'|trans}}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Supprimer mon compte</li>
+            </ol>
+        </div>
+        <!-- End .container -->
+    </nav>
+    <!-- End .breadcrumb-nav -->
+    <style>
+        .gestion-user {
+            color: #777;
+            font-weight: 400;
+            font-size: 1.8rem;
+            line-height: 1.5;
+            letter-spacing: -.025em;
+            padding-top: 8.5rem;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-height: 480px;
+            background-color: #fdfdfd;
+        }
+    </style>
+    <div class="gestion-user text-center">
+        <div class="container">
+            <h1 class="error-title">Supprimer mon compte</h1>
+            <p>Après la suppression de votre compte lest toutes vos informations ne pourront plus être restaurées</p>
+            {% if is_valide %}
+            <p class="text-danger my-3">La clé de vérificcation a expiré</p>
+            <a href="/">Retour a la page d'accueil dans ...</a> {% else %}
+            <a href="{{ path('js_client_user_delete', {'id': user.id, key:user.cle}) }}" data-token="{{ csrf_token('delete' ~ user.id) }}" class="js-user-delete btn btn-danger my-3"> Supprimer mon compte</a> {% endif %}
+        </div>
+    </div>
+</main>{% endblock %} {% block javascripts %}
+<script>
+    $(document).ready(function() {
+        //VISUSALISE UNE COMMANDE
+        $(document).on('click', '.js-user-delete', function(e) {
+            e.preventDefault()
+            let href = $(this).attr('href')
+            let token = $(this).data('token')
+
+            $.ajax({
+                url: href,
+                method: 'POST',
+                type: 'json',
+                data: {
+                    _token: token,
+                    ajax: true
+                },
+                beforeSend: function() {
+                    $('.js-loader-text').text('Vérificqtion de suppresion du compte en cour ...')
+                    $('.js-loader').css('display', 'flex')
+                },
+                success: function(data) {
+                    $('.js-loader').css('display', 'none')
+                    if (data.reponse == true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Votre compte a bien été supprimé!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then((result) => {
+                            window.location.href = "/logout"
+                        })
+                    } else {
+                        alert('Une erreur est servenue :)')
+                    }
+                },
+                error: function() {
+                    $('.js-loader').css('display', 'none')
+                    alert('Une erreur est servenue.')
+                }
+            })
+        })
+    })
+</script>
+{% endblock %}

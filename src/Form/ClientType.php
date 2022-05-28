@@ -32,8 +32,9 @@ class ClientType extends AbstractType
                 ],
                 'required'=>false
             ])
-            ->add('password',PasswordType::class)
-            ->add('isVerified')
+            ->add('password',PasswordType::class,[
+                'label'=>'Mot de passe *'
+            ])
         ;
     }
 

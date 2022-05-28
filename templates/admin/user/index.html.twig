@@ -12,90 +12,88 @@
 
 
 {% block head %}
-  {{ dataTable.css() }}
+	{{ dataTable.css() }}
 {% endblock %}
 
 {% block breadcrumb %}
-    {{ utils.breadcrumb('Manage user',[
+	{{ utils.breadcrumb('Manage user',[
         {
             path:'order_index',
             name:'Manage orders'
         }
     ])}}
 {% endblock %}
-{% block title %}Users{% endblock %}
+{% block title %}Liste des utilisateurs
+{% endblock %}
 
 {% block body %}
-{% for item in app.flashes('success') %}
-  {{ alerte.alert(item,'success')}}
-{% endfor %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="card card-outline card-primary">
-            <div class="card-header">
-                <div class="card-title"> 
-                    {{'Users'|trans}}
-                    <span class="badge badge-info">
-                        {{ users|length }}
-                    </span> 
-                </div> 
-            </div>
-            <div class="card-body">
-                <div class="btn-group mb-3">
-                    <a class="btn btn-primary" href="{{ path('user_new') }}"><i class="fa fa-plus"></i> Create new user</a>
-                </div>
-                <table id="datatable_1" class="table">
-                    <thead>
-                        <tr>
-                            <th>{{'accompte'|trans}}</th>
-                            <th>Roles</th>
-                            <th>Verified</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>{{ user.personne.fullName }} </br>
-                          <span class="font-weight-bold">Email:</span> {{ user.email }}</td>
-                            <td>
-                            {% for item in user.roles %}
-                                {% if item == 'ROLE_ADMIN' %}
-                                    Admin
-                                {% elseif item == 'ROLE_CLIENT' %}
-                                    Client
-                                {% elseif item == 'ROLE_USER' %}
-                                    {{'User'|trans}}
-                                {% elseif item == 'ROLE_EDITOR' %}
-                                    Editeur
-                                {% endif %}
-                            {% endfor %}
-                            <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
-                            <td>
-                                {{ link.pencil(path('user_edit', {'id': user.id}))}}
-                                {{ link.show(path('user_show', {'id': user.id}))}}
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="6">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {{ link.back(path('admin'), 'back to dashboard') }}
+	{% for item in app.flashes('success') %}
+		{{ alerte.alert(item,'success')}}
+	{% endfor %}
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					<div class="card-title">
+						{{'Users'|trans}}
+						<span class="badge badge-info">
+							{{ users|length }}
+						</span>
+					</div>
+				</div>
+				<div class="card-body">
 
-            </div>
-        </div>
-    </div>
-</div>
+					<a class="btn btn-primary" href="{{ path('user_new') }}">
+						<i class="fa fa-plus"></i>
+						Create new user</a>
 
-{% endblock %}
-{% block foot %}
-{{ dataTable.js()}}
-{% endblock %}
+					<hr>
+					<table id="datatable_1" class="table">
+						<thead>
+							<tr>
+								<th>{{'accompte'|trans}}</th>
+								<th>Roles</th>
+								<th>Status</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+								<tr>
+									<td>{{ user.personne.fullName }}</td>
+								</tr>
+							</br>
+							<span class="font-weight-bold">Email:</span>
+							{{ user.email }}
+						</tbody>
+					</td>
+					<td>
+						{% for item in user.roles %}
+							{% if item == 'ROLE_ADMIN' %}
+								Admin
+							{% elseif item == 'ROLE_CLIENT' %}
+								Client
+							{% elseif item == 'ROLE_USER' %}
+								{{'User'|trans}}
+							{% elseif item == 'ROLE_EDITOR' %}
+								Editeur
+							{% endif %}
+						{% endfor %}
+					</td>
+					<td>{{ user.status }}</td>
+					<td>
+						{{ link.pencil(path('user_edit', {'id': user.id}))}}
+						{{ link.show(path('user_show', {'id': user.id}))}}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<hr>
+	{{ link.back(path('admin'), 'back to dashboard') }}
 
-
-{% block javascripts %}
-{{ dataTable.script('#datatable_1') }} 
-{% endblock %}
+</div></div></div></div>{% endblock %}{% block foot %}{{ dataTable.js()}}{% endblock %}{% block javascripts %}{{ dataTable.script('#datatable_1') }}{% endblock %}

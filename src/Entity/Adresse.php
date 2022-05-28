@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AdresseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,7 +29,8 @@ class Adresse
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $city;
 
@@ -43,6 +45,7 @@ class Adresse
     private $tel;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $rue;
@@ -53,7 +56,8 @@ class Adresse
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pays;
 

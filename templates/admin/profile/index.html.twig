@@ -84,7 +84,7 @@
               <div class="col-md-4 col-12">
                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Adresse</strong>
                 <p class="text-muted">
-                 {% if  app.user.adresse is defined %}
+                 {% if  app.user.adresse is not null %}
                  {{ app.user.adresse.rue}} , {{ app.user.adresse.city }} {{ app.user.adresse.pays}}
                  {% else %}
                  
