@@ -174,26 +174,17 @@
                             {# {{ include ("admin/order/_datatable.html.twig",{id:'4',orders: ordersCompleted}) }} #}
                     </div>
                 </div>
+                <hr>
+                {{ link.back(path('order_index'),'Listes des commandes') }}
             </div>
         </div>
     </div>
-    {# <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit Order</h4>
-            </div>
-            <div class="card-body">
-                 <a href="{{ path('order_index') }}">back to list</a>
-
-            </div>
-        </div>
-    </div> #}
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
             <h3 class="card-title">
                 <i class="fas fa-text-width"></i>
-                Order detail
+                Detail de la commande
             </h3>
             </div>
             <!-- /.card-header -->

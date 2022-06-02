@@ -19,15 +19,15 @@ class OrderService{
         $this->repository = $repository;
         $this->orderRepository = $orderRepository;
     }
-    public function voiceNumber()
+    public function voiceNumber(int $id)
     {
-        $invoice= 1;
-        $orders = $this->orderRepository->findLast();
-        foreach($orders as $order)
-        {
-           $invoice += $order->getNumber();
-        }
-        return   sprintf("%06s", $invoice);
+        // $invoice= 1;
+        // $orders = $this->orderRepository->findLast();
+        // foreach($orders as $order)
+        // {
+        //    $invoice += $order->getNumber();
+        // }
+        return   sprintf("%06s", $id);
     }
     public function addQuantity(int $id, $qty)
     {
@@ -108,7 +108,7 @@ class OrderService{
         $order->setState('in progress');
         $order->setAdjustmentsTotal(0);
         // $order->setShippingAdress($order->getUser()->getAdress());
-        $order->setNumber($this->voiceNumber());
+        $order->setNumber($this->voiceNumber($order->getId()));
         // $order->setCheckoutState('in progress');
         $order->setTotal(0);
         return $order;

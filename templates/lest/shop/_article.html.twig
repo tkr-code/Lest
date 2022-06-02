@@ -1,6 +1,10 @@
 <div class="col-6 col-md-4 col-lg-4 col-xl-3 article-{{item.id }}">
 	<div class="product product-7 text-center">
 		<figure class="product-media">
+		{% if item.quantity <= 0 %}
+		<span class="product-label label-out bg-danger">Out of Stock</span>
+		{% endif %}
+		
 			{% import "macros/etats.html.twig" as etats %}
 			{{ etats.articleLabel(item.label) }}
 			<a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
@@ -35,9 +39,11 @@
 			<!-- End .product-action-vertical -->
 
 			<div class="product-action">
+			{% if item.quantity > 0 %}
 				<a href="{{ path('cart_add',{ id: item.id }) }}" class="btn-product js-btn-add btn-cart" data-id="{{item.id}}">
 					<span>{{'add to cart'|trans}}</span>
 				</a>
+			{% endif %}
 			</div>
 			<!-- End .product-action -->
 		</figure>

@@ -1,0 +1,9 @@
+{% extends "email/base.html.twig" %}
+{% block title %}Delete account{% endblock %}
+{% block body %}
+    <p>Bonjour {{ user.personne.fullName|default('') }}</p>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem nisi esse, doloribus aperiam beatae harum sequi qui architecto enim odio!
+    </p>
+    <p style="font-size: 12px">NB: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, est!</p>
+{% endblock %}

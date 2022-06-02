@@ -3,7 +3,9 @@
 namespace App\Controller\Email;
 
 use App\Entity\Order;
+use App\Entity\User;
 use App\Form\ChangePasswordFormType;
+use App\Repository\ClientRepository;
 use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
@@ -15,8 +17,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class EmailTestController extends AbstractController
 {
     private $emailService;
-    public function __construct(EmailService $emailService)
+    private $client;
+    private $user;
+    public function __construct(EmailService $emailService, UserRepository $userRepository)
     {
+
+        $user = $userRepository->findOneBy([
+            'email'=>'clientemailtest@email.com'
+        ]);
+        if($user){
+            $this->user = $user;
+            $this->client = $user->getClient();
+        }
         $this->emailService = $emailService;
     }
     /**
@@ -71,6 +83,7 @@ class EmailTestController extends AbstractController
     {
         return $this->render('email/confirmation.html.twig',
         [
+            'user'=>$this->user,
             'theme'=>$emailService->theme(1)
             ]
         );

@@ -30,7 +30,7 @@ class EmailService
           case '1':
             // inscription verification ou desinscription
               $introduction = '';
-              $button_link = null;
+              $button_link = '/gestion-compte/delete-account/{token}/{id}';
               $button_text = 'Nos catégories';
               $titre ="Email de confirmation";
               $message = 'Votre compte client lest a été bien enregistré.';

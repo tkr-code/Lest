@@ -5,3 +5,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ malick-tounkara/public/index.php [QSA,L]
 </IfModule>
+
+symfony serve  -d
+
+symfony console m:entity
+
+symfony console make:migration -n

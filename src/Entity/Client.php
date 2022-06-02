@@ -33,7 +33,7 @@ class Client
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=DeliverySpace::class, mappedBy="client")
+     * @ORM\OneToMany(targetEntity=DeliverySpace::class, mappedBy="client", cascade={"persist", "remove"})
      */
     private $deliverySpaces;
 

@@ -52,15 +52,16 @@ class ClientController extends AbstractController
      * @Route("/confirmation/order/{id}", name="client_confirmation")
      * @return Response
      */
-    public function confirmation($id, OrderRepository $orderRepository, MailerInterface $mailer): Response
+    public function confirmation(Order $order, OrderRepository $orderRepository, MailerInterface $mailer): Response
     {
-        $order = $orderRepository->find($id);
+        $user = $this->getUser();
         $email = (new TemplatedEmail())
             ->from(new Address('malick.tounkara.1@gmail.com', 'store2.test'))
             ->to($order->getUser()->getEmail())
             ->subject('Lest - Avis de facture')
             ->htmlTemplate('email/order.html.twig')
             ->context([
+                'user'=>$user,
                 'theme' => $this->emailService->theme(4),
                 'order' => $order,
             ]);
@@ -93,12 +94,12 @@ class ClientController extends AbstractController
 
         // nouvelle commande
         $order = new Order();
+        $order->setNumber(1);
 
         //rue de livraion
         $street = $session->get('shipping');
         // $street = $streetRepository->find($street->getId());
         $order->setState('in progress');
-        $order->setNumber($orderService->voiceNumber());
         $order->setPaymentDue(new \DateTime('+ 6 day'));
         $user  = $this->getUser();
         $order->setUser($user);
@@ -153,6 +154,9 @@ class ClientController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($order);
         $entityManager->flush();
+        $order->setNumber($orderService->voiceNumber($order->getId()));
+        $entityManager->flush();
+
         $this->addFlash('success', 'Order created');
         $session->set('panier', []);
         return $this->redirectToRoute('client_confirmation', ['id' => $order->getId()], Response::HTTP_SEE_OTHER);

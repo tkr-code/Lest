@@ -2,6 +2,11 @@
 	{% if order.state == 'waiting' or order.state == 'in progress' %}
 		<a data-toggle="tooltip" data-placement="bottom" data-page="{{ app.request.get('_route') }}" data-id="{{order.id}}" title="Annuller la commande" href="{{ path('main_edit_order_state',{id:order.id}) }}" class="text-danger js-order-canceled">Cancel</a>
 	{% endif %}
+	{% if is_granted('ROLE_ADMIN') %}
+	<a href="{{ path('order_edit',{id:order.id}) }}">
+		<i class="fas text-success fa-pencil-alt "></i>
+	</a>
+	{% endif %}
 {% endmacro %}
 
 {% macro client(client) %}

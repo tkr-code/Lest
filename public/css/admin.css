@@ -1,0 +1,19 @@
+.a {
+  color: #222;
+}
+
+#image {
+  display  : block;
+  max-width: 100%;
+}
+
+.loader-delete-account,
+.loader-edit-email,
+.alert-delete-account,
+.alert-edit-email {
+  display: none;
+}
+
+#js-editor {
+  display: none;
+}

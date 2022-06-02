@@ -22,6 +22,7 @@ use App\Form\ArticleSearchType;
 use App\Service\Email\EmailService;
 use App\Service\Service;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\SecurityEvents;
 
@@ -37,15 +38,17 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function appRegister(EmailService $emailService, Service $service, Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
+    public function appRegister(EmailService $emailService, Service $service, Request $request, UserPasswordHasherInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
     {
         $search = new ArticleSearch();
         $formSearch = $this->createForm(ArticleSearchType::class,$search);
         $user = new User();
+        $user->setRoles(['ROLE_CLIENT'])->setCle($service->aleatoire(100));
         
         $personne  =  new Personne();
         $personne->setFirstName('Malick')->setLastName('Tounkara');
         $user->setPersonne($personne);
+        
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -53,13 +56,13 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-                $passwordEncoder->encodePassword(
+                $passwordEncoder->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 )
             );
 
-            $user->setRoles(['ROLE_CLIENT'])->setCle($service->aleatoire(100));
+           
             $client = new Client();
             $user->setClient($client);
             $user->setIsActive(true);
@@ -76,6 +79,7 @@ class RegistrationController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('email/confirmation.html.twig')
                     ->context([
+                        'user'=>$user,
                         'theme'=>$emailService->theme(1)
                         ])
             );

@@ -37,7 +37,6 @@ class EmailController extends AbstractController
     public function editEmailResponse(Request $request):Response
     {
         $user = $this->getUser();
-        sleep(1);
         $email = (new TemplatedEmail())
             ->from(new Address('malick.tounkara.1@gmail.com', 'app.tkr'))
             ->to($user->getEmail())
