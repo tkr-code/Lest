@@ -27,6 +27,11 @@ class Phone
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_whatsapp;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Phone
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIsWhatsapp(): ?bool
+    {
+        return $this->is_whatsapp;
+    }
+
+    public function setIsWhatsapp(bool $is_whatsapp): self
+    {
+        $this->is_whatsapp = $is_whatsapp;
 
         return $this;
     }

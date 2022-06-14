@@ -92,21 +92,17 @@ alert('Une erreur est servenue')
 								<th>Email</th>
 								<th>Commande</th>
 								<th>Date Creation</th>
-								{% if is_granted('ROLE_ADMIN') %}
-									<th>Status</th>
-								{% endif %}
-
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							{% for item in clients %}
-								<tr>
+								<tr {{ (item.user.status == 'Delete')? 'class="text-danger"': '' }}>
 									<td>#{{ item.id }}
 										{{ item.user.personne.firstname ~ ' ' ~ item.user.personne.lastname |capitalize }}
 									</td>
 									<td>
-										{{ item.user.email }}
+										{{ item.user.email|explode_email }}
 									</td>
 									<td>
 										<a href="{{ path('admin_client_order',{id:item.user.id}) }}">
@@ -116,11 +112,7 @@ alert('Une erreur est servenue')
 									<td>
 										{{ item.user.createdAt|date_format_fr }}
 									</td>
-									{% if is_granted('ROLE_ADMIN') %}
-										<td>
-											{{ item.user.status  }}
-										</td>
-									{% endif %}
+									
 									<td>
 										{{ action.client(item)}}
 									</td>

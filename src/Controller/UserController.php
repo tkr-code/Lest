@@ -19,14 +19,11 @@ use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
-/**
- * @Route("admin/user")
- */
 class UserController extends AbstractController
 {
     private $parent_page = 'User';
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("admin/user/", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -37,7 +34,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route("admin/user/new", name="user_new", methods={"GET","POST"})
      */
     public function new(MailerInterface $mailerInterface, Service $service, EmailService $emailService, Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
@@ -80,8 +77,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/client", name="user_show_client", methods={"GET"})
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route("admin/user/{id}/client", name="user_show_client", methods={"GET"})
+     * @Route("admin/user/{id}", name="user_show", methods={"GET"})
      */
     public function show(User $user): Response
     {
@@ -92,7 +89,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route("admin/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, User $user, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
@@ -124,14 +121,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"POST"})
+     * @Route("admin/user/{id}", name="user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+           $email = $user->getEmail();
+            // $entityManager->remove($user);
+            // $entityManager->flush();
+            dd($user);
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);

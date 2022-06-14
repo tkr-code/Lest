@@ -82,7 +82,7 @@
 						</aside>
 						<!-- End .col-lg-3 -->
 
-						<div class="col-md-9 col-lg-10">
+						<div class="col-md-9 col-lg-10 col-12">
 							<div class="tab-content">
 								<div class="tab-pane fade {{ app.request.query.get('tab') == null ? 'show active':'' }}" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
 									<p>Hello
@@ -91,11 +91,11 @@
 										<br>
 										À partir du tableau de bord de votre compte, vous pouvez afficher
 										<a href="#tab-orders" class="tab-trigger-link link-underline">vos commandes
-																																récentes</a>, gérer vos
+																																																						récentes</a>, gérer vos
 										<a href="#tab-address" class="tab-trigger-link">adresses de livraison et de
-																																facturation</a>,
+																																																						facturation</a>,
 										<a href="#tab-account" class="tab-trigger-link">et modifier votre mot de passe et
-																																les détails de votre compte.</a>.
+																																																						les détails de votre compte.</a>.
 									</p>
 								</div>
 								<!-- .End .tab-pane -->
@@ -312,36 +312,39 @@
 													<div id="collapse5-3" class="collapse {{ app.request.get('customer_reset_password') ? 'show':'' }}" aria-labelledby="heading5-3" data-parent="#accordion-5" style="">
 														<div class="card-body">
 															<p>Après la suppression de votre compte lest toutes vos informations ne pourront plus être restaurées</p>
-															            <a href="{{ path('js_client_user_delete', {'id': app.user.client.id, key:app.user.cle}) }}" data-token="{{ csrf_token('delete' ~ app.user.id) }}" class="js-user-delete btn btn-danger my-3"> Supprimer mon compte</a>
+															<p class="text-delete text-danger"></p>
+															<div class="btn-delete-compte">
+																<a href="{{ path('js_client_user_delete', {'id': app.user.client.id, key:app.user.cle}) }}" data-token="{{ csrf_token('delete' ~ app.user.client.id) }}" class="js-user-delete btn btn-danger my-3">
+																	Supprimer mon compte</a>
 
+															</div>
+															<p class="count"></p>
+															<!-- End .card-body -->
 														</div>
-														<!-- End .card-body -->
+														<!-- End .collapse -->
 													</div>
-													<!-- End .collapse -->
+													<!-- End .card -->
+
 												</div>
-												<!-- End .card -->
-
+												<!-- End .accordion -->
 											</div>
-											<!-- End .accordion -->
+											<!-- End .col-md-6 -->
+
 										</div>
-										<!-- End .col-md-6 -->
-
 									</div>
+									<!-- .End .tab-pane -->
 								</div>
-								<!-- .End .tab-pane -->
 							</div>
+							<!-- End .col-lg-9 -->
 						</div>
-						<!-- End .col-lg-9 -->
+						<!-- End .row -->
 					</div>
-					<!-- End .row -->
+					<!-- End .container -->
 				</div>
-				<!-- End .container -->
+				<!-- End .dashboard -->
 			</div>
-			<!-- End .dashboard -->
-		</div>
-		<!-- End .page-content -->
-	</main>
+			<!-- End .page-content -->
+		</main>
 
-	{{ modal.orderView() }}
-{% endblock %}
-
+		{{ modal.orderView() }}
+	{% endblock %}

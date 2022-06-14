@@ -58,10 +58,11 @@ class EmailTestController extends AbstractController
      */
     public function order(OrderRepository $orderRepository): Response
     {
-        $order = $orderRepository->find(6);
+        $order = $orderRepository->find(22);
         return $this->render('email/order.html.twig',[
             'theme'=>$this->emailService->theme(4),
-            'order'=>$order 
+            'order'=>$order,
+            'user'=>$this->user 
         ]);
     }
     /**

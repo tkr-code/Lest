@@ -14,7 +14,7 @@
     </thead>
     <tbody>
     {% for order in orders %}
-        <tr>
+        <tr {{ (order.user.status == 'Delete')? 'class="text-danger"': '' }}>
             <td>#{{ order.id }}
             {{ order.user.personne.firstname ~ ' ' ~ order.user.personne.lastname ~ ' ' }}
             {% if order.state != 'completed' %}

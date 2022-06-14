@@ -13,6 +13,7 @@ class PhoneType extends AbstractType
     {
         $builder
             ->add('valeur')
+            ->add('is_whatsapp')
         ;
     }
 

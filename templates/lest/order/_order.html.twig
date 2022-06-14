@@ -44,8 +44,12 @@
 		</ul>
 		<div class="tab-content tab-content-border" id="tab-content-1">
 			<div class="tab-pane fade active show p-3" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
-				{{ include ("client/order/_datatable.html.twig",{id:'1',orders:
-												app.user.orders }) }}
+				<div class="row">
+					<div class="col-12">
+						{{ include ("client/order/_datatable.html.twig",{id:'1',orders:
+													app.user.orders }) }}
+					</div>
+				</div>
 			</div>
 			<!-- .End .tab-pane -->
 			<div class="tab-pane fade p-3" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">

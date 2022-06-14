@@ -85,6 +85,7 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             //on recupere les images transmise
             $images = $form->get('images')->getData();

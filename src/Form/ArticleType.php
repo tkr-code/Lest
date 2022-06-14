@@ -49,6 +49,18 @@ class ArticleType extends AbstractType
                 ],
                 'help'=>'The price must be greater than zero'
             ])
+            ->add('reduction',ChoiceType::class,[
+                'label'=>'Reduction',
+                'choices'=>Article::reductions(),
+                'required'=>false,
+                'attr'=>[
+                    'class'=>'select2'
+                ]
+                // 'attr'=>[
+                //     'placeholder'=>'The price must be greater than zero'
+                // ],
+                // 'help'=>'The price must be greater than zero'
+            ])
             ->add('quantity',IntegerType::class,[
                 'label'=>'Quantité (*)',
                 'attr'=>[
@@ -130,4 +142,5 @@ class ArticleType extends AbstractType
 
         ]);
     }
+
 }

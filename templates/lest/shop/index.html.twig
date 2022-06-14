@@ -121,7 +121,7 @@
                     <div class="sidebar sidebar-shop">
                         <div class="widget widget-clean">
                             <label>Filters:</label>
-                            <a href="#" class="sidebar-filter-clear">Clean All</a>
+                            <a href="{{ path('articles') }}" class="sidebar-filter-clear">Clean All</a>
                         </div>
                         <div class="widget widget-category widget-collapsible">
                             <h3 class="widget-title">
@@ -151,13 +151,13 @@
                         {% if app.request.get('_route') == 'articles_category' %}
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
+                                <a data-toggle="collapse" href="#widget-brand" role="button" aria-expanded="true" aria-controls="widget-brand">
 											{{ 'Brand' |capitalize |trans}}
 										</a>
                             </h3>
                             <!-- End .widget-title -->
 
-                            <div class="collapse show" id="widget-1">
+                            <div class="collapse show" id="widget-brand">
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count">
 
@@ -220,201 +220,4 @@
     <!-- End .page-content -->
 </main>
 <!-- End .main -->
-{% endblock %} {% block javascripts %}
-<script>
-    $(document).ready(function() { // Ajoute un article au panier
-        $(document).on('click', '.js-btn-add', function(e) {
-            e.preventDefault();
-            let id = $(this).data('id')
-            $.ajax({
-                url: "{{ path('cart_add_ajax') }}",
-                method: 'POST',
-                type: 'json',
-                beforeSend: function() {
-                    $('.js-loader-text').text('Ajout au panier en cour ...')
-                    $('.js-loader').css('display', 'flex')
-                },
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    loadCart()
-                    $('.js-loader').css('display', 'none')
-                    if (data) { // Alert success
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Le produit a été ajouté au panier.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Une erreur est survenu.'
-                        })
-                    }
-                },
-                error: function() {
-                    alert('Une erreur est survenu.')
-                }
-            })
-        })
-
-        // SUPPRIMER UN ARTICLE DU PANIERr
-        $(document).on('click', '.js-delete-cart', function(e) {
-            e.preventDefault();
-            let id = $(this).data('id')
-            $.ajax({
-                url: "{{ path('cart_delete_ajax') }}",
-                method: 'POST',
-                type: 'json',
-                beforeSend: function() {
-                    $('.js-loader-text').text('Suppression du panier en cour ...')
-                    $('.js-loader').css('display', 'flex')
-                },
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    loadCart()
-                    $('.js-loader').css('display', 'none')
-                    if (data) { // Alert success
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Le produit a été retiré du panier.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Une erreur est survenu.'
-                        })
-                    }
-                },
-                error: function() {
-                    $('.js-loader').css('display', 'none')
-                    alert('Une erreur est survenu.')
-                }
-            })
-        })
-
-        // AJOUTER L'ARTICLE EN FAVORIS
-        $(document).on('click', '.js-add-favoris', function(e) {
-            e.preventDefault()
-            let id = $(this).data('id')
-
-            $.ajax({
-                url: "{{ path('favoris_add_ajax') }}",
-                method: 'POST',
-                type: 'json',
-                beforeSend: function() {
-                    $('.js-loader-text').text('Ajout dans la liste des favoris en en cour ...')
-                    $('.js-loader').css('display', 'flex')
-                },
-                data: {
-                    id: id
-                },
-                success: function(data) { // $().html(remove)
-                    loadFavoris()
-                    $('.js-loader').css('display', 'none')
-                    if (data) { // changer l'icon
-                        $('.article-' + id + ' .js-favoris').attr('href', "/favoris/remove/" + id)
-                        $('.article-' + id + ' .js-favoris').removeClass('js-add-favoris')
-                        $('.article-' + id + ' .js-favoris').addClass('js-remove-favoris bg-danger')
-                        $('.article-' + id + ' .js-favoris span').addClass('bg-danger text-white').text('Retirer des favoris')
-                            // Alert success
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Le produit a été ajouté à la liste des  favoris.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Une erreur est survenu.'
-                        })
-                    }
-                },
-                error: function() {
-                    $('.js-loader').css('display', 'none')
-                    alert('Une erreur est survenu.')
-                }
-            })
-        })
-
-        // SUPPRIMER L'ARTICLE EN FAVORIS
-        $(document).on('click', '.js-remove-favoris', function(e) {
-            e.preventDefault()
-            let id = $(this).data('id')
-
-            $.ajax({
-                url: "{{ path('favoris_remove_ajax') }}",
-                method: 'POST',
-                type: 'json',
-                beforeSend: function() {
-                    $('.js-loader-text').text('Suppression dans la liste des favoris en en cour ...')
-                    $('.js-loader').css('display', 'flex')
-                },
-                data: {
-                    id: id
-                },
-                success: function(data) { // $().html(remove)
-                    loadFavoris()
-                    $('.js-loader').css('display', 'none')
-                    if (data) { // changer l'icon
-                        $('.article-' + id + ' .js-favoris').attr('href', "/favoris/add/" + id)
-                        $('.article-' + id + ' .js-favoris').removeClass('js-remove-favoris bg-danger')
-                        $('.article-' + id + ' .js-favoris').addClass('js-add-favoris')
-                        $('.article-' + id + ' .js-favoris span').removeClass('bg-danger text-white').text('Ajouter aux favoris')
-                            // Alert success
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Le produit a été retiré de la liste des  favoris.',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Une erreur est survenu.'
-                        })
-                    }
-                },
-                error: function() {
-                    alert('Une erreur est survenu.')
-                }
-            })
-        })
-
-        // CHARGER LE PANIER
-        function loadCart() {
-            $.ajax({
-                url: "{{ path('cart_load') }}",
-                method: "POST",
-                type: 'json',
-                success: function(data) {
-                    $('.js-cart-load').html(data.cart)
-                }
-            })
-        }
-
-        // CHARGER LE PANIER
-        function loadFavoris() {
-            $.ajax({
-                url: "{{ path('favoris_load_ajax') }}",
-                method: "POST",
-                type: 'json',
-                success: function(data) {
-                    $('.wishlist').html(data)
-                }
-            })
-        }
-    })
-</script>
 {% endblock %}

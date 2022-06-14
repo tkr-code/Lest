@@ -39,7 +39,7 @@ class ArticleController extends AbstractController
         
         $comment = new Comment();
         $comment->setArticle($article);
-        $comment->setRating('40');
+        
         $formComment = $this->createForm(CommentType::class, $comment);
         $formComment->handleRequest($request);
         
@@ -49,10 +49,12 @@ class ArticleController extends AbstractController
             }else{
                 return $this->redirectToRoute('app_login');
             }
+            $ratting = $request->request->get('rating');
+            $comment->setRating($ratting);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
-            $this->addFlash('success','Commentaire enregistré');
+            $this->addFlash('success','Le commentaire a été enregistré');
             return $this->redirectToRoute('articles_show',
                 [
                     'category'=>$article->getCategory()->getSlug(),
@@ -61,7 +63,9 @@ class ArticleController extends AbstractController
                 ],Response::HTTP_SEE_OTHER);
         }
         $user = $this->getUser();
-        $isBuy = false;
+
+
+        $isBuy = $isComment = false;
         if($user){
 
             $client = $user->getClient();
@@ -69,7 +73,10 @@ class ArticleController extends AbstractController
             {               
                 $isBuy = $articleBuyRepository->isBuy($client,$article);
             }
+            $isComment = $commentRepository->isComment($user,$article);
         }
+
+        
 
         $pagination = $paginatorInterface->paginate(
             $articleRepository->showPagination(),
@@ -82,6 +89,8 @@ class ArticleController extends AbstractController
             'form' => $form,
             'formComment' => $formComment,
             'is_buy'=>$isBuy,
+            'is_comment'=>$isComment,
+            'propositions'=>$articleRepository->findAll()
         ]);
     }
     /**

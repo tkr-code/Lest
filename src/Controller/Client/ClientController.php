@@ -108,9 +108,10 @@ class ClientController extends AbstractController
         foreach ($panier as $key => $value) {
             $article = $articleRepository->find($key);
             $orderItem = new OrderItem();
+            $orderItem->setReduction($article->getReduction());
             $orderItem->setProduitName($article->getTitle());
             $orderItem->setQuantity($value);
-            $orderItem->setUnitPrice($article->getPrice());
+            $orderItem->setUnitPrice($article->getNewPrice());
             $orderItem->setUnitsTotal($orderItem->getUnitPrice() * $orderItem->getQuantity());
             $orderItem->setTotal($orderItem->getUnitsTotal() + $orderItem->getAdjustmentsTotal());
             $total += $orderItem->getTotal();

@@ -24,7 +24,7 @@ class LoginRolesSuscriberSubscriber implements EventSubscriberInterface
         $user->setLastLoginAt(new \DateTime());
         $this->entityManager->flush($user);
         if(in_array('ROLE_CLIENT', $user->getRoles())){
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('client_index')));
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('articles')));
         }
     }
 

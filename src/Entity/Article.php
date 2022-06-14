@@ -137,6 +137,11 @@ class Article
      */
     private $label;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $reduction;
+
 
     public function __construct()
     {
@@ -462,6 +467,33 @@ class Article
         $this->label = $label;
 
         return $this;
+    }
+
+    public function getReduction(): ?int
+    {
+        return $this->reduction;
+    }
+    public function getNewPrice()
+    {
+        if($this->reduction > 0){
+           return $this->getPrice() -  (($this->getPrice() * 10)/100) ;
+        }
+        return $this->getPrice();
+    }
+
+    public function setReduction(?int $reduction): self
+    {
+        $this->reduction = $reduction;
+
+        return $this;
+    }
+    public static function reductions(){
+        $data[0] =0  ;
+        for ($i=1; $i < 100 ; $i++) { 
+            $reduction  = $i. ' %';
+            $data[$reduction] = $i;
+        }
+        return $data;
     }
 
 }

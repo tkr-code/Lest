@@ -81,7 +81,6 @@ class OrderController extends AbstractController
     {
         $order = new Order();
         $order->setState('in progress');
-        $order->setNumber($orderService->voiceNumber());
         $order->setPaymentDue(new \DateTime('+ 6 day') );
         $user  = $this->getUser();
         $adresses = $user->getAdresses();
@@ -116,6 +115,8 @@ class OrderController extends AbstractController
         // dd($order);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($order);
+        $entityManager->flush();
+        $order->setNumber($order->getId());
         $entityManager->flush();
         $this->addFlash('success','Order created');
         $session->set('panier',[]);

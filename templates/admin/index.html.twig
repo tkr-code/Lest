@@ -83,7 +83,7 @@
                                     </thead>
                                     <tbody>
                                         {% for item in lastOrder %}
-                                        <tr>
+                                        <tr {{ (item.user.status == 'Delete')? 'class="text-danger"': '' }} >
                                             <td>{{ item.number }}
                                                 <a class="text-dark js-order-view" href="{{ path('main_order_show',{id:item.id}) }}">
                                                     <i class="fa fa-eye float-right" aria-hidden="true"></i>
@@ -94,7 +94,7 @@
                                                     </a>
                                                 {% endif %}
                                             </td>
-                                            <td>{{ item.user.email }}</td>
+                                            <td>{{ item.user.email |explode_email }}</td>
                                             <td>
                                                 {% import "/macros/etats.html.twig" as etats %}
                                                 {{ etats.order(item.state) }}

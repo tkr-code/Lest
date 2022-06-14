@@ -498,6 +498,23 @@
         })
       })
 
+              // Used to format phone number
+        function phoneFormatter() {
+            $(document).on('blur','.phone', function () {
+                var number = $(this).val().replace(/[^\d]/g, '')
+                if (number.length == 9) {
+                    number = number.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+                } else if (number.length == 11) {
+                    number = number.replace(/(\d{2})(\d{3})(\d{3})(\d{2})/, "($1) $2 $3 $4");
+                } else if (number.length == 12) {
+                    number = number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "($1) $2 $3 $4 $5");
+                }
+                $(this).val(number)
+            });
+        };
+        $(phoneFormatter)
+        
+
 
       //CHARGER LES OPTIONS
       function loadArticleOption() {

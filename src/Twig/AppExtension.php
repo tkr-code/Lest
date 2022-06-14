@@ -25,9 +25,8 @@ class AppExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            // If your filter generates SAFE HTML, you should add a third
-            // parameter: ['is_safe' => ['html']]
-            // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
+            new TwigFilter('explode_email', [$this, 'exploideEmail']),
+            new TwigFilter('phone_format', [$this, 'phoneFormat']),
             new TwigFilter('date_format_fr', [$this, 'doSomething']),
             new TwigFilter('date_format_min_fr', [$this, 'dateFormatMinFr']),
         ];
@@ -42,6 +41,23 @@ class AppExtension extends AbstractExtension
             new TwigFunction('rating', [$this, 'rating']),
             new TwigFunction('dateFilter', [$this, 'doSomething']),
         ];
+    }
+
+    public function exploideEmail(string $email){
+        $data = explode('::',$email);
+        if(empty($data[1])){
+            return $email;
+        }else{
+            return $data[1];
+        }
+    }
+    public function phoneFormat(string $phone){
+        if (strlen($phone) == 9) {
+            return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
+        }else if(strlen($phone) == 10) {
+            return substr($phone, 0, 2).' '.substr($phone, 2, 3).' '.substr($phone, 5, 2).' '.substr($phone, 7, 2).'';
+        }
+        return $phone;
     }
 
     public function isToFavoris(User $user, Article $article){

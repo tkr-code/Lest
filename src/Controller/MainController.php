@@ -36,25 +36,29 @@ class MainController extends AbstractController
     /**
      * @Route("gestion-user/delete/{id}/{key}", name="client_user_delete", methods={"GET"})
      */
-    public function deleteUserGet(Request $request, Client $user, $key): Response
+    public function deleteUserGet(Request $request, Client $client, $key): Response
     {
-        if (!$user) {
+        if (!$client) {
             throw $this->createNotFoundException(
-                'No product found for id '.$user
+                'No product found for id '.$client
             );
         }
-        if($user->getUser()->getStatus() == 'Delete'){
+        if($client->getUser()->getStatus() == 'Delete'){
             
         }
         $is_valide = true;
-        if($key  == $user->getUser()->getCle())
+        if($key  == $client->getUser()->getCle())
         {
             $reponse  = [
                 'reponse'=>false,
             ];
-            if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($user);
+                $user = $client->getUser();
+                $user->setStatus('Delete');
+                $newEmail ="delete-user-".$client->getId()."::".$client->getUser()->getEmail();
+                $user->setEmail($newEmail);
+                $client->setUser($user);
                 $entityManager->flush();
                 $reponse = [
                     'reponse'=>true,
@@ -63,24 +67,29 @@ class MainController extends AbstractController
             }
             $is_valide = false;
         }
+
         return $this->render('delete/user/index.html.twig',[
-            'user'=>$user,
+            'user'=>$client,
             'is_valide'=>$is_valide,
         ]);
     }
     /**
      * @Route("gestion-user/js-delete/{id}/{key}", name="js_client_user_delete", methods={"POST"})
      */
-    public function deleteUserPost(Request $request, Client $user, $key): Response
+    public function deleteUserPost(Request $request, Client $client, $key): Response
     {
         $reponse  = [
             'reponse'=>false,
         ];
-        if($key  == $user->getUser()->getCle())
+        if($key  == $client->getUser()->getCle())
         {
-            if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
                 $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($user);
+                $user = $client->getUser();
+                $user->setStatus('Delete');
+                $newEmail ="delete-user-".$user->getId()."::".$client->getUser()->getEmail();
+                $user->setEmail($newEmail);
+                $client->setUser($user);
                 $entityManager->flush();
                 $reponse = [
                     'reponse'=>true,
