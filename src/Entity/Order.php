@@ -14,6 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Order
 {
+    const status = [
+        'Canceled'=>'canceled',
+        'Waiting'=>'waiting',
+        'in progress'=>'in progress',
+        'Completed'=>'completed'
+    ];
 
     /**
      * @ORM\Id

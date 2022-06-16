@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -186,8 +187,6 @@ class OrderController extends AbstractController
      */
     public function edit( Request $request, Order $order, OrderItemRepository $orderItemRepository,  OrderService $orderService, PaymentService $paymentService): Response
     {
-        // dd($request)
-        $message = '';
         // debut payment
         $payment = $order->getPayment();
         $formPayment = $this->createForm(PaymentType::class, $payment);
@@ -197,7 +196,6 @@ class OrderController extends AbstractController
         $orderItem = new OrderItem();
         $formItem = $this->createForm(OrderItemType::class, $orderItem);
         $formItem->handleRequest($request);
-        // dump($order->getOrderItem()->getValues());
         if ($formItem->isSubmitted() && $formItem->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
@@ -213,13 +211,11 @@ class OrderController extends AbstractController
 
             if(!$orderItemPost){
                 $entityManager->persist($orderItem,$order);
-                $message = 'Order item  add';
                 $entityManager->flush();
-                $this->addFlash('success',$message);
-                return $this->redirectToRoute('order_edit', ['id'=>$order->getId(),'tab'=>'articles'], Response::HTTP_SEE_OTHER);       
+                $this->addFlash('success','Un article a été ajouté');
+                return $this->redirectToRoute('order_edit', ['id'=>$order->getId()], Response::HTTP_SEE_OTHER);       
             }
-            $message = "Article existe dans la commande ";
-            $this->addFlash('warning',$message);
+            $this->addFlash('warning','Article existe dans la commande');
             
         }
         //end new orderItem
@@ -273,8 +269,79 @@ class OrderController extends AbstractController
             'form' => $form,
             'formItem' => $formItem,
             'formFacturation'=>$formPayment,
-            'breadcrumb'=>$breadcrumb
+            'breadcrumb'=>$breadcrumb,
+            'orderStatus'=>Order::status
         ]);
+    }
+
+    /**
+     * @Route("/editor/order/{id}/edit/get", name="editor_order_edit_get", methods={"GET","POST"})
+     *
+     */
+    public function editOrdeGet(Order $order, Request $request){
+
+        dd(true);
+        return new JsonResponse([
+            'reponse'=>true,
+            'content'=>$this->render('admin/order/_state.html.twig',[
+                'order'=>$order,
+                'orderStatus'=>Order::status]
+                )->getContent()
+        ]);
+        if ($request->request->get('modal') && $request->request->get('modal') == 'state') {
+        }
+        if ($request->request->get('modal') && $request->request->get('modal') == 'limite') {
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/order/_date_limite.html.twig',['order'=>$order])->getContent()
+            ]);
+        }
+
+        if ($request->request->get('modal') && $request->request->get('modal') == 'create') {
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/order/_date_emission.html.twig',['order'=>$order])->getContent()
+            ]);
+        }
+        
+        return new JsonResponse([
+            'reponse'=>false,
+        ]);
+    }
+    /**
+     * @Route("/editor/order/{id}/edit", name="editor_order_edit", methods={"GET","POST"})
+     *
+     */
+    public function editOrder(Order $order, Request $request){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        if($request->request->get('date_emission')){
+            $date_emission = $request->request->get('date_emission');
+            $order->setCreatedAt(new \DateTime($date_emission));
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
+
+        if($request->request->get('date_limite')){
+            $date_limite = $request->request->get('date_limite');
+            $order->setPaymentDue(new \DateTime($date_limite));
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
+        if($this->isCsrfTokenValid('edit'.$order->getId(),$request->request->get('_token')) && $request->request->get('state')){
+            $state = $request->request->get('state');
+            $order->setState($state);
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
+        if($this->isCsrfTokenValid('edit'.$order->getId(),$request->request->get('_token')) && $request->request->get('note')){
+            $note = $request->request->get('note');
+            $order->setNote($note);
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
+        return new JsonResponse(false);
     }
 
     /**
