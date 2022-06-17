@@ -63,7 +63,7 @@ class OrderItemController extends AbstractController
     }
 
         /**
-     * @Route("/editor/order/{id}/edit/get", name="editor_order_edit_get", methods={"GET","POST"})
+     * @Route("/editor/order-item/{id}/edit/get", name="editor_order_item_edit_get", methods={"GET","POST"})
      *
      */
     public function editOrdeGet(OrderItem $orderItem, Request $request){
@@ -83,11 +83,13 @@ class OrderItemController extends AbstractController
     /**
      * @Route("/editor/order-item/{id}/edit", name="editor_order_item_edit", methods={"GET","POST"})
      */
-    public function editQty(Request $request, OrderItem $orderItem): Response
+    public function editQty(Request $request, OrderItem $orderItem, OrderService $orderService): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         if($request->request->get('qty')){
             $orderItem->setQuantity($request->request->get('qty'));
+            $orderItem->setUnitsTotal($orderService->subTotatlItem($orderItem));
+            $orderService->calculOrder($orderItem->getCommande());
             $entityManager->flush();
             return new JsonResponse(true);
         }
@@ -117,12 +119,16 @@ class OrderItemController extends AbstractController
     /**
      * @Route("/admin/order-item/{id}", name="order_item_delete", methods={"POST"})
      */
-    public function delete(Request $request, OrderItem $orderItem): Response
+    public function delete(Request $request, OrderItem $orderItem, OrderService $orderService): Response
     {
         if ($this->isCsrfTokenValid('delete'.$orderItem->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($orderItem);
             $entityManager->flush();
+            $orderService->calculOrder($orderItem->getCommande());
+            if($request->request->get('ajax')){
+                return New JsonResponse(true);
+            }
             $this->addFlash('success','Order item deleted');
         }
         $order = $orderItem->getCommande();

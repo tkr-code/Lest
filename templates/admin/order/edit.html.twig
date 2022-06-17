@@ -1,8 +1,83 @@
 {% import "macros/breadcrumb.html.twig" as utils %} {% import "macros/head.html.twig" as head %} {% import "macros/foot.html.twig" as foot %} {% import "macros/alertes.html.twig" as alerte %} {% import "macros/table.html.twig" as table %} {% import "macros/link.html.twig"
-as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/ribbon.html.twig') as ribbon %} {% extends 'admin/base.html.twig' %} {% block stylesheets %} {{ head.dataTable() }} {% endblock %} {% block title %}Order - {{ order.user.personne.firstname
+as link %} {% import "macros/modal.html.twig" as modal %} 
+{% extends 'admin/base.html.twig' %} {% block stylesheets %} {{ head.dataTable() }} {% endblock %} {% block title %}Order - {{ order.user.personne.firstname
 ~ ' ' ~ order.user.personne.lastname }} - {{ app_name }} {% endblock %} {% block modal %} {{ modal.default() }} {% endblock %} {% block javascripts %}
 <script>
     $(document).ready(function() {
+        //Charger la commande
+        function loadOrderEdit(){
+            let href = "{{ path('editor_order_edit_get',{id:order.id})}}"
+            $.ajax({
+                    url: href,
+                    method: 'POST',
+                    type: 'json',
+                    data: {
+                        load:'order-edit'
+                    },
+                    beforeSend: function () {
+                        $('.js-loader-text').text('Actualisation en cour ...')
+                        $('.js-loader').css('display', 'flex')
+                    },
+                    success: function (data) {
+                        $('.js-loader').css('display', 'none')
+                        $('#order-detail').html(data.content)
+                    },
+                    error: function () {
+                        $('.js-loader').css('display', 'none')
+                        alert('Une erreur est survenue. code : 001')
+                    }
+                })
+        }
+        //Supprimer la ligne une ligne de la commande
+        $(document).on('click','.btn-delete-order-item',function(){
+            let href = $(this).data('path')
+            let token = $(this).data('token')
+            Swal.fire({
+				title: 'Etes vous sur ?',
+				text: "Vous allez supprimer  cette article de la commande !",
+				icon: 'question',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Oui, Annuler',
+				cancelButtonText: 'Fermer'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: href,
+						method: 'POST',
+						type: 'json',
+						data: {
+							_token : token,
+							ajax:true
+						},
+						beforeSend: function () {
+							$('.js-loader-text').text('Suppression de la ligne en cour ...')
+							$('.js-loader').css('display', 'flex')
+						},
+						success: function (data) {
+							$('.js-loader').css('display', 'none')
+							if (data) {
+								Swal.fire({
+									title: 'Modification enregistrée',
+									icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+								})
+                                loadOrderEdit()
+							} else {
+                                $('.js-loader').css('display', 'none')
+								alert('Une erreur est survenue. code : 002')
+							}
+						},
+						error: function () {
+							$('.js-loader').css('display', 'none')
+							alert('Une erreur est survenue. code : 001')
+						}
+					})
+				}
+			})
+        })
         // Modal date create
         $(document).on('click', '#btn-modal-date-create', function(e) {
                 e.preventDefault()
@@ -34,6 +109,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
             e.preventDefault()
             $('#modal-default').modal('show')
             let href = $(this).data('path')
+            console.log(href);
             $.ajax({
                 url: href,
                 method: 'POST',
@@ -107,6 +183,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
                             timer: 1500
                         })
                         $('#modal-default').modal('hide')
+                        loadOrderEdit()
                     } else {
                         Swal.fire({
                             icon: 'warning',
@@ -181,6 +258,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
                             timer: 1500
                         })
                         $('#modal-default').modal('hide')
+                        loadOrderEdit()
                     } else {
                         Swal.fire({
                             icon: 'warning',
@@ -197,6 +275,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
             })
         })
 
+        //Modifier la date limite
         $(document).on('click', '#order-edit-date-limite', function() {
             let date_limite = $('#js-order-date-limite').val()
             let href = $(this).data('path')
@@ -221,6 +300,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
                             timer: 1500
                         })
                         $('#modal-default').modal('hide')
+                        loadOrderEdit()
                     } else {
                         Swal.fire({
                             icon: 'warning',
@@ -237,6 +317,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
             })
         })
 
+        //Modifier l'etat
         $(document).on('click', '#order-edit-etat', function() {
             let etat = $('#js-order-etat').val()
             let href = $(this).data('path')
@@ -262,6 +343,8 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
                             showConfirmButton: false,
                             timer: 1500
                         })
+                         $('#modal-default').modal('hide')
+                        loadOrderEdit()
                     } else {
                         Swal.fire({
                             icon: 'warning',
@@ -307,6 +390,7 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
                             timer: 1500
                         })
                         $('#modal-default').modal('hide')
+                        loadOrderEdit()
                     } else {
                         Swal.fire({
                             icon: 'warning',
@@ -325,7 +409,6 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
 </script>
 {% endblock %} {% block breadcrumb %} {{ utils.breadcrumb('Edit Order',breadcrumb) }} {% endblock %} {% block body %} {% for item in app.flashes('success') %} {{ alerte.alert(item,'success')}} {% endfor %} {% for item in app.flashes('warning') %} {{ alerte.alert(item,'warning')}}
 {% endfor %}
-
 <div class="row">
     <div class="col-md-12 col-12">
         <div class="card card-primary card-outline card-tabs">
@@ -349,176 +432,23 @@ as link %} {% import "macros/modal.html.twig" as modal %} {% import ('macros/rib
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <p>Modifier le status de la commande
-                            <a href="#" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
-                                <i class="fas fa-pencil-alt text-success"></i>
+                        <p>
+                            <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
+                             <i class="fas fa-pencil-alt"></i>
+                             Modifier le status  
+                            </button>
+                            <a 
+                                href="{{ path('order_print',{ id : order.id }) }}" 
+                                rel="noopener" 
+                                target="_blank"
+                                class="btn btn-default"><i class="fas fa-print"></i> Imprimmer
                             </a>
                         </p>
                     </div>
                 </div>
                 <div class="tab-content" id="custom-tabs-three-tabContent">
                     <div class="tab-pane fade {% if app.request.query.get('tab') is null or app.request.query.get('tab') == ''  %}show active{% endif %}" id="order-detail" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                        <div class="row">
-                            <div class="col-md-12">
-                                {{ ribbon.ribbon(order.state)}}
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- title row -->
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <h4>
-                                                    <img src="{{ asset('img/lest-logo.png') }}" alt="" width="60px">
-                                                    <small class="float-right">Date:
-                                                        {{ order.createdAt| date_format_fr|capitalize }}
-                                                        <a href="#"
-                                                            data-path="{{ path('editor_order_edit_get',{id:order.id}) }}"
-                                                            id="btn-modal-date-create" title="Modifier">
-                                                            <i class="fas fa-pencil-alt text-success"></i>
-                                                        </a>
-                                                    </small>
-                                                </h4>
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- info row -->
-                                        <div class="row invoice-info">
-                                            <div class="col-sm-4 invoice-col">
-                                                {{'From'|trans}}
-                                                <address>
-                                                    <strong>{{ app_name }}, Inc.</strong><br>
-                                                    {{ site.ville}},
-                                                    {{ site.adresse}}
-                                                    {{ site.code_postal }}<br>
-                                                    Phone:
-                                                    {{ site.phone_number_1 }}
-                                                    ( whastapp)
-                                                    <br>
-                                                    Email:
-                                                    {{ site.email}}
-                                                </address>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-sm-4 invoice-col">
-                                                {{'To'|trans}}
-                                                <address>
-                                                    <strong>{{ order.user.personne.firstName ~ ' ' ~
-                                                        order.user.personne.lastName }}</strong><br>
-                                                    {% if order.user.adresse is not null %}
-                                                    {{ order.user.adresse.rue ~ ' ' ~ order.user.adresse.city ~ ' ' ~
-                                                    order.user.adresse.pays }}
-                                                    {% endif %}
-
-                                                    <br>
-                                                    {{'Phone'|trans}}:
-                                                    {{ order.user.phoneNumber }}<br>
-                                                    {{'Email'|trans}}:
-                                                    {{ order.user.email|explode_email }}
-                                                </address>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-sm-4 invoice-col">
-                                                <b>{{'Invoice'|trans}}
-                                                    #{{ order.number }}</b><br>
-                                                <br>
-                                                <b>{{'Order'|trans}}
-                                                    ID:</b> #{{ order.id}}
-                                                <br>
-                                                <b>Date limite de paiement:</b> {{ order.paymentDue | date_format_fr|capitalize }}
-                                                <a href="#" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" id="btn-modal-date-limite" title="Modifier">
-                                                    <i class="fas fa-pencil-alt text-success"></i>
-                                                </a>
-                                                <br>
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.row -->
-                                        <!-- Table row -->
-                                        <div class="row">
-                                            <div class="col-12 table-responsive">
-                                                <table class="table tabele-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Qty</th>
-                                                            <th>{{'Product'|trans}}</th>
-                                                            <th>{{'price'|trans}}</th>
-                                                            <th>{{'Subtotal'|trans}}</th>
-                                                            <th>Action
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {% for item in order.orderItem %}
-                                                        <tr>
-                                                            <td width="10%">{{ item.quantity }}
-                                                                <a href="#" data-path="{{ path('editor_order_edit_get',{id:item.id}) }}" class="btn-modal-qty ml-2" title="Modifier">
-                                                                    <i class="fas fa-pencil-alt text-success"></i>
-                                                                </a>
-                                                            </td>
-                                                            <td>{{ item.produitName }}</td>
-                                                            <td>{{ item.unitPrice|number_format(0,'.',' ') }} {{ site.current_name }}
-                                                            </td>
-                                                            <td>{{ item.UnitsTotal |number_format(0,'.',' ') }} {{ site.current_name }}</td>
-                                                            <td>
-                                                            <form class="d-inline-block" method="post" action="{{ path('order_item_delete', {'id': item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
-                                                                <button class="btn"><i class="text-danger fa fa-trash-alt"></i></button>
-                                                            </form>
-                                                            </td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.row -->
-                                        <hr>
-
-                                        <div class="row">
-                                            <!-- accepted payments column -->
-                                            <div class="col-6">
-                                                <p class="lead">{{'Payment Methods'|trans}}:</p>
-                                                {{ order.payment.paymentMethod.name }} {# <img src="{{ asset('adminlte/dist/img/credit/visa.png') }}" alt="Visa"> #} {# <img src="{{ asset('adminlte/dist/img/credit/mastercard.png') }}" alt="Mastercard">
-                                                <img src="{{ asset('adminlte/dist/img/credit/american-express.png') }}" alt="American Express">
-                                                <img src="{{ asset('adminlte/dist/img/credit/paypal2.png') }}" alt="Paypal"> #}
-
-                                                <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;"> {{ order.payment.paymentMethod.description }}
-                                                </p>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-6">
-                                                <p class="lead">{{'Amount Due'|trans}} {{ order.paymentDue| date_format_fr }}</p>
-
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tr>
-                                                            <th style="width:50%">{{'Subtotal'|trans}}:</th>
-                                                            <td>{{ order.itemsTotal | number_format(0,'.',' ') }} {{ site.current_name }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>{{'Shipping'|trans}}:</th>
-                                                            <td>{{ (order.deliverySpace)? order.deliverySpace.street.shippingAmount.amount| number_format(0,'.',' ') :'0' |number_format(0,'.',' ') }} {{ site.current_name }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>{{'Total'|trans}}:</th>
-                                                            <td>{{ order.total| number_format(0,'.',' ') }} {{ site.current_name }}
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <p>Nous vous remercions de votre confiance.<br>Cordialement</p>
-                                            </div>
-                                            <!-- /.col -->
-                                        </div>
-                                        <!-- /.row -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include "admin/order/_order_edit_get.html.twig" %}
                     </div>
                     <div class="tab-pane fade {% if app.request.query.get('tab') == 'facturation' %}show active{% endif %}" id="order-facturation" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                         <h4>Amount : {{ order.total| number_format(2,'.',' ') }} XOF

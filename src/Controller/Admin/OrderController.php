@@ -280,15 +280,20 @@ class OrderController extends AbstractController
      */
     public function editOrdeGet(Order $order, Request $request){
 
-        dd(true);
-        return new JsonResponse([
-            'reponse'=>true,
-            'content'=>$this->render('admin/order/_state.html.twig',[
-                'order'=>$order,
-                'orderStatus'=>Order::status]
-                )->getContent()
-        ]);
+        if($request->request->get('load') && $request->request->get('load') == 'order-edit'){
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/order/_order_edit_get.html.twig',['order'=>$order])->getContent()
+            ]);
+        }
         if ($request->request->get('modal') && $request->request->get('modal') == 'state') {
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/order/_state.html.twig',[
+                    'order'=>$order,'orderStatus'=>Order::status
+                    ]
+                    )->getContent()
+            ]);
         }
         if ($request->request->get('modal') && $request->request->get('modal') == 'limite') {
             return new JsonResponse([
@@ -312,7 +317,7 @@ class OrderController extends AbstractController
      * @Route("/editor/order/{id}/edit", name="editor_order_edit", methods={"GET","POST"})
      *
      */
-    public function editOrder(Order $order, Request $request){
+    public function editOrder(Order $order, Request $request, OrderService $orderService){
 
         $entityManager = $this->getDoctrine()->getManager();
 
