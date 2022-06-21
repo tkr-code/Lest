@@ -14,8 +14,10 @@ use App\Form\OrderItemType;
 use App\Repository\OrderItemRepository;
 use App\Repository\AdressRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\DeliverySpaceRepository;
 use App\Repository\OrderRepository;
 use App\Repository\PaymentMethodRepository;
+use App\Repository\StreetRepository;
 use App\Service\Order\OrderService;
 use App\Service\Payment\PaymentService;
 use Symfony\Component\HttpFoundation\Request;
@@ -313,14 +315,15 @@ class OrderController extends AbstractController
             'reponse'=>false,
         ]);
     }
+    
     /**
      * @Route("/editor/order/{id}/edit", name="editor_order_edit", methods={"GET","POST"})
      *
      */
-    public function editOrder(Order $order, Request $request, OrderService $orderService){
+    public function editOrder(Order $order,DeliverySpaceRepository $deliverySpaceRepository, StreetRepository $streetRepository, Request $request, OrderService $orderService){
 
         $entityManager = $this->getDoctrine()->getManager();
-
+        
         if($request->request->get('date_emission')){
             $date_emission = $request->request->get('date_emission');
             $order->setCreatedAt(new \DateTime($date_emission));
@@ -336,6 +339,25 @@ class OrderController extends AbstractController
         }
         if($this->isCsrfTokenValid('edit'.$order->getId(),$request->request->get('_token')) && $request->request->get('state')){
             $state = $request->request->get('state');
+            if ($order->getIsImmuable()) //Si la commande est modifiable
+            {
+                if($order->getState() == $state)
+                    {
+                    $payment = $order->getPayment();
+                    $payment->setState('completed');
+                    $order->setPayment($payment);
+                    $order->setCheckoutCompletedAt(new \DateTime());
+                    foreach ($order->getOrderItem()->getValues() as $key => $value) {
+                        $articleBuy = new ArticleBuy();
+                        $articleBuy->setClient($order->getUser()->getClient());
+                        $articleBuy->setArticle($value->getArticle());
+                        $articleBuy->setPrice($value->getUnitPrice());
+                        $articleBuy->setQuantity($value->getQuantity());
+                        $this->getDoctrine()->getManager()->persist($articleBuy);
+                    }
+                }
+                $order->setIsImmuable(false);
+            }
             $order->setState($state);
             $entityManager->flush();
             return new JsonResponse(true);

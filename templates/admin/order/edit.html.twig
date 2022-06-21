@@ -1,9 +1,70 @@
 {% import "macros/breadcrumb.html.twig" as utils %} {% import "macros/head.html.twig" as head %} {% import "macros/foot.html.twig" as foot %} {% import "macros/alertes.html.twig" as alerte %} {% import "macros/table.html.twig" as table %} {% import "macros/link.html.twig"
 as link %} {% import "macros/modal.html.twig" as modal %} 
 {% extends 'admin/base.html.twig' %} {% block stylesheets %} {{ head.dataTable() }} {% endblock %} {% block title %}Order - {{ order.user.personne.firstname
-~ ' ' ~ order.user.personne.lastname }} - {{ app_name }} {% endblock %} {% block modal %} {{ modal.default() }} {% endblock %} {% block javascripts %}
+~ ' ' ~ order.user.personne.lastname }} - {{ app_name }} {% endblock %} 
+{% block modal %} {{ modal.default() }} {% endblock %} {% block javascripts %}
 <script>
     $(document).ready(function() {
+
+        //Affiche le montant de la livraison
+        $(document).on('click','#btn-lieu-livraison-state',function(){
+            let id_street  = $('#streets').val()
+            $.ajax({
+                url: href,
+                method: 'POST',
+                type: 'json',
+                data: {
+                    _token : token,
+                    change_livraison:id_street
+                },
+                beforeSend: function () {
+                    $('.js-loader-text').text('Suppression de la ligne en cour ...')
+                    $('.js-loader').css('display', 'flex')
+                },
+                success: function (data) {
+                    $('.js-loader').css('display', 'none')
+                    if (data) {
+                        Swal.fire({
+                            title: 'Modification enregistrée',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        loadOrderEdit()
+                    } else {
+                        $('.js-loader').css('display', 'none')
+                        alert('Une erreur est survenue. code : 002')
+                    }
+                },
+                error: function () {
+                    $('.js-loader').css('display', 'none')
+                    alert('Une erreur est survenue. code : 001')
+                }
+            })
+        })
+        $(document).on('change', '#streets', function () {
+        let id = $(this).val()
+        $.ajax({
+            url: "{{ path('client_shipping_amount') }}",
+            method: "POST",
+            dataType: 'json',
+            data: {
+                id_street: id,
+                total: '100'
+        },
+        beforeSend: function () {
+            $('#loader-street-amount').show()
+            $('.js-amount').hide()
+
+        },
+        success: function (data) {
+            $('.js-amount').html(data.response).show()
+            $('#loader-street-amount').hide()
+            $('.total').text(data.total)
+            $('.js-show-amount').text(data.amount2)
+        }
+      })
+    })
         //Charger la commande
         function loadOrderEdit(){
             let href = "{{ path('editor_order_edit_get',{id:order.id})}}"
@@ -104,33 +165,7 @@ as link %} {% import "macros/modal.html.twig" as modal %}
                     }
                 })
             })
-        // Modal status
-        $(document).on('click', '#btn-modal-state', function(e) {
-            e.preventDefault()
-            $('#modal-default').modal('show')
-            let href = $(this).data('path')
-            console.log(href);
-            $.ajax({
-                url: href,
-                method: 'POST',
-                type: 'json',
-                data: {
-                    modal: 'state'
-                },
-                beforeSend: function() {
-                    $('.modal-loader').css('display', 'flex')
-                },
-                success: function(data) {
-                    $('#modal-default .modal-title').html('Modifier le status')
-                    $('#modal-default .modal-body').html(data.content)
-                    $('.modal-loader').css('display', 'none')
-                },
-                error: function() {
-                    $('.modal-loader').css('display', 'none')
-                    alert('Chargement impossible')
-                }
-            })
-        })
+        
         // Modal qty
         $(document).on('click', '.btn-modal-qty', function(e) {
             e.preventDefault()
@@ -430,18 +465,51 @@ as link %} {% import "macros/modal.html.twig" as modal %}
                 </ul>
             </div>
             <div class="card-body">
-                <div class="row">
+                {# <div class="shipping_box">
+                    <div class="form-group">
+                        <div id="loader-select-street" class="text-center loader">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
+                        <div id="js-select-street">
+                            <select required class="custom-select select-street"
+                                id="streets" name="street">
+                                
+                                <option selected value="{{ order.deliverySpace.street.id }}">{{
+                                      order.deliverySpace.street.name }}</option>
+                                {% for item in streets() %}
+                                <option value="{{ item.id }}">{{ item.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card border-0">
+                        <div id="loader-street-amount" class="text-center loader">
+                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                        </div>
+                        <div class="card-body  js-amount"></div>
+                    </div>
+                </div>
+                    <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-lieu-livraison-state" title="Modifier">
+                        <i class="fas fa-pencil-alt"></i>
+                        Appliquer  
+                    </button> #}
+                    <div class="row">
                     <div class="col-12">
                         <p>
                             <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
                              <i class="fas fa-pencil-alt"></i>
                              Modifier le status  
                             </button>
+                            <button href="#" class="btn btn-primary" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-send-email" title="Modifier">
+                             <i class="fas fa-pencil-alt"></i>
+                             Envoyer la commande
+                            </button>
                             <a 
                                 href="{{ path('order_print',{ id : order.id }) }}" 
                                 rel="noopener" 
                                 target="_blank"
-                                class="btn btn-default"><i class="fas fa-print"></i> Imprimmer
+                                class="btn btn-default"><i class="fas fa-print"></i> {{'Print'|trans}}
                             </a>
                         </p>
                     </div>

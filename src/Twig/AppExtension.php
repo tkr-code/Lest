@@ -9,6 +9,7 @@ use Twig\TwigFunction;
 use App\Entity\Article;
 use App\Entity\User;
 use App\Repository\ArticleRepository;
+use App\Repository\StreetRepository;
 use App\Service\Cart\CartService;
 
 class AppExtension extends AbstractExtension
@@ -16,11 +17,13 @@ class AppExtension extends AbstractExtension
     private $commentRepository;
     private $cartService;
     private $articleRepository;
-    public function __construct(ArticleRepository $articleRepository, CartService $cartService, CommentRepository $commentRepository)
+    private $streetRepository;
+    public function __construct(StreetRepository $streetRepository, ArticleRepository $articleRepository, CartService $cartService, CommentRepository $commentRepository)
     {
         $this->cartService = $cartService;
         $this->commentRepository = $commentRepository;
         $this->articleRepository = $articleRepository;
+        $this->streetRepository = $streetRepository;
     }
     public function getFilters(): array
     {
@@ -35,12 +38,17 @@ class AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('streets', [$this, 'streets']),
             new TwigFunction('isToFavoris', [$this, 'isToFavoris']),
             new TwigFunction('cartTotal', [$this, 'cartTotal']),
             new TwigFunction('cartAll', [$this, 'cartAll']),
             new TwigFunction('rating', [$this, 'rating']),
             new TwigFunction('dateFilter', [$this, 'doSomething']),
         ];
+    }
+
+    public function streets(){
+        return $this->streetRepository->findbyCity();
     }
 
     public function exploideEmail(string $email){

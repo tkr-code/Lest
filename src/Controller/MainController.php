@@ -20,6 +20,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MainController extends AbstractController
 {
     /**
+     * @Route("/faq", name="faq")
+     */
+    public function faq():Response
+    {
+        return $this->render('lest/faq.html.twig');
+    }
+    /**
      * @Route("/change-lang/{locale}", name="lang")
      */
     public function changeLocale($locale, Request $request)

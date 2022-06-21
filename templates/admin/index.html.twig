@@ -2,6 +2,85 @@
 {% import "macros/cards.html.twig" as cards %}
 {% import "macros/modal.html.twig" as modal %}
 
+{% block modal %} 
+{{ modal.default() }} 
+{{ modal.orderView() }}
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    //Modifier l'etat
+        $(document).on('click', '#order-edit-etat', function(e) {
+            e.preventDefault()
+            let etat = $('#js-order-etat').val()
+            let href = $(this).data('path')
+            let token = $(this).data('token')
+            $.ajax({
+                url: href,
+                method: 'POST',
+                type: 'json',
+                beforeSend: function() {
+                    $('.js-loader-text').text('Modification en cour ...')
+                    $('.js-loader').css('display', 'flex')
+                },
+                data: {
+                    _token: token,
+                    state: etat
+                },
+                success: function(data) {
+                    $('.js-loader').css('display', 'none')
+                    if (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Les modifications ont été enregistrée.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                         $('#modal-default').modal('hide')
+                        //load home order
+                        loadOrderEditHome()
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Une erreur est survenu.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                },
+                error: function() {
+                    $('.js-loader').css('display', 'none')
+                }
+            })
+        })
+
+        //Charger les derniere commande
+        function loadOrderEditHome(){
+            let href = ""
+            $.ajax({
+                    url: href,
+                    method: 'POST',
+                    type: 'json',
+                    data: {
+                        load:'order-edit'
+                    },
+                    beforeSend: function () {
+                        $('.js-loader-text').text('Actualisation en cour ...')
+                        $('.js-loader').css('display', 'flex')
+                    },
+                    success: function (data) {
+                        $('.js-loader').css('display', 'none')
+                        $('#order-detail').html(data.content)
+                    },
+                    error: function () {
+                        $('.js-loader').css('display', 'none')
+                        alert('Une erreur est survenue. code : 001')
+                    }
+                })
+        }
+</script>
+{% endblock %}
+
 {% extends 'admin/base.html.twig' %}
 
 {% block title %} {{'Dashboard'|trans}} 1 {% endblock %}
@@ -72,44 +151,7 @@
                         <!-- /.card-header -->
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table m-0">
-                                    <thead>
-                                        <tr>
-                                            <th>{{'number'|trans}}</th>
-                                            <th>{{'Customer'|trans}}</th>
-                                            <th>{{'Status'|trans}}</th>
-                                            <th>Crée le</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for item in lastOrder %}
-                                        <tr {{ (item.user.status == 'Delete')? 'class="text-danger"': '' }} >
-                                            <td>{{ item.number }}
-                                                <a class="text-dark js-order-view" href="{{ path('main_order_show',{id:item.id}) }}">
-                                                    <i class="fa fa-eye float-right" aria-hidden="true"></i>
-                                                </a>
-                                                {% if is_granted('ROLE_ADMIN') %}
-                                                    <a href="{{ path('order_edit',{id:item.id}) }}"> 
-                                                        <i class="fas text-success fa-pencil-alt "></i>
-                                                    </a>
-                                                {% endif %}
-                                            </td>
-                                            <td>{{ item.user.email |explode_email }}</td>
-                                            <td>
-                                                {% import "/macros/etats.html.twig" as etats %}
-                                                {{ etats.order(item.state) }}
-                                                {# <span class="badge badge-success">{{ item.state }}</span> #}
-                                            </td>
-                                            <td>{{ item.createdAt|date_format_min_fr }}</td>
-                                        </tr>
-                                        {% else %}
-                                        <tr class="text-center">
-                                            <td width="100%">not found</td>
-                                        </tr>
-                                        {% endfor %}
-
-                                    </tbody>
-                                </table>
+                                {% include "admin/order/_order_home.html.twig" %}
                             </div>
                             <!-- /.table-responsive -->
                         </div>
@@ -205,7 +247,6 @@
     <!-- /.row -->
 </div>
 <!--/. container-fluid -->
-{{ modal.orderView() }}
 
 {% endblock %}
 

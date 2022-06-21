@@ -107,7 +107,8 @@ class EmailTestController extends AbstractController
     public function reserPassword(EmailService $emailService): Response
     {
         return $this->render('email/reset-password.html.twig',[
-            'theme'=>$emailService->theme(2)
+            'theme'=>$emailService->theme(2),
+            'user'=>$this->user,
         ]);
     }
 }

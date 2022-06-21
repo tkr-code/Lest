@@ -373,6 +373,33 @@
   <script>
     $(document).ready(function () { // Initialize Select2 Elements
 
+// Modal status
+        $(document).on('click', '#btn-modal-state', function(e) {
+            e.preventDefault()
+            $('#modal-default').modal('show')
+            let href = $(this).data('path')
+            console.log(href);
+            $.ajax({
+                url: href,
+                method: 'POST',
+                type: 'json',
+                data: {
+                    modal: 'state'
+                },
+                beforeSend: function() {
+                    $('.modal-loader').css('display', 'flex')
+                },
+                success: function(data) {
+                    $('#modal-default .modal-title').html('Modifier le status')
+                    $('#modal-default .modal-body').html(data.content)
+                    $('.modal-loader').css('display', 'none')
+                },
+                error: function() {
+                    $('.modal-loader').css('display', 'none')
+                    alert('Chargement impossible')
+                }
+            })
+        })
       $('select').select2({
         theme: 'bootstrap4'
       })
