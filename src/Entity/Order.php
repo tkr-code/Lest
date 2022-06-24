@@ -18,6 +18,7 @@ class Order
         'Canceled'=>'canceled',
         'Waiting'=>'waiting',
         'in progress'=>'in progress',
+        'Shipping'=>'shipping',
         'Completed'=>'completed'
     ];
 

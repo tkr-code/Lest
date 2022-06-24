@@ -277,11 +277,19 @@ class OrderController extends AbstractController
     }
 
     /**
+     * @Route("/editor-order-get-home", name="editor_order_edit_get_home", methods={"GET","POST"})
      * @Route("/editor/order/{id}/edit/get", name="editor_order_edit_get", methods={"GET","POST"})
-     *
      */
-    public function editOrdeGet(Order $order, Request $request){
+    public function editOrdeGet(Order $order = null, Request $request, OrderRepository $orderRepository){
 
+        if($request->request->get('load') && $request->request->get('load') == 'order-home'){
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/order/_order_home.html.twig',[
+                    'lastOrder'=>$orderRepository->findAllLast()
+                ])->getContent()
+            ]);
+        }
         if($request->request->get('load') && $request->request->get('load') == 'order-edit'){
             return new JsonResponse([
                 'reponse'=>true,

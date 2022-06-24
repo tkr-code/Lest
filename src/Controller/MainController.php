@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ArticleSearch;
 use App\Entity\Client;
+use App\Entity\Order;
 use App\Entity\User;
 use App\Form\ArticleSearchType;
 use App\Repository\ClientRepository;
@@ -20,7 +21,29 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/faq", name="faq")
+     * @Route("/track-my-order/{number}", name="track_show")
+     */
+    public function trackOrder(Order $order):Response
+    {
+        if (!$order) {
+            return new JsonResponse(['reponse'=>false]);
+        }
+        return new JsonResponse([
+            'reponse'=>true,
+            'content'=>$this->render('lest/track/_track_view.html.twig',[
+                'order'=>$order
+            ])->getContent() 
+        ]);
+    }
+    /**
+     * @Route("/track-my-order/", name="track_index")
+     */
+    public function track():Response
+    {
+        return $this->render('lest/track/index.html.twig');
+    }
+    /**
+     * @Route("/track", name="faq")
      */
     public function faq():Response
     {

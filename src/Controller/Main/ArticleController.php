@@ -3,8 +3,10 @@
 namespace App\Controller\Main;
 
 use App\Entity\Article;
+use App\Entity\ArticleFiltre;
 use App\Entity\ArticleSearch;
 use App\Entity\Comment;
+use App\Form\ArticleFiltreType;
 use App\Form\ArticleSearchType;
 use App\Form\CommentType;
 use App\Repository\ArticleBuyRepository;
@@ -103,6 +105,7 @@ class ArticleController extends AbstractController
         $category = str_replace('-',' ',$category);
         $search = new ArticleSearch();
         $search->setCategory($category);
+
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
         $pagination = $paginator->paginate(
             $articleRepository->search(
@@ -114,9 +117,11 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             12
         );
+
         return $this->renderForm('lest/shop/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,
+            // 'form_filtre'=>$formFiltre,
             'breadcrumb'=>[
                 'parent'=>ucfirst($parent),
                 'category'=>ucfirst($category)

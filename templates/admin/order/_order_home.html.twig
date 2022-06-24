@@ -14,21 +14,25 @@
 					<a class="text-dark js-order-view" title="Voir" href="{{ path('main_order_show',{id:item.id}) }}">
 						<i class="fa fa-eye float-right" aria-hidden="true"></i>
 					</a>
-					{% if is_granted('ROLE_ADMIN') %}
-						<a type="button" title="Modifier la commande" class="ml-2" href="{{ path('order_edit',{id:item.id}) }}">
-							<i class="fas text-success fa-pencil-alt "></i>
-						</a>
+					{% if item.user.status != 'Delete' %}
+						{% if is_granted('ROLE_ADMIN') %}
+							<a type="button" title="Modifier la commande" class="ml-2" href="{{ path('order_edit',{id:item.id}) }}">
+								<i class="fas text-success fa-pencil-alt "></i>
+							</a>
+						{% endif %}
 					{% endif %}
 				</td>
 				<td>{{ item.user.email |explode_email }}</td>
 				<td>
 					{% import "/macros/etats.html.twig" as etats %}
 					{{ etats.order(item.state) }}
-					<a type="button" href="#" class="ml-2 text-success" data-path="{{ path('editor_order_edit_get',{id:item.id}) }}" type="button" id="btn-modal-state" title="Modifier le status">
-						<i class="fas fa-pencil-alt"></i>
-					</a>
-
-					{# <span class="badge badge-success">{{ item.state }}</span> #}
+					{% if item.user.status != 'Delete' %}
+						{% if item.state != 'completed' %}
+							<a type="button" href="#" class="ml-2 text-success float-right" data-path="{{ path('editor_order_edit_get',{id:item.id}) }}" type="button" id="btn-modal-state" title="Modifier le status">
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+						{% endif %}
+					{% endif %}
 				</td>
 				<td>{{ item.createdAt|date_format_min_fr }}</td>
 			</tr>

@@ -56,13 +56,13 @@
 
         //Charger les derniere commande
         function loadOrderEditHome(){
-            let href = ""
+            let href = "/editor-order-get-home"
             $.ajax({
                     url: href,
                     method: 'POST',
                     type: 'json',
                     data: {
-                        load:'order-edit'
+                        load:'order-home'
                     },
                     beforeSend: function () {
                         $('.js-loader-text').text('Actualisation en cour ...')
@@ -70,7 +70,7 @@
                     },
                     success: function (data) {
                         $('.js-loader').css('display', 'none')
-                        $('#order-detail').html(data.content)
+                        $('#editor-order-get-home').html(data.content)
                     },
                     error: function () {
                         $('.js-loader').css('display', 'none')
@@ -150,7 +150,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="editor-order-get-home">
                                 {% include "admin/order/_order_home.html.twig" %}
                             </div>
                             <!-- /.table-responsive -->
