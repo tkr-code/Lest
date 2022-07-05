@@ -21,7 +21,11 @@
                 <a class="c-1" href="{{ path('article_show',{id: item.id} ) }}">
                     #{{ item.id}} {{ item.title}} 
                 </a>
-                <p>{{ etats.articleLabel(item.label) }}</p>
+                <p>{{ etats.articleLabel(item.label) }} {% if item.reduction > 0 %}
+			<span class="product-label label-out bg-danger">-{{ item.reduction}} %</span> 
+		{% endif %} {% if item.quantity <= 0 %}
+			<span class="product-label label-out bg-danger">{{'Out of Stock'|trans}}</span>
+		{% endif %}</p>
             </td>
             <td>
                 En stock: {{ item.quantity }} </br>

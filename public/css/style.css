@@ -2206,7 +2206,7 @@ a {
 }
 .contact-banner-area {
  height:280px;
- background:url("../../assets/images/contact-bg.png") center center no-repeat;
+ background:url("../../img/icons/contact-bg.png") center center no-repeat;
  background-size:cover;
  position:relative;
  z-index:1

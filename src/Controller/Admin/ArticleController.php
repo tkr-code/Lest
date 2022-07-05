@@ -131,7 +131,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article, TranslatorInterface $translator, BrandRepository $brandRepository): Response
+    public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleEditType::class, $article);
         $form->handleRequest($request);
@@ -160,14 +160,7 @@ class ArticleController extends AbstractController
             }else{
                 $article->setUpdatedAt(new \DateTime());
             }
-            $article->setQtyReel($article->getQuantity());
-            $idBrand = $request->request->get('brand');
-            if($idBrand){
-                // $brand = $brandRepository->find($idBrand);
-                // if($brand){
-                //     $article->setBrand($brand);
-                // }
-            }
+            $article->setQtyReel($article->getQuantity());            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();

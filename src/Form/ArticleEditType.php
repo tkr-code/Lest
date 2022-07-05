@@ -57,10 +57,6 @@ class ArticleEditType extends AbstractType
                 'attr'=>[
                     'class'=>'select2'
                 ]
-                // 'attr'=>[
-                //     'placeholder'=>'The price must be greater than zero'
-                // ],
-                // 'help'=>'The price must be greater than zero'
             ])
             ->add('quantity',IntegerType::class,[
                 'label'=>'Quantité (*)',
@@ -78,11 +74,13 @@ class ArticleEditType extends AbstractType
 
             ->add('label',ChoiceType::class,[
                 'label'=>'Eticket',
+                'placeholder'=>"Selectionner l'eticket",
                 'choices'=>Article::LABEL,
-                'required'=>false,
                 'attr'=>[
                     'class'=>'select2'
-                ]
+                ],
+                'required'=>false,
+
             ])
             ->add('category',EntityType::class,[
                 'label'=>'Catégorie (*)',

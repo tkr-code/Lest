@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- molla/index-3.html  22 Nov 2019 09:55:42 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,175 +12,34 @@
     <meta name="description" content="{{app_name}} - eCommerce">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/img/icons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/lest-logo.png') }}">
-    <link rel="manifest" href="{{ asset('assets/images/icons/site.html') }}">
-    <link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
+    <link rel="manifest" href="{{ asset('img/icons/site.html') }}">
+    <link rel="mask-icon" href="{{ asset('imgicons/safari-pinned-tab.svg') }}" color="#666666">
     <link rel="shortcut icon" href="{{ asset('img/lest-logo.png') }}">
     <meta name="apple-mobile-web-app-title" content="Lest">
     <meta name="application-name" content="Lest">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="{{ asset('assets/images/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lest/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
 
     <!-- Sweetalert 2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/jquery.countdown.css') }}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-3.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lest/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/lest/util.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/skin-demo-3.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/demo-3.css') }}">
     {% block head %}{% endblock %}
 </head>
-
 <body>
-    <style>
-        .top-menu:not(.top-link-menu):hover ul,
-    .top-menu:not(.top-link-menu):focus ul {
-        visibility: visible;
-        opacity   : 1;
-        color: #003
-    }
-.cat-blocks-container {
- padding-top:.5rem
-}
-.cat-blocks-container [class*="col-"] {
- display:flex;
- align-items:stretch;
- justify-content:center
-}
-.cat-block {
- display:flex;
- flex-direction:column;
- justify-content:flex-end;
- align-items:center;
- text-align:center;
- margin-bottom:3rem
-}
-.cat-block figure {
- display:inline-flex;
- align-items:center;
- position:relative;
- flex:1;
- margin:0
-}
-.cat-block figure span {
- position:relative
-}
-.cat-block figure span:after {
- content:'';
- display:block;
- position:absolute;
- bottom:-.2rem;
- left:45%;
- width:105%;
- margin-left:-45%;
- height:.3rem;
- border-radius:50%;
- background-color:rgba(0,0,0,0.3);
- transition:all 0.35s ease;
- filter:blur(3px);
- opacity:.5
-}
-.cat-block img {
- margin-left:auto;
- margin-right:auto;
- transition:transform 0.35s ease
-}
-.cat-block:hover img {
- transform:translateY(-14px)
-}
-.cat-block:hover figure span:after {
- opacity:1
-}
-.cat-block-title {
- color:#333;
- font-weight:400;
- font-size:1.4rem;
- letter-spacing:-.01em;
- margin-top:2rem;
- margin-bottom:0
-}
-
-    .start{
-        color :'#ccc'!important
-    }
-    .old-price {
-        color:#cccccc;
-        text-decoration:line-through
-        }
-        label.required {
-            color: #666;
-            font-weight: 300;
-            font-size: 1.4rem;
-            margin: 0 0 1.1rem
-        }
-        
-        .label-out {
-            background: '#8c1212' !important
-        }
-        
-        #registration_form_agreeTerms {
-            position: static;
-            margin-bottom: 0;
-            margin-top: 0.1rem;
-            font-size: 1.4rem;
-            padding-left: 2.6rem;
-            margin-left: -2.6rem
-        }
-        
-        .icon-fff {
-            color: #fff
-        }
-        
-        .loader {
-            display: none
-        }
-        
-        .js-loader {
-            z-index: 1041;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: #97383863;
-            display: none;
-            justify-content: center;
-            align-items: center
-        }
-        .modal-js-loader {
-            z-index: 1041;
-            width: 100%;
-            height: 100%;
-            background: #97383863;
-            display: none;
-            justify-content: center;
-            align-items: center
-        }
-        
-        .js-loader p {
-            text-align: center
-        }
-        
-        .modal-js-loader-content {
-            padding: 10px;
-            width: 100%;
-            height:200px;
-            background: #fff;
-        }
-        .js-loader-content {
-            padding: 10px;
-            width: 300px;
-            background: #fff;
-            border-radius: 15px
-        }
-    </style>
     <div class="js-loader js-loader-hide">
         <div class="text-center js-loader-content">
             <div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
@@ -246,7 +104,7 @@
 						</button>
 
                         <a href="{{ path('home') }}" class="logo">
-                            <img src="{{ asset('assets/images/lest-jaune.png') }}" alt="Molla Logo" width="105" height="25">
+                            <img src="{{ asset('img/icons/lest-jaune.png') }}" alt="Lest Logo" width="105" height="25">
                         </a>
                     </div>
                     <!-- End .header-left -->
@@ -410,7 +268,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget widget-about">
-                                <img src="{{ asset('assets/images/logo.png') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                                <img src="{{ asset('img/icons/logo.png') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
                                 <p>Lest est une entreprise de la place qui évolue dans le domaine de l'informatique
                                 </p>
 
@@ -783,62 +641,25 @@
 
     {% block modal %}{% endblock %}
 
-    {#
-    <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="row no-gutters bg-white newsletter-popup-content">
-                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
-                        <div class="banner-content text-center">
-                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
-                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.
-                            </p>
-                            <form action="#">
-                                <div class="input-group input-group-round">
-                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
-                                    <div class="input-group-append">
-                                        <button class="btn" type="submit"><span>go</span></button>
-                                    </div>
-                                    <!-- .End .input-group-append -->
-                                </div>
-                                <!-- .End .input-group -->
-                            </form>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                <label class="custom-control-label" for="register-policy-2">Do not show this popup
-									again</label>
-                            </div>
-                            <!-- End .custom-checkbox -->
-                        </div>
-                    </div>
-                    <div class="col-xl-2-5col col-lg-5 ">
-                        <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> #}
-    <!-- Plugins JS File -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}">
+    <script src="{{ asset('js/lest/jquery.min.js') }}">
     </script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.hoverIntent.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/js/superfish.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-input-spinner.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.plugin.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('js/lest/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/lest/jquery.hoverIntent.min.js') }}"></script>
+    <script src="{{ asset('js/lest/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('js/lest/superfish.min.js') }}"></script>
+    <script src="{{ asset('js/lest/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/lest/bootstrap-input-spinner.js') }}"></script>
+    <script src="{{ asset('js/lest/jquery.plugin.min.js') }}"></script>
+    <script src="{{ asset('js/lest/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('js/lest/jquery.countdown.min.js') }}"></script>
     {% block foot %}{% endblock %}
     <!-- sweetalert2 -->
     <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{asset('js/admin.js') }}"></script>
     <!-- Main JS File -->
-    <script src="{{asset('assets/js/main.js') }}"></script>
+    <script src="{{asset('js/lest/main.js') }}"></script>
     <script src="{{asset('js/article.js') }}"></script>
-    <script src="{{asset('assets/js/demos/demo-3.js') }}"></script>
+    <script src="{{asset('js/lest/demos/demo-3.js') }}"></script>
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
         $(document).ready(function() { 
@@ -1034,7 +855,6 @@
                     }
                 })
             }
-
             // CHARGER LE PANIER
             function loadFavoris() {
                 $.ajax({
