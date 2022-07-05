@@ -116,6 +116,10 @@ class Order
         $this->is_immuable = true;
     }
 
+    public function getFacture(){
+        return 'Facture N° '.$this->getNumber().' - Lest';
+    }
+
     public function getId(): ?int
     {
         return $this->id;

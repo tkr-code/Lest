@@ -5,6 +5,9 @@ namespace App\Controller\Main;
 use App\Entity\Order;
 
 use App\Service\Email\EmailService;
+use App\Service\Pdf\PdfService;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +23,15 @@ class OrderController extends AbstractController
     public function __construct(EmailService $emailService)
     {
         $this->emailService = $emailService;
+    }
+
+    /**
+     * Telecharger une commande
+     * @Route("/order-download/{id}", name="order_download", methods={"POST","GET"})
+     */
+    public function orderDowload(Order $order, PdfService $pdfService):Response{
+        $pdfService->orderToPdf($order,true);
+        return new Response();
     }
 
     /**

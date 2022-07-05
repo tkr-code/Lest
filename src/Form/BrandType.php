@@ -16,11 +16,6 @@ class BrandType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('categories',EntityType::class,[
-                'class'=>Category::class,
-                'choice_label'=>'title',
-                'multiple'=>true
-            ])
         ;
     }
 

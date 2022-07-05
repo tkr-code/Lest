@@ -21,9 +21,6 @@
                 <a class="c-1" href="{{ path('article_show',{id: item.id} ) }}">
                     #{{ item.id}} {{ item.title}} 
                 </a>
-                <a class="c-1" href="{{ path('article_edit',{id: item.id} ) }}">
-                    <i class="fas fa-pencil-alt   text-success "></i>
-                </a>
                 <p>{{ etats.articleLabel(item.label) }}</p>
             </td>
             <td>

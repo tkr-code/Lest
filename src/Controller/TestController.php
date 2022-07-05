@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
+use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use App\Repository\DeliverySpaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,15 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/test", name="test")
+     * @Route("/test/{id}", name="test")
      */
-    public function index(DeliverySpaceRepository $deliverySpaceRepository): Response
+    public function index(Order $order): Response
     {
-
-        return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
-        ]);
+        return $this->render('pdf/order.html.twig',['order'=>$order]);
     }
-
     
 }

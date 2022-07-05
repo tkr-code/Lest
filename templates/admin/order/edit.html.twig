@@ -452,73 +452,51 @@ as link %} {% import "macros/modal.html.twig" as modal %}
                     <li class="nav-item">
                         <a class="nav-link {% if app.request.query.get('tab') is null or app.request.query.get('tab') == '' %}active{% endif %}" id="custom-tabs-three-home-tab" data-toggle="pill" href="#order-detail" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Details Order</a>
                     </li>
-                    {#
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.query.get('tab') == 'facturation' %}active{% endif %} " id="custom-tabs-three-profile-tab" data-toggle="pill" href="#order-facturation" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Facturation</a>
-                    </li> #}
+                    {% if order.state != 'completed' %}
                     <li class="nav-item">
                         <a class="nav-link {% if app.request.query.get('tab') == 'articles' %}active{% endif %} " id="custom-tabs-three-profile-tab" data-toggle="pill" href="#order-articles" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Ajouter un article</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link {% if app.request.query.get('tab') == 'info' %}active{% endif %} " id="custom-tabs-info-tab" data-toggle="pill" href="#order-info" role="tab" aria-controls="custom-tabs-info" aria-selected="false">Info</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
-                {# <div class="shipping_box">
-                    <div class="form-group">
-                        <div id="loader-select-street" class="text-center loader">
-                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                        </div>
-                        <div id="js-select-street">
-                            <select required class="custom-select select-street"
-                                id="streets" name="street">
-                                
-                                <option selected value="{{ order.deliverySpace.street.id }}">{{
-                                      order.deliverySpace.street.name }}</option>
-                                {% for item in streets() %}
-                                <option value="{{ item.id }}">{{ item.name }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="card border-0">
-                        <div id="loader-street-amount" class="text-center loader">
-                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                        </div>
-                        <div class="card-body  js-amount"></div>
-                    </div>
-                </div>
-                    <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-lieu-livraison-state" title="Modifier">
-                        <i class="fas fa-pencil-alt"></i>
-                        Appliquer  
-                    </button> #}
                     <div class="row">
                     <div class="col-12">
                         <p>
-                            <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
-                             <i class="fas fa-pencil-alt"></i>
-                             Modifier le status  
-                            </button>
-                            <button href="#" class="btn btn-primary" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-send-email" title="Modifier">
-                             <i class="fas fa-pencil-alt"></i>
-                             Envoyer la commande
-                            </button>
+                            {% if order.state != 'completed' %}
+                                <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
+                                <i class="fas fa-pencil-alt"></i>
+                                Modifier le status  
+                                </button>
+                            {% elseif is_granted('ROLE_ADMIN') %}
+                                <button href="#" class="btn btn-success" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-state" title="Modifier">
+                                <i class="fas fa-pencil-alt"></i>
+                                Modifier le status  
+                                </button>
+                            {% endif %}
+                            {% if order.user.status != 'Delete' %}
+                                <a href="{{ path('send_email_order',{id:order.id}) }}" class="btn btn-primary" data-path="{{ path('editor_order_edit_get',{id:order.id}) }}" type="button" id="btn-modal-send-email" title="Modifier">
+                                <i class="fas fa-pencil-alt"></i>
+                                Envoyer la commande
+                                </a>
+                            {% endif %}
                             <a 
                                 href="{{ path('order_print',{ id : order.id }) }}" 
                                 rel="noopener" 
                                 target="_blank"
                                 class="btn btn-default"><i class="fas fa-print"></i> {{'Print'|trans}}
                             </a>
+                            <a 
+                                href="{{ path('order_download',{id:order.id}) }}" 
+                                rel="noopener" 
+                                target="_blank"
+                                class="btn btn-default"><i class="fas fa-file-pdf"></i> Telecharger le pdf
+                            </a>
                         </p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-
-                        </div>
-                    </div>
-                    <button>Envoyer</button>
                 </div>
                 <div class="tab-content" id="custom-tabs-three-tabContent">
                     <div class="tab-pane fade {% if app.request.query.get('tab') is null or app.request.query.get('tab') == ''  %}show active{% endif %}" id="order-detail" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
@@ -532,6 +510,7 @@ as link %} {% import "macros/modal.html.twig" as modal %}
                             <i class="fas fa-save    "></i>
                         </button> {{ form_end(formFacturation) }}
                     </div>
+                     {% if order.state != 'completed' %}
                     <div class="tab-pane fade {% if app.request.query.get('tab') == 'articles' %}show active{% endif %}" id="order-articles" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
 
                         <!-- /.row -->
@@ -555,6 +534,7 @@ as link %} {% import "macros/modal.html.twig" as modal %}
                         <hr> {{ link.back(path('order_index'),'back to list order') }} {{ link.back(path('admin_client_order',{id:order.user.id }),'back to client list order') }}
 
                     </div>
+                    {% endif %}
                     <div class="tab-pane fade" id="order-shipping" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">{# {{ include ("admin/order/_datatable.html.twig",{id:'4',orders: ordersCompleted}) }} #}
                     </div>
                     <div class="tab-pane fade" id="order-info" role="tabpanel" aria-labelledby="custom-tabs-info-tab">

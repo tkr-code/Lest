@@ -1,7 +1,7 @@
 <div class="product product-7 text-center">
 	<figure class="product-media">
 		{% if item.quantity <= 0 %}
-			<span class="product-label label-out bg-danger">Out of Stock</span>
+			<span class="product-label label-out bg-danger">{{'Out of Stock'|trans}}</span>
 		{% endif %}
 
 		{% import "macros/etats.html.twig" as etats %}
@@ -33,9 +33,6 @@
 					<span>{{'add to wishlist'|trans}}</span>
 				</a>
 			{% endif %}
-			{# <a href="{{ asset('popup/quickView.html.twig') }}" class="btn-product-icon btn-quickview" title="Quick view">
-				<span>{{'Quick view'|trans}}</span>
-			</a> #}
 		</div>
 		<!-- End .product-action-vertical -->
 
@@ -63,14 +60,14 @@
 		<!-- End .product-title -->
 		<div class="product-price">
 		{% if item.reduction > 0 %}
-			{{ item.newPrice}}
+			{{ item.newPrice|number_format(0,'', ' ')}}
 			{{ site.current_name }}
 			<span class="old-price ml-1">
-				{{ item.formatterPrice }}
+				{{ item.price|number_format(0,'',' ') }}
 			{{ site.current_name }}
 			</span>
 			{% else %}				
-			{{ item.newPrice}}
+			{{ item.newPrice|number_format(0,'',' ')}}
 			{{ site.current_name }}
 		{% endif %}
 		</div>
@@ -81,10 +78,9 @@
 				<!-- End .ratings-val -->
 			</div>
 			<!-- End .ratings -->
-			<span class="ratings-text">(
-				{{ item.comments|length}}
-				{{'Reviews'|trans}}
-				)</span>
+			<span class="ratings-text">
+				({{ item.comments|length}} {{'Reviews'|trans}})
+			</span>
 		</div>
 		<!-- End .rating-container -->
 

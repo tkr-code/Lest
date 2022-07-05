@@ -71,7 +71,9 @@ class OrderItemController extends AbstractController
         if ($request->request->get('modal') && $request->request->get('modal') == 'qty') {
             return new JsonResponse([
                 'reponse'=>true,
-                'content'=>$this->render('admin/order/_form_order_item_qty.html.twig',['orderItem'=>$orderItem])->getContent()
+                'content'=>$this->render('admin/order/_form_order_item_qty.html.twig',[
+                    'orderItem'=>$orderItem
+                    ])->getContent()
             ]);
         }
         

@@ -2,7 +2,10 @@
 
 namespace App\Service\Email;
 
+use App\Entity\User;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Mime\Address;
 
 class EmailService
 {

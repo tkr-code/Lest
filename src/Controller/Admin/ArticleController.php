@@ -57,17 +57,17 @@ class ArticleController extends AbstractController
         ];
         $id = $request->request->get('id');
         if(!empty($id)){
-            $category  = $categoryRepository->find($id);
-            if($category)
-            {
-                $brands = $category->getBrands();
-                $reponse =[
-                    'reponse'=>true,
-                    'content'=>$this->render('admin/article/ajax/select_brand.html.twig',['brands'=>$brands])->getContent()
-                ];
+            // $category  = $categoryRepository->find($id);
+            // if($category)
+            // {
+            //     $brands = $category->getBrand();
+            //     $reponse =[
+            //         'reponse'=>true,
+            //         'content'=>$this->render('admin/article/ajax/select_brand.html.twig',['brands'=>$brands])->getContent()
+            //     ];
                 
-                return new JsonResponse($reponse);
-            }
+            //     return new JsonResponse($reponse);
+            // }
         }
         return new JsonResponse($reponse);
     }
@@ -109,10 +109,10 @@ class ArticleController extends AbstractController
             $article->setQtyReel($article->getQuantity());
             $idBrand = $request->request->get('brand');
             if($idBrand){
-                $brand = $brandRepository->find($idBrand);
-                if($brand){
-                    $article->setBrand($brand);
-                }
+                // $brand = $brandRepository->find($idBrand);
+                // if($brand){
+                //     $article->setBrand($brand);
+                // }
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
@@ -163,10 +163,10 @@ class ArticleController extends AbstractController
             $article->setQtyReel($article->getQuantity());
             $idBrand = $request->request->get('brand');
             if($idBrand){
-                $brand = $brandRepository->find($idBrand);
-                if($brand){
-                    $article->setBrand($brand);
-                }
+                // $brand = $brandRepository->find($idBrand);
+                // if($brand){
+                //     $article->setBrand($brand);
+                // }
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);

@@ -90,6 +90,12 @@ class ArticleEditType extends AbstractType
                 'choice_label'=>'title',
                 'placeholder'=>'Selectionner la catégorie'
                 ])
+            ->add('brand',EntityType::class,[
+                'label'=>'Marque',
+                'class'=>Brand::class,
+                'choice_label'=>'name',
+                'placeholder'=>'Selectionner la marque'
+                ])
             ->add('images',FileType::class,[
                 'label'=>'Ajouter une ou plusieurs images (*)',
                 'multiple'=>true,

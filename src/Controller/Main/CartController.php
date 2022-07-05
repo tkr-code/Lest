@@ -120,7 +120,6 @@ class CartController extends AbstractController
             'streets'=>$streetRepository->findbyCity(),
             'form_payment'=>$formPayment,
             'form_delivery_space'=>$formDeliverySpace,
-            'rand_articles'=>$articleRepository->findRand(),
             'methodPayment'=>$paymentMethodRepository->findAll()
 
         ]);
@@ -151,7 +150,6 @@ class CartController extends AbstractController
             'streets'=>$streetRepository->findbyCity(),
             'form_payment'=>$formPayment,
             'form_delivery_space'=>$formDeliverySpace,
-            'rand_articles'=>$articleRepository->findRand(),
             'methodPayment'=>$paymentMethodRepository->findAll()
 
         ]);

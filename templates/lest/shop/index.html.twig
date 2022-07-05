@@ -1,9 +1,4 @@
 {% extends "lest/base.html.twig" %}
-{% block head %}
-	{# <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-3.css') }}">
-		<link rel="stylesheet" href="{{ asset('assets/css/demos/demo-3.css') }}">  #}
-
-{% endblock %}
 {% block main %}
 	<main class="main">
 		<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -157,6 +152,10 @@
 								<div class="collapse show" id="widget-1" style="">
 									<div class="widget-body">
 										<div class="filter-items filter-items-count">
+												<div class="filter-item">
+													<a href="{{path('articles') }}" {{ app.request.get('_route') == 'articles' ? 'class="active"': '' }}>{{ 'All'|trans }}</a>
+													<span class="item-count">{{ articles.totalItemCount }} </span>
+												</div>
 											{% for item in categories.all %}
 												<div class="filter-item">
 													<a href="{{path('articles_category',{category:item.slug|lower}) }}" {{ item.slug == app.request.get( 'category') ? 'class="active"': '' }}>{{ item.title }}</a>
@@ -184,7 +183,7 @@
 										<div class="widget-body">
 											<div class="filter-items filter-items-count">
 
-												{% for item in categorie.brands %}
+												{# {% for item in categorie.brands %}
 													<div class="filter-item">
 														<div class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input" id="cat-{{ item.name }}">
@@ -193,7 +192,7 @@
 														<!-- End .custom-checkbox -->
 														<span class="item-count">100</span>
 													</div>
-												{% endfor %}
+												{% endfor %} #}
 											</div>
 											<!-- End .filter-items -->
 										</div>

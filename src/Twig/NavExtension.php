@@ -146,15 +146,29 @@ class NavExtension extends AbstractExtension
                             'path'=>'admin_delivery_space_index'
                         ]       
                     ]
-                ]
-            ],
-            'editor'=>
-            [
+                ],
+                [
+                    'name'=>'Marque',
+                    'links'=>[
+                        [
+                            'name'=>'Liste',
+                            'path'=>'admin_brand_index'
+                        ],       
+                        [
+                            'name'=>'new',
+                            'path'=>'admin_brand_new',
+                        ],
+                        
+                    ]
+                ],
                 [
                     'name'=>'Categorie',
                     'path'=>'category_index',
                     'icon'=>'far fa-circle'
                 ]
+            ],
+            'editor'=>
+            [
             ]
         ];
     }

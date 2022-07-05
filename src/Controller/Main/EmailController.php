@@ -2,6 +2,7 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Order;
 use App\Service\Email\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,42 @@ class EmailController extends AbstractController
 {
     private $emailService;
     private $mailer;
+    private $from= ['contact@lest.sn','lest.sn'];
     public function __construct(EmailService $emailService, MailerInterface $mailerInterface )
     {
         $this->emailService = $emailService;
         $this->mailer = $mailerInterface;
+    }
+
+    /**
+     * @Route("send/order/{id}", name="send_email_order", methods={"GET","POST"})
+     */
+    public function sendOrder(Order $order)
+    {
+        $user = $order->getUser();
+        $email = (new TemplatedEmail())
+            ->from(new Address($this->from[0],$this->from[1]))
+            ->to($user->getEmail())
+            ->subject("Facture")
+            // ->attachFromPath($this->getParameter('order_pdf_directory').DIRECTORY_SEPARATOR.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
+            ->attach($this->getParameter('order_pdf_directory').DIRECTORY_SEPARATOR.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
+            ->htmlTemplate('email/order.html.twig')
+            ->context([
+                'user'=>$user,
+                'theme'=> $this->emailService->theme(4),
+                'order'=>$order
+            ]);
+            try
+                {
+                    $this->mailer->send($email);
+                    $this->addFlash('success','La commande été envoyé');
+                   return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
+                } catch (TransportExceptionInterface $e) 
+                {
+                    $this->addFlash('error',$e->getMessage());
+                   return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
+                       
+                }
     }
     /**
      * @Route("gestion-compte/edit-email", name="edit_email")

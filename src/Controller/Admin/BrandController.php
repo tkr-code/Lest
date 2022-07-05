@@ -65,10 +65,11 @@ class BrandController extends AbstractController
     {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
+        // dump($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {                        
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success','Modification réussie');
             return $this->redirectToRoute('admin_brand_index', [], Response::HTTP_SEE_OTHER);
         }
 

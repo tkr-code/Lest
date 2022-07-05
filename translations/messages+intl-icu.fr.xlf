@@ -471,7 +471,7 @@
       </trans-unit>
       <trans-unit id="RsyWeyy" resname="Categorys">
         <source>Categorys</source>
-        <target>Categories</target>
+        <target>Catégories</target>
       </trans-unit>
       <trans-unit id="IYGXaTQ" resname="From">
         <source>From</source>
@@ -515,7 +515,7 @@
       </trans-unit>
       <trans-unit id="_574lBd" resname="Product">
         <source>Product</source>
-        <target>Produict</target>
+        <target>Produit</target>
       </trans-unit>
       <trans-unit id="giurjUG" resname="Quantity">
         <source>Quantity</source>

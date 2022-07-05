@@ -345,11 +345,13 @@ class OrderController extends AbstractController
             $entityManager->flush();
             return new JsonResponse(true);
         }
+            $orderService->calculOrder($order);
+
         if($this->isCsrfTokenValid('edit'.$order->getId(),$request->request->get('_token')) && $request->request->get('state')){
             $state = $request->request->get('state');
             if ($order->getIsImmuable()) //Si la commande est modifiable
             {
-                if($order->getState() == $state)
+                if($state == 'completed')
                     {
                     $payment = $order->getPayment();
                     $payment->setState('completed');

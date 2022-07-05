@@ -17,7 +17,7 @@ $(document).ready(function() {
 
         Swal.fire({
             title: 'Etes vous sûr ?',
-            text: "Vous êtes sur le point de supprimeer votre compte lest  !  ",
+            text: "Votre compte va être supprimé.",
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -35,7 +35,7 @@ $(document).ready(function() {
                         ajax: true
                     },
                     beforeSend: function() {
-                        $('.js-loader-text').text('Vérificqtion de suppresion du compte en cour ...')
+                        $('.js-loader-text').text('Annulation de compte en cours de vérification ...')
                         $('.js-loader').css('display', 'flex')
                     },
                     success: function(data) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then((result) => {
-                                $('.text-delete').html('Votre conpte a été supprimer !')
+                                $('.text-delete').html("Votre compte n'existe plus.")
                                 compteurToRedirige('.btn-delete-compte', 5, 'Vous serez redirigé dans ', '/logout');
                             })
                         } else {

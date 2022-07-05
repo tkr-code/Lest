@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\ArticleSearch;
 use App\Form\ArticleSearchType;
+use App\Repository\CategoryRepository;
 use App\Repository\ClientRepository;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Repository\UserRepository;
@@ -22,10 +23,17 @@ class HomeController extends AbstractController
     {
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
+        dump(
+            $articleRepository->findCategoryTitle('imprimante et accessoires')
+        );
       return  $this->renderForm("lest/home/index.html.twig", [
             'form'=>$form,
             'articles'=>[
-                'rand'=>$articleRepository->findRand(),
+                'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateurs'),
+                'cle_usb'=>$articleRepository->findCategoryTitle('clé usb'),
+                'claviers_souris'=>$articleRepository->findCategoryTitle('claviers et souris'),
+                'imprimante_accessoires'=>$articleRepository->findCategoryTitle('imprimante et accessoires'),
+                'all'=>$articleRepository->findRand(20),
                 'tendances'=>$articleRepository->findBy([
                     'etat'=>'Tendance',
                     'enabled'=>true

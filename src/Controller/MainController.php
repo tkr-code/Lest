@@ -21,6 +21,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MainController extends AbstractController
 {
     /**
+     * @Route("/service", name="service")
+     */
+    public function service():Response
+    {
+
+        return $this->render('lest/service.html.twig');
+    }
+    /**
      * @Route("/track-my-order/{number}", name="track_show")
      */
     public function trackOrder(Order $order):Response
@@ -43,7 +51,14 @@ class MainController extends AbstractController
         return $this->render('lest/track/index.html.twig');
     }
     /**
-     * @Route("/track", name="faq")
+     * @Route("/help", name="help")
+     */
+    public function help():Response
+    {
+        return $this->render('lest/help.html.twig');
+    }
+    /**
+     * @Route("/faq", name="faq")
      */
     public function faq():Response
     {

@@ -12,14 +12,15 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $brands =[
-            'Hp','Dell','Lenovo','Toshiba'
+            'Hp','Dell','Lenovo','Toshiba','Asus','Acer','Apple','Microsoft','Razer','Huawei','Alienware',
+            'MSI','Samsung'
         ];
         foreach ($brands as $key => $value) {
             $brand = new Brand();
             $brand
             ->setName($value)
-            ->addArticle($this->getReference('_article_Hp_probook'))
-            ->addCategory($this->getReference('category_Ordinateurs'))
+            // ->addArticle($this->getReference('_article_Hp_probook'))
+            // ->addCategory($this->getReference('category_Ordinateurs'))
             ;
             $this->addReference('brand_'.$value, $brand);
             $manager->persist($brand);

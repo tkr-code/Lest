@@ -14,8 +14,7 @@
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/lest-logo.png') }}"> {#
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png"> #}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/lest-logo.png') }}">
     <link rel="manifest" href="{{ asset('assets/images/icons/site.html') }}">
     <link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
     <link rel="shortcut icon" href="{{ asset('img/lest-logo.png') }}">
@@ -112,7 +111,7 @@
 }
 
     .start{
-        color :'#003'
+        color :'#ccc'!important
     }
     .old-price {
         color:#cccccc;
@@ -156,11 +155,26 @@
             justify-content: center;
             align-items: center
         }
+        .modal-js-loader {
+            z-index: 1041;
+            width: 100%;
+            height: 100%;
+            background: #97383863;
+            display: none;
+            justify-content: center;
+            align-items: center
+        }
         
         .js-loader p {
             text-align: center
         }
         
+        .modal-js-loader-content {
+            padding: 10px;
+            width: 100%;
+            height:200px;
+            background: #fff;
+        }
         .js-loader-content {
             padding: 10px;
             width: 300px;
@@ -335,9 +349,6 @@
                                 <li {{ app.request.get( '_route' ) =='contact' ? 'class="active"' : '' }}>
                                     <a href="{{ path('contact') }}">{{'Contact'|trans}}</a>
                                 </li>
-                                <li {{ ( app.request.get( '_route' ) =='about' ) ? 'class="active"' : '' }}>
-                                    <a href="{{ path('home') }}">{{'About'|trans}}</a>
-                                </li>
                                 {% if is_granted('ROLE_CLIENT') %}
                                 <li class="">
                                     <a href="#" class="sf-with-ul">
@@ -420,13 +431,10 @@
 
                                 <ul class="widget-list">
                                     <li>
-                                        <a href="#">About Lest</a>
+                                        <a href="{{ path('service') }}">{{'Our Services'|trans}}</a>
                                     </li>
                                     <li>
-                                        <a href="#">{{'Our Services'|trans}}</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">How to shop on Lest</a>
+                                        <a href="#">{{'How to shop on Lest'|trans}}</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('faq') }}">FAQ</a>
@@ -450,18 +458,10 @@
                                     <li>
                                         <a href="#">{{'Payment Methods'|trans}}</a>
                                     </li>
-                                    {# <li>
-                                        <a href="#">Money-back guarantee!</a>
-                                    </li> #}
                                     <li>
-                                        <a href="#">Politique de retour</a>
+                                        <a href="{{ asset("doc/Conditions générales d'utilisation.pdf") }}">Terms and conditions</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Terms and conditions</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Privacy Policy</a>
-                                    </li>
+                                  
                                 </ul>
                                 <!-- End .widget-list -->
                             </div>
@@ -481,14 +481,13 @@
                                     <li>
                                         <a href="{{ path('cart_index') }}">View Cart</a>
                                     </li>
+                                    {% if is_granted('ROLE_CLIENT') %}
                                     <li>
                                         <a href="{{ path('favoris_index') }}">My Wishlist</a>
                                     </li>
+                                    {% endif %}
                                     <li>
                                         <a href="{{ path('track_index') }}">Track My Order</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Help</a>
                                     </li>
                                 </ul>
                                 <!-- End .widget-list -->
@@ -505,12 +504,8 @@
 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-copyright">Copyright © 2022 LEST. All Rights Reserved.</p>
+                    <p class="footer-copyright">Copyright © 2022 - <span id="year"></span> LEST. All Rights Reserved.</p>
                     <!-- End .footer-copyright -->
-                    <figure class="footer-payments">
-                        <img src="{{ asset('assets/images/payments.png') }}" alt="Payment methods" width="272" height="20">
-                    </figure>
-                    <!-- End .footer-payments -->
                 </div>
                 <!-- End .container -->
             </div>
@@ -786,6 +781,8 @@
     </div>
     <!-- End .modal -->
 
+    {% block modal %}{% endblock %}
+
     {#
     <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
         <div class="row justify-content-center">
@@ -843,7 +840,20 @@
     <script src="{{asset('js/article.js') }}"></script>
     <script src="{{asset('assets/js/demos/demo-3.js') }}"></script>
     <script>
-        $(document).ready(function() { // Ajoute un article au panier
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+        $(document).ready(function() { 
+            //Copier un lien
+            $(document).on('click','.copie',function(e){
+            e.preventDefault()
+            navigator.clipboard.writeText($(this).data('text'));
+            Swal.fire({
+                icon: 'success',
+                title:"Le lien de l'article a été copié",
+                showConfirmButton: false,
+                timer: 2000
+            })
+        })
+            // Ajoute un article au panier
             $(document).on('click', '.js-btn-add', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id')

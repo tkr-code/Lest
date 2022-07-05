@@ -52,20 +52,8 @@ class ClientController extends AbstractController
      * @Route("/confirmation/order/{id}", name="client_confirmation")
      * @return Response
      */
-    public function confirmation(Order $order, OrderRepository $orderRepository, MailerInterface $mailer): Response
+    public function confirmation(Order $order, OrderRepository $orderRepository): Response
     {
-        $user = $this->getUser();
-        $email = (new TemplatedEmail())
-            ->from(new Address('malick.tounkara.1@gmail.com', 'store2.test'))
-            ->to($order->getUser()->getEmail())
-            ->subject('Lest - Avis de facture')
-            ->htmlTemplate('email/order.html.twig')
-            ->context([
-                'user'=>$user,
-                'theme' => $this->emailService->theme(4),
-                'order' => $order,
-            ]);
-        $mailer->send($email);
         return $this->renderForm('client/confirmation.html.twig', [
             'order' => $order
         ]);
@@ -89,7 +77,7 @@ class ClientController extends AbstractController
     /**
      * @Route("/order/new-order", name="order_client_new", methods={"POST"})
      */
-    public function newOrder(OrderRepository $orderRepository, StreetRepository $streetRepository, EntityManagerInterface $entityManagerInterface, PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository, Request $request, OrderService $orderService, SessionInterface $session): Response
+    public function newOrder(MailerInterface $mailer, OrderRepository $orderRepository, StreetRepository $streetRepository, EntityManagerInterface $entityManagerInterface, PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository, Request $request, OrderService $orderService, SessionInterface $session): Response
     {
 
         // nouvelle commande
@@ -160,6 +148,19 @@ class ClientController extends AbstractController
 
         $this->addFlash('success', 'Order created');
         $session->set('panier', []);
+        $user = $this->getUser();
+        $email = (new TemplatedEmail())
+            ->from(new Address('contact@lest.sn', 'lest.sn'))
+            ->to($order->getUser()->getEmail())
+            ->subject('Lest - Avis de facture')
+            ->htmlTemplate('email/order.html.twig')
+            // ->attachFromPath()
+            ->context([
+                'user'=>$user,
+                'theme' => $this->emailService->theme(4),
+                'order' => $order,
+            ]);
+        $mailer->send($email);
         return $this->redirectToRoute('client_confirmation', ['id' => $order->getId()], Response::HTTP_SEE_OTHER);
     }
     /**

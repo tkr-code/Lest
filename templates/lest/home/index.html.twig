@@ -1,2367 +1,565 @@
-{% extends "lest/base.html.twig" %} {% block main %}
-<main class="main">
-    <div class="intro-section pt-3 pb-3 mb-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="intro-slider-container slider-container-ratio mb-2 mb-lg-0">
-                        <div class="intro-slider owl-carousel owl-simple owl-dark owl-nav-inside" data-toggle="owl" data-owl-options='{
-																		                                        "nav": false,
-																		                                        "dots": true,
-																		                                        "responsive": {
-																		                                            "768": {
-																		                                                "nav": true,
-																		                                                "dots": false
-																		                                            }
-																		                                        }
-																		                                    }'>
-                            <div class="intro-slide">
-                                <figure class="slide-image">
-                                    <picture>
-                                        <source media="(max-width: 480px)" srcset="{{ asset('img/home/lest-videosurveillance.png') }}">
-                                        <img src="{{ asset('img/home/lest-videosurveillance.png') }}" alt="Image Desc">
-                                    </picture>
-                                </figure>
-                                <!-- End .slide-image -->
+{% extends "lest/base.html.twig" %}
+{% block main %}
+	<main class="main">
+		<div class="intro-section pt-3 pb-3 mb-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="intro-slider-container slider-container-ratio mb-2 mb-lg-0">
+							<div class="intro-slider owl-carousel owl-simple owl-dark owl-nav-inside" data-toggle="owl" data-owl-options='{
+																																				                                        "nav": false,
+																																				                                        "dots": true,
+																																				                                        "responsive": {
+																																				                                            "768": {
+																																				                                                "nav": true,
+																																				                                                "dots": false
+																																				                                            }
+																																				                                        }
+																																				                                    }'>
+								<div class="intro-slide">
+									<figure class="slide-image">
+										<picture>
+											<source media="(max-width: 480px)" srcset="{{ asset('img/icons/lest-slide-1-480.png') }}">
+											<img src="{{ asset('img/icons/lest-slide-1.png') }}" alt="Image Desc">
+										</picture>
+									</figure>
+									<!-- End .slide-image -->
 
-                                <div class="intro-content">
-                                    <h3 class="intro-subtitle text-primary">Securite des biens et des personnes</h3>
-                                    <!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title">
-                                        Vidéosurveillance
-                                    </h1>
-                                    <!-- End .intro-title -->
+									<div class="intro-content">
+										{# <h3 class="intro-subtitle text-primary">Securite des biens et des personnes</h3> #}
+										<!-- End .h3 intro-subtitle -->
+										<h1 class="intro-title">
+											{# Vidéosurveillance #}
+										</h1>
+										<!-- End .intro-title -->
 
-                                    <div class="intro-price">
-                                        <sup>{{'Today'|trans}}:</sup>
-                                        <span class="text-primary">
-												300 000<sup>FCFA</sup>
+										<div class="intro-price">
+											{# <sup>{{'Today'|trans}}:</sup> #}
+											<span class="text-primary">
+												{# 300 000<sup>FCFA</sup> #}
 											</span>
-                                    </div>
-                                    <!-- End .intro-price -->
+										</div>
+										<!-- End .intro-price -->
 
-                                    <a href="{{ path('articles') }}" class="btn btn-primary btn-round">
-                                        <span>Click Here</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </a>
-                                </div>
-                                <!-- End .intro-content -->
-                            </div>
-                            <!-- End .intro-slide -->
+										<a href="{{ path('articles') }}" class="btn btn-primary btn-round">
+											<span>{{'Click Here'|trans}}</span>
+											<i class="icon-long-arrow-right"></i>
+										</a>
+									</div>
+									<!-- End .intro-content -->
+								</div>
+								<!-- End .intro-slide -->
 
-                            <div class="intro-slide">
-                                <figure class="slide-image">
-                                    <picture>
-                                        <source media="(max-width: 480px)" srcset="assets/images/demos/demo-3/slider/slide-2-480w.jpg">
-                                        <img src="assets/images/demos/demo-3/slider/slide-2.jpg" alt="Image Desc">
-                                    </picture>
-                                </figure>
-                                <!-- End .slide-image -->
+								<div class="intro-slide">
+									<figure class="slide-image">
+										<picture>
+											<source media="(max-width: 480px)" srcset="img/icons/lest-slide-2-480.png">
+											<img src="img/icons/lest-slide-2.png" alt="Image Desc">
+										</picture>
+									</figure>
+									<!-- End .slide-image -->
 
-                                <div class="intro-content">
-                                    <h3 class="intro-subtitle text-primary">Ordinateur portable et bureau</h3>
-                                    <!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title">
-                                        Hp Elitebook
-                                        <br>Folio
-                                    </h1>
-                                    <!-- End .intro-title -->
+									<div class="intro-content">
+										<h3 class="intro-subtitle text-primary">Ordinateur portable et bureau</h3>
+										<!-- End .h3 intro-subtitle -->
+										<h1 class="intro-title">
+											Hp Elitebook
+											<br>Folio
+										</h1>
+										<!-- End .intro-title -->
 
-                                    <div class="intro-price">
-                                        <sup class="intro-old-price">200 000 FCFA</sup>
-                                        <span class="text-primary">
+										<div class="intro-price">
+											<sup class="intro-old-price">200 000 FCFA</sup>
+											<span class="text-primary">
 												180 000<sup>FCFA</sup>
 											</span>
-                                    </div>
-                                    <!-- End .intro-price -->
+										</div>
+										<!-- End .intro-price -->
 
-                                    <a href="{{ path('articles') }}" class="btn btn-primary btn-round">
-                                        <span>Click Here</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </a>
-                                </div>
-                                <!-- End .intro-content -->
-                            </div>
-                            <!-- End .intro-slide -->
-                        </div>
-                        <!-- End .intro-slider owl-carousel owl-simple -->
-
-                        <span class="slider-loader"></span>
-                        <!-- End .slider-loader -->
-                    </div>
-                    <!-- End .intro-slider-container -->
-                </div>
-                <!-- End .col-lg-8 -->
-
-                <div class="col-lg-4">
-                    <div class="intro-banners">
-                        <div class="banner mb-lg-1 mb-xl-2">
-                            <a href="#">
-                                <img src="assets/images/demos/demo-3/banners/banner-1.jpg" alt="Banner">
-                            </a>
-
-                            <div class="banner-content">
-                                <h4 class="banner-subtitle d-lg-none d-xl-block">
-                                    <a href="#">Controle d'accès</a>
-                                </h4>
-                                <!-- End .banner-subtitle -->
-                                <h3 class="banner-title">
-                                    <a href="#">Visiophone</a>
-                                </h3>
-                            </div>
-                            <!-- End .banner-content -->
-                        </div>
-                        <!-- End .banner -->
-
-                        <div class="banner mb-lg-1 mb-xl-2">
-                            <a href="#">
-                                <img src="assets/images/demos/demo-3/banners/banner-2.jpg" alt="Banner">
-                            </a>
-
-                            <div class="banner-content">
-                                <h4 class="banner-subtitle d-lg-none d-xl-block">
-                                    <a href="#">Developpement</a>
-                                </h4>
-                                <!-- End .banner-subtitle -->
-                                <h3 class="banner-title">
-                                    <a href="#">GoPro - Fusion 360
-											<span>Save $70</span>
+										<a href="{{ path('articles') }}" class="btn btn-primary btn-round">
+											<span>Click Here</span>
+											<i class="icon-long-arrow-right"></i>
 										</a>
-                                </h3>
-                            </div>
-                            <!-- End .banner-content -->
-                        </div>
-                        <!-- End .banner -->
+									</div>
+									<!-- End .intro-content -->
+								</div>
+								<!-- End .intro-slide -->
+							</div>
+							<!-- End .intro-slider owl-carousel owl-simple -->
 
-                        <div class="banner mb-0">
-                            <a href="#">
-                                <img src="assets/images/demos/demo-3/banners/banner-3.jpg" alt="Banner">
-                            </a>
+							<span class="slider-loader"></span>
+							<!-- End .slider-loader -->
+						</div>
+						<!-- End .intro-slider-container -->
+					</div>
+					<!-- End .col-lg-8 -->
 
-                            <div class="banner-content">
-                                
-                                <!-- End .banner-subtitle -->
-                                <h3 class="banner-title">
-                                    <a href="#">Apple Watch 4
-											<span>Our Hottest Deals</span>
+					<div class="col-lg-4">
+						<div class="intro-banners">
+							<div class="banner mb-lg-1 mb-xl-2">
+								<a href="#">
+									<img src="{{ asset('img/cats/visio-banner.png') }}" alt="Banner">
+								</a>
+
+								<div class="banner-content">
+									<h4 class="banner-subtitle d-lg-none d-xl-block">
+										<a href="{{path('articles_category',{category:'visiophone'}) }}" class="text-white">Controle d'accès</a>
+									</h4>
+									<!-- End .banner-subtitle -->
+									<h3 class="banner-title">
+										<a href="{{path('articles_category',{category:'visiophone'}) }}" class="text-white">Visiophone</a>
+									</h3>
+								</div>
+								<!-- End .banner-content -->
+							</div>
+							<!-- End .banner -->
+
+							<div class="banner mb-lg-1 mb-xl-2">
+								<a href="#">
+									<img src="{{ asset('img/icons/banner-2.png') }}" alt="Banner">
+								</a>
+
+								<div class="banner-content">
+									<h4 class="banner-subtitle d-lg-none d-xl-block">
+										<a href="#" class="text-white">Parck informatique</a>
+									</h4>
+									<!-- End .banner-subtitle -->
+									<h3 class="banner-title">
+										<a href="#" class="text-white">Cablage et Résaux</a>
+									</h3>
+								</div>
+								<!-- End .banner-content -->
+							</div>
+							<!-- End .banner -->
+
+							<div class="banner mb-0">
+								<a href="#">
+									<img src="{{ asset('img/icons/banner-3.png') }}" alt="Banner">
+								</a>
+								<div class="banner-content">
+									<!-- End .banner-subtitle -->
+									<h3 class="banner-title">
+										<a href="#" class="text-white">Support amovible
+											<span>Clé usb</span>
 										</a>
-                                </h3>
-                                <!-- End .banner-title -->
-                                <a href="#" class="banner-link">{{ 'Shop Now'|trans }}<i class="icon-long-arrow-right"></i>
+									</h3>
+									<!-- End .banner-title -->
+									<a href="#" class="banner-link">{{ 'Shop Now'|trans }}<i class="icon-long-arrow-right"></i>
 									</a>
-                            </div>
-                            <!-- End .banner-content -->
-                        </div>
-                        <!-- End .banner -->
-                    </div>
-                    <!-- End .intro-banners -->
-                </div>
-                <!-- End .col-lg-4 -->
+								</div>
+								<!-- End .banner-content -->
+							</div>
+							<!-- End .banner -->
+						</div>
+						<!-- End .intro-banners -->
+					</div>
+					<!-- End .col-lg-4 -->
+				</div>
+				<!-- End .row -->
+			</div>
+			<!-- End .container -->
+		</div>
+		<!-- End .intro-section -->
+
+        
+		<div class="container">
+			<hr class="mt-3 mb-6">
+		</div>
+		<div class="container">
+			<h2 class="title text-center mb-4">{{'Explore Popular Categories'|trans}}</h2>
+			<!-- End .title text-center -->
+
+			<div class="cat-blocks-container">
+				<div class="row">
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'ordinateurs'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('assets/images/demos/demo-4/cats/1.png') }}" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">{{'Laptop'|trans}}</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'imprimante-et-accessoires'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('img/cats/imprimante.png') }}" width="100px" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">Imprimante</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'accessoires'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('img/cats/reseaux.png') }}" width="200px" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">Réseaux</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'ordinateur-de-bureau'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('img/cats/computer.png') }}" width="100px" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">{{'Desktop'|trans}}</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'memoire'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('img/cats/memoire.png') }}" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">Mémoire</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+					<div class="col-6 col-sm-4 col-lg-2">
+						<a href="{{path('articles_category',{category:'claviers-et-souris'}) }}" class="cat-block">
+							<figure>
+								<span>
+									<img src="{{ asset('img/cats/clavier-souris.png') }}" alt="Category image">
+								</span>
+							</figure>
+
+							<h3 class="cat-block-title">clavier et Souris</h3>
+							<!-- End .cat-block-title -->
+						</a>
+					</div>
+					<!-- End .col-sm-4 col-lg-2 -->
+
+
+				</div>
+				<!-- End .row -->
+			</div>
+			<!-- End .cat-blocks-container -->
+            
+		</div>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="banner">
+						<a href="#">
+							<img src="{{ asset('img/icons/lest-visio.png') }}" alt="Banner">
+						</a>
+
+						<div class="banner-content">
+							<h4 class="banner-subtitle text-white">Surveillance et
+								<br>
+								protection</h4>
+							<!-- End .banner-subtitle -->
+							<h3 class="banner-title text-white">Visiophone.</h3>
+							<!-- End .banner-title -->
+						</div>
+						<!-- End .banner-content -->
+					</div>
+					<!-- End .banner -->
+				</div>
+				<!-- End .col-md-6 -->
+
+				<div class="col-md-6 col-lg-4">
+					<div class="banner">
+						<a href="#">
+							<img src="{{ asset('img/icons/lest-camera.png') }}" alt="Banner">
+						</a>
+
+						<div class="banner-content">
+							<h4 class="banner-subtitle text-dark">
+								caméras et
+								<br>
+								transmission d'images</h4>
+							<!-- End .banner-subtitle -->
+							<h3 class="banner-title">Vidéosurveillance.</h3>
+							<!-- End .banner-title -->
+						</div>
+						<!-- End .banner-content -->
+					</div>
+					<!-- End .banner -->
+				</div>
+				<!-- End .col-md-6 -->
+
+				<div class="col-md-6 col-lg-4">
+					<div class="banner">
+						<a href="#">
+							<img src="{{ asset('img/icons/lest-dev.png') }}" alt="Banner">
+						</a>
+						<div class="banner-content">
+							<h4 class="banner-subtitle">Developpement</h4>
+							<!-- End .banner-subtitle -->
+							<h3 class="banner-title text-white">Création de site web
+								<br>
+								et d'application mobile.
+								<br></h3>
+							<!-- End .banner-title -->
+							{# <a href="#" class="banner-link">Click here</a> #}
+						</div>
+						<!-- End .banner-content -->
+					</div>
+					<!-- End .banner -->
+				</div>
+				<!-- End .col-md-6 -->
+			</div>
+		</div>
+        
+		<div class="container">
+			<div class="heading text-center my-5">
+                <img src="img/lest-logo.png" class="mx-auto" width="100px" alt="Lest">
+				<h2 class="title-sm">Les Spécialistes de la technologies</h2><!-- End .title -->
+            <p class="text-center">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
             </div>
-            <!-- End .row -->
-        </div>
-        <!-- End .container -->
-    </div>
-    <!-- End .intro-section -->
-    <div class="container">
-        <hr class="mt-3 mb-6">
-    </div>
-    <div class="container">
-                <h2 class="title text-center mb-4">Explore Popular Categories</h2><!-- End .title text-center -->
-                
-                <div class="cat-blocks-container">
-                    <div class="row">
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/1.png" alt="Category image">
-                                    </span>
-                                </figure>
+		</div>
+		<div class="container">
+			<hr class="mt-3 mb-6">
+		</div>
 
-                                <h3 class="cat-block-title">Computer &amp; Laptop</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
+		<div class="container top">
+			<div class="heading heading-flex mb-3">
+				<div class="heading-left">
+					<h2 class="title">{{'Top Selling Products'|trans}}</h2>
+					<!-- End .title -->
+				</div>
+				<!-- End .heading-left -->
 
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/2.png" alt="Category image">
-                                    </span>
-                                </figure>
+				<div class="heading-right">
+					<ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="top-all-link" data-toggle="tab" href="#top-all-tab" role="tab" aria-controls="top-all-tab" aria-selected="true">{{'All'|trans}}</a>
+						</li>
 
-                                <h3 class="cat-block-title">Digital Cameras</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
+						<li class="nav-item">
+							<a class="nav-link" id="top-ordinateurs-link" data-toggle="tab" href="#top-ordinateurs-tab" role="tab" aria-controls="top-ordinateurs-tab" aria-selected="false">Ordinateurs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="top-cle-usb-link" data-toggle="tab" href="#top-cle-usb-tab" role="tab" aria-controls="top-cle-usb-tab" aria-selected="false">Clé Usb</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="top-claviers_souris-link" data-toggle="tab" href="#top-claviers_souris-tab" role="tab" aria-controls="top-claviers_souris-tab" aria-selected="false">Claviers et Souris</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="top-imprimante_accessoires-link" data-toggle="tab" href="#top-imprimante_accessoires-tab" role="tab" aria-controls="top-imprimante_accessoires-tab" aria-selected="false">Imprimante et accessoires</a>
+						</li>
+					</ul>
+				</div>
+				<!-- End .heading-right -->
+			</div>
+			<!-- End .heading -->
 
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/3.png" alt="Category image">
-                                    </span>
-                                </figure>
+			<div class="tab-content tab-content-carousel just-action-icons-sm">
+				<div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+														                                        "nav": true,
+														                                        "dots": false,
+														                                        "margin": 20,
+														                                        "loop": false,
+														                                        "responsive": {
+														                                            "0": {
+														                                                "items":2
+														                                            },
+														                                            "480": {
+														                                                "items":2
+														                                            },
+														                                            "768": {
+														                                                "items":3
+														                                            },
+														                                            "992": {
+														                                                "items":4
+														                                            },
+														                                            "1200": {
+														                                                "items":5
+														                                            }
+														                                        }
+														                                        }'>
 
-                                <h3 class="cat-block-title">Smart Phones</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
+						{% for item in articles.all %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
+					</div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+				<div class="tab-pane p-0 fade" id="top-ordinateurs-tab" role="tabpanel" aria-labelledby="top-ordinateurs-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+																												                                "nav": true,
+																												                                "dots": false,
+																												                                "margin": 20,
+																												                                "loop": false,
+																												                                "responsive": {
+																												                                    "0": {
+																												                                        "items":2
+																												                                    },
+																												                                    "480": {
+																												                                        "items":2
+																												                                    },
+																												                                    "768": {
+																												                                        "items":3
+																												                                    },
+																												                                    "992": {
+																												                                        "items":4
+																												                                    },
+																												                                    "1200": {
+																												                                        "items":5
+																												                                    }
+																												                                }
+																												                            }'>
+						{% for item in articles.ordinateurs %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
+					</div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+				<div class="tab-pane p-0 fade" id="top-cle-usb-tab" role="tabpanel" aria-labelledby="top-cle-usb-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+																												                                "nav": true,
+																												                                "dots": false,
+																												                                "margin": 20,
+																												                                "loop": false,
+																												                                "responsive": {
+																												                                    "0": {
+																												                                        "items":2
+																												                                    },
+																												                                    "480": {
+																												                                        "items":2
+																												                                    },
+																												                                    "768": {
+																												                                        "items":3
+																												                                    },
+																												                                    "992": {
+																												                                        "items":4
+																												                                    },
+																												                                    "1200": {
+																												                                        "items":5
+																												                                    }
+																												                                }
+																												                            }'>
+						{% for item in articles.cle_usb %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
+					</div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+				<div class="tab-pane p-0 fade" id="top-claviers_souris-tab" role="tabpanel" aria-labelledby="top-claviers_souris-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" 
+                    data-toggle="owl" data-owl-options='{                            "nav": true,
+																												                                "dots": false,
+																												                                "margin": 20,
+																												                                "loop": false,
+																												                                "responsive": {
+																												                                    "0": {
+																												                                        "items":2
+																												                                    },
+																												                                    "480": {
+																												                                        "items":2
+																												                                    },
+																												                                    "768": {
+																												                                        "items":3
+																												                                    },
+																												                                    "992": {
+																												                                        "items":4
+																												                                    },
+																												                                    "1200": {
+																												                                        "items":5
+																												                                    }
+																												                                }
+																												                            }'>
 
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/4.png" alt="Category image">
-                                    </span>
-                                </figure>
-
-                                <h3 class="cat-block-title">Televisions</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/5.png" alt="Category image">
-                                    </span>
-                                </figure>
-
-                                <h3 class="cat-block-title">Audio</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="category.html" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img src="assets/images/demos/demo-4/cats/6.png" alt="Category image">
-                                    </span>
-                                </figure>
-
-                                <h3 class="cat-block-title">Smart Watches</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-                    </div><!-- End .row -->
-                </div><!-- End .cat-blocks-container -->
-            </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="banner">
-                    <a href="#">
-                        <img src="assets/images/banners/3cols/banner-1.jpg" alt="Banner">
-                    </a>
-
-                    <div class="banner-content">
-                        <h4 class="banner-subtitle">Visiophone</h4><!-- End .banner-subtitle -->
-                        <h3 class="banner-title">Praesent elementum <br>hendrerit tortor.</h3><!-- End .banner-title -->
-                        <a href="#" class="banner-link">Click here</a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-6 -->
-
-            <div class="col-md-6 col-lg-4">
-                <div class="banner">
-                    <a href="#">
-                        <img src="assets/images/banners/3cols/banner-2.jpg" alt="Banner">
-                    </a>
-
-                    <div class="banner-content">
-                        <h4 class="banner-subtitle">Quisque a lectus</h4><!-- End .banner-subtitle -->
-                        <h3 class="banner-title">COntrol d'acces.</h3><!-- End .banner-title -->
-                        <a href="#" class="banner-link">Click here</a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-6 -->
-
-            <div class="col-md-6 col-lg-4">
-                <div class="banner">
-                    <a href="#">
-                        <img src="assets/images/banners/3cols/banner-3.jpg" alt="Banner">
-                    </a>
-
-                    <div class="banner-content">
-                        <h4 class="banner-subtitle">Quisque a lectus</h4><!-- End .banner-subtitle -->
-                        <h3 class="banner-title text-white">Creation de site web. <br></h3><!-- End .banner-title -->
-                        <a href="#" class="banner-link">Click here</a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-6 -->
-        </div>
-    </div>
-    <div class="container">
-        <hr class="mt-3 mb-6">
-    </div>
-
-    <div class="container top">
-        <div class="heading heading-flex mb-3">
-            <div class="heading-left">
-                <h2 class="title">Top Selling Products</h2>
-                <!-- End .title -->
-            </div>
-            <!-- End .heading-left -->
-
-            <div class="heading-right">
-                <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="top-all-link" data-toggle="tab" href="#top-all-tab" role="tab" aria-controls="top-all-tab" aria-selected="true">{{'All'|trans}}</a>
-                    </li>
-                    {% for item in categories.all | slice(0,4)%}
-                    <li class="nav-item">
-                        <a class="nav-link" id="top-tv-link" data-toggle="tab" href="#top-tv-tab" role="tab" aria-controls="top-tv-tab" aria-selected="false">{{ item.title }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End .heading-right -->
-        </div>
-        <!-- End .heading -->
-
-        <div class="tab-content tab-content-carousel just-action-icons-sm">
-            <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
+						{% for item in articles.claviers_souris %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
+					</div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+				<div class="tab-pane p-0 fade" id="top-imprimante_accessoires-tab" role="tabpanel" aria-labelledby="top-imprimante_accessoires-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+																										                                "nav": true,
+																										                                "dots": false,
+																										                                "margin": 20,
+																										                                "loop": false,
+																										                                "responsive": {
+																										                                    "0": {
+																										                                        "items":2
+																										                                    },
+																										                                    "480": {
+																										                                        "items":2
+																										                                    },
+																										                                    "768": {
+																										                                        "items":3
+																										                                    },
+																										                                    "992": {
+																										                                        "items":4
+																										                                    },
+																										                                    "1200": {
+																										                                        "items":5
+																										                                    }
+																										                                }
+																										                            }'>
+                        {% for item in articles.imprimante_accessoires %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
                         </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <span class="product-label label-circle label-sale">Sale</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-14.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cell Phone</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Google - Pixel 3 XL 128GB</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$35.41</span>
-                                <span class="old-price">Was $41.67</span>
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 10 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-15.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">TV & Home Theater</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Samsung - 55" Class LED 2160p Smart</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 5 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="top-tv-tab" role="tabpanel" aria-labelledby="top-tv-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <span class="product-label label-circle label-sale">Sale</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-14.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cell Phone</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Google - Pixel 3 XL 128GB</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$35.41</span>
-                                <span class="old-price">Was $41.67</span>
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 10 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-15.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">TV & Home Theater</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Samsung - 55" Class LED 2160p Smart</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 5 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="top-computers-tab" role="tabpanel" aria-labelledby="top-computers-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-15.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">TV & Home Theater</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Samsung - 55" Class LED 2160p Smart</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 5 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <span class="product-label label-circle label-sale">Sale</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-14.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cell Phone</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Google - Pixel 3 XL 128GB</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$35.41</span>
-                                <span class="old-price">Was $41.67</span>
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 10 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="top-phones-tab" role="tabpanel" aria-labelledby="top-phones-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-15.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">TV & Home Theater</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Samsung - 55" Class LED 2160p Smart</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 5 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <span class="product-label label-circle label-sale">Sale</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-14.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cell Phone</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Google - Pixel 3 XL 128GB</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$35.41</span>
-                                <span class="old-price">Was $41.67</span>
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 10 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="top-watches-tab" role="tabpanel" aria-labelledby="top-watches-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <span class="product-label label-circle label-sale">Sale</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-14.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cell Phone</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Google - Pixel 3 XL 128GB</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$35.41</span>
-                                <span class="old-price">Was $41.67</span>
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 10 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-            <div class="tab-pane p-0 fade" id="top-acc-tab" role="tabpanel" aria-labelledby="top-acc-link">
-                <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                "nav": true,
-														                                "dots": false,
-														                                "margin": 20,
-														                                "loop": false,
-														                                "responsive": {
-														                                    "0": {
-														                                        "items":2
-														                                    },
-														                                    "480": {
-														                                        "items":2
-														                                    },
-														                                    "768": {
-														                                        "items":3
-														                                    },
-														                                    "992": {
-														                                        "items":4
-														                                    },
-														                                    "1200": {
-														                                        "items":5
-														                                    }
-														                                }
-														                            }'>
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-15.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">TV & Home Theater</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Samsung - 55" Class LED 2160p Smart</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 5 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-11.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Laptops</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">MacBook Pro 13" Display, i5</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $1,199.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-12.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Audio</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Bose - SoundLink Bluetooth Speaker</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $79.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 60%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-
-                    <div class="product product-2">
-                        <figure class="product-media">
-                            <span class="product-label label-circle label-new">New</span>
-                            <a href="{{ path('articles') }}">
-                                <img src="assets/images/demos/demo-3/products/product-13.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable">
-                                    <span>add to wishlist</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-
-                            <div class="product-action product-action-dark">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart">
-                                    <span>add to cart</span>
-                                </a>
-                                <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view">
-                                    <span>quick view</span>
-                                </a>
-                            </div>
-                            <!-- End .product-action -->
-                        </figure>
-                        <!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Tablets</a>
-                            </div>
-                            <!-- End .product-cat -->
-                            <h3 class="product-title">
-                                <a href="{{ path('articles') }}">Apple - 11 Inch iPad Pro with Wi-Fi 256GB
-									</a>
-                            </h3>
-                            <!-- End .product-title -->
-                            <div class="product-price">
-                                $899.99
-                            </div>
-                            <!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div>
-                                    <!-- End .ratings-val -->
-                                </div>
-                                <!-- End .ratings -->
-                                <span class="ratings-text">( 4 Reviews )</span>
-                            </div>
-                            <!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" style="background: #edd2c8;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" style="background: #eaeaec;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                                <a href="#" class="active" style="background: #333333;">
-                                    <span class="sr-only">Color name</span>
-                                </a>
-                            </div>
-                            <!-- End .product-nav -->
-                        </div>
-                        <!-- End .product-body -->
-                    </div>
-                    <!-- End .product -->
-                </div>
-                <!-- End .owl-carousel -->
-            </div>
-            <!-- .End .tab-pane -->
-        </div>
-        <!-- End .tab-content -->
-    </div>
-    <!-- End .container -->
-
-    <div class="container">
-        <hr class="mt-5 mb-0">
-    </div>
-    <!-- End .container -->
-
-    <div class="icon-boxes-container mt-2 mb-2 bg-transparent">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="icon-box icon-box-side">
-                        <span class="icon-box-icon text-dark">
-								<i class="icon-rocket"></i>
-							</span>
-                        <div class="icon-box-content">
-                            <h3 class="icon-box-title">Free Shipping</h3>
-                            <!-- End .icon-box-title -->
-                            <p>Orders $50 or more</p>
-                        </div>
-                        <!-- End .icon-box-content -->
-                    </div>
-                    <!-- End .icon-box -->
-                </div>
-                <!-- End .col-sm-6 col-lg-3 -->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="icon-box icon-box-side">
-                        <span class="icon-box-icon text-dark">
-								<i class="icon-rotate-left"></i>
-							</span>
-
-                        <div class="icon-box-content">
-                            <h3 class="icon-box-title">Free Returns</h3>
-                            <!-- End .icon-box-title -->
-                            <p>Within 30 days</p>
-                        </div>
-                        <!-- End .icon-box-content -->
-                    </div>
-                    <!-- End .icon-box -->
-                </div>
-                <!-- End .col-sm-6 col-lg-3 -->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="icon-box icon-box-side">
-                        <span class="icon-box-icon text-dark">
-								<i class="icon-info-circle"></i>
-							</span>
-
-                        <div class="icon-box-content">
-                            <h3 class="icon-box-title">Get 20% Off 1 Item</h3>
-                            <!-- End .icon-box-title -->
-                            <p>when you sign up</p>
-                        </div>
-                        <!-- End .icon-box-content -->
-                    </div>
-                    <!-- End .icon-box -->
-                </div>
-                <!-- End .col-sm-6 col-lg-3 -->
-
-                <div class="col-sm-6 col-lg-3">
-                    <div class="icon-box icon-box-side">
-                        <span class="icon-box-icon text-dark">
-								<i class="icon-life-ring"></i>
-							</span>
-
-                        <div class="icon-box-content">
-                            <h3 class="icon-box-title">We Support</h3>
-                            <!-- End .icon-box-title -->
-                            <p>24/7 amazing services</p>
-                        </div>
-                        <!-- End .icon-box-content -->
-                    </div>
-                    <!-- End .icon-box -->
-                </div>
-                <!-- End .col-sm-6 col-lg-3 -->
-            </div>
-            <!-- End .row -->
-        </div>
-        <!-- End .container -->
-    </div>
-    <!-- End .icon-boxes-container -->
-</main>
-<!-- End .main -->
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+				<div class="tab-pane p-0 fade" id="top-acc-tab" role="tabpanel" aria-labelledby="top-acc-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+																										                                "nav": true,
+																										                                "dots": false,
+																										                                "margin": 20,
+																										                                "loop": false,
+																										                                "responsive": {
+																										                                    "0": {
+																										                                        "items":2
+																										                                    },
+																										                                    "480": {
+																										                                        "items":2
+																										                                    },
+																										                                    "768": {
+																										                                        "items":3
+																										                                    },
+																										                                    "992": {
+																										                                        "items":4
+																										                                    },
+																										                                    "1200": {
+																										                                        "items":5
+																										                                    }
+																										                                }
+																										                            }'></div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+			</div>
+			<!-- End .tab-content -->
+		</div>
+
+		<div class="container">
+			<hr class="mt-3 mb-6">
+		</div>
+			{% include "lest/_contact.html.twig" %}
+		<!-- End .container -->
+	</main>
+	<!-- End .main -->
 {% endblock %}

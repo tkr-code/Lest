@@ -59,3 +59,32 @@
 		<!-- /.modal-dialog -->
 	</div>
 {% endmacro %}
+{% macro defaultLest(id = 'modal-default',taille = '') %}
+<div class="modal fade" id="{{ id }}" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog {{ taille}}">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Default Modal</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-js-loader modal-js-loader-hide">
+					<div class="text-center modal-js-loader-content">
+						<div class="spinner-border d-inline-block" style="width: 3rem; height: 3rem;" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+						<p class="modal-js-loader-text">Chargement...</p>
+					</div>
+				</div>
+				<div class="modal-body"></div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+{% endmacro %}

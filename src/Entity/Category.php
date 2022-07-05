@@ -37,7 +37,6 @@ class Category
     private $title;
 
 
-
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category", orphanRemoval=true)
      */
@@ -53,11 +52,6 @@ class Category
      */
     private $parentCategory;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Brand::class, inversedBy="categories")
-     */
-    private $brands;
-
 
 
     public function __construct()
@@ -65,7 +59,6 @@ class Category
         $this->articles = new ArrayCollection();
         $this->created_at = new \DateTime();
         $this->categories = new ArrayCollection();
-        $this->brands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,30 +142,6 @@ class Category
     public function setParentCategory(?ParentCategory $parentCategory): self
     {
         $this->parentCategory = $parentCategory;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Brand[]
-     */
-    public function getBrands(): Collection
-    {
-        return $this->brands;
-    }
-
-    public function addBrand(Brand $brand): self
-    {
-        if (!$this->brands->contains($brand)) {
-            $this->brands[] = $brand;
-        }
-
-        return $this;
-    }
-
-    public function removeBrand(Brand $brand): self
-    {
-        $this->brands->removeElement($brand);
 
         return $this;
     }

@@ -83,13 +83,12 @@ class ArticleType extends AbstractType
                     'class'=>'select2'
                 ]
             ])
-            // ->add('etat',ChoiceType::class,[
-            //     'choices'=>Article::etats,
-            //     'required'=>false,
-            //     'attr'=>[
-            //         'class'=>'select2'
-            //     ]
-            // ])
+            ->add('brand',EntityType::class,[
+                'label'=>'Marque',
+                'class'=>Brand::class,
+                'choice_label'=>'name',
+                'placeholder'=>'Selectionner la marque'
+                ])
             ->add('category',EntityType::class,[
                 'label'=>'Catégorie (*)',
                 'class'=>Category::class,

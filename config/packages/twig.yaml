@@ -11,7 +11,7 @@ twig:
         parentCategorys: '@App\Twig\CategoryParentExtention'
         site: 
             name: 'lest'
-            email: 'lest@gmail.com'
+            email: 'contact@lest.sn'
             path_logo: 'lest-logo.png'
             current_name: 'F cfa'
             current: 'XOF'
@@ -23,9 +23,12 @@ twig:
             mission_text: 'text à definir'
             user_empty: 'empty.png'
             orange_money: '+221 77 801 06 46'
-            code_postal: '11300'
+            code_postal: 'DK 11300'
             adresse: 'Médina Marché champ de course'
             ville: 'Dakar'
+            pays: 'Sénégal'
+            whatsapp: "https://api.whatsapp.com/send?phone=221778010646&text=Salut, je vous contacte depuis votre site lest.sn"
+            facebook: 'https://www.facebook.com/Les-Spécialistes-de-la-Technologie-LEST-575426226469195/'
 
 when@test:
     twig:

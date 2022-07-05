@@ -25,18 +25,12 @@ class Brand
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="brands", cascade={"persist"})
-     */
-    private $categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="brand", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="brand")
      */
     private $articles;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
 
@@ -53,33 +47,6 @@ class Brand
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->addBrand($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeBrand($this);
-        }
 
         return $this;
     }

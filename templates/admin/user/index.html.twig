@@ -42,7 +42,6 @@
 					</div>
 				</div>
 				<div class="card-body">
-
 					<a class="btn btn-primary" href="{{ path('user_new') }}">
 						<i class="fa fa-plus"></i>
 						Create new user</a>
@@ -50,50 +49,53 @@
 					<hr>
 					<table id="datatable_1" class="table">
 						<thead>
-							<tr>
-								<th>{{'accompte'|trans}}</th>
-								<th>Roles</th>
-								<th>Status</th>
-								<th>actions</th>
-							</tr>
+							<th>{{'accompte'|trans}}</th>
+							<th>Email</th>
+							<th>Roles</th>
+							<th>Status</th>
+							<th>actions</th>
+
 						</thead>
 						<tbody>
 							{% for user in users %}
 								<tr>
 									<td>{{ user.personne.fullName }}</td>
+									<td>
+										<span class="font-weight-bold">Email:</span>
+										{{ user.email|explode_email }}</td>
+									<td>
+										{% for item in user.roles %}
+											{% if item == 'ROLE_ADMIN' %}
+												Admin
+											{% elseif item == 'ROLE_CLIENT' %}
+												Client
+											{% elseif item == 'ROLE_USER' %}
+												{{'User'|trans}}
+											{% elseif item == 'ROLE_EDITOR' %}
+												Editeur
+											{% endif %}
+										{% endfor %}
+									</td>
+									<td>{{ user.status }}</td>
+									<td>
+										{{ link.pencil(path('user_edit', {'id': user.id}))}}
+										{{ link.show(path('user_show', {'id': user.id}))}}</td>
 								</tr>
-							</br>
-							<span class="font-weight-bold">Email:</span>
-							{{ user.email }}
+							{% else %}
+								<tr>
+									<td colspan="6">no records found</td>
+								</tr>
+							{% endfor %}
 						</tbody>
-					</td>
-					<td>
-						{% for item in user.roles %}
-							{% if item == 'ROLE_ADMIN' %}
-								Admin
-							{% elseif item == 'ROLE_CLIENT' %}
-								Client
-							{% elseif item == 'ROLE_USER' %}
-								{{'User'|trans}}
-							{% elseif item == 'ROLE_EDITOR' %}
-								Editeur
-							{% endif %}
-						{% endfor %}
-					</td>
-					<td>{{ user.status }}</td>
-					<td>
-						{{ link.pencil(path('user_edit', {'id': user.id}))}}
-						{{ link.show(path('user_show', {'id': user.id}))}}
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="6">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-	<hr>
-	{{ link.back(path('admin'), 'back to dashboard') }}
-
-</div></div></div></div>{% endblock %}{% block foot %}{{ dataTable.js()}}{% endblock %}{% block javascripts %}{{ dataTable.script('#datatable_1') }}{% endblock %}
+					</table><hr>
+					{{ link.back(path('admin'), 'back to dashboard') }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+	{% block foot %}
+		{{ dataTable.js()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{ dataTable.script('#datatable_1') }}
+	{% endblock %}

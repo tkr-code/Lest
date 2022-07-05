@@ -27,58 +27,63 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 'articles'=>
                 [
                     [
-                        'title' => 'Mini pc','price' => '60000',
-                        'buy' => '120000',
+                        'title' => 'Mini pc Asus','price' => '60000',
+                        'buy' => '50000',
+                        'etat'=>'Tendance',
+                        'brand'=>'Asus'
+                    ],
+                    [
+                        'title' => 'Mini pc Hp','price' => '60000',
+                        'buy' => '50000',
                         'etat'=>'Tendance',
                         'brand'=>'Hp'
                     ],
                     [
-                        'title' => 'Mini pc 2','price' => '60000',
+                        'title' => 'Dell E440',
+                        'price' => '150000',
                         'buy' => '120000',
                         'etat'=>'Tendance',
-                        'brand'=>'Hp'
+                        'brand'=>'Dell'
                     ],
                     [
-                        'title' => 'Mini pc 3','price' => '60000',
-                        'buy' => '120000',
-                        'etat'=>'Tendance',
-                        'brand'=>'Hp'
-                    ],
-                    [
-                        'title' => 'Hp probook','price' => '150000',
-                        'buy' => '120000',
-                        'etat'=>'Tendance',
-                        'brand'=>'Hp'
-                    ],
-                    [
-                        'title' => 'Dell Lattitude 1','price' => '240000',
+                        'title' => 'Dell Lattitude','price' => '240000',
                         'buy' => '150000',
                         'etat'=>'Tendance',
                         'brand'=>'Hp'
                     ],
                     [
-                        'title' => 'Dell Lattitude 2','price' => '110000',
+                        'title' => 'Hp 215 G1','price' => '200000',
                         'buy' => '150000',
                         'etat'=>'Tendance',
                         'brand'=>'Hp'
                     ],
                     [
-                        'title' => 'Dell Lattitude 3','price' => '200000',
-                        'buy' => '150000',
+                        'title' => 'Hp Elitebook 840 G3',
+                        'price' => '220000',
+                        'buy' => '200000',
                         'etat'=>'Tendance',
                         'brand'=>'Hp'
                     ],
                     [
-                        'title' => 'Mac probook','price' => '10000',
-                        'buy' => '200000','etat'=>'Tendance','brand'=>'Hp'
+                        'title' => 'Lenovo x131e',
+                        'price' => '85000',
+                        'buy' => '70000',
+                        'etat'=>'Tendance',
+                        'brand'=>'Lenovo'
                     ],
                     [
-                        'title' => 'Mac probook 2','price' => '200000',
-                        'buy' => '200000','etat'=>'Tendance','brand'=>'Hp'
+                        'title' => 'Toshiba portege Z30',
+                        'price' => '180000',
+                        'buy' => '200000',
+                        'etat'=>'Tendance',
+                        'brand'=>'Lenovo'
                     ],
                     [
-                        'title' => 'Mac probook 3','price' => '350000',
-                        'buy' => '200000','etat'=>'Tendance','brand'=>'Hp'
+                        'title' => 'Toshiba portege',
+                        'price' => '125000',
+                        'buy' => '120000',
+                        'etat'=>'Tendance',
+                        'brand'=>'Lenovo'
                     ],
                 ]
             ],
@@ -98,8 +103,8 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                         'etat'=>'Top','brand'=>'Hp'
                     ],
                     [
-                        'title' => 'Clé Usb 16 go','price' => '8000',
-                        'buy' => '3000',
+                        'title' => 'Clé Usb 16 go','price' => '6500',
+                        'buy' => '5000',
                         'etat'=>'Top','brand'=>'Hp'
                     ],
                     [
@@ -130,37 +135,6 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     ],
                 ]
             ],
-            // [
-            //     'cat'=>'Iphone',
-            //     'articles'=>
-            //     [
-            //         [
-            //             'title' => 'Iphone 13','price' => '900000',
-            //             'buy' => '700000',
-            //             'etat'=>'Top'
-            //         ],
-            //         [
-            //             'title' => 'Iphone 12','price' => '760000',
-            //             'buy' => '700000',
-            //             'etat'=>'Top'
-            //         ],
-            //         [
-            //             'title' => 'Iphone 11','price' => '800000',
-            //             'buy' => '700000',
-            //             'etat'=>'Top'
-            //         ],
-            //         [
-            //             'title' => 'Iphone 8','price' => '400000',
-            //             'buy' => '700000',
-            //             'etat'=>'Top'
-            //         ],
-            //         [
-            //             'title' => 'Airpod','price' => '40000',
-            //             'buy' => '30000',
-            //             'etat'=>'Tendance'
-            //         ]
-            //     ]
-            // ],
         ];
 
         
@@ -176,16 +150,11 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 ->setEtat($value['etat'])
                 ->setDescription('Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae consequatur dicta,')
                 ->setQuantity(10)
-                // ->setLabel('New')
-                // ->setBrand($this->getReference('brand_'.$value))
                 ->setQtyReel(10);
                 $this->addReference('_article_'. str_replace(' ','_', $value['title']),$article);
                 $manager->persist($article);
                 }
             }
-
-        
-
         $manager->flush();
     }
 

@@ -25,7 +25,7 @@
 					<i class="fas fa-book mr-1"></i>
 					Email</strong>
 				<p class="text-muted">
-					{{user.email}}
+					{{user.email|explode_email}}
 				</p>
 			</div>
 			<div class="col-md-4 col-12">

@@ -85,6 +85,7 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             1
         );
+
         return $this->renderForm('lest/shop/show.html.twig', [
             'article'=>$article,
             'articles'=>$articleRepository->findBy(['enabled'=>true,'etat'=>'top'],null,12),
@@ -92,7 +93,8 @@ class ArticleController extends AbstractController
             'formComment' => $formComment,
             'is_buy'=>$isBuy,
             'is_comment'=>$isComment,
-            'propositions'=>$articleRepository->findAll()
+            'propositions'=>$articleRepository->findAll(),
+            'article_rand'=>$articleRepository->findRand(20,$article)
         ]);
     }
     /**
@@ -117,7 +119,6 @@ class ArticleController extends AbstractController
             $request->query->getInt('page',1),
             12
         );
-
         return $this->renderForm('lest/shop/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,

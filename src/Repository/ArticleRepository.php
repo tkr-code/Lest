@@ -52,7 +52,13 @@ class ArticleRepository extends ServiceEntityRepository
         } 
         return $query->getQuery();
     }
-
+    public function findCategoryTitle(string $category){
+        $query = $this->findQueryBuilder();
+        $query->leftJoin('p.category', 'c');
+            $query->andWhere('c.title = :title')
+            ->setParameter('title',$category);
+            return $query->getQuery()->getResult();
+    }
     public function showPagination(){
         $query = $this->findQueryBuilder();
         // $query->
@@ -142,12 +148,14 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function findRand()
+    public function findRand(int $maxResults = 10, Article $article = null)
     {
         return $this->findQueryBuilder()
             ->addSelect('RAND() as HIDDEN rand')
+            ->where('p.id <> :id')
+            ->setParameter('id',$article == null ? 0: $article->getId() )
             ->orderBy('rand')
-            ->setMaxResults(16)
+            ->setMaxResults($maxResults)
             ->getQuery()
             ->getResult();
     }
