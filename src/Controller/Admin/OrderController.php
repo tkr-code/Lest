@@ -345,7 +345,7 @@ class OrderController extends AbstractController
             $entityManager->flush();
             return new JsonResponse(true);
         }
-            $orderService->calculOrder($order);
+        $orderService->calculOrder($order);
 
         if($this->isCsrfTokenValid('edit'.$order->getId(),$request->request->get('_token')) && $request->request->get('state')){
             $state = $request->request->get('state');

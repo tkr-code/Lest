@@ -48,29 +48,6 @@ class ArticleController extends AbstractController
             'parent_page'=>$this->parent_page
         ]);
     }
-    /**
-     * @Route("/select/brand", name="article_brand_category_ajax", methods={"POST"})
-     */
-    public function brandToCategoryAjax(Request $request, CategoryRepository $categoryRepository ){
-        $reponse = [
-            'reponse'=>false
-        ];
-        $id = $request->request->get('id');
-        if(!empty($id)){
-            // $category  = $categoryRepository->find($id);
-            // if($category)
-            // {
-            //     $brands = $category->getBrand();
-            //     $reponse =[
-            //         'reponse'=>true,
-            //         'content'=>$this->render('admin/article/ajax/select_brand.html.twig',['brands'=>$brands])->getContent()
-            //     ];
-                
-            //     return new JsonResponse($reponse);
-            // }
-        }
-        return new JsonResponse($reponse);
-    }
 
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})

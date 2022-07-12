@@ -4,9 +4,49 @@
 {% import "macros/breadcrumb.html.twig" as utils %}
 {% import "macros/alertes.html.twig" as alertes %}
 {% import "macros/button.html.twig" as btn %}
+{% import "macros/modal.html.twig" as modal %}
 
 {% extends 'admin/base.html.twig' %}
 {% block title %}Edit Article
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// $(document).on('click','.btn-edit-modal-option',function(e){
+			// 	e.preventDefault()
+			// 	let id = $(this).data('id')
+			// 	console.log(id);
+			// 	$('#modal-default .modal-title').text('Modifier une caractéristique')
+			// 	$('#modal-default').modal('show')
+			// })
+			$(document).on('click', '.btn-edit-modal-option', function(e) {
+                e.preventDefault()
+                $('#modal-default').modal('show')
+                let href = $(this).data('path')
+                $.ajax({
+                    url: href,
+                    method: 'POST',
+                    type: 'json',
+                    data: {
+                        modal: 'create'
+                    },
+                    beforeSend: function() {
+                        $('.modal-loader').css('display', 'flex')
+                    },
+                    success: function(data) {
+                        $('#modal-default .modal-title').html('Modifier la date emmission')
+                        $('#modal-default .modal-body').html(data.content)
+                        $('.modal-loader').css('display', 'none')
+                    },
+                    error: function() {
+                        $('.modal-loader').css('display', 'none')
+                        alert('Chargement impossible')
+                    }
+                })
+            })
+		})
+	</script>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -149,4 +189,5 @@ name:'Manage Articles'
 
 {% block modal %}
 	{% include "includes/article/article_option/modal_add_option.html.twig" %}
+	{{ modal.default()}}
 {% endblock %}

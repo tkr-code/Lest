@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -64,21 +64,6 @@
                             <li>
                                 <a href="#">Liens</a>
                                 <ul>
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">{{app.request.locale}}</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    {% for item in locales %} {% if item != app.request.locale %}
-                                                    <li>
-                                                        <a href="{{ path('lang',{ locale: item }) }}">{{item}}</a>
-                                                    </li>
-                                                    {% endif %} {% endfor %}
-                                                </ul>
-                                            </div>
-                                            <!-- End .header-menu -->
-                                        </div>
-                                    </li>
                                     {% if not is_granted('ROLE_CLIENT') %}
                                     <li>
                                         <a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a>
@@ -99,7 +84,7 @@
                 <div class="container">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
-							<span class="sr-only">Toggle mobile menu</span>
+							<span class="sr-only">{{'Toggle mobile menu'|trans}}</span>
 							<i class="icon-bars"></i>
 						</button>
 
@@ -120,7 +105,8 @@
                                     <button class="btn btn-primary" type="submit">
 										<i class="icon-search"></i>
 									</button>
-                                    <input type="search" class="form-control" name="mots" id="mots" placeholder="Search product ..." value="{{ app.request.get('mots') }}" required>
+                                    <input type="search" class="form-control" name="mots" id="mots" 
+                                    placeholder="{{'Search product'|trans}} ..." value="{{ app.request.get('mots') }}" required>
                                 </div>
                                 <!-- End .header-search-wrapper -->
                             </form>
@@ -166,7 +152,8 @@
                 <div class="container">
                     <div class="header-left">
                         <div class="dropdown category-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false" data-display="static" title="{{'Browse Categories'|trans}}">
 							{{'	Browse Categories'|trans}}
 								<i class="icon-angle-down"></i>
 							</a>
@@ -175,7 +162,7 @@
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
                                         <li>
-                                            <a href="{{ path('articles') }}">Tous</a>
+                                            <a href="{{ path('articles') }}">{{ 'All'}}</a>
                                         </li>
                                         {% for item in categories.all %}
                                         <li>
@@ -228,13 +215,13 @@
                                     <a href="{{ path('admin') }}" class="sf-with-ul">{{'Dashboard'|trans}}</a>
                                     <ul style="display: none;">
                                         <li>
-                                            <a href="{{ path('order_index') }}">Commande</a>
+                                            <a href="{{ path('order_index') }}">{{'Order'|trans}}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ path('article_index') }}">Produits</a>
+                                            <a href="{{ path('article_index') }}">{{'Products'|trans}}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ path('admin_client_index') }}">Clients</a>
+                                            <a href="{{ path('admin_client_index') }}">{{'Customers'|trans}}</a>
                                         </li>
                                         <li>
                                             <a id="btn-logout" href="#">{{'Log out'|trans}}</a>
@@ -269,7 +256,9 @@
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget widget-about">
                                 <img src="{{ asset('img/icons/logo.png') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
-                                <p>Lest est une entreprise de la place qui évolue dans le domaine de l'informatique
+                                <p>
+                                {{'Lest is a local company developing in the field of IT'|trans}}
+                                {# Lest est une entreprise de la place qui évolue dans le domaine de l'informatique #}
                                 </p>
 
                                 <div class="widget-call">
@@ -295,10 +284,10 @@
                                         <a href="#">{{'How to shop on Lest'|trans}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('faq') }}">FAQ</a>
+                                        <a href="{{ path('faq') }}">{{'FAQ'|trans}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('contact') }}">Contact us</a>
+                                        <a href="{{ path('contact') }}">{{'Contact us'|trans}}</a>
                                     </li>
                                 </ul>
                                 <!-- End .widget-list -->
@@ -309,7 +298,7 @@
 
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget">
-                                <h4 class="widget-title">Customer Service</h4>
+                                <h4 class="widget-title">{{'Customer Service'|trans}}</h4>
                                 <!-- End .widget-title -->
 
                                 <ul class="widget-list">
@@ -317,7 +306,7 @@
                                         <a href="#">{{'Payment Methods'|trans}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ asset("doc/Conditions générales d'utilisation.pdf") }}">Terms and conditions</a>
+                                        <a href="{{ asset("doc/Conditions générales d'utilisation.pdf") }}">{{'Terms and conditions'|trans}}</a>
                                     </li>
                                   
                                 </ul>
@@ -329,23 +318,23 @@
 
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget">
-                                <h4 class="widget-title">My Account</h4>
+                                <h4 class="widget-title">{{'My Account'|trans}}</h4>
                                 <!-- End .widget-title -->
 
                                 <ul class="widget-list">
                                     <li>
-                                        <a href="{{ path('app_register') }}">Sign In</a>
+                                        <a href="{{ path('app_register') }}">{{'Sign In'|trans}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('cart_index') }}">View Cart</a>
+                                        <a href="{{ path('cart_index') }}">{{'View Cart'|trans}}</a>
                                     </li>
                                     {% if is_granted('ROLE_CLIENT') %}
                                     <li>
-                                        <a href="{{ path('favoris_index') }}">My Wishlist</a>
+                                        <a href="{{ path('favoris_index') }}">{{'My Wishlist'|trans}}</a>
                                     </li>
                                     {% endif %}
                                     <li>
-                                        <a href="{{ path('track_index') }}">Track My Order</a>
+                                        <a href="{{ path('track_index') }}">{{'Track My Order'|trans}}</a>
                                     </li>
                                 </ul>
                                 <!-- End .widget-list -->
@@ -362,7 +351,7 @@
 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-copyright">Copyright © 2022 - <span id="year"></span> LEST. All Rights Reserved.</p>
+                    <p class="footer-copyright">Copyright © <span id="year"></span> LEST. {{'All Rights Reserved'|trans}}.</p>
                     <!-- End .footer-copyright -->
                 </div>
                 <!-- End .container -->
@@ -429,7 +418,7 @@
                     <nav class="mobile-cats-nav">
                         <ul class="mobile-cats-menu">
                             <li>
-                                <a class="mobile-cats-lead" href="{{ path('articles') }}">Tous</a>
+                                <a class="mobile-cats-lead" href="{{ path('articles') }}">{{'All|trans'}}</a>
                             </li>
                             {% for item in categories.all %}
                             <li>
@@ -480,7 +469,8 @@
                         <div class="form-tab">
                             <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" 
+                                    href="#signin" role="tab" aria-controls="signin" aria-selected="true">{{'Sign In'|trans}}</a>
                                 </li>
 
                             </ul>
@@ -488,51 +478,56 @@
                                 <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
                                     <form action="{{ path('app_login') }}" method="post">
                                         <div class="form-group">
-                                            <label for="singin-email">Username or email address *</label>
-                                            <input type="email" value="{{ last_username is defined ? last_username:'' }}" name="email" id="inputEmail" placeholder="email" class="form-control" autocomplete="email" required autofocus>
+                                            <label for="singin-email">{{'Username or email address'|trans}} *</label>
+                                            <input type="email" value="{{ last_username is defined ? last_username:'' }}" 
+                                            name="email" id="inputEmail" placeholder="email" class="form-control" 
+                                            autocomplete="email" required autofocus>
                                         </div>
                                         <!-- End .form-group -->
 
                                         <div class="form-group">
-                                            <label for="singin-password">Password *</label>
-                                            <input type="password" name="password" id="inputPassword" placeholder="password" class="form-control" autocomplete="current-password" required>
+                                            <label for="singin-password">{{'Password'|trans}} *</label>
+                                            <input type="password" name="password" id="inputPassword" 
+                                            placeholder="{{'password'|trans}}" class="form-control" autocomplete="current-password" required>
                                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                         </div>
                                         <!-- End .form-group -->
 
                                         <div class="form-footer">
                                             <button type="submit" class="btn btn-outline-primary-2">
-												<span>LOG IN</span>
+												<span>{{'LOG IN'|trans}}</span>
 												<i class="icon-long-arrow-right"></i>
 											</button>
 
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input" id="signin-remember">
-                                                <label class="custom-control-label" for="signin-remember">Remember
-													Me</label>
+                                                <label class="custom-control-label" for="signin-remember">{{'Remember Me'|trans}}</label>
                                             </div>
                                             <!-- End .custom-checkbox -->
 
-                                            <a href="{{ path('app_forgot_password_request') }}" class="forgot-link">Forgot Your Password?</a>
+                                            <a href="{{ path('app_forgot_password_request') }}" class="forgot-link">{{'Forgot Your Password'|trans}}?</a>
                                         </div>
                                         <div class="text-center">
                                         
-                                            <a href="{{ path('app_register') }}" class="btn btn-outline-primary-2 mx-auto">Creer un compte.</a>
+                                            <a href="{{ path('app_register') }}" class="btn btn-outline-primary-2 mx-auto">
+                                            {{'Create an account'|trans}}
+                                            {# Creer un compte #}
+                                            </a>
                                         </div>
                                         <!-- End .form-footer -->
                                     </form>
                                     <div class="form-choice">
-                                        <p class="text-center">or sign in with</p>
+                                        <p class="text-center">{{'or sign in with'|trans}}</p>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <a href="#" class="btn btn-login btn-g">
-                                                    <i class="icon-google"></i> Login With Google
+                                                    <i class="icon-google"></i> {{'Login With Google'|trans}}
                                                 </a>
                                             </div>
                                             <!-- End .col-6 -->
                                             <div class="col-sm-6">
                                                 <a href="#" class="btn btn-login btn-f">
-                                                    <i class="icon-facebook-f"></i> Login With Facebook
+                                                    <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
                                                 </a>
                                             </div>
                                             <!-- End .col-6 -->
@@ -547,54 +542,68 @@
                                     <form name="registration_form" method="post" action="/register" novalidate="novalidate">
 
                                         <div class="form-group">
-                                            <label for="registration_form_personne_firstName" class="required">Prénom
-												*</label><input type="text" id="registration_form_personne_firstName" name="registration_form[personne][firstName]" required="required" placeholder="Prénom" class="form-control" value="Malick">
+                                            <label for="registration_form_personne_firstName" class="required">{{'First name'|trans}}
+												*</label><input type="text" id="registration_form_personne_firstName" 
+                                                name="registration_form[personne][firstName]" required="required" 
+                                                placeholder="{{'First name'|trans}}" class="form-control" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="registration_form_personne_lastName" class="required">Nom
+                                            <label for="registration_form_personne_lastName" class="required">{{'Last name'|trans}}
 												*</label><input type="text" id="registration_form_personne_lastName" name="registration_form[personne][lastName]" required="required" placeholder="Nom" class="form-control" value="Tounkara">
                                         </div>
                                         <div class="form-group">
-                                            <label for="registration_form_email" class="required">Adresse email
-												*</label><input type="email" id="registration_form_email" name="registration_form[email]" required="required" class="form-control">
+                                            <label for="registration_form_email" class="required">
+                                            Email *
+                                            </label><input type="email" id="registration_form_email" name="registration_form[email]" required="required" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label for="registration_form_phone_number" class="required">Numéro de
-												téléphone *</label><input type="text" id="registration_form_phone_number" name="registration_form[phone_number]" required="required" placeholder="Numéro de téléphone" value="781278288" class="form-control">
+                                            <label for="registration_form_phone_number" class="required">
+                                            {{'Phone number'|trans}} 
+                                            Numéro det téléphone 
+                                            *
+                                            </label><input type="text" id="registration_form_phone_number" name="registration_form[phone_number]" required="required" placeholder="Numéro de téléphone" value="781278288" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label for="registration_form_password" class="required">Mot de passe
-												*</label><input type="password" id="registration_form_password" name="registration_form[password]" required="required" autocomplete="new-password" placeholder="Mot de passe" value="demarrer" class="form-control">
+                                            <label for="registration_form_password" class="required">
+                                            {{'Password'}} *
+                                            </label><input type="password" id="registration_form_password" 
+                                            name="registration_form[password]" required="required" 
+                                            autocomplete="new-password" placeholder="Mot de passe" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
+                                                <input type="checkbox" id="registration_form_agreeTerms" 
+                                                name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
                                                 <label class="form-check-label required" for="registration_form_agreeTerms">
-													J'acceptes les conditions d'utilisateurs</label>
+													{{'I accept the user conditions'|trans}}
+													{# J'acceptes les conditions d'utilisateurs #}
+                                                    </label>
                                             </div>
                                         </div>
 
                                         <div class="form-footer">
                                             <button type="submit" class="btn btn-outline-primary-2">
-												<span>SIGN UP</span>
+												<span>{{'SIGN UP'|trans}}</span>
 												<i class="icon-long-arrow-right"></i>
 											</button>
                                         </div>
-                                        <div id="registration_form"><input type="hidden" id="registration_form__token" name="registration_form[_token]" value="{{ csrf_token('registration') }}">
+                                        <div id="registration_form"><input type="hidden" 
+                                        id="registration_form__token" name="registration_form[_token]" 
+                                        value="{{ csrf_token('registration') }}">
                                         </div>
                                         <!-- End .form-footer -->
                                         <div class="form-choice">
-                                            <p class="text-center">or sign in with</p>
+                                            <p class="text-center">{{'or sign in with'|trans}}</p>
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <a href="#" class="btn btn-login btn-g">
-                                                        <i class="icon-google"></i> Login With Google
+                                                        <i class="icon-google"></i> {{'Login With Google'|trans}}
                                                     </a>
                                                 </div>
                                                 <!-- End .col-6 -->
                                                 <div class="col-sm-6">
                                                     <a href="#" class="btn btn-login  btn-f">
-                                                        <i class="icon-facebook-f"></i> Login With Facebook
+                                                        <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
                                                     </a>
                                                 </div>
                                                 <!-- End .col-6 -->
@@ -604,17 +613,17 @@
                                         <!-- End .form-choice -->
                                     </form>
                                     <div class="form-choice">
-                                        <p class="text-center">or sign in with</p>
+                                        <p class="text-center">{{'or sign in with'|trans}}</p>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <a href="#" class="btn btn-login btn-g">
-                                                    <i class="icon-google"></i> Login With Google
+                                                    <i class="icon-google"></i> {{'Login With Google'|trans}}
                                                 </a>
                                             </div>
                                             <!-- End .col-6 -->
                                             <div class="col-sm-6">
                                                 <a href="#" class="btn btn-login  btn-f">
-                                                    <i class="icon-facebook-f"></i> Login With Facebook
+                                                    <i class="icon-facebook-f"></i> {{'Login With Facebook'|trans}}
                                                 </a>
                                             </div>
                                             <!-- End .col-6 -->

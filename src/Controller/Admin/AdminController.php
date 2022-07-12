@@ -28,7 +28,7 @@ class AdminController extends AbstractController
      */
     public function index(ClientRepository $clientRepository, OrderRepository $orderRepository, ArticleRepository $articleRepository, UserRepository $userRepository)
     {
-        return $this->render('admin/index.html.twig',[
+        return $this->render('admin/dashboard/index.html.twig',[
             'title'=>'titre de la page',
             'productOnline'=>$articleRepository->findCountOnline(),
             'allArticle'=>count($articleRepository->findAll()),
@@ -39,6 +39,15 @@ class AdminController extends AbstractController
             'recentlys'=>$articleRepository->recently(),
             'parent_page'=>$this->translator->trans('Dashboard'),
             'latestUser'=>$userRepository->findByRole('ROLE_USER',)
+        ]);
+    }
+    /**
+     * @Route("/dashboard", name="admin2")
+     */
+    public function index2()
+    {
+        return $this->render('admin/dashboard/index2.html.twig',[
+            'parent_page'=>$this->translator->trans('Dashboard 2')
         ]);
     }
         

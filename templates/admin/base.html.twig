@@ -373,7 +373,7 @@
   <script>
     $(document).ready(function () { // Initialize Select2 Elements
 
-// Modal status
+        // Modal status
         $(document).on('click', '#btn-modal-state', function(e) {
             e.preventDefault()
             $('#modal-default').modal('show')
@@ -573,33 +573,6 @@
   </script>
   <script>
     $(document).ready(function () {
-      // CHAGER LA MARQUE
-      $(document).on('change', '#article_category', function () {
-        let id = $(this).val()
-        $.ajax({
-          url: '/admin/article/select/brand',
-          method: 'post',
-          type: 'json',
-          data: {
-            id: id,
-          },
-          beforeSend: function () {
-            $('#js-loader-marque').css('display', 'initial')
-            $('#js-select-brands').css('display', 'none')
-          },
-          success: function (data) {
-            if (data.reponse) {
-              $('#js-select-brands').html(data.content)
-            }
-            $('#js-loader-marque').css('display', 'none')
-            $('#js-select-brands').css('display', 'initial')
-          }, error: function () {
-            alert('erreur')
-          }
-        })
-
-      })
-
 
       var imagesPreview = function (input, placeToInsertImagePreview) {
         if (input.files) {
