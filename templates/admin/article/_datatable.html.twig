@@ -53,6 +53,13 @@
                     <button class="btn"><i class="fas fa-trash-alt  text-danger  "></i></button>
                 </form>
                 {% endif %}
+                {# {% if item.enabled %}
+                    <button data-path="{{path('article_edit',{id:item.id})}}"
+                    class="btn btn-desactiver">Desactiver</button>
+                    {% else %}
+                    <button data-path="{{path('article_edit',{id:item.id})}}"
+                    class="btn btn-activer">Activer</button>
+                {% endif %} #}
             </td>
         </tr>
         {% endfor %}

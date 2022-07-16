@@ -35,7 +35,6 @@ $(document).ready(function(){
 			e.preventDefault()
 			let id = $(this).data('id')
 			let page = $(this).data('page')
-			alert(page)
 			let href= $(this).attr('href')
 			let token = 'token'
 			Swal.fire({

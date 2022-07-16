@@ -150,6 +150,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 ->setEtat($value['etat'])
                 ->setDescription('Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae consequatur dicta,')
                 ->setQuantity(10)
+                ->setStatus('Neuf')
                 ->setQtyReel(10);
                 $this->addReference('_article_'. str_replace(' ','_', $value['title']),$article);
                 $manager->persist($article);

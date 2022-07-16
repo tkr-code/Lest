@@ -37,6 +37,23 @@ class ArticleController extends AbstractController
         $this->translator = $translatorInterface;
     }
     /**
+     * @Route("/load", name="article_load", methods={"GET","POST"})
+     */
+    public function load(Request $request, ArticleRepository $articleRepository): Response
+    {
+        if($request->request->get('load') == 'articles'){
+            return new JsonResponse([
+                'reponse'=>true,
+                'content'=>$this->render('admin/article/_load_articles.html.twig',[
+                    'articlesOn' => $articleRepository->findAllOn(),
+                    'articlesOff' => $articleRepository->findAllOff(),
+                    'articlesTop' => $articleRepository->findEtat('top'),
+                ])->getContent()
+            ]);
+        }
+        return new JsonResponse(['reponse'=>false]);
+    }
+    /**
      * @Route("/", name="article_index", methods={"GET"})
      */
     public function index(BrandRepository $brandRepository, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
@@ -56,8 +73,9 @@ class ArticleController extends AbstractController
     {
         $article = new Article();
         $article
-            ->setEnabled(true)->setTitle('produit 1')->setDescription('produit 1 description')
-            ->setPrice('1500000')->setBuyingPrice('120000')->setQuantity(5)->setLabel('New');
+            ->setEnabled(true);
+            // ->setTitle('produit 1')->setDescription('produit 1 description')
+            // ->setPrice('1500000')->setBuyingPrice('120000')->setQuantity(5)->setLabel('New');
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -110,6 +128,20 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article): Response
     {
+        //Desactive l'article en ajax
+        if($request->request->get('edit') == 'enabled_false'){
+            $article->setEnabled(false);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
+        //Active l'article en ajax
+        if($request->request->get('edit') == 'enabled_true'){
+            $article->setEnabled(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            return new JsonResponse(true);
+        }
         $form = $this->createForm(ArticleEditType::class, $article);
         $form->handleRequest($request);
 
@@ -139,7 +171,7 @@ class ArticleController extends AbstractController
             }
             $article->setQtyReel($article->getQuantity());            
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($article);
+            // $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success',"L'article a été modifier avec succès");
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);

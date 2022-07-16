@@ -90,13 +90,15 @@ class ArticleType extends AbstractType
                 'required'=>false,
                 'attr'=>[
                     'class'=>'select2'
-                ]
-            ])
+                    ]
+                ])
             ->add('brand',EntityType::class,[
                 'label'=>'Marque',
+                'required'=>false,
                 'class'=>Brand::class,
                 'choice_label'=>'name',
-                'placeholder'=>'Selectionner la marque'
+                'placeholder'=>'Selectionner la marque',
+
                 ])
             ->add('category',EntityType::class,[
                 'label'=>'Catégorie (*)',
