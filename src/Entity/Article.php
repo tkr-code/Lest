@@ -12,17 +12,19 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"title","description"}, flags={"fulltext"})})
- * @UniqueEntity(
- *  fields="title"
- * )
  */
 class Article
 {
-    const etats =[
+    const ETATS =[
         'Top'=>'Top',
         'Tendance'=>'Tendance',
         'Populaire'=>'Populaire',
         'Meilleurs ventes'=>'Meilleurs ventes'
+    ];
+    const STATUS =[
+        'Neuf'=>'Neuf',
+        'Reconditionné'=>'Reconditionné',
+        'Occasion'=>'Occasion',
     ];
     const LABEL =[
         'New'=>'New',
@@ -142,6 +144,11 @@ class Article
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="articles")
      */
     private $brand;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
 
 
     public function __construct()
@@ -466,7 +473,7 @@ class Article
     public function getNewPrice()
     {
         if($this->reduction > 0){
-           return $this->getPrice() -  (($this->getPrice() * 10)/100) ;
+           return $this->getPrice() -  (($this->getPrice() * $this->getReduction() )/100) ;
         }
         return $this->getPrice();
     }
@@ -494,6 +501,18 @@ class Article
     public function setBrand(?Brand $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

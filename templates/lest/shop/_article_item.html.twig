@@ -7,7 +7,7 @@
 		{% import "macros/etats.html.twig" as etats %}
 		{{ etats.articleLabel(item.label) }}
 		{% if item.reduction > 0 %}
-			<span class="product-label label-out bg-danger">-{{ item.reduction}}%</span>
+			<span class="product-label mt-3 label-out bg-danger">-{{ item.reduction}}%</span>
 		{% endif %}
 		<a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
 			{% for item in item.images|slice(0,1) %}
@@ -79,7 +79,7 @@
 			</div>
 			<!-- End .ratings -->
 			<span class="ratings-text">
-				({{ item.comments|length}} {{'Reviews'|trans}})
+				({{ item.comments|length}} <i class="fas fa-comment"></i>)
 			</span>
 		</div>
 		<!-- End .rating-container -->

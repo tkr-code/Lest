@@ -26,6 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderController extends AbstractController
@@ -328,7 +329,7 @@ class OrderController extends AbstractController
      * @Route("/editor/order/{id}/edit", name="editor_order_edit", methods={"GET","POST"})
      *
      */
-    public function editOrder(Order $order,DeliverySpaceRepository $deliverySpaceRepository, StreetRepository $streetRepository, Request $request, OrderService $orderService){
+    public function editOrder(Order $order,MailerInterface $mailer, DeliverySpaceRepository $deliverySpaceRepository, StreetRepository $streetRepository, Request $request, OrderService $orderService){
 
         $entityManager = $this->getDoctrine()->getManager();
         
@@ -367,6 +368,7 @@ class OrderController extends AbstractController
                     }
                 }
                 $order->setIsImmuable(false);
+                $mailer->send($orderService->orderSendToEmail($order));
             }
             $order->setState($state);
             $entityManager->flush();

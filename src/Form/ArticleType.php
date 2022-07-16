@@ -75,6 +75,15 @@ class ArticleType extends AbstractType
                 ]
             ])
 
+            ->add('status',ChoiceType::class,[
+                'label'=>'Etat',
+                'placeholder'=>"Selectionner l'état",
+                'choices'=>Article::STATUS,
+                'attr'=>[
+                    'class'=>'select2'
+                ],
+            ])
+
             ->add('label',ChoiceType::class,[
                 'label'=>'Eticket',
                 'choices'=>Article::LABEL,

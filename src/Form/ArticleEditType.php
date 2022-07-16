@@ -82,6 +82,24 @@ class ArticleEditType extends AbstractType
                 'required'=>false,
 
             ])
+            ->add('etat',ChoiceType::class,[
+                'label'=>'Status',
+                'placeholder'=>"Selectionner le status",
+                'choices'=>Article::ETATS,
+                'attr'=>[
+                    'class'=>'select2'
+                ],
+                'required'=>false,
+
+            ])
+            ->add('status',ChoiceType::class,[
+                'label'=>'Etat',
+                'placeholder'=>"Selectionner l'état",
+                'choices'=>Article::STATUS,
+                'attr'=>[
+                    'class'=>'select2'
+                ],
+            ])
             ->add('category',EntityType::class,[
                 'label'=>'Catégorie (*)',
                 'class'=>Category::class,
@@ -92,6 +110,7 @@ class ArticleEditType extends AbstractType
                 'label'=>'Marque',
                 'class'=>Brand::class,
                 'choice_label'=>'name',
+                'required'=>false,
                 'placeholder'=>'Selectionner la marque'
                 ])
             ->add('images',FileType::class,[

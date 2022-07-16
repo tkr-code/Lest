@@ -3,6 +3,10 @@
         <span class="badge badge-success">Activer</span>
         {% elseif etat == 'Désactiver' %}
         <span class="badge badge-warning">Désactiver</span>
+        {% elseif etat == 'Meilleurs ventes' %}
+        <span class="badge badge-success">Meilleurs ventes</span>
+        {% else %}
+        <span class="badge badge-light">{{etat}}</span>
     {% endif %}
 {% endmacro %}
 

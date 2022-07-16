@@ -9134,7 +9134,8 @@ p {
 }
 
 @media screen and (min-width: 768px) {
-    .just-action-icons-md .btn-product span {
+    /* .widget .widget-category .widget-collapsible .widget-title, */
+    .just-action-icons-md .btn-product span{
         display: none
     }
     .just-action-icons-md .btn-product:before {
@@ -10504,6 +10505,10 @@ small.form-text {
 }
 
 @media screen and (max-width: 767px) {
+    #aside-name,
+    #widget-1{
+        display: none!important;
+    }
     .cta-horizontal .form-control {
         margin-right: 1rem
     }

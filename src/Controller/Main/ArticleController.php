@@ -11,6 +11,7 @@ use App\Form\ArticleSearchType;
 use App\Form\CommentType;
 use App\Repository\ArticleBuyRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ParentCategoryRepository;
@@ -102,7 +103,9 @@ class ArticleController extends AbstractController
      * "/boutique/{parent}", name="articles_parent"
      * @Route("/boutique/{category}", name="articles_category")
      */
-    public function index(string $parent = null, string $category = null, ParentCategoryRepository $parentCategoryRepository, Request $request, PaginatorInterface $paginator, ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
+    public function index(string $parent = null, string $category = null, 
+        ParentCategoryRepository $parentCategoryRepository, Request $request, PaginatorInterface $paginator, 
+        ArticleRepository $articleRepository, CategoryRepository $categoryRepository, BrandRepository $brandRepository): Response
     {
         $category = str_replace('-',' ',$category);
         $search = new ArticleSearch();
@@ -114,7 +117,9 @@ class ArticleController extends AbstractController
                 $search->getMots(),
                 $search->getCategory(),
                 $search->getMinPrice(),
-                $search->getMaxPrice()
+                $search->getMaxPrice(),
+                $search->getBrand(),
+                $search->getEtat()
             ),
             $request->query->getInt('page',1),
             12
@@ -122,7 +127,7 @@ class ArticleController extends AbstractController
         return $this->renderForm('lest/shop/index.html.twig', [
             'articles' => $pagination,
             'form'=>$form,
-            // 'form_filtre'=>$formFiltre,
+            'brands'=> $brandRepository->findAll(),
             'breadcrumb'=>[
                 'parent'=>ucfirst($parent),
                 'category'=>ucfirst($category)

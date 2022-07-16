@@ -23,25 +23,24 @@ class HomeController extends AbstractController
     {
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
-        dump(
-            $articleRepository->findCategoryTitle('imprimante et accessoires')
-        );
       return  $this->renderForm("lest/home/index.html.twig", [
             'form'=>$form,
-            'articles'=>[
-                'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateurs'),
-                'cle_usb'=>$articleRepository->findCategoryTitle('clé usb'),
-                'claviers_souris'=>$articleRepository->findCategoryTitle('claviers et souris'),
-                'imprimante_accessoires'=>$articleRepository->findCategoryTitle('imprimante et accessoires'),
-                'all'=>$articleRepository->findRand(20),
+            'articles'=>
+            [
+                'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateurs','Meilleurs ventes'),
+                'cle_usb'=>$articleRepository->findCategoryTitle('clé usb','Meilleurs ventes'),
+                'claviers_souris'=>$articleRepository->findCategoryTitle('claviers et souris','Meilleurs ventes'),
+                'imprimante_accessoires'=>$articleRepository->findCategoryTitle('imprimante et accessoires','Meilleurs ventes'),
                 'tendances'=>$articleRepository->findBy([
                     'etat'=>'Tendance',
                     'enabled'=>true
                 ]),
-                'top'=>$articleRepository->findBy([
-                    'etat'=>'Top',
+                'populaires'=>$articleRepository->findBy(
+                    [
+                    'etat'=>'Populaire',
                     'enabled'=>true
-                ])
+                    ],null,15
+                )
             ]
         ]);
     }

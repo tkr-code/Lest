@@ -35,8 +35,8 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/lest/style.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/lest/util.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/skin-demo-3.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/demo-3.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/skin-lest-3.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lest-3.css') }}">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -66,7 +66,7 @@
                                 <ul>
                                     {% if not is_granted('ROLE_CLIENT') %}
                                     <li>
-                                        <a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a>
+                                        <a href="#signin-modal" data-toggle="modal">{{'Sign in'|trans}} / {{'Sign up'|trans}}</a>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -154,7 +154,7 @@
                         <div class="dropdown category-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" 
                             aria-haspopup="true" aria-expanded="false" data-display="static" title="{{'Browse Categories'|trans}}">
-							{{'	Browse Categories'|trans}}
+							{{'Browse Categories'|trans}}
 								<i class="icon-angle-down"></i>
 							</a>
 
@@ -162,7 +162,7 @@
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
                                         <li>
-                                            <a href="{{ path('articles') }}">{{ 'All'}}</a>
+                                            <a href="{{ path('articles') }}">Tous</a>
                                         </li>
                                         {% for item in categories.all %}
                                         <li>
@@ -197,12 +197,20 @@
                                 {% if is_granted('ROLE_CLIENT') %}
                                 <li class="">
                                     <a href="#" class="sf-with-ul">
-
                                         <i class="fas fa-user-circle fa-1x"></i> {{app.user.personne.fullName}}
                                     </a>
                                     <ul style="display: none;">
                                         <li>
                                             <a href="{{ path('client_index') }}">{{'Dashboard'|trans}}</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('client_index',{tab:'orders'}) }}">Commande</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('client_index',{tab:'buy'}) }}">Mes achats</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ path('client_index',{tab:'details'}) }}">Details du compte</a>
                                         </li>
                                         <li>
                                             <a id="btn-logout" href="#">{{'Log out'|trans}}</a>
@@ -302,9 +310,6 @@
                                 <!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li>
-                                        <a href="#">{{'Payment Methods'|trans}}</a>
-                                    </li>
                                     <li>
                                         <a href="{{ asset("doc/Conditions générales d'utilisation.pdf") }}">{{'Terms and conditions'|trans}}</a>
                                     </li>
@@ -418,7 +423,7 @@
                     <nav class="mobile-cats-nav">
                         <ul class="mobile-cats-menu">
                             <li>
-                                <a class="mobile-cats-lead" href="{{ path('articles') }}">{{'All|trans'}}</a>
+                                <a class="mobile-cats-lead" href="{{ path('articles') }}">Tous</a>
                             </li>
                             {% for item in categories.all %}
                             <li>

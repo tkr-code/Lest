@@ -4,6 +4,7 @@ namespace App\Controller\Main;
 
 use App\Entity\Order;
 use App\Service\Email\EmailService;
+use App\Service\Order\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,32 +30,17 @@ class EmailController extends AbstractController
     /**
      * @Route("send/order/{id}", name="send_email_order", methods={"GET","POST"})
      */
-    public function sendOrder(Order $order)
+    public function sendOrder(Order $order, OrderService $orderService)
     {
-        $user = $order->getUser();
-        $email = (new TemplatedEmail())
-            ->from(new Address($this->from[0],$this->from[1]))
-            ->to($user->getEmail())
-            ->subject("Facture")
-            // ->attachFromPath($this->getParameter('order_pdf_directory').DIRECTORY_SEPARATOR.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
-            ->attach($this->getParameter('order_pdf_directory').DIRECTORY_SEPARATOR.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
-            ->htmlTemplate('email/order.html.twig')
-            ->context([
-                'user'=>$user,
-                'theme'=> $this->emailService->theme(4),
-                'order'=>$order
-            ]);
-            try
-                {
-                    $this->mailer->send($email);
-                    $this->addFlash('success','La commande été envoyé');
-                   return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
-                } catch (TransportExceptionInterface $e) 
-                {
-                    $this->addFlash('error',$e->getMessage());
-                   return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
-                       
-                }
+       $email = $orderService->orderSendToEmail($order);
+        try{
+                $this->mailer->send($email);
+                $this->addFlash('success','La commande été envoyé');
+                return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
+            } catch (TransportExceptionInterface $e){
+                $this->addFlash('error',$e->getMessage());
+                return $this->redirectToRoute('order_edit',['id'=>$order->getId()]);
+            }
     }
     /**
      * @Route("gestion-compte/edit-email", name="edit_email")

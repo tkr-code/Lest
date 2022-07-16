@@ -212,7 +212,7 @@
 						<a href="{{path('articles_category',{category:'accessoires'}) }}" class="cat-block">
 							<figure>
 								<span>
-									<img src="{{ asset('img/cats/reseaux.png') }}" width="200px" alt="Category image">
+									<img src="{{ asset('img/cats/reseaux.png') }}" width="100px" alt="Category image">
 								</span>
 							</figure>
 
@@ -229,7 +229,7 @@
 								</span>
 							</figure>
 
-							<h3 class="cat-block-title">{{'Desktop'|trans}}</h3>
+							<h3 class="cat-block-title">Ordinateur de bureau</h3>
 							<!-- End .cat-block-title -->
 						</a>
 					</div>
@@ -255,7 +255,7 @@
 								</span>
 							</figure>
 
-							<h3 class="cat-block-title">{{'keyboard and mouse'|trans}}</h3>
+							<h3 class="cat-block-title">Claviers et souris</h3>
 							<!-- End .cat-block-title -->
 						</a>
 					</div>
@@ -358,11 +358,7 @@
 				<div class="heading-right">
 					<ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link active" id="top-all-link" data-toggle="tab" href="#top-all-tab" role="tab" aria-controls="top-all-tab" aria-selected="true">{{'All'|trans}}</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" id="top-ordinateurs-link" data-toggle="tab" href="#top-ordinateurs-tab" role="tab" aria-controls="top-ordinateurs-tab" aria-selected="false">Ordinateurs</a>
+							<a class="nav-link active" id="top-ordinateurs-link" data-toggle="tab" href="#top-ordinateurs-tab" role="tab" aria-controls="top-ordinateurs-tab" aria-selected="false">Ordinateurs</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" id="top-cle-usb-link" data-toggle="tab" href="#top-cle-usb-tab" role="tab" aria-controls="top-cle-usb-tab" aria-selected="false">Clé Usb</a>
@@ -380,39 +376,7 @@
 			<!-- End .heading -->
 
 			<div class="tab-content tab-content-carousel just-action-icons-sm">
-				<div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
-					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-														                                        "nav": true,
-														                                        "dots": false,
-														                                        "margin": 20,
-														                                        "loop": false,
-														                                        "responsive": {
-														                                            "0": {
-														                                                "items":2
-														                                            },
-														                                            "480": {
-														                                                "items":2
-														                                            },
-														                                            "768": {
-														                                                "items":3
-														                                            },
-														                                            "992": {
-														                                                "items":4
-														                                            },
-														                                            "1200": {
-														                                                "items":5
-														                                            }
-														                                        }
-														                                        }'>
-
-						{% for item in articles.all %}
-							{% include "lest/home/_article.html.twig" %}
-						{% endfor %}
-					</div>
-					<!-- End .owl-carousel -->
-				</div>
-				<!-- .End .tab-pane -->
-				<div class="tab-pane p-0 fade" id="top-ordinateurs-tab" role="tabpanel" aria-labelledby="top-ordinateurs-link">
+								<div class="tab-pane p-0 fade show active" id="top-ordinateurs-tab" role="tabpanel" aria-labelledby="top-ordinateurs-link">
 					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
 																												                                "nav": true,
 																												                                "dots": false,
@@ -566,6 +530,61 @@
 				<!-- .End .tab-pane -->
 			</div>
 			<!-- End .tab-content -->
+		</div>
+		<div class="container">
+			<hr class="mt-3 mb-6">
+		</div>
+		<div class="container top">
+			<div class="heading heading-flex mb-3">
+				<div class="heading-left">
+					<h2 class="title">Populaires</h2>
+					<!-- End .title -->
+				</div>
+				<!-- End .heading-left -->			
+			</div>
+			<!-- End .heading -->
+
+			<div class="tab-content tab-content-carousel just-action-icons-sm">
+						<div class="tab-pane p-0 fade show active" id="populaire-tab" role="tabpanel" aria-labelledby="populaire-link">
+					<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+																												                                "nav": true,
+																												                                "dots": false,
+																												                                "margin": 20,
+																												                                "loop": false,
+																												                                "responsive": {
+																												                                    "0": {
+																												                                        "items":2
+																												                                    },
+																												                                    "480": {
+																												                                        "items":2
+																												                                    },
+																												                                    "768": {
+																												                                        "items":3
+																												                                    },
+																												                                    "992": {
+																												                                        "items":4
+																												                                    },
+																												                                    "1200": {
+																												                                        "items":5
+																												                                    }
+																												                                }
+																												                            }'>
+						{% for item in articles.populaires %}
+							{% include "lest/home/_article.html.twig" %}
+						{% endfor %}
+					</div>
+					<!-- End .owl-carousel -->
+				</div>
+				<!-- .End .tab-pane -->
+
+			</div>
+			<!-- End .tab-content -->
+		</div>
+		<div class="text-center">
+			<a href="{{ path('articles') }}" class="btn btn-primary btn-round">
+				<span>Voir Tous nos produits</span>
+				<i class="icon-long-arrow-right"></i>
+			</a>
 		</div>
 
 		<div class="container">

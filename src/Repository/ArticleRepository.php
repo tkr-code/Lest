@@ -27,7 +27,7 @@ class ArticleRepository extends ServiceEntityRepository
      * @param  mixed $var
      * @return void
      */
-    public function search($mots=null, $category=null, $min=null, $max= null)
+    public function search($mots=null, $category=null, $min=null, $max= null, $brand = null, $etat = null)
     {
         $query = $this->findQueryBuilder()
         ->AndWhere('p.enabled = true');
@@ -37,13 +37,24 @@ class ArticleRepository extends ServiceEntityRepository
         }
         if($min != null){
             $query
-            ->andWhere("p.price >= :minprix ")
+            ->andWhere("p.price >= :minprix")
             ->setParameter("minprix",$min);
             }
         if($max != null){
             $query
-                ->andWhere("p.price <= :maxprix ")
+                ->andWhere("p.price <= :maxprix")
                 ->setParameter("maxprix",$max);
+        }
+        if($etat != null){
+            $query
+                ->andWhere("p.status = :etat")
+                ->setParameter("etat",$etat);
+        }
+        if($brand != null){
+            $query
+                ->leftJoin('p.brand', 'b')
+                ->andWhere("b.name = :brand")
+                ->setParameter("brand",$brand);
         }
         if($category != null){
             $query->leftJoin('p.category', 'c');
@@ -52,11 +63,15 @@ class ArticleRepository extends ServiceEntityRepository
         } 
         return $query->getQuery();
     }
-    public function findCategoryTitle(string $category){
+    public function findCategoryTitle(string $category, string $etat =''){
         $query = $this->findQueryBuilder();
         $query->leftJoin('p.category', 'c');
-            $query->andWhere('c.title = :title')
-            ->setParameter('title',$category);
+            $query->andWhere('c.title = :title');
+            $query->setParameter('title',$category);
+            if(!empty($etat)){
+                $query->andWhere('p.etat = :etat');
+                $query->setParameter('etat',$etat);
+            }
             return $query->getQuery()->getResult();
     }
     public function showPagination(){

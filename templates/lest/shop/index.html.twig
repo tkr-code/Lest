@@ -34,13 +34,13 @@
 									<span>{{ articles|length }}
 										{{'of'|trans}}</span>
 									{{ articles.totalItemCount }}
-									Products
+									{{'Products'|trans}}
 								</div>
 								<!-- End .toolbox-info -->
 							</div>
 							<!-- End .toolbox-left -->
 
-							<div class="toolbox-right">
+							{# <div class="toolbox-right">
 								<div class="toolbox-sort">
 									<label for="sortby">{{'Sort by'|trans}}:</label>
 									<div class="select-custom">
@@ -96,29 +96,46 @@
 									</a>
 								</div>
 								<!-- End .toolbox-layout -->
-							</div>
+							</div> #}
 							<!-- End .toolbox-right -->
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<form method="get">
-									<p class="h4">Filtre par prix:</p>
+									<p class="h4">Filtre: </p>
 									<div class="form-row">
-										<div class="form-group col-4">
+										<div class="form-group col-md-2 col-12">
 											<input type="number" id="minPrice" value="{{ app.request.get('minPrice') }}" width="100px" name="minPrice" placeholder="Prix Min" class="form-primary">
 										</div>
-										<div class="form-group col-4">
+										<div class="form-group col-md-2 col-12">
 											<input type="number" id="maxPrice" value="{{ app.request.get('maxPrice') }}" width="100px" name="maxPrice" placeholder="Prix Max" class="form-primary">
 										</div>
-										<div class="form-group col-4">
+										<div class="form-group col-md-3 col-12">
+											<select class="custom-select" style="height:41px;font-size:14px" name="brand" id="brand">
+												<option value="">Toutes les Marques</option>
+												{% for item in brands %}
+													<option {{ app.request.get('brand') == item.name ? 'selected':'' }} value="{{ item.name }}">{{ item.name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group col-md-2 col-12">
+											<select class="custom-select" style="height:41px;font-size:14px" name="etat" id="brand">
+												<option value="">Tous les états</option>
+												<option {{ app.request.get('etat') == 'Neuf' ? 'selected':'' }} value="Neuf">Neuf</option>
+												<option {{ app.request.get('etat') == 'Reconditionné' ? 'selected':'' }} value="Reconditionné">Reconditionné</option>
+												<option {{ app.request.get('etat') == 'Occasion' ? 'selected':'' }} value="Occasion">Occasion</option>
+											</select>
+										</div>
+										<div class="form-group col-md-2 col-12">
 											<button type="submit" width="90px" class="btn btn-primary">Appliquer</button>
 										</div>
 									</div>
+									<a href="{{ path('articles') }}" class="active">Annuler les filtres</a>
 								</form>
 							</div>
 						</div>
+		                <hr class="my-5">
 						<!-- End .toolbox -->
-
 						{% include "lest/shop/_articles_list.html.twig" %}
 					</div>
 					<!-- End .col-lg-9 -->
@@ -126,7 +143,7 @@
 					<aside class="col-lg-3 order-lg-first">
 						<div class="sidebar sidebar-shop">
 							<div class="widget widget-category widget-collapsible">
-								<h3 class="widget-title">
+								<h3 class="widget-title" id="aside-name">
 									<a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="false" aria-controls="widget-1" class="collapsed">
 										Category
 									</a>
@@ -154,43 +171,21 @@
 								</div>
 								<!-- End .collapse -->
 							</div>
-							<!-- End .widget widget-clean -->
-							<div class="widget widget-collapsible">
-								<h3 class="widget-title">
-									<a data-toggle="collapse" href="#widget-brand" role="button" aria-expanded="true" aria-controls="widget-brand">
-										{{ 'Brand' |capitalize |trans}}
-									</a>
-								</h3>
-								<!-- End .widget-title -->
-
-								<div class="collapse show" id="widget-brand">
-									<div class="widget-body">
-										<div class="filter-items filter-items-count">
-											<div class="filter-item">
-												<div class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" id="cat-hp">
-													<label class="custom-control-label" for="cat-hp">Hp</label>
-												</div>
-												<!-- End .custom-checkbox -->
-												<span class="item-count">100</span>
-											</div>
-										</div>
-										<!-- End .filter-items -->
-									</div>
-									<!-- End .widget-body -->
-								</div>
-								<!-- End .collapse -->
+						</div>
+						<!-- End .widget widget-clean -->
+						<div class="card">
+							<div class="card-body" style="">
+								<img width="300px" height="300px" src="https://via.placeholder.com/300"/>
 							</div>
-							<!-- End .category parent-->
-							<!-- End .sidebar sidebar-shop -->
-						</aside>
-						<!-- End .col-lg-3 -->
-					</div>
-					<!-- End .row -->
+						</div>
+					</aside>
+					<!-- End .col-lg-3 -->
 				</div>
-				<!-- End .container -->
+				<!-- End .row -->
 			</div>
-			<!-- End .page-content -->
-		</main>
-		<!-- End .main -->
-	{% endblock %}
+			<!-- End .container -->
+		</div>
+		<!-- End .page-content -->
+	</main>
+	<!-- End .main -->
+{% endblock %}

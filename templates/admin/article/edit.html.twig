@@ -122,7 +122,13 @@ name:'Manage Articles'
 												<div class="col-lg-4">
 													{{form_row(form.label)}}
 												</div>
-												<div class="col-lg-8 col-12">
+												<div class="col-lg-4 col-12">
+													{{form_row(form.etat)}}
+												</div>
+												<div class="col-lg-4 col-12">
+													{{form_row(form.status)}}
+												</div>
+												<div class="col-lg-4 col-12">
 													{{form_row(form.images)}}
 												</div>
 
@@ -149,9 +155,6 @@ name:'Manage Articles'
 														{% endfor %}
 													</div>
 													<div class="btn-group">
-														<a class="btn btn-dark" href="{{ path('article_index') }}">
-															<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-															back to list</a>
 														<button class="btn btn-primary">
 															<i class="fas fa-save"></i>
 															{{ button_label|default('Save') }}</button>
@@ -175,6 +178,9 @@ name:'Manage Articles'
 								</div>
 								<!-- /.card-body -->
 							</div>
+							<a class="btn btn-dark" href="{{ path('article_index') }}">
+															<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+															back to list</a>
 							<!-- ./card -->
 						</div>
 						<div class="col-md-3">

@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/service", name="service")
+     * @Route("/nos-service", name="service")
      */
     public function service():Response
     {

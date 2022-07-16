@@ -26,6 +26,7 @@
         
         $(document).on('click','#btn-modal-comment',function(e){
             e.preventDefault()
+             $('.star').css('color', '#ccc')
             $('#modal-default').modal('show')
             $('#modal-default .modal-title').text('Modifier votre commentaire')
             let path = $(this).data('path')
@@ -262,7 +263,7 @@
                                 </div>
                                 <!-- End .ratings -->
                                 <a class="ratings-text" href="#product-accordion" id="review-link">( {{
-									article.comments|length}} {{'Reviews'|trans}} )</a>
+									article.comments|length}} {{ (article.comments|length > 1 )? 'Commentaires':'Commentaire' }} )</a>
                             </div>
                             <!-- End .rating-container -->
 

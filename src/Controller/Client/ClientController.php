@@ -134,12 +134,9 @@ class ClientController extends AbstractController
         $deliverySpace->setClient($user->getClient());
 
         $order->setPayment($payment);
-        // $order->setShipping($shipping);
         $order->setDeliverySpace($deliverySpace);
-
         $order->setDeliverySpace($deliverySpace);
-        // dd($order);
-        // dump($request);
+        
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($order);
         $entityManager->flush();
@@ -149,18 +146,7 @@ class ClientController extends AbstractController
         $this->addFlash('success', 'Order created');
         $session->set('panier', []);
         $user = $this->getUser();
-        $email = (new TemplatedEmail())
-            ->from(new Address('contact@lest.sn', 'lest.sn'))
-            ->to($order->getUser()->getEmail())
-            ->subject('Lest - Avis de facture')
-            ->htmlTemplate('email/order.html.twig')
-            // ->attachFromPath()
-            ->context([
-                'user'=>$user,
-                'theme' => $this->emailService->theme(4),
-                'order' => $order,
-            ]);
-        $mailer->send($email);
+        $mailer->send($orderService->orderSendToEmail($order)); // envoi la commande par email
         return $this->redirectToRoute('client_confirmation', ['id' => $order->getId()], Response::HTTP_SEE_OTHER);
     }
     /**

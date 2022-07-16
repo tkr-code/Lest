@@ -70,10 +70,10 @@
 									<a class="nav-link {{ app.request.query.get('tab') == 'orders' ? 'active':'' }} " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Mes achats</a>
+									<a class="nav-link {{ app.request.query.get('tab') == 'buy' ? 'active':'' }}" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Mes achats</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link {{ app.request.query.get('tab') == 'details' ? 'active':'' }}" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+									<a class="nav-link {{ app.request.query.get('tab') == 'details' ? 'active':'' }}" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Details du compte</a>
 								</li>
 								<li class="nav-item">
 									<a id="btn-logout" class="nav-link" href="{{ path('app_logout') }}">{{'Sign Out'|trans}}</a>
@@ -105,7 +105,7 @@
 								</div>
 								<!-- .End .tab-pane -->
 
-								<div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
+								<div class="tab-pane fade {{ app.request.query.get('tab') == 'buy' ? 'show active':'' }}" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
 									<div class="col-lg-12 mb-3 div-primary">
 										<div class="card card-primary border-0">
 											<div class="card-header bg-white">{{'My buys'|trans}}</div>
