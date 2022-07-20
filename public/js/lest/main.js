@@ -605,7 +605,6 @@ $(document).ready(function() {
             center: latLong, // Map Center coordinates
             scrollwheel: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-
         });
 
         var infowindow = new google.maps.InfoWindow({

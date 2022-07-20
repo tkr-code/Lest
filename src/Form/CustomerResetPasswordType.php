@@ -18,16 +18,16 @@ class CustomerResetPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('current',PasswordType::class,[
-            'mapped'=>false,
-            'label'=>'Mot de passe actuel *',
-            'required'=>false,
-            'constraints'=>[
-                new UserPassword([
-                    'message'=>'Mot de passe incorrect !'
-                ])
-            ]
-        ])
+        // ->add('current',PasswordType::class,[
+        //     'mapped'=>false,
+        //     'label'=>'Mot de passe actuel *',
+        //     'required'=>false,
+        //     'constraints'=>[
+        //         new UserPassword([
+        //             'message'=>'Mot de passe incorrect !'
+        //         ])
+        //     ]
+        // ])
         
         ->add('new', RepeatedType::class, [
             'type' => PasswordType::class,

@@ -8,6 +8,8 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        oauth:
+            id: knpu.oauth2.user_provider
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
@@ -19,6 +21,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            # anonymous: true
             login_link:
                 check_route: login_check
                 signature_properties: ['id']
@@ -26,9 +29,13 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 31536000 # 1 week in seconds
                 path:     /
-            lazy: true
+            # lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\UserAuthenticator
+            custom_authenticator: 
+                - App\Security\UserAuthenticator
+                # - App\Security\GoogleAuthenticator
+            
+            # entry_point: App\Security\GoogleAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout

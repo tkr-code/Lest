@@ -42,7 +42,6 @@ class PersonneClientType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Personne::class,
             'translation_domain'=>'forms',
-
         ]);
     }
 }

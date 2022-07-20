@@ -46,8 +46,8 @@ class RegistrationController extends AbstractController
         $user->setRoles(['ROLE_CLIENT'])->setCle($service->aleatoire(100));
         
         $personne  =  new Personne();
-        $personne->setFirstName('Malick')->setLastName('Tounkara');
-        $user->setPersonne($personne);
+        // $personne->setFirstName('Malick')->setLastName('Tounkara');
+        // $user->setPersonne($personne);
         
 
         $form = $this->createForm(RegistrationFormType::class, $user);

@@ -11,6 +11,8 @@ use App\Entity\ArticleSearch;
 use App\Entity\User;
 use App\Form\ArticleSearchType;
 use App\Form\RegistrationFormType;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends AbstractController
 {

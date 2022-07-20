@@ -26,13 +26,17 @@ class RegistrationFormType extends AbstractType
                 'label'=>false
             ])
             ->add('email',EmailType::class,[
-                'label'=>'Adresse email *'
+                'label'=>'Adresse email *',
+                'attr'=>[
+                    'placeholder'=>'Adresse email',
+                    // 'value'=>'781278288'
+                ],
             ])
             ->add('phone_number',NumberType::class,[
                 'label'=>'Numéro de téléphone *',
                 'attr'=>[
                     'placeholder'=>'Numéro de téléphone',
-                    'value'=>'781278288'
+                    // 'value'=>'781278288'
                 ],
             ])
 
@@ -41,7 +45,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'placeholder'=>'Mot de passe',
-                    'value'=>'demarrer'
+                    // 'value'=>'demarrer'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -55,8 +59,9 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label'=>" J'acceptes les conditions d'utilisateurs et les cookies",
+                'label'=>'J\'acceptes <a href="#a-modifier-en-production">les conditions d\'utilisateurs et des cookies</a>',
                 'mapped' => false,
+                'label_html' => true,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
