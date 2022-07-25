@@ -61,11 +61,7 @@ class ClientController extends AbstractController
     {
         $user = new User();
         $personne = new Personne();
-        $personne->setFirstName('Client')->setLastName('Lest');
-        $user->setPersonne($personne);
-        $user->setEmail('client@mail.com')
-        ->setPhoneNumber('772495592')
-        ->setIsActive('Activer')
+        $user->setIsActive('Activer')
         ->setRoles(['ROLE_CLIENT'])
         ->setCle($service->aleatoire(100));
         $form = $this->createForm(ClientType::class, $user);

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ArticleBuy;
+use App\Entity\DeliverySpace;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Entity\OrderItem;
@@ -129,23 +130,36 @@ class OrderController extends AbstractController
     /**
      * @Route("/admin/order/new", name="order_new", methods={"GET","POST"})
      */
-    public function new(Request $request, OrderService $orderService): Response
+    public function new(Request $request, OrderService $orderService, StreetRepository $streetRepository): Response
     {
         $order = new Order();
+        $order->setNumber(1);
         
         $form = $this->createForm(OrderNewType::class, $order);
         $form->handleRequest($request);
     
-        // dd($request->getSession());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $order = $orderService->calculPersist($order);
-            // dd($order);
+
+            $street = $form->get('street')->getData();
+            if($street){
+
+                //lieu de livraison
+                $deliverySpace = new DeliverySpace();
+                //rue de la livraison
+                $street = $streetRepository->find($street->getId());
+                $deliverySpace->setStreet($street);
+                //client 
+                $deliverySpace->setClient($form->get('user')->getData()->getClient());
+            }
+            $order->setDeliverySpace($deliverySpace);
             $entityManager->persist($order);
             $entityManager->flush();
+            $order->setNumber($orderService->voiceNumber($order->getId()));
+            $entityManager->flush($order);
             $this->addFlash('success','Order created');
-            // dd($order);
             return $this->redirectToRoute('order_edit', ['id'=>$order->getId(),'tab'=>'articles'], Response::HTTP_SEE_OTHER);
         }
 
@@ -161,11 +175,6 @@ class OrderController extends AbstractController
      */
     public function show(Order $order): Response
     {
-        // dd($order);
-        // dump($order);
-    //    $var =  sprintf("%06s", 1);
-        // $ribbon_text = ($order->getState() == 'paid') ? 'PAID':'NOT PAID';
-
         return $this->render('admin/order/show.html.twig', [
             'order' => $order,
             'parent_page'=>$this->parent_page
@@ -215,6 +224,7 @@ class OrderController extends AbstractController
             if(!$orderItemPost){
                 $entityManager->persist($orderItem,$order);
                 $entityManager->flush();
+                $orderService->calculOrder($order);
                 $this->addFlash('success','Un article a été ajouté');
                 return $this->redirectToRoute('order_edit', ['id'=>$order->getId()], Response::HTTP_SEE_OTHER);       
             }

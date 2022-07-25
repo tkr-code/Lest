@@ -135,7 +135,6 @@ class ClientController extends AbstractController
 
         $order->setPayment($payment);
         $order->setDeliverySpace($deliverySpace);
-        $order->setDeliverySpace($deliverySpace);
         
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($order);

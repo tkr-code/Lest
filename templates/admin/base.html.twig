@@ -372,7 +372,9 @@
 
   <script>
     $(document).ready(function () { // Initialize Select2 Elements
-
+      $(".alert").fadeTo(10000, 500).slideUp(500, function(){
+                $(".alert").slideUp(500);
+            });
         // Modal status
         $(document).on('click', '#btn-modal-state', function(e) {
             e.preventDefault()
@@ -476,12 +478,10 @@
           }
         })
       })
-
       // SUPPRIMER UNE OPTION
       $(document).on('click', '.js-remove-option', function () {
         let id_option = $(this).data('id')
         let token = $(this).data('token')
-
         Swal.fire({
           title: 'Est vous sur ?',
           icon: 'question',

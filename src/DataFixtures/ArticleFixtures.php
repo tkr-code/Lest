@@ -23,70 +23,120 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $articles = 
         [
             [
+                'cat'=>'Accessoires',
+                'articles'=>
+                [
+                    [
+                        'title' => 'Chargeur',
+                        'price' => '2500',
+                        'buy' => '20000',
+                        'etat'=>'Top',
+                        'brand'=>'Hp'
+                    ],
+                ],
+                'cat'=>'Imprimante et accessoires',
+                'articles'=>
+                [
+                    [
+                        'title' => 'Imprimante laser',
+                        'price' => '2500',
+                        'buy' => '20000',
+                        'etat'=>'Meilleurs ventes',
+                        'brand'=>'Hp'
+                    ],
+                ],
                 'cat'=>'Ordinateurs',
                 'articles'=>
                 [
                     [
                         'title' => 'Mini pc Asus','price' => '60000',
                         'buy' => '50000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Asus'
                     ],
                     [
                         'title' => 'Mini pc Hp','price' => '60000',
                         'buy' => '50000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Dell E440',
                         'price' => '150000',
                         'buy' => '120000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Dell'
                     ],
                     [
                         'title' => 'Dell Lattitude','price' => '240000',
                         'buy' => '150000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Hp 215 G1','price' => '200000',
                         'buy' => '150000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Hp Elitebook 840 G3',
                         'price' => '220000',
                         'buy' => '200000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Populaire',
                         'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Lenovo x131e',
                         'price' => '85000',
                         'buy' => '70000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Populaire',
                         'brand'=>'Lenovo'
                     ],
                     [
                         'title' => 'Toshiba portege Z30',
                         'price' => '180000',
                         'buy' => '200000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Populaire',
                         'brand'=>'Lenovo'
                     ],
                     [
                         'title' => 'Toshiba portege',
                         'price' => '125000',
                         'buy' => '120000',
-                        'etat'=>'Tendance',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Lenovo'
                     ],
                 ]
             ],
+            [
+                'cat'=>'Claviers et Souris',
+                'articles'=>
+                [
+                    [
+                        'title' => 'Clavier sans fil',
+                        'price' => '10000',
+                        'buy' => '8000',
+                        'etat'=>'Meilleurs ventes',
+                        'brand'=>'Hp'
+                    ],
+                    [
+                        'title' => 'Clavier',
+                        'price' => '3000',
+                        'buy' => '1500',
+                        'etat'=>'Meilleurs ventes',
+                        'brand'=>'Hp'
+                    ],
+                    [
+                        'title' => 'Souris',
+                        'price' => '2000',
+                        'buy' => '1000',
+                        'etat'=>'Meilleurs ventes',
+                        'brand'=>'Hp'
+                    ],
+                ]
+            ],
+            
             [
                 'cat'=>'Clé usb',
                 'articles'=>
@@ -94,23 +144,23 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'title' => 'Clé Usb 32 go','price' => '10000',
                         'buy' => '6000',
-                        'etat'=>'Top',
+                        'etat'=>'Meilleurs ventes',
                         'brand'=>'Hp'
                     ],
                     [
                         'title' => 'Clé Usb 8 go','price' => '4000',
                         'buy' => '3000',
-                        'etat'=>'Top','brand'=>'Hp'
+                        'etat'=>'Meilleurs ventes','brand'=>'Hp'
                     ],
                     [
                         'title' => 'Clé Usb 16 go','price' => '6500',
                         'buy' => '5000',
-                        'etat'=>'Top','brand'=>'Hp'
+                        'etat'=>'Meilleurs ventes','brand'=>'Hp'
                     ],
                     [
                         'title' => 'Clé Usb 2 go','price' => '2000',
                         'buy' => '3000',
-                        'etat'=>'Top','brand'=>'Hp'
+                        'etat'=>'Meilleurs ventes','brand'=>'Hp'
                     ]
                 ]
             ],
@@ -121,7 +171,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'title' => 'Hdmi 1.5m','price' => '1000',
                         'buy' => '250000',
-                        'etat'=>'Top'
+                        'etat'=>'Populaire'
                     ],
                     [
                         'title' => 'Hdmi 2m','price' => '2500',
@@ -131,13 +181,12 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                     [
                         'title' => 'Hdmi 6m','price' => '10000',
                         'buy' => '8000',
-                        'etat'=>'Top'
+                        'etat'=>'Populaire'
                     ],
                 ]
             ],
         ];
 
-        
             foreach ($articles as $value) {
                 $category  = $this->getReference(('category_'.str_replace(' ','_',$value['cat'])));
                 foreach ($value['articles'] as $key => $value) {

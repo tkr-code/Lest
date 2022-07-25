@@ -130,7 +130,7 @@ class OrderService{
      */
     public function total(Order $order)
     {
-       $order->setTotal($this->subTotal($order) + $order->getAdjustmentsTotal() );
+       $order->setTotal($this->subTotal($order) + $order->getAdjustmentsTotal());
 
         return $order;
     }
@@ -148,7 +148,8 @@ class OrderService{
         $order->setItemsTotal(0);
         $order->setState('in progress');
         $order->setAdjustmentsTotal(0);
-        $order->setNumber($this->voiceNumber($order->getId()));
+        $numer = empty($order->getId()) ? 1:$order->getId();
+        $order->setNumber($this->voiceNumber($numer));
         $order->setTotal(0);
         return $order;
     }
@@ -162,7 +163,11 @@ class OrderService{
     public function calculOrder(Order $order)
     {
         $order->setItemsTotal($this->subTotal($order));
-        $this->total($order);
+        // $street = $order->getStreet();
+        // if($street){
+        //     $order->setAdjustmentsTotal($street()->getShippingAmount()->getAmount());
+        // }
+        $order = $this->total($order);
         $this->em->flush($order);
     }
 }

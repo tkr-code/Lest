@@ -276,7 +276,7 @@ class ArticleController extends AbstractController
             }
             $entityManager->remove($article);
             $entityManager->flush();
-            $this->addFlash('success','Deleted item');
+            $this->addFlash('success','Article supprimé');
 
         }
 

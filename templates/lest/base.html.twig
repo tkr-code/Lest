@@ -33,12 +33,13 @@
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/jquery.countdown.css') }}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ asset('css/lest/style.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('css/lest/util.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/lest/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lest/util.css') }}">
     <link rel="stylesheet" href="{{ asset('css/skin-lest-3.css') }}">
     <link rel="stylesheet" href="{{ asset('css/lest-3.css') }}">
     {% block head %}{% endblock %}
 </head>
+
 <body>
     <div class="js-loader js-loader-hide">
         <div class="text-center js-loader-content">
@@ -66,7 +67,8 @@
                                 <ul>
                                     {% if not is_granted('ROLE_CLIENT') %}
                                     <li>
-                                        <a href="#signin-modal" data-toggle="modal">Identifiez-vous / Créer un compte</a>
+                                        <a href="#signin-modal" data-toggle="modal">Identifiez-vous / Créer un
+                                            compte</a>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -84,9 +86,9 @@
                 <div class="container">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
-							<span class="sr-only">{{'Toggle mobile menu'|trans}}</span>
-							<i class="icon-bars"></i>
-						</button>
+                            <span class="sr-only">{{'Toggle mobile menu'|trans}}</span>
+                            <i class="icon-bars"></i>
+                        </button>
 
                         <a href="{{ path('home') }}" class="logo">
                             <img src="{{ asset('img/icons/lest-jaune.png') }}" alt="Lest Logo" width="105" height="25">
@@ -103,10 +105,11 @@
                                 <div class="header-search-wrapper search-wrapper-wide">
                                     <label for="q" class="sr-only">Search</label>
                                     <button class="btn btn-primary" type="submit">
-										<i class="icon-search"></i>
-									</button>
-                                    <input type="search" class="form-control" name="mots" id="mots" 
-                                    placeholder="{{'Search product'|trans}} ..." value="{{ app.request.get('mots') }}" required>
+                                        <i class="icon-search"></i>
+                                    </button>
+                                    <input type="search" class="form-control" name="mots" id="mots"
+                                        placeholder="{{'Search product'|trans}} ..."
+                                        value="{{ app.request.get('mots') }}" required>
                                 </div>
                                 <!-- End .header-search-wrapper -->
                             </form>
@@ -121,7 +124,7 @@
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
                                     <span class="wishlist-count badge">{{ app.user.favoris|length}}
-									</span>
+                                    </span>
                                 </div>
                                 <p>{{'Wishlist'|trans}}</p>
                             </a>
@@ -152,11 +155,12 @@
                 <div class="container">
                     <div class="header-left">
                         <div class="dropdown category-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" 
-                            aria-haspopup="true" aria-expanded="false" data-display="static" title="{{'Browse Categories'|trans}}">
-							{{'Browse Categories'|trans}}
-								<i class="icon-angle-down"></i>
-							</a>
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" data-display="static"
+                                title="{{'Browse Categories'|trans}}">
+                                {{'Browse Categories'|trans}}
+                                <i class="icon-angle-down"></i>
+                            </a>
 
                             <div class="dropdown-menu">
                                 <nav class="side-nav">
@@ -167,7 +171,7 @@
                                         {% for item in categories.all %}
                                         <li>
                                             <a href="{{path('articles_category',{category:item.slug|lower}) }}">
-                                            {{	item.title }}
+                                                {{ item.title }}
                                             </a>
                                         </li>
                                         {% endfor %}
@@ -188,10 +192,11 @@
                                 <li {{ app.request.get( '_route' )=='home' ? 'class="active"' : '' }}>
                                     <a href="{{ path('home') }}">{{'Home'|trans}}</a>
                                 </li>
-                                <li {{ ( app.request.get( '_route' ) =='articles' or app.request.get( '_route' )=='articles_category' ) ? 'class="active"' : '' }}>
+                                <li {{ ( app.request.get( '_route' )=='articles' or app.request.get( '_route'
+                                    )=='articles_category' ) ? 'class="active"' : '' }}>
                                     <a href="{{ path('articles') }}">{{'Shop'|trans}}</a>
                                 </li>
-                                <li {{ app.request.get( '_route' ) =='contact' ? 'class="active"' : '' }}>
+                                <li {{ app.request.get( '_route' )=='contact' ? 'class="active"' : '' }}>
                                     <a href="{{ path('contact') }}">{{'Contact'|trans}}</a>
                                 </li>
                                 {% if is_granted('ROLE_CLIENT') %}
@@ -250,23 +255,25 @@
             <!-- End .header-bottom -->
         </header>
         <!-- End .header -->
-        {% endblock %} 
-        {% block main %}{% endblock %} 
+        {% endblock %}
+        {% block main %}{% endblock %}
         <div class="container">
-                <hr class="mt-5 mb-0">
-            </div>
-        {% block footer %} 
-            
+            <hr class="mt-5 mb-0">
+        </div>
+        {% block footer %}
+
         <footer class="footer">
             <div class="footer-middle">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget widget-about">
-                                <img src="{{ asset('img/icons/logo.png') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                                <img src="{{ asset('img/icons/logo.png') }}" class="footer-logo" alt="Footer Logo"
+                                    width="105" height="25">
                                 <p>
-                                {{'Lest is a local company developing in the field of IT'|trans}}
-                                {# Lest est une entreprise de la place qui évolue dans le domaine de l'informatique #}
+                                    {{'Lest is a local company developing in the field of IT'|trans}}
+                                    {# Lest est une entreprise de la place qui évolue dans le domaine de l'informatique
+                                    #}
                                 </p>
 
                                 <div class="widget-call">
@@ -311,9 +318,10 @@
 
                                 <ul class="widget-list">
                                     <li>
-                                        <a href="{{ asset("doc/Conditions générales d'utilisation.pdf") }}">{{'Terms and conditions'|trans}}</a>
+                                        <a href="{{ asset(" doc/Conditions générales d'utilisation.pdf") }}">{{'Terms
+                                            and conditions'|trans}}</a>
                                     </li>
-                                  
+
                                 </ul>
                                 <!-- End .widget-list -->
                             </div>
@@ -356,7 +364,8 @@
 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-copyright">Copyright © <span id="year"></span> LEST. {{'All Rights Reserved'|trans}}.</p>
+                    <p class="footer-copyright">Copyright © <span id="year"></span> LEST. {{'All Rights
+                        Reserved'|trans}}.</p>
                     <!-- End .footer-copyright -->
                 </div>
                 <!-- End .container -->
@@ -364,12 +373,12 @@
             <!-- End .footer-bottom -->
         </footer>
         <!-- End .footer -->
- {% endblock %}
+        {% endblock %}
     </div>
     <!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top">
-		<i class="icon-arrow-up"></i>
-	</button>
+        <i class="icon-arrow-up"></i>
+    </button>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div>
@@ -378,42 +387,47 @@
     <div class="mobile-menu-container">
         <div class="mobile-menu-wrapper">
             <span class="mobile-menu-close">
-				<i class="icon-close"></i>
-			</span>
+                <i class="icon-close"></i>
+            </span>
 
-            <form action="" method="get" class="mobile-search">
+            <form action="{{ path('articles') }}" method="get" class="mobile-search">
                 <label for="mobile-search" class="sr-only">{{'Search'|trans}}</label>
-                <input type="search" class="form-control" name="mots" id="mobile-search" placeholder="Search in..." required>
+                <input type="search" class="form-control" name="mots" id="mobile-search"
+                    placeholder="{{'Search in'|trans}}..." required>
                 <button class="btn btn-primary" type="submit">
-					<i class="icon-search"></i>
-				</button>
+                    <i class="icon-search"></i>
+                </button>
             </form>
 
             <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab" role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
+                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab"
+                        role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab" aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
+                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab"
+                        aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel" aria-labelledby="mobile-menu-link">
+                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel"
+                    aria-labelledby="mobile-menu-link">
                     <nav class="mobile-nav">
                         <ul class="mobile-menu">
                             <li {{ app.request.get( '_route' )=='home' ? 'class="active"' : '' }}>
                                 <a href="{{ path('home') }}">{{'Home'|trans}}</a>
                             </li>
-                            <li {{ ( app.request.get( '_route' ) =='articles' or app.request.get( '_route' )=='articles_category' ) ? 'class="active"' : '' }}>
+                            <li {{ ( app.request.get( '_route' )=='articles' or app.request.get( '_route'
+                                )=='articles_category' ) ? 'class="active"' : '' }}>
                                 <a href="{{ path('articles') }}">{{'Shop'|trans}}</a>
                             </li>
-                            <li {{ app.request.get( '_route' ) =='contact' ? 'class="active"' : '' }}>
+                            <li {{ app.request.get( '_route' )=='contact' ? 'class="active"' : '' }}>
                                 <a href="{{ path('contact') }}">{{'Contact'|trans}}</a>
-                            </li>                            
-                            <li {{ ( app.request.get( '_route' ) =='about' ) ? 'class="active"' : '' }}>
+                            </li>
+                            <li {{ ( app.request.get( '_route' )=='about' ) ? 'class="active"' : '' }}>
                                 <a href="{{ path('home') }}">{{'About'|trans}}</a>
-                            </li>                            
+                            </li>
                         </ul>
                     </nav>
                     <!-- End .mobile-nav -->
@@ -427,9 +441,9 @@
                             </li>
                             {% for item in categories.all %}
                             <li>
-                                <a href="{{path('articles_category',{category:item.slug|lower}) }}">{{	item.title }}</a>
+                                <a href="{{path('articles_category',{category:item.slug|lower}) }}">{{ item.title }}</a>
                             </li>
-                            {% endfor %}                       
+                            {% endfor %}
                         </ul>
                         <!-- End .mobile-cats-menu -->
                     </nav>
@@ -465,58 +479,66 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">
-							<i class="icon-close"></i>
-						</span>
-					</button>
+                        <span aria-hidden="true">
+                            <i class="icon-close"></i>
+                        </span>
+                    </button>
 
                     <div class="form-box">
                         <div class="form-tab">
                             <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" 
-                                    href="#signin" role="tab" aria-controls="signin" aria-selected="true">{{'Sign In'|trans}}</a>
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin"
+                                        role="tab" aria-controls="signin" aria-selected="true">{{'Sign In'|trans}}</a>
                                 </li>
 
                             </ul>
                             <div class="tab-content" id="tab-content-5">
-                                <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel"
+                                    aria-labelledby="signin-tab">
                                     <form action="{{ path('app_login') }}" method="post">
                                         <div class="form-group">
                                             <label for="singin-email">{{'Username or email address'|trans}} *</label>
-                                            <input type="email" value="{{ last_username is defined ? last_username:'' }}" 
-                                            name="email" id="inputEmail" placeholder="email" class="form-control" 
-                                            autocomplete="email" required autofocus>
+                                            <input type="email"
+                                                value="{{ last_username is defined ? last_username:'' }}" name="email"
+                                                id="inputEmail" placeholder="email" class="form-control"
+                                                autocomplete="email" required autofocus>
                                         </div>
                                         <!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="singin-password">{{'Password'|trans}} *</label>
-                                            <input type="password" name="password" id="inputPassword" 
-                                            placeholder="{{'password'|trans}}" class="form-control" autocomplete="current-password" required>
-                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                            <input type="password" name="password" id="inputPassword"
+                                                placeholder="{{'password'|trans}}" class="form-control"
+                                                autocomplete="current-password" required>
+                                            <input type="hidden" name="_csrf_token"
+                                                value="{{ csrf_token('authenticate') }}">
                                         </div>
                                         <!-- End .form-group -->
 
                                         <div class="form-footer">
                                             <button type="submit" class="btn btn-outline-primary-2">
-												<span>{{'LOG IN'|trans}}</span>
-												<i class="icon-long-arrow-right"></i>
-											</button>
+                                                <span>{{'LOG IN'|trans}}</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
 
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="signin-remember">
-                                                <label class="custom-control-label" for="signin-remember">{{'Remember Me'|trans}}</label>
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="signin-remember">
+                                                <label class="custom-control-label" for="signin-remember">{{'Remember
+                                                    Me'|trans}}</label>
                                             </div>
                                             <!-- End .custom-checkbox -->
 
-                                            <a href="{{ path('app_forgot_password_request') }}" class="forgot-link">{{'Forgot Your Password'|trans}}?</a>
+                                            <a href="{{ path('app_forgot_password_request') }}"
+                                                class="forgot-link">{{'Forgot Your Password'|trans}}?</a>
                                         </div>
                                         <div class="text-center">
-                                        
-                                            <a href="{{ path('app_register') }}" class="btn btn-outline-primary-2 mx-auto">
-                                            {{'Create an account'|trans}}
-                                            {# Creer un compte #}
+
+                                            <a href="{{ path('app_register') }}"
+                                                class="btn btn-outline-primary-2 mx-auto">
+                                                {{'Create an account'|trans}}
+                                                {# Creer un compte #}
                                             </a>
                                         </div>
                                         <!-- End .form-footer -->
@@ -544,57 +566,70 @@
                                 <!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                                     {# {% include "registration/_form.html.twig" %} #}
-                                    <form name="registration_form" method="post" action="/register" novalidate="novalidate">
+                                    <form name="registration_form" method="post" action="/register"
+                                        novalidate="novalidate">
 
                                         <div class="form-group">
-                                            <label for="registration_form_personne_firstName" class="required">{{'First name'|trans}}
-												*</label><input type="text" id="registration_form_personne_firstName" 
-                                                name="registration_form[personne][firstName]" required="required" 
+                                            <label for="registration_form_personne_firstName" class="required">{{'First
+                                                name'|trans}}
+                                                *</label><input type="text" id="registration_form_personne_firstName"
+                                                name="registration_form[personne][firstName]" required="required"
                                                 placeholder="{{'First name'|trans}}" class="form-control" value="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="registration_form_personne_lastName" class="required">{{'Last name'|trans}}
-												*</label><input type="text" id="registration_form_personne_lastName" name="registration_form[personne][lastName]" required="required" placeholder="Nom" class="form-control" value="Tounkara">
+                                            <label for="registration_form_personne_lastName" class="required">{{'Last
+                                                name'|trans}}
+                                                *</label><input type="text" id="registration_form_personne_lastName"
+                                                name="registration_form[personne][lastName]" required="required"
+                                                placeholder="Nom" class="form-control" value="Tounkara">
                                         </div>
                                         <div class="form-group">
                                             <label for="registration_form_email" class="required">
-                                            Email *
-                                            </label><input type="email" id="registration_form_email" name="registration_form[email]" required="required" class="form-control">
+                                                Email *
+                                            </label><input type="email" id="registration_form_email"
+                                                name="registration_form[email]" required="required"
+                                                class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="registration_form_phone_number" class="required">
-                                            {{'Phone number'|trans}} 
-                                            Numéro det téléphone 
-                                            *
-                                            </label><input type="text" id="registration_form_phone_number" name="registration_form[phone_number]" required="required" placeholder="Numéro de téléphone" value="781278288" class="form-control">
+                                                {{'Phone number'|trans}}
+                                                Numéro det téléphone
+                                                *
+                                            </label><input type="text" id="registration_form_phone_number"
+                                                name="registration_form[phone_number]" required="required"
+                                                placeholder="Numéro de téléphone" value="781278288"
+                                                class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="registration_form_password" class="required">
-                                            {{'Password'}} *
-                                            </label><input type="password" id="registration_form_password" 
-                                            name="registration_form[password]" required="required" 
-                                            autocomplete="new-password" placeholder="Mot de passe" class="form-control">
+                                                {{'Password'}} *
+                                            </label><input type="password" id="registration_form_password"
+                                                name="registration_form[password]" required="required"
+                                                autocomplete="new-password" placeholder="Mot de passe"
+                                                class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input type="checkbox" id="registration_form_agreeTerms" 
-                                                name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
-                                                <label class="form-check-label required" for="registration_form_agreeTerms">
-													{{'I accept the user conditions'|trans}}
-													{# J'acceptes les conditions d'utilisateurs #}
-                                                    </label>
+                                                <input type="checkbox" id="registration_form_agreeTerms"
+                                                    name="registration_form[agreeTerms]" required="required"
+                                                    class="form-check-input" value="1">
+                                                <label class="form-check-label required"
+                                                    for="registration_form_agreeTerms">
+                                                    {{'I accept the user conditions'|trans}}
+                                                    {# J'acceptes les conditions d'utilisateurs #}
+                                                </label>
                                             </div>
                                         </div>
 
                                         <div class="form-footer">
                                             <button type="submit" class="btn btn-outline-primary-2">
-												<span>{{'SIGN UP'|trans}}</span>
-												<i class="icon-long-arrow-right"></i>
-											</button>
+                                                <span>{{'SIGN UP'|trans}}</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
                                         </div>
-                                        <div id="registration_form"><input type="hidden" 
-                                        id="registration_form__token" name="registration_form[_token]" 
-                                        value="{{ csrf_token('registration') }}">
+                                        <div id="registration_form"><input type="hidden" id="registration_form__token"
+                                                name="registration_form[_token]"
+                                                value="{{ csrf_token('registration') }}">
                                         </div>
                                         <!-- End .form-footer -->
                                         <div class="form-choice">
@@ -676,211 +711,6 @@
     <script src="{{asset('js/lest/demos/demo-3.js') }}"></script>
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
-        $(document).ready(function() { 
-            //Copier un lien
-            $(document).on('click','.copie',function(e){
-            e.preventDefault()
-            navigator.clipboard.writeText($(this).data('text'));
-            Swal.fire({
-                icon: 'success',
-                title:"Le lien de l'article a été copié",
-                showConfirmButton: false,
-                timer: 2000
-            })
-        })
-            // Ajoute un article au panier
-            $(document).on('click', '.js-btn-add', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id')
-                $.ajax({
-                    url: "{{ path('cart_add_ajax') }}",
-                    method: 'POST',
-                    type: 'json',
-                    beforeSend: function() {
-                        $('.js-loader-text').text('Ajout au panier en cour ...')
-                        $('.js-loader').css('display', 'flex')
-                    },
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        loadCart()
-                        $('.js-loader').css('display', 'none')
-                        if (data) { // Alert success
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Le produit a été ajouté au panier.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Une erreur est survenu.'
-                            })
-                        }
-                    },
-                    error: function() {
-                        alert('Une erreur est survenu.')
-                    }
-                })
-            })
-
-            // SUPPRIMER UN ARTICLE DU PANIERr
-            $(document).on('click', '.js-delete-cart', function(e) {
-                e.preventDefault();
-                let id = $(this).data('id')
-                $.ajax({
-                    url: "{{ path('cart_delete_ajax') }}",
-                    method: 'POST',
-                    type: 'json',
-                    beforeSend: function() {
-                        $('.js-loader-text').text('Suppression du panier en cour ...')
-                        $('.js-loader').css('display', 'flex')
-                    },
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        loadCart()
-                        $('.js-loader').css('display', 'none')
-                        if (data) { // Alert success
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Le produit a été retiré du panier.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Une erreur est survenu.'
-                            })
-                        }
-                    },
-                    error: function() {
-                        $('.js-loader').css('display', 'none')
-                        alert('Une erreur est survenu.')
-                    }
-                })
-            })
-
-            // AJOUTER L'ARTICLE EN FAVORIS
-            $(document).on('click', '.js-add-favoris', function(e) {
-                e.preventDefault()
-                let id = $(this).data('id')
-
-                $.ajax({
-                    url: "{{ path('favoris_add_ajax') }}",
-                    method: 'POST',
-                    type: 'json',
-                    beforeSend: function() {
-                        $('.js-loader-text').text('Ajout dans la liste des favoris en en cour ...')
-                        $('.js-loader').css('display', 'flex')
-                    },
-                    data: {
-                        id: id
-                    },
-                    success: function(data) { // $().html(remove)
-                        loadFavoris()
-                        $('.js-loader').css('display', 'none')
-                        if (data) { // changer l'icon
-                            $('.article-' + id + ' .js-favoris').attr('href', "/favoris/remove/" + id)
-							.removeClass('js-add-favoris')
-                            .addClass('js-remove-favoris bg-danger')
-                            $('.article-' + id + ' .js-favoris span').addClass('bg-danger text-white').text('Retirer des favoris')
-                                // Alert success
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Le produit a été ajouté à la liste des  favoris.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Une erreur est survenu.'
-                            })
-                        }
-                    },
-                    error: function() {
-                        $('.js-loader').css('display', 'none')
-                        alert('Une erreur est survenu.')
-                    }
-                })
-            })
-
-            // SUPPRIMER L'ARTICLE EN FAVORIS
-            $(document).on('click', '.js-remove-favoris', function(e) {
-                e.preventDefault()
-                let id = $(this).data('id')
-
-                $.ajax({
-                    url: "{{ path('favoris_remove_ajax') }}",
-                    method: 'POST',
-                    type: 'json',
-                    beforeSend: function() {
-                        $('.js-loader-text').text('Suppression dans la liste des favoris en en cour ...')
-                        $('.js-loader').css('display', 'flex')
-                    },
-                    data: {
-                        id: id
-                    },
-                    success: function(data) { // $().html(remove)
-                        loadFavoris()
-                        $('.js-loader').css('display', 'none')
-                        if (data) { // changer l'icon
-                            $('.article-' + id + ' .js-favoris').attr('href', "/favoris/add/" + id)
-                            $('.article-' + id + ' .js-favoris').removeClass('js-remove-favoris bg-danger')
-                            $('.article-' + id + ' .js-favoris').addClass('js-add-favoris')
-                            $('.article-' + id + ' .js-favoris span').removeClass('bg-danger text-white').text('Ajouter aux favoris')
-                                // Alert success
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Le produit a été retiré de la liste des  favoris.',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Une erreur est survenu.'
-                            })
-                        }
-                    },
-                    error: function() {
-                        alert('Une erreur est survenu.')
-                    }
-                })
-            })
-
-            // CHARGER LE PANIER
-            function loadCart() {
-                $.ajax({
-                    url: "{{ path('cart_load') }}",
-                    method: "POST",
-                    type: 'json',
-                    success: function(data) {
-                        $('.js-cart-load').html(data.cart)
-                    }
-                })
-            }
-            // CHARGER LE PANIER
-            function loadFavoris() {
-                $.ajax({
-                    url: "{{ path('favoris_load_ajax') }}",
-                    method: "POST",
-                    type: 'json',
-                    success: function(data) {
-                        $('.wishlist').html(data)
-                    }
-                })
-            }
-        })
     </script>
     {% block javascripts %}{% endblock %}
 </body>

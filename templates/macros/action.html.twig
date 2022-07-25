@@ -22,7 +22,7 @@
 
 {% macro brand(brand) %}
 	{% import "macros/link.html.twig" as link %}
-	{{ link.pencil(path('admin_brand_show', {'id': brand.id})) }}
+	{{ link.pencil(path('admin_brand_edit', {'id': brand.id})) }}
 	{# {{ link.show(path('admin_brand_edit', {'id': brand.id})) }} #}
 {% endmacro %}
 

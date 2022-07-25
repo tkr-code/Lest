@@ -90,6 +90,7 @@
 {% endblock %}
 
 {% block body %}
+{% include "includes/_alerte.html.twig" %}
 <div class="container-fluid">
     <!-- Info boxes -->
     <div class="row">
@@ -151,18 +152,22 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
+                            <a href="{{ path('admin') }}" class="btn btn-primary m-3">Actualiser</a>
                             <div class="table-responsive" id="editor-order-get-home">
                                 {% include "admin/order/_order_home.html.twig" %}
                             </div>
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.card-body -->
+                        {% if lastOrder %}
+                        
                         <div class="card-footer clearfix">
                             <a href="{{ path('order_new') }}" class="btn btn-sm btn-info float-left">{{'Place New
                                 Order'|trans}}</a>
-                            <a href="{{ path('order_index') }}" class="btn btn-sm btn-secondary float-right">{{'View All
-                                Orders'|trans}}</a>
-                        </div>
+                                <a href="{{ path('order_index') }}" class="btn btn-sm btn-secondary float-right">{{'View All
+                                    Orders'|trans}}</a>
+                                </div>
+                            {% endif %}
                         <!-- /.card-footer -->
                     </div>
                     <!-- /.card -->
@@ -178,7 +183,7 @@
                 <span class="info-box-icon"><i class="fas fa-tag"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Inventory</span>
+                    <span class="info-box-text">Inventaires</span>
                     <span class="info-box-number">{{ allArticle }}</span>
                 </div>
                 <!-- /.info-box-content -->

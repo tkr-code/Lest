@@ -108,6 +108,8 @@ class Order
      */
     private $is_immuable;
 
+    private $street;
+
 
     public function __construct()
     {
@@ -326,6 +328,18 @@ class Order
     public function setIsImmuable(bool $is_immuable): self
     {
         $this->is_immuable = $is_immuable;
+
+        return $this;
+    }
+
+    public function getStreet() : ?Street
+    {
+        return $this->street;
+    }
+
+    public function setStreet($street): self
+    {
+        $this->street = $street;
 
         return $this;
     }

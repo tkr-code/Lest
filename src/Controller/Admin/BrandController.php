@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BrandController extends AbstractController
 {
+    private $parent_page = 'Marque';
     /**
      * @Route("/", name="admin_brand_index", methods={"GET"})
      */
@@ -22,6 +23,7 @@ class BrandController extends AbstractController
     {
         return $this->render('admin/brand/index.html.twig', [
             'brands' => $brandRepository->findAll(),
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -38,13 +40,14 @@ class BrandController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($brand);
             $entityManager->flush();
-
+            $this->addFlash('success','Une marque a été ajoutée');
             return $this->redirectToRoute('admin_brand_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/brand/new.html.twig', [
             'brand' => $brand,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -55,6 +58,7 @@ class BrandController extends AbstractController
     {
         return $this->render('admin/brand/show.html.twig', [
             'brand' => $brand,
+            'parent_page'=>$this->parent_page
         ]);
     }
 
@@ -65,7 +69,6 @@ class BrandController extends AbstractController
     {
         $form = $this->createForm(BrandType::class, $brand);
         $form->handleRequest($request);
-        // dump($request);
 
         if ($form->isSubmitted() && $form->isValid()) {                        
             $this->getDoctrine()->getManager()->flush();
@@ -76,6 +79,7 @@ class BrandController extends AbstractController
         return $this->renderForm('admin/brand/edit.html.twig', [
             'brand' => $brand,
             'form' => $form,
+            'parent_page'=>$this->parent_page
         ]);
     }
 

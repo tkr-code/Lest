@@ -70,13 +70,15 @@
 
                                     </td>
                                     <td class="price-col">
-                                    {% if item.article.reduction > 0 %}
-                                     <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }} </span>
-                                     <span class="old-price">{{ item.article.formatterPrice }}</span>
-                                     {% else %}
-                                     <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }} </span>                                        
-                                    {% endif %}
-                                    
+                                        {% if item.article.reduction > 0 %}
+                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
+                                        </span>
+                                        <span class="old-price">{{ item.article.formatterPrice }}</span>
+                                        {% else %}
+                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
+                                        </span>
+                                        {% endif %}
+
                                         {{ site.current}}
                                     </td>
                                     <td class="quantity-col">
@@ -89,12 +91,13 @@
                                                         <input type="number" class="form-control" min="1"
                                                             max="{{ item.article.quantity }}" name="qty"
                                                             value="{{ item.quantite }}">
-                                                            <small id="helpId" class="text-muted">En Stock:
+                                                        <small id="helpId" class="text-muted">En Stock:
                                                             {{ item.article.quantity }}
                                                         </small>
                                                     </div>
                                                     <div class="col-5 col-md-5">
-                                                        <button type="submit" title="Appliquer" class="text-center btn-success mt-1">
+                                                        <button type="submit" title="Appliquer"
+                                                            class="text-center btn-success mt-1">
                                                             <i class="icon-refresh"></i>
                                                         </button>
                                                     </div>
@@ -102,7 +105,7 @@
                                             </div>
                                         </form>
                                     </td>
-                                
+
                                     <td class="total-col">{{ (item.article.newPrice * item.quantite) |
                                         number_format(0,'.',' ') ~ ' ' ~ site.current }}
                                     </td>
@@ -115,7 +118,7 @@
                             </tbody>
                             </tr>
                             {% endfor %}
-                           
+
                             </tbody>
                         </table>
                         <!-- End .table table-wishlist -->
@@ -146,7 +149,7 @@
                     </div>
                     <!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
-                        <form action="{{ path('order_client_new') }}" id="form_order_client_new" method="post" >
+                        <form action="{{ path('order_client_new') }}" id="form_order_client_new" method="post">
                             <div class="summary summary-cart">
                                 <h3 class="summary-title">{{'Cart Total'|trans}}</h3>
                                 <!-- End .summary-title -->
@@ -154,82 +157,82 @@
                                     <div class="col-md-12">
                                         <p class="h6 mt-3">Lieu de livraison</p>
                                         {% if app.request.session.get('shipping') %}
-                                                        <div class="shipping_box">
-                                                            <div class="form-group">
-                                                                <div id="loader-select-street" class="text-center loader">
-                                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                                                </div>
-                                                                <div id="js-select-street">
-                                                                    <select required class="custom-select select-street"
-                                                                        id="streets" name="street">
-                                                                        <option value="0">Choisir le lieu de livraison
-                                                                        </option>
-                                                                        <option selected value="{{ delivery.id }}">{{
-                                                                            delivery.name }}</option>
-                                                                        {% for item in streets %}
-                                                                        <option value="{{ item.id }}">{{ item.name }}
-                                                                        </option>
-                                                                        {% endfor %}
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card border-0">
-                                                                <div id="loader-street-amount" class="text-center loader">
-                                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                                                </div>
-                                                                <div class="card-body  js-amount">
-                                                                    <p>Montant de la livraison:</p>
-                                                                    <p class="text-center">
-                                                                        <span class="text-danger font-weight-bold">
-                                                                            {{
-                                                                            delivery.shippingAmount.amount|number_format(2,'.','
-                                                                            ') }}
-                                                                            {{ site.current
-                                                                            }}
-                                                                        </span>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {% else %}
-                                                        <div class="shipping_box">
-                                                            {# <div class="form-group loader-city">
-                                                                <select class="custom-select" name="city" id="select-city">
-                                                                    {% for item in cities %}
-                                                                    <option name="city" value="{{ item.id}}">{{ item.name }}
-                                                                    </option>
-                                                                    {% endfor %}
-                                                                </select>
-                                                            </div> #}
-                                                            <div class="form-group">
-                                                                <div id="loader-select-street" class="text-center loader">
-                                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                                                </div>
-                                                                <div id="js-select-street">
-                                                                    <select required class="custom-select select-street"
-                                                                        id="streets" name="street">
-                                                                        <option value="0">Choisir le lieu de livraison
-                                                                        </option>
-                                                                        {% for item in streets %}
-                                                                        <option value="{{ item.id }}">{{ item.name }}
-                                                                        </option>
-                                                                        {% endfor %}
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card border-0">
-                                                                <div id="loader-street-amount" class="text-center loader">
-                                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                                                                </div>
-                                                                <div class="card-body  js-amount"></div>
-                                                                {# <p class="h4">Total : <span class="total"></span> </p> #}
-                                                            </div>
-                                                        </div>
-                                                        {% endif %}
+                                        <div class="shipping_box">
+                                            <div class="form-group">
+                                                <div id="loader-select-street" class="text-center loader">
+                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                                </div>
+                                                <div id="js-select-street">
+                                                    <select required class="custom-select select-street" id="streets"
+                                                        name="street">
+                                                        <option value="0">Choisir le lieu de livraison
+                                                        </option>
+                                                        <option selected value="{{ delivery.id }}">{{
+                                                            delivery.name }}</option>
+                                                        {% for item in streets %}
+                                                        <option value="{{ item.id }}">{{ item.name }}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="card border-0">
+                                                <div id="loader-street-amount" class="text-center loader">
+                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                                </div>
+                                                <div class="card-body  js-amount">
+                                                    <p>Montant de la livraison:</p>
+                                                    <p class="text-center">
+                                                        <span class="text-danger font-weight-bold">
+                                                            {{
+                                                            delivery.shippingAmount.amount|number_format(2,'.','
+                                                            ') }}
+                                                            {{ site.current
+                                                            }}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="shipping_box">
+                                            {# <div class="form-group loader-city">
+                                                <select class="custom-select" name="city" id="select-city">
+                                                    {% for item in cities %}
+                                                    <option name="city" value="{{ item.id}}">{{ item.name }}
+                                                    </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div> #}
+                                            <div class="form-group">
+                                                <div id="loader-select-street" class="text-center loader">
+                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                                </div>
+                                                <div id="js-select-street">
+                                                    <select required class="custom-select select-street" id="streets"
+                                                        name="street">
+                                                        <option value="0">Choisir le lieu de livraison
+                                                        </option>
+                                                        {% for item in streets %}
+                                                        <option value="{{ item.id }}">{{ item.name }}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="card border-0">
+                                                <div id="loader-street-amount" class="text-center loader">
+                                                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                                                </div>
+                                                <div class="card-body  js-amount"></div>
+                                                {# <p class="h4">Total : <span class="total"></span> </p> #}
+                                            </div>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                     <div class="col-lg-12">
                                         <p class="h6 mt-3">Payement à la livraison</p>
-                                        
+
                                     </div>
                                 </div>
                                 <table class="table table-summary">
@@ -240,19 +243,20 @@
                                                 {{ total|number_format(0,'.',' ') }}
                                                 {{ site.current }}
                                             </td>
-                                        </tr>                                  
-                                          
+                                        </tr>
+
                                         <!-- End .summary-shipping-estimate -->
                                         <tr class="summary-total">
                                             <td>Total:</td>
                                             <td>
-                                            {% if app.request.session.get('shipping') %}
-                                                <span class="text-danger" class="total"> 
-                                                    {{ (total + delivery.shippingAmount.amount)|number_format(0,'.',' ') }} {{ site.current }} 
+                                                {% if app.request.session.get('shipping') %}
+                                                <span class="text-danger" class="total">
+                                                    {{ (total + delivery.shippingAmount.amount)|number_format(0,'.',' ')
+                                                    }} {{ site.current }}
                                                 </span>
                                                 {% else %}
                                                 <span class="text-danger total">
-                                                    {{ total|number_format(0,'.',' ' ) ~ ' '  ~ site.current }}
+                                                    {{ total|number_format(0,'.',' ' ) ~ ' ' ~ site.current }}
                                                 </span>
                                                 {% endif %}
                                             </td>
@@ -261,11 +265,11 @@
                                     </tbody>
                                 </table>
                                 <!-- End .table table-summary -->
-                                
+
                                 <button type="submit" id="btn-submit-order"
                                     class="btn btn-outline-primary-2 btn-order btn-block">COMMANDER</button>
                             </div>
-                        <!-- End .summary -->
+                            <!-- End .summary -->
                         </form>
                         <a href="{{ path('articles') }}" class="btn btn-outline-dark-2 btn-block mb-3">
                             <span>CONTINUE SHOPPING</span>
@@ -309,48 +313,47 @@
     }
     {% if not is_granted('ROLE_CLIENT') %}
     //Envoyer la comande
-    $(document).on('click','#btn-submit-order',function(e){
+    $(document).on('click', '#btn-submit-order', function (e) {
         e.preventDefault()
         Swal.fire({
-            title:'Oups !',
+            title: 'Oups !',
             text: 'Veillez vous connecter ou creer un compte.',
-            icon:'info',
+            icon: 'info',
             confirmButtonText: 'Se connecter ou creer un compte',
-            }).then((result) => {
-                $('#signin-modal').modal('show')
+        }).then((result) => {
+            $('#signin-modal').modal('show')
         })
     })
-    
+
     {% else %}
 
-        $(document).on('click','#btn-submit-order',function(e){
-            e.preventDefault()
-        if($('#streets').val() == '0')
-            {
-                Swal.fire(
+    $(document).on('click', '#btn-submit-order', function (e) {
+        e.preventDefault()
+        if ($('#streets').val() == '0') {
+            Swal.fire(
                 'Oups !',
-                    'Choississez un lieu de livraison',
-                    'warning'
-                )
-                return
+                'Choississez un lieu de livraison',
+                'warning'
+            )
+            return
+        }
+        Swal.fire({
+            title: 'Etes vous sur ?',
+            text: 'Vous etes sur le point de confirmer une commande.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Non',
+            confirmButtonText: 'CONFIRMER',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#form_order_client_new').submit()
             }
-            Swal.fire({
-                title:'Etes vous sur ?',
-                text: 'Vous etes sur le point de confirmer une commande.',
-                icon:'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Non',
-                confirmButtonText: 'CONFIRMER',
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#form_order_client_new').submit()
-                    }
-            })
-
-            
         })
+
+
+    })
     {% endif %}
 
     $(document).on('change', '#select-city', function () {

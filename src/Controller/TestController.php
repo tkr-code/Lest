@@ -14,12 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     /**
-     * @Route("/test/{id}", name="test")
+     * @Route("/test", name="test")
      */
-    public function index(Order $order, OrderService $orderService): Response
+    public function index(): Response
     {
-        // $orderService->orderSendToEmail($order);
-        return $this->render('pdf/order.html.twig',['order'=>$order]);
+        return $this->render('test/index.html.twig');
     }
     
 }

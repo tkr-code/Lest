@@ -4,7 +4,7 @@
 	{{ app_name }}
 {% endblock %}
 {% block breadcrumb %}
-	{{ utils.breadcrumb('Add Order',[ { path:path('order_index'), name:'Manage orders' }, { path:path('order_new'), name:'Add order' } ])}}
+	{{ utils.breadcrumb('Ajouter une commande',[ { path:path('order_index'), name:'Manage orders' }, { path:path('order_new'), name:'Ajouter une commande' } ])}}
 {% endblock %}
 {% block body %}
 	<div class="row">
@@ -14,7 +14,7 @@
 					{{ form_start(form,{ 'attr':{ 'novalidate':'novalidate' } }) }}
 					{{ form_row(form.user)}}
 					{{ form_row(form.note)}}
-					{{ form_row(form.delivery_space)}}
+					{{ form_row(form.street)}}
 					{{ form_row(form.payment)}}
 					<button type="submit" class="btn btn-primary">Submit</button>
 					{{ form_end(form) }}

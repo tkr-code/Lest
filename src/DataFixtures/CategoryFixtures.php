@@ -25,7 +25,8 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
                     'Mémoire',
                     'Reseaux',
                     'Ecran PC',
-                    'Ordinateur de Bureau'
+                    'Ordinateur de Bureau',
+                    'Visiophone'
                 ]
             ],            
             // [

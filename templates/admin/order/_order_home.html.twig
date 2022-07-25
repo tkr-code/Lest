@@ -37,8 +37,8 @@
 				<td>{{ item.createdAt|date_format_min_fr }}</td>
 			</tr>
 		{% else %}
-			<tr class="text-center">
-				<td width="100%">not found</td>
+			<tr>
+				<td colspan="4" width="100%" class="text-center">Aucune commande enregistrée</td>
 			</tr>
 		{% endfor %}
 
