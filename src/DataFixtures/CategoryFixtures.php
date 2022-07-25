@@ -28,15 +28,7 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
                     'Ordinateur de Bureau',
                     'Visiophone'
                 ]
-            ],            
-            // [
-            //     'parent'=>'parent_smartphone',
-            //     'cat'=>[
-            //         'Samsung',
-            //         'Iphone',
-            //         'Autre marque',
-            //     ]
-            // ],            
+            ],                       
         ];
         foreach ($categories as $key => $value) {
             $parent = $this->getReference($value['parent']);

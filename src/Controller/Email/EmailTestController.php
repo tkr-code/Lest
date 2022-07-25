@@ -23,7 +23,7 @@ class EmailTestController extends AbstractController
     {
 
         $user = $userRepository->findOneBy([
-            'email'=>'clientemailtest@email.com'
+            'email'=>'clienttest@lest.sn'
         ]);
         if($user){
             $this->user = $user;
@@ -58,7 +58,9 @@ class EmailTestController extends AbstractController
      */
     public function order(OrderRepository $orderRepository): Response
     {
-        $order = $orderRepository->find(36);
+        $order = $orderRepository->findOneBy([
+            'number'=>'000001'
+        ]);
         return $this->render('email/order.html.twig',[
             'theme'=>$this->emailService->theme(4),
             'order'=>$order,

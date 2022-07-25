@@ -23,6 +23,17 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $articles = 
         [
             [
+                'cat'=>'Ordinateur de Bureau',
+                'articles'=>
+                [
+                    [
+                        'title' => 'Dell inspiron',
+                        'price' => '60000',
+                        'buy' => '50000',
+                        'etat'=>'Top',
+                        'brand'=>'Dell'
+                    ],
+                ],
                 'cat'=>'Accessoires',
                 'articles'=>
                 [

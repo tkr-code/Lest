@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-           
+            //initialise le nouveau
             $client = new Client();
             $user->setClient($client);
             $user->setIsActive(true);

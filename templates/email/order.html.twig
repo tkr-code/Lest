@@ -1,14 +1,13 @@
-{% extends "email/base1.html.twig" %}
+{% extends "email/base.html.twig" %}
 {% block title %}Facture #{{order.number}}{% endblock %}
 {% block body %}
-    <p>Bonjour {{ order.user.personne.fullName }}</p>
-    <p>
-        <b>Facture:</b> #{{order.number}} <br>
-       <b>Montant:</b> <span style="color:red;font-weight:bold">{{order.total|number_format(2,'.',' ' )}}</span> {{site.current}} <br>
-       <b>Date:</b> {{ order.createdAt| date_format_fr }}<br>
-        <b>{{'Payment Due'|trans}}:</b> {{ order.paymentDue |date_format_fr }}
-    </p>
-    <p>Remarque: <br>
-        - Payement à la livraison
-    </p>
+<p>Bonjour {{ order.user.personne.fullName }}</p>
+<p>
+    <b>Facture:</b> #{{order.number}} <br>
+    <b>Montant:</b> <span style="color:red;font-weight:bold">{{order.total|number_format(2,'.',' ' )}}</span>
+    {{site.current}} <br>
+    <b>Date:</b> {{ order.createdAt| date_format_fr }}<br>
+    <b>{{'Payment Due'|trans}}:</b> {{ order.paymentDue |date_format_fr }}
+</p>
+<p>- Payement à la livraison</p>
 {% endblock %}

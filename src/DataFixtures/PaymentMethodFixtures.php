@@ -33,6 +33,7 @@ class PaymentMethodFixtures extends Fixture
             $paymentMethod->setName($value['name'])
             ->setDescription($value['description'])
             ->setInstructions($value['instructions']); 
+            $this->addReference('_method_'.str_replace(' ','_', $value['name']),$paymentMethod);
             $manager->persist($paymentMethod);
         }
         $manager->flush();

@@ -30,6 +30,7 @@ class StreetFixtures extends Fixture implements DependentFixtureInterface
             $street->setName($value['name'])
             ->setShippingAmount($this->getReference('ref_shipping_amount_'.$value['montant']))
             ->setCity($this->getReference('Dakar'));
+            $this->addReference('_street_'.str_replace(' ','_', $value['name']),$street);
             $manager->persist($street);
         }
         $manager->flush();
