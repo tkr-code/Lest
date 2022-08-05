@@ -13,16 +13,84 @@ class StreetFixtures extends Fixture implements DependentFixtureInterface
     {
         $streets=[
             [
+                'name'=>'Wakam',
+                'montant'=>1300
+            ],
+            [
+                'name'=>'Médina',
+                'montant'=>500
+            ],
+            [
+                'name'=>'Fass',
+                'montant'=>500
+            ],
+            [
+                'name'=>'Grand Dakar',
+                'montant'=>500
+            ],
+            [
+                'name'=>'Grand Yoff',
+                'montant'=>500
+            ],
+            [
+                'name'=>'Almadie',
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Sacre ceour 1',
+                'montant'=>1000
+            ],
+            [
                 'name'=>'Sacre ceour 2',
                 'montant'=>1000
             ],
             [
-                'name'=>'Wakam',
-                'montant'=>1500
+                'name'=>'Sacre ceour 3',
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Liberté 1',
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Liberté 2',
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Liberté 3',
+                'montant'=>1000
             ],
             [
                 'name'=>'Liberté 4',
-                'montant'=>500
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Liberté 5',
+                'montant'=>1000
+            ],
+            [
+                'name'=>'Liberté 6',
+                'montant'=>1400
+            ],
+            [
+                'name'=>'Liberté 6 extension',
+                'montant'=>1500
+            ],
+            [
+                'name'=>'Ouest-foire',
+                'montant'=>1500
+            ],
+            [
+                'name'=>'Nord-foire',
+                'montant'=>1500
+            ],
+            [
+                'name'=>'Sud-foire',
+                'montant'=>1500
+            ],
+            [
+                'name'=>'Est-foire',
+                'montant'=>1500
             ],
         ];
         foreach ($streets as $key => $value) {

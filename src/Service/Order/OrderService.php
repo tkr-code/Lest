@@ -37,7 +37,7 @@ class OrderService{
             ->attach('/public/pdf/order/'.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
             // ->attachFromPath()
             ->context([
-                // 'user'=>$user,
+                'user'=>$order->getUser(),
                 'theme' => $this->emailService->theme(4),
                 'order' => $order,
             ]);

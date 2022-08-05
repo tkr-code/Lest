@@ -3,6 +3,7 @@
 <main class="main">
 	<div class="intro-section pt-3 pb-3 mb-2">
 		<div class="container">
+			{% include "includes/_alerte.html.twig" %}
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="intro-slider-container slider-container-ratio mb-2 mb-lg-0">
@@ -53,8 +54,8 @@
 							<div class="intro-slide">
 								<figure class="slide-image">
 									<picture>
-										<source media="(max-width: 480px)" srcset="img/icons/lest-slide-2-480.png">
-										<img src="img/icons/lest-slide-2.png" alt="Image Desc">
+										<source media="(max-width: 480px)" srcset="{{ asset('img/icons/lest-slide-2-480.png') }}">
+										<img src="{{ asset('img/icons/lest-slide-2.png') }}" alt="Image Desc">
 									</picture>
 								</figure>
 								<!-- End .slide-image -->
@@ -329,7 +330,7 @@
 	</div>
 	<div class="container">
 		<div class="heading text-center my-5">
-			<img src="img/lest-logo.png" class="mx-auto" width="100px" alt="Lest">
+			<img src="{{ asset('img/lest-logo.png') }}" class="mx-auto" width="100px" alt="Lest">
 			<h2 class="title-sm">Les Spécialistes de la technologies</h2><!-- End .title -->
 			<p class="text-center">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus
 				libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.

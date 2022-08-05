@@ -67,7 +67,7 @@
 									<a class="nav-link {{ app.request.query.get('tab') == null ? 'active':'' }}" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="true">{{'Dashboard'|trans}}</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link {{ app.request.query.get('tab') == 'orders' ? 'active':'' }} " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+									<a class="nav-link {{ app.request.query.get('tab') == 'orders' ? 'active':'' }} " id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Commandes</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link {{ app.request.query.get('tab') == 'buy' ? 'active':'' }}" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Mes achats</a>
@@ -153,7 +153,7 @@
 										</div>
 									</div>
 									<a href="category.html" class="btn btn-outline-primary-2">
-										<span>GO SHOP</span>
+										<span>{{'GO SHOP'|trans}}</span>
 										<i class="icon-long-arrow-right"></i>
 									</a>
 								</div>
@@ -255,7 +255,7 @@
 															<!-- End .row -->
 
 															<button type="submit" class="btn btn-outline-primary-2">
-																<span>SAVE CHANGES</span>
+																<span>{{'SAVE CHANGES'|trans}}</span>
 																<i class="icon-long-arrow-right"></i>
 															</button>
 															{{ form_end(formDetail) }}

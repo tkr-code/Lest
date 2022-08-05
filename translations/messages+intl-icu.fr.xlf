@@ -235,7 +235,7 @@
       </trans-unit>
       <trans-unit id="hgM.daT" resname="Create an account">
         <source>Create an account</source>
-        <target>Crée un compte</target>
+        <target>Créer un compte</target>
       </trans-unit>
       <trans-unit id="O.bdQdy" resname="Create an Account">
         <source>Create an Account</source>
@@ -499,7 +499,7 @@
       </trans-unit>
       <trans-unit id=".jrA1Dx" resname="Order Details">
         <source>Order Details</source>
-        <target>__Order Details</target>
+        <target>Détails de la commande</target>
       </trans-unit>
       <trans-unit id="_574lBd" resname="Product">
         <source>Product</source>
@@ -633,7 +633,7 @@
       </trans-unit>
       <trans-unit id="4O3_s6c" resname="Reset password">
         <source>Reset password</source>
-        <target>réinitialiser le mot de passe</target>
+        <target>Réinitialiser le mot de passe</target>
       </trans-unit>
       <trans-unit id="KSwG8AR" resname="Category">
         <source>Category</source>
@@ -981,6 +981,74 @@
       <trans-unit id="y2XxXvP" resname="Send password reset email">
         <source>Send password reset email</source>
         <target>Envoyer un courriel de réinitialisation du mot de passe</target>
+      </trans-unit>
+      <trans-unit id="zJO1KsS" resname="Article cree">
+        <source>Article cree</source>
+        <target>__Article cree</target>
+      </trans-unit>
+      <trans-unit id="L.WZgUO" resname="Tous">
+        <source>Tous</source>
+        <target>__Tous</target>
+      </trans-unit>
+      <trans-unit id="puhknd." resname="View All&#10;                                    Orders">
+        <source>View All
+                                    Orders</source>
+        <target>__View All
+                                    Orders</target>
+      </trans-unit>
+      <trans-unit id="aMhG.KG" resname="GO SHOP">
+        <source>GO SHOP</source>
+        <target>ALLER FAIRE LES COURSES</target>
+      </trans-unit>
+      <trans-unit id="CCfUnms" resname="SAVE CHANGES">
+        <source>SAVE CHANGES</source>
+        <target>SAUVEGARDER</target>
+      </trans-unit>
+      <trans-unit id="FF4cn0z" resname="Pmd developper">
+        <source>Pmd developper</source>
+        <target>__Pmd developper</target>
+      </trans-unit>
+      <trans-unit id="_nklVqF" resname="Search in">
+        <source>Search in</source>
+        <target>Rechercher dans</target>
+      </trans-unit>
+      <trans-unit id="jlwDIz_" resname="First&#10;                                                name">
+        <source>First
+                                                name</source>
+        <target>__First
+                                                name</target>
+      </trans-unit>
+      <trans-unit id="cBN3PmW" resname="Last&#10;                                                name">
+        <source>Last
+                                                name</source>
+        <target>__Last
+                                                name</target>
+      </trans-unit>
+      <trans-unit id="yeo7yKR" resname="Out of&#10;                                    Stock">
+        <source>Out of
+                                    Stock</source>
+        <target>__Out of
+                                    Stock</target>
+      </trans-unit>
+      <trans-unit id="ylHOH7F" resname="Hi!">
+        <source>Hi!</source>
+        <target>Salut!</target>
+      </trans-unit>
+      <trans-unit id="vQH5j0c" resname="To reset your password, please visit the following link">
+        <source>To reset your password, please visit the following link</source>
+        <target>Pour réinitialiser votre mot de passe, Merci de cliquer sur le lien suivant</target>
+      </trans-unit>
+      <trans-unit id="3nEApYK" resname="Enter your order number">
+        <source>Enter your order number</source>
+        <target>Entrer le numéro de la commande</target>
+      </trans-unit>
+      <trans-unit id="Dl8KZ1S" resname="Send order number">
+        <source>Send order number</source>
+        <target>Envoyé le numero de la commande</target>
+      </trans-unit>
+      <trans-unit id="WUAVGWp" resname="Arrived">
+        <source>Arrived</source>
+        <target>Arrivée</target>
       </trans-unit>
     </body>
   </file>

@@ -40,16 +40,15 @@ class RegistrationController extends AbstractController
      */
     public function appRegister(EmailService $emailService, Service $service, Request $request, UserPasswordHasherInterface $passwordEncoder, EventDispatcherInterface $eventDispatcherInterface): Response
     {
+        if ($this->getUser()) {
+            $this->addFlash('success','Vous etes déja connecté');
+            return $this->redirectToRoute('home');
+        }
         $search = new ArticleSearch();
         $formSearch = $this->createForm(ArticleSearchType::class,$search);
         $user = new User();
         $user->setRoles(['ROLE_CLIENT'])->setCle($service->aleatoire(100));
         
-        $personne  =  new Personne();
-        // $personne->setFirstName('Malick')->setLastName('Tounkara');
-        // $user->setPersonne($personne);
-        
-
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

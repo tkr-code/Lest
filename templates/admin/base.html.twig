@@ -30,18 +30,19 @@
   <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}"> 
-  <link rel="stylesheet" href="{{ asset('css/admin.css') }}"> 
+  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
   {% block head %}{% endblock %}
 
 </head>
 <style>
   .loader-delete-account,
-.loader-edit-email,
-.alert-delete-account,
-.alert-edit-email {
-  display: none;
-}
+  .loader-edit-email,
+  .alert-delete-account,
+  .alert-edit-email {
+    display: none;
+  }
+
   .label-new {
     margin-top: 10px;
     padding-left: 5px;
@@ -279,25 +280,25 @@
           </div>
         </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          {{ nav.list(navs.getNavs.navs,parent_page|default('')) }}
-          {% if is_granted('ROLE_EDITOR') %}
-          {{ nav.list(navs.getNavs.editor,parent_page|default('')) }}
-          {% endif %}
-          {% if is_granted('ROLE_ADMIN') %}
-          {{ nav.list(navs.getNavs.admin,parent_page|default('')) }}
-          {% endif %}
-          <li class="nav-item">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            {{ nav.list(navs.getNavs.navs,parent_page|default('')) }}
+            {% if is_granted('ROLE_EDITOR') %}
+            {{ nav.list(navs.getNavs.editor,parent_page|default('')) }}
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            {{ nav.list(navs.getNavs.admin,parent_page|default('')) }}
+            {% endif %}
+            <li class="nav-item">
               <a id="btn-logout" href="#" type="button" class="nav-link  ">
-                  <i class="fas fa-power-off nav-icon"></i>
-                  <p>log out</p>
+                <i class="fas fa-power-off nav-icon"></i>
+                <p>log out</p>
               </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
     </aside>
@@ -372,36 +373,36 @@
 
   <script>
     $(document).ready(function () { // Initialize Select2 Elements
-      $(".alert").fadeTo(10000, 500).slideUp(500, function(){
-                $(".alert").slideUp(500);
-            });
-        // Modal status
-        $(document).on('click', '#btn-modal-state', function(e) {
-            e.preventDefault()
-            $('#modal-default').modal('show')
-            let href = $(this).data('path')
-            console.log(href);
-            $.ajax({
-                url: href,
-                method: 'POST',
-                type: 'json',
-                data: {
-                    modal: 'state'
-                },
-                beforeSend: function() {
-                    $('.modal-loader').css('display', 'flex')
-                },
-                success: function(data) {
-                    $('#modal-default .modal-title').html('Modifier le status')
-                    $('#modal-default .modal-body').html(data.content)
-                    $('.modal-loader').css('display', 'none')
-                },
-                error: function() {
-                    $('.modal-loader').css('display', 'none')
-                    alert('Chargement impossible')
-                }
-            })
+      $(".alert").fadeTo(10000, 500).slideUp(500, function () {
+        $(".alert").slideUp(500);
+      });
+      // Modal status
+      $(document).on('click', '#btn-modal-state', function (e) {
+        e.preventDefault()
+        $('#modal-default').modal('show')
+        let href = $(this).data('path')
+        console.log(href);
+        $.ajax({
+          url: href,
+          method: 'POST',
+          type: 'json',
+          data: {
+            modal: 'state'
+          },
+          beforeSend: function () {
+            $('.modal-loader').css('display', 'flex')
+          },
+          success: function (data) {
+            $('#modal-default .modal-title').html('Modifier le status')
+            $('#modal-default .modal-body').html(data.content)
+            $('.modal-loader').css('display', 'none')
+          },
+          error: function () {
+            $('.modal-loader').css('display', 'none')
+            alert('Chargement impossible')
+          }
         })
+      })
       $('select').select2({
         theme: 'bootstrap4'
       })
@@ -525,22 +526,22 @@
         })
       })
 
-              // Used to format phone number
-        function phoneFormatter() {
-            $(document).on('blur','.phone', function () {
-                var number = $(this).val().replace(/[^\d]/g, '')
-                if (number.length == 9) {
-                    number = number.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
-                } else if (number.length == 11) {
-                    number = number.replace(/(\d{2})(\d{3})(\d{3})(\d{2})/, "($1) $2 $3 $4");
-                } else if (number.length == 12) {
-                    number = number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "($1) $2 $3 $4 $5");
-                }
-                $(this).val(number)
-            });
-        };
-        $(phoneFormatter)
-        
+      // Used to format phone number
+      function phoneFormatter() {
+        $(document).on('blur', '.phone', function () {
+          var number = $(this).val().replace(/[^\d]/g, '')
+          if (number.length == 9) {
+            number = number.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+          } else if (number.length == 11) {
+            number = number.replace(/(\d{2})(\d{3})(\d{3})(\d{2})/, "($1) $2 $3 $4");
+          } else if (number.length == 12) {
+            number = number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "($1) $2 $3 $4 $5");
+          }
+          $(this).val(number)
+        });
+      };
+      $(phoneFormatter)
+
 
 
       //CHARGER LES OPTIONS

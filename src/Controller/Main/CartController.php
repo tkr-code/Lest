@@ -105,7 +105,7 @@ class CartController extends AbstractController
         $formPayment = $this->createForm(Payment1Type::class,$payment);
         if ($request->request->count() > 0) {
             $cartService->addPost($request->request->get('article_id'),$request->request->get('qty'));
-            $this->addFlash('success',"Le produit a été modifié avec succès.");
+            $this->addFlash('success',"Le produit a été ajouté au panier.");
             return $this->redirectToRoute('cart_index');
         }
 
@@ -200,7 +200,7 @@ class CartController extends AbstractController
     public function delete($id, CartService $cartService)
     {
         $cartService->delete($id);
-        $this->addFlash('success','Le produit retiré du panier');
+        $this->addFlash('success','Le produit a été retiré du panier');
         return $this->redirectToRoute('cart_index');
     }
 

@@ -24,11 +24,11 @@ class EmailService
         $link_site = 'https://lest.sn';
         $link_img = $link_site.'/public/assets/images/lest-jaune.png';
         $message = '';
-        $link_contrat = $link_site."/public/doc/condition-d'utilisation-gaboma-annonce.pdf";
+        $link_contrat = $link_site."/public/doc/condition-d'utilisation-lest.pdf";
         $button_link = $link_site;
         $button_text = '';
         $titre = '';
-        $link_disinscription = $link_site.'/se-desinscrire-'.$id_user.'-tkr'.$cle_user.'-gaboma-annonce';
+        $link_disinscription = $link_site.'/se-desinscrire-'.$id_user.'-tkr'.$cle_user.'-lest';
         switch ($id) {
           case '1':
             // inscription verification ou desinscription
@@ -44,7 +44,7 @@ class EmailService
             $button_link = null;
             $button_text = 'Modifier votre mot de passe';
               $titre = 'Veuillez modifier votre mot de passe';
-              $message = 'Étiez-vous à l’origine de la modfication de votre compte leSekoya ? Si oui, voici le lien de modification.';
+              $message = 'Étiez-vous à l’origine de la modfication de votre compte lest ? Si oui, voici le lien de modification.';
             break;
           case '3':
             // modifier l'email
@@ -52,7 +52,7 @@ class EmailService
             $button_link = null;
             $button_text = 'Modifier votre e-mail';
               $titre = 'Veuillez modifier e-mail';
-              $message = 'Étiez-vous à l’origine de la modfication de votre compte gaboma annonce ? Si oui, voici le lien de modification.';
+              $message = 'Étiez-vous à l’origine de la modfication de votre compte lest ? Si oui, voici le lien de modification.';
             break;
           case '4':
             // nouvell commande

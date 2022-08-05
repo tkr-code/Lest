@@ -9,7 +9,7 @@
         {% block title %}Lest Sénégal - vente de produits et accesoires informatique {% endblock %} - {{ app_name }}
     </title>
     <meta name="keywords" content="Boutique - e-commerce - eCommerce">
-    <meta name="description" content="{{app_name}} - eCommerce">
+    <meta name="description" content="{{app_name}} - eCommerce - ordinateur - Pc - Souris - Dakar - Sénégal">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/img/icons/apple-touch-icon.png') }}">
@@ -67,8 +67,7 @@
                                 <ul>
                                     {% if not is_granted('ROLE_CLIENT') %}
                                     <li>
-                                        <a href="#signin-modal" data-toggle="modal">Identifiez-vous / Créer un
-                                            compte</a>
+                                        <a href="#signin-modal" data-toggle="modal">Identifiez-vous / Créer un compte</a>
                                     </li>
                                     {% endif %}
                                 </ul>
@@ -318,8 +317,7 @@
 
                                 <ul class="widget-list">
                                     <li>
-                                        <a href="{{ asset(" doc/Conditions générales d'utilisation.pdf") }}">{{'Terms
-                                            and conditions'|trans}}</a>
+                                        <a href="{{ asset(" doc/Conditions générales d'utilisation.pdf") }}">{{'Terms and conditions'|trans}}</a>
                                     </li>
 
                                 </ul>
@@ -364,8 +362,7 @@
 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-copyright">Copyright © <span id="year"></span> LEST. {{'All Rights
-                        Reserved'|trans}}.</p>
+                    <p class="footer-copyright">Copyright © <span id="year"></span> LEST. {{'All Rights Reserved'|trans}}.</p>
                     <!-- End .footer-copyright -->
                 </div>
                 <!-- End .container -->
@@ -521,24 +518,19 @@
                                                 <span>{{'LOG IN'|trans}}</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </button>
-
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
                                                     id="signin-remember">
-                                                <label class="custom-control-label" for="signin-remember">{{'Remember
-                                                    Me'|trans}}</label>
+                                                <label class="custom-control-label" for="signin-remember">{{'Remember Me'|trans}}</label>
                                             </div>
                                             <!-- End .custom-checkbox -->
-
                                             <a href="{{ path('app_forgot_password_request') }}"
                                                 class="forgot-link">{{'Forgot Your Password'|trans}}?</a>
                                         </div>
                                         <div class="text-center">
-
                                             <a href="{{ path('app_register') }}"
                                                 class="btn btn-outline-primary-2 mx-auto">
                                                 {{'Create an account'|trans}}
-                                                {# Creer un compte #}
                                             </a>
                                         </div>
                                         <!-- End .form-footer -->

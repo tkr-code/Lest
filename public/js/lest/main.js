@@ -1,7 +1,10 @@
 // Main Js File
-$(document).ready(function() {
+$(document).ready(function () {
     'use strict';
 
+    $(".alert").fadeTo(10000, 500).slideUp(500, function () {
+        $(".alert").slideUp(500);
+    });
     owlCarousels();
     quantityInputs();
 
@@ -11,14 +14,14 @@ $(document).ready(function() {
         $body = $('body'),
         $searchToggle = $('.search-toggle');
 
-    $searchToggle.on('click', function(e) {
+    $searchToggle.on('click', function (e) {
         $searchWrapper.toggleClass('show');
         $(this).toggleClass('active');
         $searchWrapper.find('input').focus();
         e.preventDefault();
     });
 
-    $body.on('click', function(e) {
+    $body.on('click', function (e) {
         if ($searchWrapper.hasClass('show')) {
             $searchWrapper.removeClass('show');
             $searchToggle.removeClass('active');
@@ -26,7 +29,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.header-search').on('click', function(e) {
+    $('.header-search').on('click', function (e) {
         e.stopPropagation();
     });
 
@@ -39,7 +42,7 @@ $(document).ready(function() {
             element: $('.sticky-header')[0],
             stuckClass: 'fixed',
             offset: -300,
-            handler: function(direction) {
+            handler: function (direction) {
                 // Show category dropdown
                 if (catInitVal && direction == 'up') {
                     catDropdown.addClass('show').find('.dropdown-menu').addClass('show');
@@ -69,20 +72,20 @@ $(document).ready(function() {
     }
 
     // Mobile Menu Toggle - Show & Hide
-    $('.mobile-menu-toggler').on('click', function(e) {
+    $('.mobile-menu-toggler').on('click', function (e) {
         $body.toggleClass('mmenu-active');
         $(this).toggleClass('active');
         e.preventDefault();
     });
 
-    $('.mobile-menu-overlay, .mobile-menu-close').on('click', function(e) {
+    $('.mobile-menu-overlay, .mobile-menu-close').on('click', function (e) {
         $body.removeClass('mmenu-active');
         $('.menu-toggler').removeClass('active');
         e.preventDefault();
     });
 
     // Add Mobile menu icon arrows to items with children
-    $('.mobile-menu').find('li').each(function() {
+    $('.mobile-menu').find('li').each(function () {
         var $this = $(this);
 
         if ($this.find('ul').length) {
@@ -93,16 +96,16 @@ $(document).ready(function() {
     });
 
     // Mobile Menu toggle children menu
-    $('.mmenu-btn').on('click', function(e) {
+    $('.mmenu-btn').on('click', function (e) {
         var $parent = $(this).closest('li'),
             $targetUl = $parent.find('ul').eq(0);
 
         if (!$parent.hasClass('open')) {
-            $targetUl.slideDown(300, function() {
+            $targetUl.slideDown(300, function () {
                 $parent.addClass('open');
             });
         } else {
-            $targetUl.slideUp(300, function() {
+            $targetUl.slideUp(300, function () {
                 $parent.removeClass('open');
             });
         }
@@ -113,13 +116,13 @@ $(document).ready(function() {
 
     // Sidebar Filter - Show & Hide
     var $sidebarToggler = $('.sidebar-toggler');
-    $sidebarToggler.on('click', function(e) {
+    $sidebarToggler.on('click', function (e) {
         $body.toggleClass('sidebar-filter-active');
         $(this).toggleClass('active');
         e.preventDefault();
     });
 
-    $('.sidebar-filter-overlay').on('click', function(e) {
+    $('.sidebar-filter-overlay').on('click', function (e) {
         $body.removeClass('sidebar-filter-active');
         $sidebarToggler.removeClass('active');
         e.preventDefault();
@@ -145,7 +148,7 @@ $(document).ready(function() {
 
     // Product hover
     if ($.fn.hoverIntent) {
-        $('.product-3').hoverIntent(function() {
+        $('.product-3').hoverIntent(function () {
             var $this = $(this),
                 animDiff = ($this.outerHeight() - ($this.find('.product-body').outerHeight() + $this.find('.product-media').outerHeight())),
                 animDistance = ($this.find('.product-footer').outerHeight() - animDiff);
@@ -153,7 +156,7 @@ $(document).ready(function() {
             $this.find('.product-footer').css({ 'visibility': 'visible', 'transform': 'translateY(0)' });
             $this.find('.product-body').css('transform', 'translateY(' + -animDistance + 'px)');
 
-        }, function() {
+        }, function () {
             var $this = $(this);
 
             $this.find('.product-footer').css({ 'visibility': 'hidden', 'transform': 'translateY(100%)' });
@@ -186,14 +189,14 @@ $(document).ready(function() {
         });
 
         // Update Price Range
-        priceSlider.noUiSlider.on('update', function(values, handle) {
+        priceSlider.noUiSlider.on('update', function (values, handle) {
             $('#filter-price-range').text(values.join(' - '));
         });
     }
 
     // Product countdown
     if ($.fn.countdown) {
-        $('.product-countdown').each(function() {
+        $('.product-countdown').each(function () {
             var $this = $(this),
                 untilDate = $this.data('until'),
                 compact = $this.data('compact'),
@@ -272,7 +275,7 @@ $(document).ready(function() {
             }
 
             // Init all carousel
-            $wrap.find('[data-toggle="owl"]').each(function() {
+            $wrap.find('[data-toggle="owl"]').each(function () {
                 var $this = $(this),
                     newOwlSettings = $.extend({}, owlSettings, $this.data('owl-options'));
 
@@ -295,7 +298,7 @@ $(document).ready(function() {
         });
 
         // On click change thumbs active item
-        $('.product-gallery-item').on('click', function(e) {
+        $('.product-gallery-item').on('click', function (e) {
             $('#product-zoom-gallery').find('a').removeClass('active');
             $(this).addClass('active');
 
@@ -305,7 +308,7 @@ $(document).ready(function() {
         var ez = $('#product-zoom').data('elevateZoom');
 
         // Open popup - product images
-        $('#btn-product-gallery').on('click', function(e) {
+        $('#btn-product-gallery').on('click', function (e) {
             if ($.fn.magnificPopup) {
                 $.magnificPopup.open({
                     items: ez.getGalleryList(),
@@ -327,7 +330,7 @@ $(document).ready(function() {
     if ($.fn.owlCarousel && $.fn.elevateZoom) {
         var owlProductGallery = $('.product-gallery-carousel');
 
-        owlProductGallery.on('initialized.owl.carousel', function() {
+        owlProductGallery.on('initialized.owl.carousel', function () {
             owlProductGallery.find('.active img').elevateZoom({
                 zoomType: "inner",
                 cursor: "crosshair",
@@ -363,11 +366,11 @@ $(document).ready(function() {
             }
         });
 
-        owlProductGallery.on('change.owl.carousel', function() {
+        owlProductGallery.on('change.owl.carousel', function () {
             $('.zoomContainer').remove();
         });
 
-        owlProductGallery.on('translated.owl.carousel', function() {
+        owlProductGallery.on('translated.owl.carousel', function () {
             owlProductGallery.find('.active img').elevateZoom({
                 zoomType: "inner",
                 cursor: "crosshair",
@@ -390,7 +393,7 @@ $(document).ready(function() {
 
         // Create Array for gallery popup
         var galleryArr = [];
-        $('.product-gallery-separated').find('img').each(function() {
+        $('.product-gallery-separated').find('img').each(function () {
             var $this = $(this),
                 imgSrc = $this.attr('src'),
                 imgTitle = $this.attr('alt'),
@@ -399,7 +402,7 @@ $(document).ready(function() {
             galleryArr.push(obj);
         })
 
-        $('#btn-separated-gallery').on('click', function(e) {
+        $('#btn-separated-gallery').on('click', function (e) {
             if ($.fn.magnificPopup) {
                 $.magnificPopup.open({
                     items: galleryArr,
@@ -418,10 +421,10 @@ $(document).ready(function() {
     }
 
     // Checkout discount input - toggle label if input is empty etc...
-    $('#checkout-discount-input').on('focus', function() {
+    $('#checkout-discount-input').on('focus', function () {
         // Hide label on focus
         $(this).parent('form').find('label').css('opacity', 0);
-    }).on('blur', function() {
+    }).on('blur', function () {
         // Check if input is empty / toggle label
         var $this = $(this);
 
@@ -433,7 +436,7 @@ $(document).ready(function() {
     });
 
     // Dashboard Page Tab Trigger
-    $('.tab-trigger-link').on('click', function(e) {
+    $('.tab-trigger-link').on('click', function (e) {
         var targetHref = $(this).attr('href');
 
         $('.nav-dashboard').find('a[href="' + targetHref + '"]').trigger('click');
@@ -443,7 +446,7 @@ $(document).ready(function() {
 
     // Masonry / Grid layout fnction
     function layoutInit(container, selector) {
-        $(container).each(function() {
+        $(container).each(function () {
             var $this = $(this);
 
             $this.isotope({
@@ -454,7 +457,7 @@ $(document).ready(function() {
     }
 
     function isotopeFilter(filterNav, container) {
-        $(filterNav).find('a').on('click', function(e) {
+        $(filterNav).find('a').on('click', function (e) {
             var $this = $(this),
                 filter = $this.attr('data-filter');
 
@@ -476,7 +479,7 @@ $(document).ready(function() {
     /* Masonry / Grid Layout & Isotope Filter for blog/portfolio etc... */
     if (typeof imagesLoaded === 'function' && $.fn.isotope) {
         // Portfolio
-        $('.portfolio-container').imagesLoaded(function() {
+        $('.portfolio-container').imagesLoaded(function () {
             // Portfolio Grid/Masonry
             layoutInit('.portfolio-container', '.portfolio-item'); // container - selector
             // Portfolio Filter
@@ -484,7 +487,7 @@ $(document).ready(function() {
         });
 
         // Blog
-        $('.entry-container').imagesLoaded(function() {
+        $('.entry-container').imagesLoaded(function () {
             // Blog Grid/Masonry
             layoutInit('.entry-container', '.entry-item'); // container - selector
             // Blog Filter
@@ -492,13 +495,13 @@ $(document).ready(function() {
         });
 
         // Product masonry product-masonry.html
-        $('.product-gallery-masonry').imagesLoaded(function() {
+        $('.product-gallery-masonry').imagesLoaded(function () {
             // Products Grid/Masonry
             layoutInit('.product-gallery-masonry', '.product-gallery-item'); // container - selector
         });
 
         // Products - Demo 11
-        $('.products-container').imagesLoaded(function() {
+        $('.products-container').imagesLoaded(function () {
             // Products Grid/Masonry
             layoutInit('.products-container', '.product-item'); // container - selector
             // Product Filter
@@ -510,7 +513,7 @@ $(document).ready(function() {
     var $countItem = $('.count');
     if ($.fn.countTo) {
         if ($.fn.waypoint) {
-            $countItem.waypoint(function() {
+            $countItem.waypoint(function () {
                 $(this.element).countTo();
             }, {
                 offset: '90%',
@@ -522,7 +525,7 @@ $(document).ready(function() {
     } else {
         // fallback
         // Get the data-to value and add it to element
-        $countItem.each(function() {
+        $countItem.each(function () {
             var $this = $(this),
                 countValue = $this.data('to');
             $this.text(countValue);
@@ -534,7 +537,7 @@ $(document).ready(function() {
     // If button scroll elements exists
     if ($scrollTo.length) {
         // Scroll to - Animate scroll
-        $scrollTo.on('click', function(e) {
+        $scrollTo.on('click', function (e) {
             var target = $(this).attr('href'),
                 $target = $(target);
             if ($target.length) {
@@ -549,7 +552,7 @@ $(document).ready(function() {
     }
 
     // Review tab/collapse show + scroll to tab
-    $('#review-link').on('click', function(e) {
+    $('#review-link').on('click', function (e) {
         var target = $(this).attr('href'),
             $target = $(target);
 
@@ -573,7 +576,7 @@ $(document).ready(function() {
     // Scroll Top Button - Show
     var $scrollTop = $('#scroll-top');
 
-    $(window).on('load scroll', function() {
+    $(window).on('load scroll', function () {
         if ($(window).scrollTop() >= 400) {
             $scrollTop.addClass('show');
         } else {
@@ -582,7 +585,7 @@ $(document).ready(function() {
     });
 
     // On click animate to top
-    $scrollTop.on('click', function(e) {
+    $scrollTop.on('click', function (e) {
         $('html, body').animate({
             'scrollTop': 0
         }, 800);
@@ -619,32 +622,32 @@ $(document).ready(function() {
             animation: google.maps.Animation.DROP
         });
 
-        google.maps.event.addListener(marker, 'click', (function(marker) {
-            return function() {
+        google.maps.event.addListener(marker, 'click', (function (marker) {
+            return function () {
                 infowindow.open(map, marker);
             }
         })(marker));
     }
 
     var $viewAll = $('.view-all-demos');
-    $viewAll.on('click', function(e) {
+    $viewAll.on('click', function (e) {
         e.preventDefault();
         $('.demo-item.hidden').addClass('show');
         $(this).addClass('disabled-hidden');
     })
 
     var $megamenu = $('.megamenu-container .sf-with-ul');
-    $megamenu.hover(function() {
+    $megamenu.hover(function () {
         $('.demo-item.show').addClass('hidden');
         $('.demo-item.show').removeClass('show');
         $viewAll.removeClass('disabled-hidden');
     });
 
     // Product quickView popup
-    $('.btn-quickview').on('click', function(e) {
+    $('.btn-quickview').on('click', function (e) {
         var ajaxUrl = $(this).attr('href');
         if ($.fn.magnificPopup) {
-            setTimeout(function() {
+            setTimeout(function () {
                 $.magnificPopup.open({
                     type: 'ajax',
                     mainClass: "mfp-ajax-product",
@@ -655,9 +658,9 @@ $(document).ready(function() {
                         src: ajaxUrl
                     },
                     callbacks: {
-                        ajaxContentAdded: function() {
+                        ajaxContentAdded: function () {
                             owlCarousels($('.quickView-content'), {
-                                onTranslate: function(e) {
+                                onTranslate: function (e) {
                                     var $this = $(e.target),
                                         currentIndex = ($this.data('owl.carousel').current() + e.item.count - Math.ceil(e.item.count / 2)) % e.item.count;
                                     $('.quickView-content .carousel-dot').eq(currentIndex).addClass('active').siblings().removeClass('active');
@@ -665,11 +668,11 @@ $(document).ready(function() {
                             });
                             quantityInputs();
                         },
-                        open: function() {
+                        open: function () {
                             $('body').css('overflow-x', 'visible');
                             $('.sticky-header.fixed').css('padding-right', '1.7rem');
                         },
-                        close: function() {
+                        close: function () {
                             $('body').css('overflow-x', 'hidden');
                             $('.sticky-header.fixed').css('padding-right', '0');
                         }
@@ -684,14 +687,14 @@ $(document).ready(function() {
             e.preventDefault();
         }
     });
-    $('body').on('click', '.carousel-dot', function() {
+    $('body').on('click', '.carousel-dot', function () {
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
     });
 
-    $('body').on('click', '.btn-fullscreen', function(e) {
+    $('body').on('click', '.btn-fullscreen', function (e) {
         var galleryArr = [];
-        $(this).parents('.owl-stage-outer').find('.owl-item:not(.cloned)').each(function() {
+        $(this).parents('.owl-stage-outer').find('.owl-item:not(.cloned)').each(function () {
             var $this = $(this).find('img'),
                 imgSrc = $this.attr('src'),
                 imgTitle = $this.attr('alt'),
@@ -705,7 +708,7 @@ $(document).ready(function() {
         if (mpInstance.isOpen)
             mpInstance.close();
 
-        setTimeout(function() {
+        setTimeout(function () {
             $.magnificPopup.open({
                 type: 'ajax',
                 mainClass: "mfp-ajax-product",
@@ -716,9 +719,9 @@ $(document).ready(function() {
                     src: ajaxUrl
                 },
                 callbacks: {
-                    ajaxContentAdded: function() {
+                    ajaxContentAdded: function () {
                         owlCarousels($('.quickView-content'), {
-                            onTranslate: function(e) {
+                            onTranslate: function (e) {
                                 var $this = $(e.target),
                                     currentIndex = ($this.data('owl.carousel').current() + e.item.count - Math.ceil(e.item.count / 2)) % e.item.count;
                                 $('.quickView-content .carousel-dot').eq(currentIndex).addClass('active').siblings().removeClass('active');
@@ -727,11 +730,11 @@ $(document).ready(function() {
                         });
                         quantityInputs();
                     },
-                    open: function() {
+                    open: function () {
                         $('body').css('overflow-x', 'visible');
                         $('.sticky-header.fixed').css('padding-right', '1.7rem');
                     },
-                    close: function() {
+                    close: function () {
                         $('body').css('overflow-x', 'hidden');
                         $('.sticky-header.fixed').css('padding-right', '0');
                     }
@@ -747,13 +750,13 @@ $(document).ready(function() {
     });
 
     if (document.getElementById('newsletter-popup-form')) {
-        setTimeout(function() {
+        setTimeout(function () {
             var mpInstance = $.magnificPopup.instance;
             if (mpInstance.isOpen) {
                 mpInstance.close();
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $.magnificPopup.open({
                     items: {
                         src: '#newsletter-popup-form'
@@ -761,11 +764,11 @@ $(document).ready(function() {
                     type: 'inline',
                     removalDelay: 350,
                     callbacks: {
-                        open: function() {
+                        open: function () {
                             $('body').css('overflow-x', 'visible');
                             $('.sticky-header.fixed').css('padding-right', '1.7rem');
                         },
-                        close: function() {
+                        close: function () {
                             $('body').css('overflow-x', 'hidden');
                             $('.sticky-header.fixed').css('padding-right', '0');
                         }

@@ -87,7 +87,7 @@ class ClientController extends AbstractController
         //rue de livraion
         $street = $session->get('shipping');
         // $street = $streetRepository->find($street->getId());
-        $order->setState('in progress');
+        $order->setState('waiting');
         $order->setPaymentDue(new \DateTime('+ 6 day'));
         $user  = $this->getUser();
         $order->setUser($user);

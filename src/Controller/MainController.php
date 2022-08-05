@@ -29,7 +29,7 @@ class MainController extends AbstractController
         return $this->render('lest/service.html.twig');
     }
     /**
-     * @Route("/track-my-order/{number}", name="track_show")
+     * @Route("js/track-my-order/{number}", name="track_show")
      */
     public function trackOrder(Order $order):Response
     {
@@ -45,9 +45,15 @@ class MainController extends AbstractController
     }
     /**
      * @Route("/track-my-order/", name="track_index")
+     * @Route("/track-my-order/{number}", name="track_number")
      */
-    public function track():Response
+    public function track(Order $order  = null):Response
     {
+        if($order){
+            return $this->render('lest/track/index.html.twig',[
+                'order'=>$order
+            ]);
+        }
         return $this->render('lest/track/index.html.twig');
     }
     /**

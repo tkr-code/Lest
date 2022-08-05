@@ -7,8 +7,8 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
+                <li class="breadcrumb-item"><a href="/">{{'Home'|trans}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{'Contact us'|trans}}</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
@@ -64,8 +64,7 @@
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button class="btn btn-outline-primary-2 btn-minwidth-sm" type="submit">{{'Send
-                                Message'|trans }} <i class="icon-long-arrow-right"></i></button>
+                            <button class="btn btn-outline-primary-2 btn-minwidth-sm" type="submit">{{'Send Message'|trans }} <i class="icon-long-arrow-right"></i></button>
                         </div>
                     </div>
                     {{ form_widget(form_contact) }}

@@ -4,7 +4,7 @@
 {% set delivery = app.request.session.get('shipping') %}
 {% endif %}
 
-{% block title %}Cart
+{% block title %}{{'Cart'|trans}}
 {% endblock %}
 
 {% block main %}
@@ -123,7 +123,7 @@
                         </table>
                         <!-- End .table table-wishlist -->
 
-                        <div class="cart-bottom">
+                        {# <div class="cart-bottom">
                             <div class="cart-discount">
                                 <form action="#">
                                     <div class="input-group">
@@ -140,11 +140,11 @@
                             </div>
                             <!-- End .cart-discount -->
 
-                            {# <a href="#" class="btn btn-outline-dark-2">
+                             <a href="#" class="btn btn-outline-dark-2">
                                 <span>UPDATE CART</span>
                                 <i class="icon-refresh"></i>
-                            </a> #}
-                        </div>
+                            </a> 
+                        </div> #}
                         <!-- End .cart-bottom -->
                     </div>
                     <!-- End .col-lg-9 -->
@@ -284,13 +284,12 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body text-center">
-                                <a class="btn bg-primary btn-primary p-5 rounded-circle" href="#">
+                                <span class="btn bg-primary btn-primary p-5 rounded-circle">
                                     <i class="icon-shopping-cart" style="font-size:7rem"></i>
-                                </a>
+                                </span>
                                 <h3>{{'Empty cart'|trans }}</h3>
                                 <p>Ajouter au moins un article au panier</p>
-                                <a href="{{ path('articles') }}" class="btn btn-primary mt-2 w-100">View All
-                                    products</a>
+                                <a href="{{ path('articles') }}" class="btn btn-primary mt-2 w-100">Tous nos produits</a>
                             </div>
                         </div>
                     </div>

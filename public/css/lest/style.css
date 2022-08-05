@@ -15231,7 +15231,7 @@ button:focus {
 }
 
 .form-box {
-    max-width: 575px;
+    max-width: 595px;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
@@ -15329,6 +15329,21 @@ button:focus {
 
 .form-choice p {
     margin-bottom: 2.7rem
+}
+label.required {
+    color: #666;
+    font-weight: 300;
+    font-size: 1.4rem;
+    margin: 0 0 1.1rem;
+}
+
+#registration_form_agreeTerms {
+    position: static;
+    margin-bottom: 0;
+    margin-top: .1rem;
+    font-size: 1.4rem;
+    padding-left: 2.6rem;
+    margin-left: -2.6rem;
 }
 
 .btn.btn-login {

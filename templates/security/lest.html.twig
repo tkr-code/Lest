@@ -1,33 +1,13 @@
 {% extends "lest/base.html.twig" %}
 {% block main %}
-<style>
-	label.required {
-		color: #666;
-		font-weight: 300;
-		font-size: 1.4rem;
-		margin: 0 0 1.1rem;
-	}
-
-	#registration_form_agreeTerms {
-		position: static;
-		margin-bottom: 0;
-		margin-top: .1rem;
-		font-size: 1.4rem;
-		padding-left: 2.6rem;
-		margin-left: -2.6rem;
-	}
-</style>
 <main class="main">
 	<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
 		<div class="container">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
-					<a href="index.html">Home</a>
+					<a href="/">{{'Home'|trans}}</a>
 				</li>
-				<li class="breadcrumb-item">
-					<a href="#">Pages</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page">Login</li>
+				<li class="breadcrumb-item active" aria-current="page">{{'Login'|trans}}</li>
 			</ol>
 		</div>
 		<!-- End .container -->
@@ -77,7 +57,7 @@
 
 									<div class="custom-control custom-checkbox">
 										<input type="checkbox" class="custom-control-input" id="signin-remember-2">
-										<label class="custom-control-label" for="signin-remember-2">{{'Remember	Me'|trans}}</label>
+										<label class="custom-control-label" for="signin-remember-2">Se souvenir de moi</label>
 									</div>
 									<!-- End .custom-checkbox -->
 
