@@ -1,6 +1,12 @@
 $(function() {
     "use strict";
 
+    // //loader
+    window.onload = function() {
+        var loader = document.getElementById('loader-app')
+        loader.style.display = 'none'
+    }
+
     //------- Parallax -------//
     // skrollr.init({
     //   forceHeight: false

@@ -8,6 +8,38 @@
 <script src="{{asset('js/article_detail.js') }}"></script>
 {% endblock %}
 {% block main %}
+<style>
+    #btn-product-gallery {
+        display: inline-block;
+    }
+
+    .product-image-thumbs {
+        align-items: stretch;
+        display: flex;
+        margin-top: 2rem;
+    }
+
+    .product-image-thumb img {
+        max-width: 100%;
+        height: auto;
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+    }
+
+    .product-image-thumb {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+        border-radius: .25rem;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-right: 1rem;
+        max-width: 7rem;
+        padding: .5rem;
+    }
+</style>
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container d-flex align-items-center">
@@ -35,71 +67,54 @@
         <div class="container">
             <div class="product-details-top">
                 <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-4">
                         <div class="product-gallery">
                             <figure class="product-main-image">
                                 {% import "macros/etats.html.twig" as etats %}
                                 {% if article.quantity <= 0 %} <span class="product-label label-out bg-danger">{{'Out of
                                     Stock'|trans}}</span>
                                     {% endif %}
-                                    {{ etats.articleLabel(article.label) }} {% for item in article.images|slice(0,1) %}
+                                    {{ etats.articleLabel(article.label) }}
+                                    {% for item in article.images|slice(0,1) %}
                                     <img id="product-zoom" src="{{ asset('img/article/' ~ item.name ) }}"
                                         alt="{{ article.title }}"
                                         data-zoom-image="{{ asset('img/article/' ~ item.name ) }}" alt="product image">
+
                                     {% else %}
                                     <div class="single-prd-item">
                                         <img class="img-fluid" src="{{ asset('img/article/vide.png') }}"
                                             alt="{{ article.title }}">
                                     </div>
                                     {% endfor %}
-                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
-                                        <i class="icon-arrows"></i>
-                                    </a>
                             </figure>
                             <!-- End .product-main-image -->
-                            {% if article.images[1] is defined %}
-                            <div id="product-zoom-gallery" class="product-image-gallery product-gallery-masonry"
-                                style="position: relative; height: 390.983px;">
-                                {% if article.images[1] is defined %}
-                                <a class="product-gallery-item" href="#"
-                                    data-image="{{ asset('img/article/' ~ article.images[1].name )}}"
-                                    data-zoom-image="{{ asset('img/article/' ~ article.images[1].name ) }}"
-                                    style="position: absolute; left: 0px; top: 0px;">
-                                    <img src="{{ asset('img/article/' ~ article.images[1].name)}}" alt="product cross">
-                                </a>
-                                {% endif %} {% if article.images[2] is defined %}
-                                <a class="product-gallery-item gallery-item-wide active" href="#"
-                                    data-image="{{ asset('img/article/' ~ article.images[2].name )}}"
-                                    data-zoom-image="{{ asset('img/article/' ~ article.images[2].name )}}"
-                                    style="position: absolute; left: 292px; top: 0px;">
-                                    <img src="{{ asset('img/article/' ~ article.images[2].name )}}"
-                                        alt="{{ article.title }}">
-                                </a>
-                                {% endif %} {% if article.images[3] is defined %}
-                                <a class="product-gallery-item" href="#"
-                                    data-image="{{ asset('img/article/' ~ article.images[3].name )}}"
-                                    data-zoom-image="{{ asset('img/article/' ~ article.images[3].name )}}"
-                                    style="position: absolute; left: 292px; top: 223.383px;">
-                                    <img src="{{ asset('img/article/' ~ article.images[3].name )}}"
-                                        alt="{{ article.title }}">
-                                </a>
-                                {% endif %}
+                            <div class="row">
+                                <div class="col-12 product-image-thumbs">
+                                    {% for item in article.images %}
+                                    <a href="{{ asset('img/article/' ~ item.name )}}" class="product-gallery-show">
+
+                                        <div class="product-image-thumb">
+                                            <img src="{{ asset('img/article/' ~ item.name )}}"
+                                            alt="{{ item.name }}">
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <!-- End .product-image-gallery -->
-                            {% endif %}
                         </div>
                         <!-- End .product-gallery -->
                     </div>
                     <!-- End .col-md-6 -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="product-details sticky-content">
                             <h1 class="product-title">{{ article.title }}</h1>
                             <!-- End .product-title -->
 
                             <div class="ratings-container">
                                 <div class="ratings">
-                                    <div class="ratings-val" style="width: {{ rating(article) }} %"></div>
+                                    <div class="ratings-val" style="width: {{ rating(article) }}%"></div>
                                     <!-- End .ratings-val -->
                                 </div>
                                 <!-- End .ratings -->
@@ -167,7 +182,7 @@
                                 </div>
                                 <div class="details-action-wrapper">
                                     <a target="_blank"
-                                        href="https://api.whatsapp.com/send?phone=221778010646&text=Salut, Je souhaite commander cet article: {{ url('articles_show', { category: article.category.title|lower, slug: article.slug, id: article.id}) }}"
+                                        href="https://api.whatsapp.com/send?phone=221778010646&text=Salut, Je souhaite commander cet article: {{ url('articles_show', { category: article.category.slug, slug: article.slug, id: article.id}) }}"
                                         class="btn-product">
                                         <span>
                                             <i class="icon-whatsapp"></i> Commander Via whatsapp
@@ -180,7 +195,7 @@
 
                             <div class="product-details-footer">
                                 <div class="product-cat">
-                                    <span>Category:</span>
+                                    <span>{{'Category'|trans}}:</span>
                                     <a
                                         href="{{path('articles_category',{category:article.category.slug|lower}) }}">{{article.category.title}}</a>
                                 </div>
@@ -221,7 +236,7 @@
                                             <a class="collapsed" role="button" data-toggle="collapse"
                                                 href="#product-accordion-info" aria-expanded="false"
                                                 aria-controls="product-accordion-info">
-                                                Information suplémentaire
+                                                Information suplémentaire ({{article.options|length}})
                                             </a>
                                         </h2>
                                     </div>
@@ -330,6 +345,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+                        "autoplay":true,
+                        "autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2

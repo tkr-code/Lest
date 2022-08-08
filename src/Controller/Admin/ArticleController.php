@@ -103,12 +103,6 @@ class ArticleController extends AbstractController
             }
             $article->setQtyReel($article->getQuantity());
             $idBrand = $request->request->get('brand');
-            if($idBrand){
-                // $brand = $brandRepository->find($idBrand);
-                // if($brand){
-                //     $article->setBrand($brand);
-                // }
-            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -257,6 +251,7 @@ class ArticleController extends AbstractController
         }
         return $this->render('admin/article/show.html.twig', [
             'article' => $article,
+            'parent_page'=>'Produit'
         ]);
     }
 
@@ -287,9 +282,9 @@ class ArticleController extends AbstractController
      * @Route("/delete/image/{id}", name="article_delete_image", methods={"DELETE"})
      */
     public function deleteImage(Image $image,Request $request){
-        $data = json_decode($request->getContent(),true);
+        $token = $request->request->get('_token');
         //om verifi si le token est valide 
-        if($this->isCsrfTokenValid('delete'.$image->getId(),$data['_token'])){
+        if($this->isCsrfTokenValid('delete'.$image->getId(),$token)){
             $path = $this->getParameter('article_images_directory').'/'.$image->getName();
             if(file_exists($path)){
                 unlink($path);

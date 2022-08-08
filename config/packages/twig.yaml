@@ -9,7 +9,8 @@ twig:
         navs: '@App\Twig\NavExtension'
         categories: '@App\Twig\CategoryExtention'
         parentCategorys: '@App\Twig\CategoryParentExtention'
-        site: 
+        site:
+            version: '1.0' 
             name: 'lest'
             email: 'contact@lest.sn'
             path_logo: 'lest-logo.png'

@@ -11,46 +11,89 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			// $(document).on('click','.btn-edit-modal-option',function(e){
-			// 	e.preventDefault()
-			// 	let id = $(this).data('id')
-			// 	console.log(id);
-			// 	$('#modal-default .modal-title').text('Modifier une caractéristique')
-			// 	$('#modal-default').modal('show')
-			// })
-			$(document).on('click', '.btn-edit-modal-option', function(e) {
-                e.preventDefault()
-                $('#modal-default').modal('show')
-                let href = $(this).data('path')
-                $.ajax({
-                    url: href,
-                    method: 'POST',
-                    type: 'json',
-                    data: {
-                        modal: 'create'
-                    },
-                    beforeSend: function() {
-                        $('.modal-loader').css('display', 'flex')
-                    },
-                    success: function(data) {
-                        $('#modal-default .modal-title').html('Modifier la date emmission')
-                        $('#modal-default .modal-body').html(data.content)
-                        $('.modal-loader').css('display', 'none')
-                    },
-                    error: function() {
-                        $('.modal-loader').css('display', 'none')
-                        alert('Chargement impossible')
-                    }
-                })
-            })
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(document).on('click','.btn-image-delete',function(e){
+			e.preventDefault()
+			let href = $(this).attr('href')
+			let token = $(this).data('token')
+			let div = $(this).closest('div')
+			Swal.fire({
+            title: 'Etes vous sûr?',
+            text: "Voulez vous supprimr cettre image ?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Fermer',
+            confirmButtonText: 'Oui, je confirme!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+				$.ajax({
+				url: href,
+				method: 'DELETE',
+				type: 'json',
+				data: {
+					_token:token
+				},
+				beforeSend: function () {
+					$('.js-loader-text').text("Suppression de l'image en cour ...")
+					$('.js-loader').css('display', 'flex')
+				},
+				success: function (data) {
+					$('.js-loader').css('display', 'none')
+					if (data.success) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Supression réussie !',
+							showConfirmButton: false,
+							timer: 1500
+						})
+						div.remove()
+					} else {
+						alert('Une erreur est servenue')
+					}
+				},
+				error: function () {
+					$('.js-loader').css('display', 'none')
+					alert('Une erreur est servenue')
+				}
+			})
+            }
+        })
+			
 		})
-	</script>
+		$(document).on('click', '.btn-edit-modal-option', function (e) {
+			e.preventDefault()
+			$('#modal-default').modal('show')
+			let href = $(this).data('path')
+			$.ajax({
+				url: href,
+				method: 'POST',
+				type: 'json',
+				data: {
+					modal: 'create'
+				},
+				beforeSend: function () {
+					$('.modal-loader').css('display', 'flex')
+				},
+				success: function (data) {
+					$('#modal-default .modal-title').html('Modifier la date émmission')
+					$('#modal-default .modal-body').html(data.content)
+					$('.modal-loader').css('display', 'none')
+				},
+				error: function () {
+					$('.modal-loader').css('display', 'none')
+					alert('Chargement impossible')
+				}
+			})
+		})
+	})
+</script>
 {% endblock %}
 
 {% block breadcrumb %}
-	{{ utils.breadcrumb('Ajouter un produit',[
+{{ utils.breadcrumb('Ajouter un produit',[
 {
 path:path('article_index'),
 name:'Manage Articles'
@@ -58,142 +101,140 @@ name:'Manage Articles'
 ])}}
 {% endblock %}
 
-{% block foot %}
-	<script src="{{ asset('js/image.js') }}"></script>
-{% endblock %}
-
 {% block body %}
-	<style>
-		.gallery-2{background:#ccc;border-radius:5px;padding:5px;margin:5px
-		}
-	</style>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card card-outline card-primary">
-				<div class="card-header">
-					<div class="card-title">{{ 'Edit Article' }}</div>
-				</div>
-				<div class="card-body">
-					<div class="row">
-						<div
-							class="col-md-9 col-12">
-							<!-- Custom Tabs -->
-							<div class="card">
-								<div class="card-header d-flex p-0">
-									<h3 class="card-title p-3">Modifier un article</h3>
-									<ul class="nav nav-pills ml-auto p-2">
-										<li class="nav-item">
-											<a class="nav-link active" href="#tab_1" data-toggle="tab">Information</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#tab_2" data-toggle="tab">Caractéristiques</a>
-										</li>
-									</ul>
-								</div>
-								<div class="card-body">
-									<div class="tab-content">
-										<div class="tab-pane active" id="tab_1">
-											{{ form_start(form) }}
-											<div class="row">
-												<div class="col-lg-5">
-													{{form_row(form.title)}}
-												</div>
-												<div class="col-lg-7">
-													{{form_row(form.description)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.buyingPrice)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.price)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.quantity)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.reduction)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.category)}}
-												</div>												
-												<div class="col-lg-4">
-													{{form_row(form.brand)}}
-												</div>
-												<div class="col-lg-4">
-													{{form_row(form.label)}}
-												</div>
-												<div class="col-lg-4 col-12">
-													{{form_row(form.etat)}}
-												</div>
-												<div class="col-lg-4 col-12">
-													{{form_row(form.status)}}
-												</div>
-												<div class="col-lg-4 col-12">
-													{{form_row(form.images)}}
-												</div>
 
-												<div class="col-lg-12 col-12">
-													{{form_row(form.enabled)}}
-												</div>
-												<div class="gallery">
-													<p class="text-center">Prévisualisez vos images</p>
-												</div>
-												<div class="col-lg-12">
-													<div class="row gallery-2">
-														{% for image in article.images %}
-															<div class="col-lg-3 col-md-4 col-xs-6">
-																<img src="{{ asset('/img/article/' ~ image.name)}}" class="zoom img-fluid " alt="">
-																<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center" href="{{ path('article_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
-																	<i class="fa fa-window-close"></i>
-																</a>
-															</div>
-														{% else %}
-															<div class="col-md-12 col-12">
-																<p class="font-weight-bold text-center">L'article ne possede pas
-																	                                                            d'image</p>
-															</div>
-														{% endfor %}
+<div class="row">
+	<div class="col-md-12">
+		<div class="card card-outline card-primary">
+			<div class="card-header">
+				<div class="card-title">{{ 'Edit Article' }}</div>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-9 col-12">
+						<!-- Custom Tabs -->
+						<div class="card">
+							<div class="card-header d-flex p-0">
+								<h3 class="card-title p-3">Modifier un article</h3>
+								<ul class="nav nav-pills ml-auto p-2">
+									<li class="nav-item">
+										<a class="nav-link active" href="#tab_1" data-toggle="tab">Information</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#tab_2" data-toggle="tab">Caractéristiques</a>
+									</li>
+								</ul>
+							</div>
+							<div class="card-body">
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_1">
+										{{ form_start(form) }}
+										<div class="row">
+											<div class="col-lg-5">
+												{{form_row(form.title)}}
+											</div>
+											<div class="col-lg-7">
+												{{form_row(form.description)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.buyingPrice)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.price)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.quantity)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.qty_reel)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.reduction)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.category)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.brand)}}
+											</div>
+											<div class="col-lg-4">
+												{{form_row(form.label)}}
+											</div>
+											<div class="col-lg-4 col-12">
+												{{form_row(form.etat)}}
+											</div>
+											<div class="col-lg-4 col-12">
+												{{form_row(form.status)}}
+											</div>
+											<div class="col-lg-4 col-12">
+												{{form_row(form.images)}}
+											</div>
+
+											<div class="col-lg-12 col-12">
+												{{form_row(form.enabled)}}
+											</div>
+											<div class="gallery">
+												<p class="text-center">Prévisualisez vos images</p>
+											</div>
+											<div class="col-lg-12">
+												<div class="row gallery-2">
+													{% for image in article.images %}
+													<div class="col-lg-3 col-md-4 col-xs-6">
+														<img src="{{ asset('/img/article/' ~ image.name)}}"
+															class="zoom img-fluid " alt="">
+														<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center"
+															href="{{ path('article_delete_image', {id: image.id}) }}"
+															data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">
+															<i class="fa fa-window-close"></i>
+														</a>
 													</div>
-													<div class="btn-group">
-														<button class="btn btn-primary">
-															<i class="fas fa-save"></i>
-															{{ button_label|default('Save') }}</button>
+													{% else %}
+													<div class="col-md-12 col-12">
+														<p class="font-weight-bold text-center">L'article ne possede pas
+															d'image</p>
 													</div>
+													{% endfor %}
+												</div>
+												<div class="btn-group">
+													<button class="btn btn-primary">
+														<i class="fas fa-save"></i>
+														{{ button_label|default('Save') }}</button>
 												</div>
 											</div>
-											{{ form_widget(form) }}
-											{{ form_end(form) }}
-											<hr>
-											{{ include('admin/article/_delete_form.html.twig') }}
 										</div>
-										<!-- /.tab-pane -->
-										<div class="tab-pane " id="tab_2">
-											{% include "includes/article/article_option/table.html.twig" %}
-										</div>
-										<!-- /.tab-pane -->
-										<div class="tab-pane" id="tab_3"></div>
-										<!-- /.tab-pane -->
+										{{ form_widget(form) }}
+										{{ form_end(form) }}
+										<hr>
+										{{ include('admin/article/_delete_form.html.twig') }}
 									</div>
-									<!-- /.tab-content -->
+									<!-- /.tab-pane -->
+									<div class="tab-pane " id="tab_2">
+										{% include "includes/article/article_option/table.html.twig" %}
+									</div>
+									<!-- /.tab-pane -->
+									<div class="tab-pane" id="tab_3"></div>
+									<!-- /.tab-pane -->
 								</div>
-								<!-- /.card-body -->
+								<!-- /.tab-content -->
 							</div>
-							<a class="btn btn-dark" href="{{ path('article_index') }}">
-															<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-															back to list</a>
-							<!-- ./card -->
+							<!-- /.card-body -->
 						</div>
-						<div class="col-md-3">
-							{% include "includes/article/aides.html.twig" %}
-						</div>
+						<a class="btn btn-dark" href="{{ path('article_index') }}">
+							<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+							{{'back to list'|trans}}</a>
+						<!-- ./card -->
+					</div>
+					<div class="col-md-3">
+						{% include "includes/article/aides.html.twig" %}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 {% endblock %}
 
 {% block modal %}
-	{% include "includes/article/article_option/modal_add_option.html.twig" %}
-	{{ modal.default()}}
+{% include "includes/article/article_option/modal_add_option.html.twig" %}
+{{ modal.default()}}
 {% endblock %}

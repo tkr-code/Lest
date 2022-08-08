@@ -5,7 +5,7 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('View Article',[
+{{ utils.breadcrumb('View Article'|trans,[
 {
 path:'article_index',
 name:'Manage Articles'
@@ -55,7 +55,8 @@ name:'Manage Articles'
                         </tr>
                         <tr>
                             <td scope="row">Categorie</td>
-                            <td>{{ article.category.parentCategory ? article.category.parentCategory.name ~ ' - ' : '' }} {{ article.category.title }}</td>
+                            <td>{{ article.category.parentCategory ? article.category.parentCategory.name ~ ' - ' : ''
+                                }} {{ article.category.title }}</td>
                         </tr>
                         <tr>
                             <td scope="row">Marque</td>
@@ -90,25 +91,7 @@ name:'Manage Articles'
                 </table>
 
             </div>
-
         </div>
-        <div class="row mt-4">
-            <nav class="w-100">
-                <div class="nav nav-tabs" id="product-tab" role="tablist">
-                    <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments"
-                        role="tab" aria-controls="product-comments" aria-selected="false">Comments</a>
-                    <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating"
-                        role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
-                </div>
-            </nav>
-            <div class="tab-content p-3" id="nav-tabContent">
-                <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
-                    comments </div>
-                <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
-                    rating </div>
-            </div>
-        </div>
-        <hr>
         <div class="row">
             <div class="col-md-12">
                 <h4>Specificity of the article</h4>

@@ -1006,7 +1006,7 @@
       </trans-unit>
       <trans-unit id="FF4cn0z" resname="Pmd developper">
         <source>Pmd developper</source>
-        <target>__Pmd developper</target>
+        <target>Pmd developper</target>
       </trans-unit>
       <trans-unit id="_nklVqF" resname="Search in">
         <source>Search in</source>
@@ -1049,6 +1049,32 @@
       <trans-unit id="WUAVGWp" resname="Arrived">
         <source>Arrived</source>
         <target>Arrivée</target>
+      </trans-unit>
+      <trans-unit id="TLGRyWw" resname="View Article">
+        <source>View Article</source>
+        <target>Voir Article</target>
+      </trans-unit>
+      <trans-unit id="FVHfXDL" resname="Terms&#10;                                            and conditions">
+        <source>Terms
+                                            and conditions</source>
+        <target>__Terms
+                                            and conditions</target>
+      </trans-unit>
+      <trans-unit id="mecfSMS" resname="Checkout">
+        <source>Checkout</source>
+        <target>Commander</target>
+      </trans-unit>
+      <trans-unit id="KYh6X.m" resname="Share">
+        <source>Share</source>
+        <target>Partager</target>
+      </trans-unit>
+      <trans-unit id="BdN5no1" resname="ORDER">
+        <source>ORDER</source>
+        <target>COMMANDE</target>
+      </trans-unit>
+      <trans-unit id="u6YIKGG" resname="Expected Arrival">
+        <source>Expected Arrival</source>
+        <target>__Expected Arrival</target>
       </trans-unit>
     </body>
   </file>

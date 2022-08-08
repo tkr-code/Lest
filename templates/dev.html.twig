@@ -20,13 +20,19 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<style>
+	@media screen and (max-width: 767px) {
+		.mobile_h3{
+			font-size: 20px;
+		}
+	}
+	</style>
 	
 	<div class="bg-g1 size1 flex-w flex-col-c-sb p-l-15 p-r-15 p-b-30">
 		
 
 		<div class="flex-col-c w-full p-t-50 p-b-80">
-			<h3 class="l1-txt1 txt-center p-b-10">
+			<h3 class="l1-txt1 txt-center p-b-10 mobile_h3">
 				<img src="{{ asset('img/lest-logo.png') }}" class="mx-auto" width="100px" alt="Lest"> </br>
                 {{ app_name }}.SN </br>
 				{{'Coming Soon'|trans}}

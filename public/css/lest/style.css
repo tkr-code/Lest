@@ -1831,6 +1831,9 @@ blockquote.text-white cite span {
         flex: 0 0 180px;
         max-width: 180px
     }
+    .mobile-cat {
+        width: 90px;
+    }
 }
 
 @media screen and (max-width: 575px) {
@@ -11122,6 +11125,21 @@ small.form-text {
     height: auto
 }
 
+#loader-app {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 100;
+    color: #222;
+    font-weight: bold;
+    background: #fff;
+    text-align: center;
+}
+
 .slider-loader {
     color: #333
 }
@@ -15824,8 +15842,8 @@ label.required {
 }
 
 .table td {
-    padding-top: 3rem;
-    padding-bottom: 3rem
+    padding-top: 2rem;
+    padding-bottom: 0rem
 }
 
 .table .price-col {

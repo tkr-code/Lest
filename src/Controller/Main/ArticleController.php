@@ -27,8 +27,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("boutique/{category}/{slug}/{id}", name="articles_show", requirements={"slug": "[a-z0-9\-]*"} )
      */
-    public function show(PaginatorInterface $paginatorInterface, CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
+    public function show( PaginatorInterface $paginatorInterface, CommentRepository $commentRepository, ArticleBuyRepository $articleBuyRepository, Article $article,string $category, string $slug, Request $request, ArticleRepository $articleRepository): Response
     {
+        if (!$article) {
+            throw $this->createNotFoundException(
+                'No product found for id '
+            );
+        }
         if($slug !== $article->getSlug() || $category !== $article->getCategory()->getSlug() ){
             return $this->redirectToRoute('articles_show',
                 [

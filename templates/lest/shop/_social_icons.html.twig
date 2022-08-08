@@ -1,18 +1,17 @@
 <div class="social-icons social-icons-sm">
-    <span class="social-label">Share:</span>
+    <span class="social-label">{{'Share'|trans}}:</span>
     <a href="{{ site.facebook }}" class="social-icon" title="Facebook" target="_blank">
         <i class="icon-facebook-f"></i>
     </a>
     {% if app.request.get('_route') == 'articles_show' %}
-
     <a href="#" class="social-icon copie"
-        data-text="{{ url('articles_show', { category: article.category.title|lower, slug: article.slug, id: article.id}) }}"
+        data-text="{{ url('articles_show', { category: article.category.slug, slug: article.slug, id: article.id}) }}"
         title="Copier le lien de l'article" target="_blank">
         <i class="fas fa-copy"></i>
     </a>
-    <a href="https://api.whatsapp.com/send?phone=221778010646&text={{ url('articles_show', { category: article.category.title|lower, slug: article.slug, id: article.id}) }}"
-    class="social-icon" title="whatsapp" target="_blank">
-    <i class="icon-whatsapp"></i>
-</a>
-{% endif %}
+    <a href="https://api.whatsapp.com/send?phone=221778010646&text={{ url('articles_show', { category: article.category.slug, slug: article.slug, id: article.id}) }}"
+        class="social-icon" title="whatsapp" target="_blank">
+        <i class="icon-whatsapp"></i>
+    </a>
+    {% endif %}
 </div>

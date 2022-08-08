@@ -58,6 +58,13 @@ class ArticleEditType extends AbstractType
                     'class'=>'select2'
                 ]
             ])
+            ->add('qty_reel',IntegerType::class,[
+                'label'=>'Quantité en stock (*)',
+                'attr'=>[
+                    'placeholder'=>'The quantity must be greater than zero'
+                ],
+                'help'=>'The quantity must be greater than zero'
+            ])
             ->add('quantity',IntegerType::class,[
                 'label'=>'Quantité (*)',
                 'attr'=>[

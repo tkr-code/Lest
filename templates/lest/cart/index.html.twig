@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block main %}
+<style>
+    .product-col {
+  width: 280px;
+}
+</style>
 <main class="main">
     <!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -36,9 +41,9 @@
                         <table class="table table-cart table-mobile">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th>{{'Product'|trans}}</th>
+                                    {# <th>{{'Price'|trans}}</th> #}
+                                    <th>{{'Quantity'|trans}}</th>
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
@@ -62,14 +67,23 @@
                                             </figure>
 
                                             <h3 class="product-title">
-                                                <a href="#">{{ item.article.title }}</a>
+                                                <a href="#">{{ item.article.title }}</a> <br>
+                                                {% if item.article.reduction > 0 %}
+                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
+                                        </span>
+                                        <span class="old-price">{{ item.article.formatterPrice }}</span>
+                                        {% else %}
+                                        <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
+                                        </span>
+                                        {% endif %}
+                                        {{ site.current_name }}
                                             </h3>
                                             <!-- End .product-title -->
                                         </div>
                                         <!-- End .product -->
 
                                     </td>
-                                    <td class="price-col">
+                                    {# <td class="price-col">
                                         {% if item.article.reduction > 0 %}
                                         <span class="new-price">{{ item.article.newPrice| number_format(0,'.',' ') }}
                                         </span>
@@ -80,7 +94,7 @@
                                         {% endif %}
 
                                         {{ site.current}}
-                                    </td>
+                                    </td> #}
                                     <td class="quantity-col">
                                         <form class="form-row" action="" method="post">
                                             <div class="form-group col-md-12">
@@ -107,7 +121,7 @@
                                     </td>
 
                                     <td class="total-col">{{ (item.article.newPrice * item.quantite) |
-                                        number_format(0,'.',' ') ~ ' ' ~ site.current }}
+                                        number_format(0,'.',' ') ~ ' ' ~ site.current_name }}
                                     </td>
                                     <td class="remove-col">
                                         <a href="{{ path('cart_delete',{id:item.article.id}) }}" class="btn-remove">
@@ -187,7 +201,7 @@
                                                             {{
                                                             delivery.shippingAmount.amount|number_format(2,'.','
                                                             ') }}
-                                                            {{ site.current
+                                                            {{ site.current_name
                                                             }}
                                                         </span>
                                                     </p>
@@ -241,7 +255,7 @@
                                             <td>{{'Subtotal'|trans}}:</td>
                                             <td style="min-width:max-content">
                                                 {{ total|number_format(0,'.',' ') }}
-                                                {{ site.current }}
+                                                {{ site.current_name }}
                                             </td>
                                         </tr>
 
@@ -252,11 +266,11 @@
                                                 {% if app.request.session.get('shipping') %}
                                                 <span class="text-danger" class="total">
                                                     {{ (total + delivery.shippingAmount.amount)|number_format(0,'.',' ')
-                                                    }} {{ site.current }}
+                                                    }} {{ site.current_name }}
                                                 </span>
                                                 {% else %}
                                                 <span class="text-danger total">
-                                                    {{ total|number_format(0,'.',' ' ) ~ ' ' ~ site.current }}
+                                                    {{ total|number_format(0,'.',' ' ) ~ ' ' ~ site.current_name }}
                                                 </span>
                                                 {% endif %}
                                             </td>
@@ -272,7 +286,7 @@
                             <!-- End .summary -->
                         </form>
                         <a href="{{ path('articles') }}" class="btn btn-outline-dark-2 btn-block mb-3">
-                            <span>CONTINUE SHOPPING</span>
+                            <span>CONTINUEZ VOS COURSES</span>
                             <i class="icon-refresh"></i>
                         </a>
                     </aside>

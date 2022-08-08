@@ -1,5 +1,10 @@
 {% extends "lest/base.html.twig" %}
 {% block main %}
+<style>
+	@media screen and (max-width: 767px) {
+		
+	}
+</style>
 <main class="main">
 	<div class="intro-section pt-3 pb-3 mb-2">
 		<div class="container">
@@ -11,6 +16,8 @@
 							data-owl-options='{
 								"nav": false,
 								"dots": true,
+								"autoplay":true,
+    							"autoplayTimeout":4000,
 								"responsive": {
 									"768": {
 										"nav": true,
@@ -54,7 +61,8 @@
 							<div class="intro-slide">
 								<figure class="slide-image">
 									<picture>
-										<source media="(max-width: 480px)" srcset="{{ asset('img/icons/lest-slide-2-480.png') }}">
+										<source media="(max-width: 480px)"
+											srcset="{{ asset('img/icons/lest-slide-2-480.png') }}">
 										<img src="{{ asset('img/icons/lest-slide-2.png') }}" alt="Image Desc">
 									</picture>
 								</figure>
@@ -99,7 +107,7 @@
 					<div class="intro-banners">
 						<div class="banner mb-lg-1 mb-xl-2">
 							<a href="{{path('articles_category',{category:'visiophone'}) }}">
-								<img src="{{ asset('img/cats/visio-banner.png') }}" alt="Banner">
+								<img  src="{{ asset('img/cats/visio-banner.png') }}" alt="Banner">
 							</a>
 
 							<div class="banner-content">
@@ -185,7 +193,7 @@
 					<a href="{{path('articles_category',{category:'ordinateurs'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/1.png') }}" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/1.png') }}" alt="Category image">
 							</span>
 						</figure>
 						<h3 class="cat-block-title">{{'Laptop'|trans}}</h3>
@@ -197,7 +205,7 @@
 					<a href="{{path('articles_category',{category:'imprimante-et-accessoires'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/imprimante.png') }}" width="100px" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/imprimante.png') }}" width="100px" alt="Category image">
 							</span>
 						</figure>
 
@@ -210,7 +218,7 @@
 					<a href="{{path('articles_category',{category:'accessoires'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/reseaux.png') }}" width="100px" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/reseaux.png') }}" width="100px" alt="Category image">
 							</span>
 						</figure>
 
@@ -223,7 +231,7 @@
 					<a href="{{path('articles_category',{category:'ordinateur-de-bureau'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/computer.png') }}" width="100px" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/computer.png') }}" width="100px" alt="Category image">
 							</span>
 						</figure>
 
@@ -236,7 +244,7 @@
 					<a href="{{path('articles_category',{category:'memoire'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/memoire.png') }}" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/memoire.png') }}" alt="Category image">
 							</span>
 						</figure>
 
@@ -249,7 +257,7 @@
 					<a href="{{path('articles_category',{category:'claviers-et-souris'}) }}" class="cat-block">
 						<figure>
 							<span>
-								<img src="{{ asset('img/cats/clavier-souris.png') }}" alt="Category image">
+								<img class="mobile-cat" src="{{ asset('img/cats/clavier-souris.png') }}" alt="Category image">
 							</span>
 						</figure>
 
@@ -293,7 +301,6 @@
 							{{'cameras'|trans}} {{'and'|trans}}
 							<br>
 							{{'transmission of images'|trans}}
-							transmission d'images
 						</h4>
 						<!-- End .banner-subtitle -->
 						<h3 class="banner-title">Vidéosurveillance.</h3>
@@ -388,6 +395,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+						"autoplay":true,
+						"autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2
@@ -420,6 +429,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+						"autoplay":true,
+						"autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2
@@ -453,6 +464,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+						"autoplay":true,
+						"autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2
@@ -486,6 +499,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+						"autoplay":true,
+						"autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2
@@ -518,6 +533,8 @@
 					"dots": false,
 					"margin": 20,
 					"loop": false,
+					"autoplay":true,
+					"autoplayTimeout":4000,
 					"responsive": {
 						"0": {
 							"items":2
@@ -564,6 +581,8 @@
 						"dots": false,
 						"margin": 20,
 						"loop": false,
+						"autoplay":true,
+						"autoplayTimeout":4000,
 						"responsive": {
 							"0": {
 								"items":2
