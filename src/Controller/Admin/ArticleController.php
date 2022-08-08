@@ -208,7 +208,8 @@ class ArticleController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $articleOption->setArticle($article)->setTitle($nom)->setContent($valeur);
                 if($articleOptionRepository->findOneBy([
-                    'title'=>$articleOption->getTitle()
+                    'title'=>$articleOption->getTitle(),
+                    'article'=>$article->getId()
                 ]))
                 {
                     $reponse =[
