@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mime\Address;
 
 
-class OrderService{
+class OrderService extends AbstractController{
     private $em;
     private $repository;
     private $orderRepository;
@@ -27,20 +27,22 @@ class OrderService{
         $this->emailService = $emailService;
     }
 
-    public function orderSendToEmail(Order $order){
-        return (new TemplatedEmail())
+    public function orderSendToEmail(Order $order, $pdf= false){
+        $fichier = 'Facture - N°'.$order->getNumber().' - Lest.pdf';
+        $email =  (new TemplatedEmail())
             ->from(new Address('contact@lest.sn', 'lest.sn'))
             ->to($order->getUser()->getEmail())
             ->subject('Lest - Avis de facture')
-            ->htmlTemplate('email/order.html.twig')
-            // ->attachFromPath($this->getParameter('order_pdf_directory').DIRECTORY_SEPARATOR.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
-            ->attach('/public/pdf/order/'.$order->getFacture().'.pdf',$order->getFacture(),'application/pdf')
-            // ->attachFromPath()
-            ->context([
+            ->htmlTemplate('email/order.html.twig');
+            if($pdf){
+                $email->attachFromPath($this->getParameter('order_pdf_directory') .DIRECTORY_SEPARATOR.$fichier,$fichier,'application/pdf');                
+            }
+            $email->context([
                 'user'=>$order->getUser(),
                 'theme' => $this->emailService->theme(4),
                 'order' => $order,
             ]);
+            return $email;
     }
     public function voiceNumber(int $id)
     {

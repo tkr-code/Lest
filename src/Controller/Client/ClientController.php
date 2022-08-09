@@ -24,6 +24,7 @@ use App\Repository\PaymentMethodRepository;
 use App\Repository\StreetRepository;
 use App\Service\Cart\CartService;
 use App\Service\Email\EmailService;
+use App\Service\Pdf\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +53,7 @@ class ClientController extends AbstractController
      * @Route("/confirmation/order/{id}", name="client_confirmation")
      * @return Response
      */
-    public function confirmation(Order $order, OrderRepository $orderRepository): Response
+    public function confirmation(Order $order): Response
     {
         return $this->renderForm('client/confirmation.html.twig', [
             'order' => $order
@@ -77,7 +78,7 @@ class ClientController extends AbstractController
     /**
      * @Route("/order/new-order", name="order_client_new", methods={"POST"})
      */
-    public function newOrder(MailerInterface $mailer, OrderRepository $orderRepository, StreetRepository $streetRepository, EntityManagerInterface $entityManagerInterface, PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository, Request $request, OrderService $orderService, SessionInterface $session): Response
+    public function newOrder(PdfService $pdfService, MailerInterface $mailer, OrderRepository $orderRepository, StreetRepository $streetRepository, EntityManagerInterface $entityManagerInterface, PaymentMethodRepository $paymentMethodRepository, ArticleRepository $articleRepository, Request $request, OrderService $orderService, SessionInterface $session): Response
     {
 
         // nouvelle commande
@@ -142,10 +143,12 @@ class ClientController extends AbstractController
         $order->setNumber($orderService->voiceNumber($order->getId()));
         $entityManager->flush();
 
-        $this->addFlash('success', 'Order created');
+        $this->addFlash('success', 'Merci. Votre commande a été recu.');
         $session->set('panier', []);
         $user = $this->getUser();
+        
         $mailer->send($orderService->orderSendToEmail($order)); // envoi la commande par email
+        
         return $this->redirectToRoute('client_confirmation', ['id' => $order->getId()], Response::HTTP_SEE_OTHER);
     }
     /**

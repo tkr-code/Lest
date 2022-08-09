@@ -156,7 +156,6 @@ class Article
         $this->images = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->created_at = new \DateTime();
         $this->favori = new ArrayCollection();
         $this->articleBuys = new ArrayCollection();
     }

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -59,6 +60,12 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 'cat'=>'Ordinateurs',
                 'articles'=>
                 [
+                    [
+                        'title' => 'Hp elitebook Folio','price' => '200000',
+                        'buy' => '150000',
+                        'etat'=>'Meilleurs ventes',
+                        'brand'=>'Hp'
+                    ],
                     [
                         'title' => 'Mini pc Asus','price' => '60000',
                         'buy' => '50000',
@@ -203,6 +210,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
                 foreach ($value['articles'] as $key => $value) {
                 $article  = new Article();
                 $article->setTitle($value['title'])
+                ->setCreatedAt(new DateTime())
                 ->setCategory($category)
                 ->setBuyingPrice($value['buy'])
                 ->setPrice($value['price'])

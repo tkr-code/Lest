@@ -127,14 +127,31 @@
             icon:'fas fa-shopping-cart'
             }) }}
         </div>
+        {# <div class="col-12 col-sm-6 col-md-3">
+            {{ cards.infoBox({
+            name:'Utilisateurs',
+            path:path('order_index'),
+            bg:'bg-success',
+            count:'0',
+            icon:'fas fa-user-secret'
+            }) }}
+        </div> #}
     </div>
     <!-- /.row -->
+    <div class="row">
+        <div class="col-12 my-2">
+            <div class="btn-group">
+                <a href="{{ path('article_new') }}" class="btn btn-primary mx-1">Ajouter un produit</a>
+                <a href="{{ path('admin_brand_new') }}" class="btn btn-primary mx-1">Ajouter une marque</a>
+                <a href="{{ path('category_index') }}" class="btn btn-primary mx-1">Ajouter une catégorie</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main row -->
     <div class="row">
         <!-- Left col -->
         <div class="col-md-8">
-
             <!-- /.card -->
             <div class="row">
                 <div class="col-md-12">
@@ -164,8 +181,8 @@
                         <div class="card-footer clearfix">
                             <a href="{{ path('order_new') }}" class="btn btn-sm btn-info float-left">{{'Place New
                                 Order'|trans}}</a>
-                                <a href="{{ path('order_index') }}" class="btn btn-sm btn-secondary float-right">{{'View All
-                                    Orders'|trans}}</a>
+                                <a href="{{ path('order_index') }}" class="btn btn-sm btn-secondary float-right">
+                                    Toutes les commandes</a>
                                 </div>
                             {% endif %}
                         <!-- /.card-footer -->
@@ -242,7 +259,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer text-center">
-                    <a href="{{ path('article_index') }}" class="uppercase">{{'View All Products'|trans}}</a>
+                    <a href="{{ path('article_index') }}" class="uppercase">Tous les produits</a>
                 </div>
                 <!-- /.card-footer -->
             </div>

@@ -958,12 +958,12 @@
       <trans-unit id="zXO5kk6" resname="If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.&#10;        This link will expire in">
         <source>If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
         This link will expire in</source>
-        <target>Si un compte correspondant à votre email existe, alors un email vient d’être envoyé qui contient un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
-        Ce lien expirera à</target>
+        <target>Si un compte correspondant à votre email, alors un email vient d’être envoyé qui contient un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+        Ce lien expirera dans</target>
       </trans-unit>
       <trans-unit id="GMHRWbg" resname="If you don't receive an email please check your spam folder or &lt;a href='{{ path('app_forgot_password_request') }}'&gt;try again&lt;/a&gt;.">
         <source>If you don't receive an email please check your spam folder or &lt;a href='{{ path('app_forgot_password_request') }}'&gt;try again&lt;/a&gt;.</source>
-        <target><![CDATA[__If you don't receive an email please check your spam folder or <a href='{{ path('app_forgot_password_request') }}'>try again</a>.]]></target>
+        <target><![CDATA[Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam ou <a href='{{ path('app_forgot_password_request') }}'>réessayer</a>.]]></target>
       </trans-unit>
       <trans-unit id="WfA9ZCt" resname="Request">
         <source>Request</source>
@@ -971,7 +971,7 @@
       </trans-unit>
       <trans-unit id="WfpDeb4" resname="Reset your password">
         <source>Reset your password</source>
-        <target>réinitialiser votre mot de passe</target>
+        <target>Réinitialiser votre mot de passe</target>
       </trans-unit>
       <trans-unit id="eScWPZF" resname="Enter your email address and we we will send you a&#10;                                link to reset your password.">
         <source>Enter your email address and we we will send you a
@@ -1054,12 +1054,6 @@
         <source>View Article</source>
         <target>Voir Article</target>
       </trans-unit>
-      <trans-unit id="FVHfXDL" resname="Terms&#10;                                            and conditions">
-        <source>Terms
-                                            and conditions</source>
-        <target>__Terms
-                                            and conditions</target>
-      </trans-unit>
       <trans-unit id="mecfSMS" resname="Checkout">
         <source>Checkout</source>
         <target>Commander</target>
@@ -1075,6 +1069,38 @@
       <trans-unit id="u6YIKGG" resname="Expected Arrival">
         <source>Expected Arrival</source>
         <target>__Expected Arrival</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>__back to list</target>
+      </trans-unit>
+      <trans-unit id="aoMq9J3" resname="log out">
+        <source>log out</source>
+        <target>__log out</target>
+      </trans-unit>
+      <trans-unit id="vko3pnY" resname="All rights reserved">
+        <source>All rights reserved</source>
+        <target>__All rights reserved</target>
+      </trans-unit>
+      <trans-unit id="Tds_loA" resname="completed">
+        <source>completed</source>
+        <target>terminer</target>
+      </trans-unit>
+      <trans-unit id="K2uFPJ5" resname="in progress">
+        <source>in progress</source>
+        <target>en cour</target>
+      </trans-unit>
+      <trans-unit id="gM_j5.K" resname="waiting">
+        <source>waiting</source>
+        <target>en attente</target>
+      </trans-unit>
+      <trans-unit id="8S.eaEs" resname="canceled">
+        <source>canceled</source>
+        <target>anuller</target>
+      </trans-unit>
+      <trans-unit id="Z.ZGrMk" resname="If you don't receive an email please check your spam folder">
+        <source>If you don't receive an email please check your spam folder</source>
+        <target>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam</target>
       </trans-unit>
     </body>
   </file>

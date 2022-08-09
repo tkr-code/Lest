@@ -13,6 +13,7 @@ use App\Repository\ArticleOptionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\BrandRepository;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use function PHPUnit\Framework\fileExists;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +74,7 @@ class ArticleController extends AbstractController
     {
         $article = new Article();
         $article
+            ->setCreatedAt(new DateTime())
             ->setEnabled(true);
             // ->setTitle('produit 1')->setDescription('produit 1 description')
             // ->setPrice('1500000')->setBuyingPrice('120000')->setQuantity(5)->setLabel('New');

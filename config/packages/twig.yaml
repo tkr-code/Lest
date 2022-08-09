@@ -14,13 +14,13 @@ twig:
             name: 'lest'
             email: 'contact@lest.sn'
             path_logo: 'lest-logo.png'
-            current_name: 'F cfa'
+            current_name: 'F CFA'
             current: 'XOF'
             phone_number_1: '+221 77 801 06 46'
-            phone_1: '+221781278288'
-            phone_number_2: '+221 77 000 00 00'
-            phone_2: '+221778010646'
-            link: "https://localhost:8000"
+            phone_1: '+221778010646'
+            phone_number_2: '+221 76 201 51 61'
+            phone_2: '+221762015161'
+            link: "https://lest.sn"
             mission_text: 'text à definir'
             user_empty: 'empty.png'
             orange_money: '+221 77 801 06 46'

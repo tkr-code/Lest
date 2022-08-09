@@ -12,15 +12,15 @@
 
 {% macro order(etat) %}
     {% if etat == 'completed' %}
-        <span class="badge badge-success">{{etat}}</span>
+        <span class="badge badge-success">{{'completed'|trans}}</span>
         {% elseif etat == 'Désactiver' %}
         <span class="badge badge-warning">{{etat}}</span>
         {% elseif etat == 'in progress' %}
-        <span class="badge badge-primary">{{etat}}</span>
+        <span class="badge badge-primary">{{'in progress'|trans}}</span>
         {% elseif etat == 'waiting' %}
-        <span class="badge badge-light">{{etat}}</span>
+        <span class="badge badge-light">{{'waiting'|trans}}</span>
         {% elseif etat == 'canceled' %}
-        <span class="badge badge-danger">{{etat}}</span>
+        <span class="badge badge-danger">{{'canceled'|trans}}</span>
         {% else %}
         <span class="badge">{{etat}}</span>
     {% endif %}
