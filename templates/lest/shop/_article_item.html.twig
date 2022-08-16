@@ -8,7 +8,7 @@
 			{% if item.reduction > 0 %}
 			<span class="product-label mt-3 label-out bg-danger">-{{ item.reduction}}%</span>
 			{% endif %}
-			<a href="{{ path('articles_show', { category: item.category.title|lower, slug: item.slug, id: item.id}) }}">
+			<a href="{{ path('articles_show', { category: item.category.slug|lower, slug: item.slug, id: item.id}) }}">
 				{% for item in item.images|slice(0,1) %}
 				<img class="product-image" src="{{ asset('img/article/' ~ item.name ) }}" alt="{{ item.name }}">
 				{% else %}

@@ -28,7 +28,7 @@ class OrderService extends AbstractController{
     }
 
     public function orderSendToEmail(Order $order, $pdf= false){
-        $fichier = 'Facture - N°'.$order->getNumber().' - Lest.pdf';
+        $fichier = $order->getFacture().'.pdf';
         $email =  (new TemplatedEmail())
             ->from(new Address('contact@lest.sn', 'lest.sn'))
             ->to($order->getUser()->getEmail())
@@ -146,10 +146,10 @@ class OrderService extends AbstractController{
     public function calculPersist(Order $order){
         $payment = $order->getPayment();
         $payment->setAmount(0);
-        $order->setPaymentDue(new \DateTime('+ 5 day') );
+        $order->setPaymentDue(new \DateTime('+ 10 day') );
         $order->setItemsTotal(0);
-        $order->setState('in progress');
-        $order->setAdjustmentsTotal(0);
+        $order->setState('waiting');
+        $order->setAdjustmentsTotal($order->getShipping());
         $numer = empty($order->getId()) ? 1:$order->getId();
         $order->setNumber($this->voiceNumber($numer));
         $order->setTotal(0);

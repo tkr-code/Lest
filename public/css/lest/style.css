@@ -18,7 +18,36 @@ html,
 body {
     height: 100%
 }
+#btn-product-gallery {
+    display: inline-block;
+}
 
+.product-image-thumbs {
+    align-items: stretch;
+    display: flex;
+    margin-top: 2rem;
+}
+
+.product-image-thumb img {
+    max-width: 100%;
+    height: 50px;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
+
+.product-image-thumb {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+    border-radius: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-right: 1rem;
+    max-width: 7rem;
+    padding: .5rem;
+}
 body {
     font: normal 300 1.4rem/1.86 "Poppins", sans-serif;
     color: #666;

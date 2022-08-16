@@ -110,6 +110,16 @@ class Order
 
     private $street;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $shipping;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $shipping_state;
+
 
     public function __construct()
     {
@@ -340,6 +350,30 @@ class Order
     public function setStreet($street): self
     {
         $this->street = $street;
+
+        return $this;
+    }
+
+    public function getShipping(): ?int
+    {
+        return $this->shipping;
+    }
+
+    public function setShipping(?int $shipping): self
+    {
+        $this->shipping = $shipping;
+
+        return $this;
+    }
+
+    public function getShippingState(): ?string
+    {
+        return $this->shipping_state;
+    }
+
+    public function setShippingState(string $shipping_state): self
+    {
+        $this->shipping_state = $shipping_state;
 
         return $this;
     }

@@ -34,7 +34,7 @@
 					</div>
 					<div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
 						<div class="confirmation-card">
-							<h3 class="billing-title">Order Info</h3>
+							<h3 class="billing-title">{{'Order Info'|trans}}</h3>
 							<table class="order-rable">
 								<tbody>
 									<tr>
@@ -127,7 +127,7 @@
 										<h5></h5>
 									</td>
 									<td>
-										<p>{{ order.itemsTotal|number_format(2,'.',' ') }}
+										<p>{{ order.itemsTotal|number_format(0,'',' ') }}
 											{{ site.current_name }}</p>
 									</td>
 								</tr>
@@ -139,7 +139,7 @@
 										<h5></h5>
 									</td>
 									<td>
-										<p>{{ (order.deliverySpace)? order.deliverySpace.street.shippingAmount.amount |number_format(0,'.',' '):'0' |number_format(0,'.',' ') }}
+										<p>{{ (order.deliverySpace)? order.shipping |number_format(0,'',' '):'0' |number_format(0,'',' ') }}
 											{{ site.current_name }}</p>
 									</td>
 								</tr>
@@ -151,7 +151,7 @@
 										<h5></h5>
 									</td>
 									<td>
-										<h4>{{ order.total|number_format(2,'.',' ') }}
+										<h4>{{ order.total|number_format(0,'', ' ') }}
 											{{ site.current_name }}</h4>
 									</td>
 								</tr>
@@ -163,7 +163,9 @@
 			<p class="text-center my-4 1rem">
 				<a href="{{ path('order_download',{id:order.id}) }}">
 					<i class="fa fa-download" aria-hidden="true"></i>
-					Telecherger au format pdf</a>
+					Télécharger au format pdf</a>
+				<a href="{{ path('track_number',{number:order.number}) }}" class="ml-3">
+					Suivre la commande</a>
 			</p>
 		</div>
 	</main>

@@ -40,11 +40,11 @@ class UserController extends AbstractController
     {
         $user = new User();
         $personne = new Personne();
-        $personne->setFirstName('Malick')->setLastName('Tounkara');
-        $user->setPersonne($personne);
-        $user->setEmail('email@lest.com')
-        ->setPassword('password')
-        ->setPhoneNumber('772495592');
+        // $personne->setFirstName('Malick')->setLastName('Tounkara');
+        // $user->setPersonne($personne);
+        // $user->setEmail('email@lest.com')
+        // ->setPassword('password')
+        // ->setPhoneNumber('772495592');
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

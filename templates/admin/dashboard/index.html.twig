@@ -127,23 +127,25 @@
             icon:'fas fa-shopping-cart'
             }) }}
         </div>
-        {# <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
             {{ cards.infoBox({
-            name:'Utilisateurs',
-            path:path('order_index'),
-            bg:'bg-success',
-            count:'0',
+            name:'Gérants',
+            path:path('gerant_index'),
+            bg:'bg-warning',
+            count:gerants|length,
             icon:'fas fa-user-secret'
             }) }}
-        </div> #}
+        </div>
     </div>
     <!-- /.row -->
     <div class="row">
         <div class="col-12 my-2">
             <div class="btn-group">
                 <a href="{{ path('article_new') }}" class="btn btn-primary mx-1">Ajouter un produit</a>
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('admin_brand_new') }}" class="btn btn-primary mx-1">Ajouter une marque</a>
                 <a href="{{ path('category_index') }}" class="btn btn-primary mx-1">Ajouter une catégorie</a>
+                {% endif %}
             </div>
         </div>
     </div>

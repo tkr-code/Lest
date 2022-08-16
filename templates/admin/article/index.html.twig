@@ -25,12 +25,12 @@
 {{ dataTable.script('#datatable_1') }}
 {{ dataTable.script('#datatable_2') }}
 <script>
-  $(document).ready(function () {
-    //desactive un article
-    $(document).on('click','.btn-desactiver',function(e){
-      e.preventDefault()
-      let href = $(this).data('path')
-      Swal.fire({
+	$(document).ready(function () {
+		//desactive un article
+		$(document).on('click', '.btn-desactiver', function (e) {
+			e.preventDefault()
+			let href = $(this).data('path')
+			Swal.fire({
 				title: 'Etes vous sur ?',
 				text: "Vous allez desactiver ce produit !",
 				icon: 'question',
@@ -46,7 +46,7 @@
 						method: 'POST',
 						type: 'json',
 						data: {
-							edit : 'enabled_false',
+							edit: 'enabled_false',
 						},
 						beforeSend: function () {
 							$('.js-loader-text').text('Désactivation en cour ...')
@@ -55,15 +55,15 @@
 						success: function (data) {
 							$('.js-loader').css('display', 'none')
 							if (data) {
-                Swal.fire({
+								Swal.fire({
 									title: 'Modification enregistrée',
 									icon: 'success',
-                  timer:1500,
-                  showConfirmButton:false
+									timer: 1500,
+									showConfirmButton: false
 								})
 								loadArticles()
 							} else {
-                    $('.js-loader').css('display', 'none')
+								$('.js-loader').css('display', 'none')
 								alert('Une erreur est survenue. code : 002')
 							}
 						},
@@ -74,12 +74,12 @@
 					})
 				}
 			})
-    })
-    //active un article
-    $(document).on('click','.btn-activer',function(e){
-      e.preventDefault()
-      let href = $(this).data('path')
-      Swal.fire({
+		})
+		//active un article
+		$(document).on('click', '.btn-activer', function (e) {
+			e.preventDefault()
+			let href = $(this).data('path')
+			Swal.fire({
 				title: 'Etes vous sur ?',
 				text: "Vous allez activer ce produit !",
 				icon: 'question',
@@ -95,7 +95,7 @@
 						method: 'POST',
 						type: 'json',
 						data: {
-							edit : 'enabled_true',
+							edit: 'enabled_true',
 						},
 						beforeSend: function () {
 							$('.js-loader-text').text('Activation en cour ...')
@@ -104,15 +104,15 @@
 						success: function (data) {
 							$('.js-loader').css('display', 'none')
 							if (data) {
-                Swal.fire({
+								Swal.fire({
 									title: 'Modification enregistrée',
 									icon: 'success',
-                  timer:1500,
-                  showConfirmButton:false
+									timer: 1500,
+									showConfirmButton: false
 								})
 								loadArticles()
 							} else {
-                    $('.js-loader').css('display', 'none')
+								$('.js-loader').css('display', 'none')
 								alert('Une erreur est survenue. code : 002')
 							}
 						},
@@ -123,34 +123,34 @@
 					})
 				}
 			})
-    })
+		})
 
-    //charge les articles
-    function loadArticles(){
-      $.ajax({
-						url: "/admin/article/load",
-						method: 'POST',
-						type: 'json',
-						data: {
-							load : 'articles',
-						},
-						beforeSend: function () {
-							$('.js-loader-text').text('Actualisation en cour ...')
-							$('.js-loader').css('display', 'flex')
-						},
-						success: function (data) {
-              if(data.reponse){
-                $('#load-articles').html(data.content)
-              }
-							$('.js-loader').css('display', 'none')
-						},
-						error: function () {
-							$('.js-loader').css('display', 'none')
-							alert('Une erreur est survenue. code : 001')
-						}
-					})
-    }
-  })
+		//charge les articles
+		function loadArticles() {
+			$.ajax({
+				url: "/admin/article/load",
+				method: 'POST',
+				type: 'json',
+				data: {
+					load: 'articles',
+				},
+				beforeSend: function () {
+					$('.js-loader-text').text('Actualisation en cour ...')
+					$('.js-loader').css('display', 'flex')
+				},
+				success: function (data) {
+					if (data.reponse) {
+						$('#load-articles').html(data.content)
+					}
+					$('.js-loader').css('display', 'none')
+				},
+				error: function () {
+					$('.js-loader').css('display', 'none')
+					alert('Une erreur est survenue. code : 001')
+				}
+			})
+		}
+	})
 </script>
 {% endblock %}
 
@@ -160,6 +160,6 @@
 {{ alerte.alert(item,'success')}}
 {% endfor %}
 <div id="load-articles">
-  {% include "admin/article/_load_articles.html.twig" %}
+	{% include "admin/article/_load_articles.html.twig" %}
 </div>
 {% endblock %}

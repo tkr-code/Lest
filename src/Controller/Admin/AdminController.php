@@ -38,7 +38,8 @@ class AdminController extends AbstractController
             'clients'=>$clientRepository->findAll(),
             'recentlys'=>$articleRepository->recently(),
             'parent_page'=>$this->translator->trans('Dashboard'),
-            'latestUser'=>$userRepository->findByRole('ROLE_USER',)
+            'latestUser'=>$userRepository->findByRole('ROLE_USER'),
+            'gerants'=>$userRepository->findByRole('ROLE_EDITOR')
         ]);
     }
     /**

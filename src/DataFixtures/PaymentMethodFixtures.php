@@ -24,7 +24,7 @@ class PaymentMethodFixtures extends Fixture
                 // ],
                 [
                     'name' => 'Payement à la livraison',
-                    'description' => 'Etsy doostttt zimbra.',
+                    'description' => "le client paiera le montant du colis ou du produit qu'il a commandé après l'avoir reçu..",
                     'instructions' => 'imbra.'
                 ]
             ];

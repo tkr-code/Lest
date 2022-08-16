@@ -96,7 +96,7 @@
 							<h3 class="widget-title" id="aside-name">
 								<a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="false"
 									aria-controls="widget-1" class="collapsed">
-									Category
+									{{'Category'|trans}}
 								</a>
 							</h3>
 							<!-- End .widget-title -->
@@ -112,9 +112,9 @@
 										</div>
 										{% for item in categories.all %}
 										<div class="filter-item">
-											<a href="{{path('articles_category',{category:item.slug|lower}) }}" {{
-												item.slug==app.request.get( 'category' ) ? 'class="active"' : '' }}>{{
-												item.title }}</a>
+											<a href="{{path('articles_category',{category:item.slug}) }}" 
+											{{ item.slug==app.request.get( 'category' ) ? 'class="active"' : '' }}>
+											{{item.title }}</a>
 											<span class="item-count">{{ item.articles|length }}</span>
 										</div>
 										{% endfor %}
@@ -130,7 +130,8 @@
 					<div class="card">
 						<div class="text-center">
 							<a href="#">
-								<img width="200px" class="d-inline-block" src="https://via.placeholder.com/200" />
+								<img width="200px" class="d-inline-block"
+									src="{{ asset('img/icons/lest-boutique.png') }}" />
 							</a>
 						</div>
 					</div>

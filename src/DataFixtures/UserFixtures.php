@@ -24,8 +24,7 @@ class UserFixtures extends Fixture
     {
         $users = [
             ['first_name' => 'Admin','last_name' => 'Admin','email' => 'admin@lest.sn','roles' => ["ROLE_ADMIN"]],
-            ['first_name' => 'Editor','last_name' => 'Editor','email' => 'editor@lest.sn','roles' => ["ROLE_EDITOR"]],
-
+            // ['first_name' => 'Gerant','last_name' => 'Lest','email' => 'gerant@lest.sn','roles' => ["ROLE_EDITOR"]],
         ];
         
         foreach ($users as $key => $value) {

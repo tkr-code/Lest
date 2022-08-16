@@ -131,6 +131,13 @@ table{
 
 	<div class="row">
 		<!-- accepted payments column -->
+		
+		<div class="col-6">
+			<p class="bold">Status de la commande:</p>
+			{% import "macros/etats.html.twig" as etats %}
+			{{ etats.order(order.state) }}
+			</p>
+		</div>
 		<div class="col-6">
 			<p class="bold">{{'Payment Methods'|trans}}:</p>
 			{{ order.payment.paymentMethod.name }}

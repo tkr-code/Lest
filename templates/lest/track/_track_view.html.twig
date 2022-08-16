@@ -1,4 +1,5 @@
 <div class="container px-1 px-md-4 mx-auto">
+    
     <div class="card">
         <div class="row d-flex justify-content-between px-3 top">
             <div class="d-flex">
@@ -37,6 +38,8 @@
             </ul>
             </div>
         </div>
+       
+        {% if order.state != 'canceled' %}
         <div class="row justify-content-between top">
             <div class="row d-flex icon-content">
                 <img class="icon-track" src="https://i.imgur.com/9nnc9Et.png">
@@ -63,5 +66,15 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="row justify-content-between top">
+            <div class="row d-flex icon-content">
+                <h3 class="text-danger font-weight-bold">La commande a été annulé</h3>
+                </div>
+        </div>
+        {% endif %}
     </div>
+    {% if order.state != 'canceled' %}
+    <button class="btn-send-order-number btn btn-primary">Actualiser</button>
+    {% endif %}
 </div>

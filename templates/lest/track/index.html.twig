@@ -150,7 +150,7 @@
                     {{'Enter your order number'|trans}}.
                 </small>
             </div>
-            <button id="btn-send-order-number" class="btn btn-primary">{{'Send order number'|trans}}</button>
+            <button class="btn-send-order-number btn btn-primary">{{'Send order number'|trans}}</button>
         </div>
         {% if app.request.get('_route') == 'track_index' %}
         <div id="track-show"></div>
@@ -167,7 +167,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $(document).on('click', '#btn-send-order-number', function () {
+        $(document).on('click', '.btn-send-order-number', function () {
             let number = $('#order-number').val()
 
             if (number.length == '') {
@@ -206,7 +206,7 @@
                     if (data.reponse) {
                         $('#track-show').html(data.content)
                         Swal.fire({
-                            title: 'Oups !',
+                            title: 'Bien joué !',
                             text: 'Chargement terminé',
                             icon: 'success',
                             showConfirmButton: false,

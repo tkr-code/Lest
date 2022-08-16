@@ -3,43 +3,21 @@
 {% block modal %}
 {{ modal.defaultLest()}}
 {% endblock %}
+{% block javascripts %}
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}
 
 {% block foot %}
 <script src="{{asset('js/article_detail.js') }}"></script>
 {% endblock %}
 {% block main %}
-<style>
-    #btn-product-gallery {
-        display: inline-block;
-    }
-
-    .product-image-thumbs {
-        align-items: stretch;
-        display: flex;
-        margin-top: 2rem;
-    }
-
-    .product-image-thumb img {
-        max-width: 100%;
-        height: auto;
-        -webkit-align-self: center;
-        -ms-flex-item-align: center;
-        align-self: center;
-    }
-
-    .product-image-thumb {
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
-        border-radius: .25rem;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        margin-right: 1rem;
-        max-width: 7rem;
-        padding: .5rem;
-    }
-</style>
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container d-flex align-items-center">
@@ -93,10 +71,9 @@
                                 <div class="col-12 product-image-thumbs">
                                     {% for item in article.images %}
                                     <a href="{{ asset('img/article/' ~ item.name )}}" class="product-gallery-show">
-
                                         <div class="product-image-thumb">
-                                            <img src="{{ asset('img/article/' ~ item.name )}}"
-                                            alt="{{ item.name }}">
+                                            <img src="{{ asset('img/article/' ~ item.name )}}" width="100px"
+                                                alt="{{ item.name }}">
                                         </div>
                                     </a>
                                     {% endfor %}

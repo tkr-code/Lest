@@ -25,6 +25,9 @@ class HomeController extends AbstractController
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
       return  $this->renderForm("lest/home/index.html.twig", [
             'form'=>$form,
+            'slide2'=>$articleRepository->findOneBy([
+                'title'=>'Hp elitebook Folio G1'
+            ]),
             'articles'=>
             [
                 'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateurs','Meilleurs ventes'),

@@ -15,12 +15,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Manage Order',[
-{
-path:path('order_index'),
-name:'Manage orders'
-}
-])}}
+{{ utils.breadcrumb('Listes des commandes') }}
 {% endblock %}
 
 {% block title %}
@@ -84,7 +79,8 @@ name:'Manage orders'
             </div>
             <div class="card-body">
                 <div class="mb-2">
-                    {{link.add(path('order_new'),'Add order') }}
+                    {{link.add(path('order_new'),'Add order'|trans) }}
+                    <a href="{{ path('order_index') }}"class="ml-3">Actualiser</a>
                 </div>
 
                 <div class="tab-content" id="custom-tabs-three-tabContent">

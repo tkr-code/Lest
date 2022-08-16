@@ -15,7 +15,15 @@ class PdfService extends AbstractController{
         $pdfOption->set('defaultFont', 'Arial');
         $pdfOption->setIsRemoteEnabled(false);
 
+        //logo
+        // $this->getParameter('base_path');
+        // $path = '/img/lest-logo.png';
+        // $type = pathinfo($path, PATHINFO_EXTENSION);
+        // $data = file_get_contents($path);
+        // $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        // dd($data);
         $domPdf = new Dompdf($pdfOption);
+        $domPdf->setBasePath('/');
         $context = stream_context_create([
             'ssl'=>[
                 'verify_peer'=>false,

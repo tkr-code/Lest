@@ -20,12 +20,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     const roles=[
         // 'Administrateur'=>'ROLE_ADMIN',
-        'Editeur'=>'ROLE_EDITOR',
+        'Gérant'=>'ROLE_EDITOR',
         // 'Client'=>'ROLE_CLIENT',
         // 'Utilisateur'=>'ROLE_USER'
     ];
     const status=[
         'Activer'=>'Activer',
+        'Désactiver'=>'Désactiver',
         'Delete'=>'Delete'
     ];
     /**

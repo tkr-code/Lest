@@ -134,6 +134,7 @@ class OrderController extends AbstractController
     {
         $order = new Order();
         $order->setNumber(1);
+        $order->setShippingState('shipping');
         
         $form = $this->createForm(OrderNewType::class, $order);
         $form->handleRequest($request);
@@ -159,7 +160,7 @@ class OrderController extends AbstractController
             $entityManager->flush();
             $order->setNumber($orderService->voiceNumber($order->getId()));
             $entityManager->flush($order);
-            $this->addFlash('success','Order created');
+            $this->addFlash('success','Commande enregistré');
             return $this->redirectToRoute('order_edit', ['id'=>$order->getId(),'tab'=>'articles'], Response::HTTP_SEE_OTHER);
         }
 

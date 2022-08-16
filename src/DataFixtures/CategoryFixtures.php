@@ -16,16 +16,16 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
             [
                 'parent'=>'parent_informatique',
                 'cat'=>[
-                    'Ordinateurs',
-                    'Claviers et Souris',
-                    'Clé usb',
-                    'Cable Hdmi',
+                    'Ordinateur portable',
+                    'Ordinateur de Bureau',
                     'Accessoires',
+                    'Clé usb',
+                    'Claviers et Souris',
+                    'Cable Hdmi',
                     'Imprimante et accessoires',
                     'Mémoire',
-                    'Reseaux',
+                    'Reseaux informatiques',
                     'Ecran PC',
-                    'Ordinateur de Bureau',
                     'Visiophone'
                 ]
             ],                       

@@ -21,23 +21,23 @@ class DevFixtures extends Fixture
     }
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $personne = new Personne();
-        $personne->setFirstName('client')
-        ->setLastName('Test');
-        $user->setEmail('clienttest@lest.sn');
-        $user->setStatus('Activer');
-        $user->setCle('123456');
-        $user->setPhoneNumber('770000000');
-        $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
-        ->setRoles(['ROLE_CLIENT'])
-        ->setPersonne($personne);
-        $client = new Client();
-        $client->setUser($user);
-        $user->setClient($client);
-        $this->addReference('client_test',$user);
-        $this->em->persist($user);
+        // $user = new User();
+        // $personne = new Personne();
+        // $personne->setFirstName('client')
+        // ->setLastName('Test');
+        // $user->setEmail('clienttest@lest.sn');
+        // $user->setStatus('Activer');
+        // $user->setCle('123456');
+        // $user->setPhoneNumber('770000000');
+        // $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))
+        // ->setRoles(['ROLE_CLIENT'])
+        // ->setPersonne($personne);
+        // $client = new Client();
+        // $client->setUser($user);
+        // $user->setClient($client);
+        // $this->addReference('client_test',$user);
+        // $this->em->persist($user);
 
-        $manager->flush();
+        // $manager->flush();
     }
 }

@@ -21,6 +21,7 @@
     <meta name="application-name" content="Lest">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="theme-color" content="#ffffff">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="{{ asset('vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('css/lest/bootstrap.min.css') }}">
@@ -279,8 +280,6 @@
                                     width="105" height="25">
                                 <p>
                                     {{'Lest is a local company developing in the field of IT'|trans}}
-                                    {# Lest est une entreprise de la place qui évolue dans le domaine de l'informatique
-                                    #}
                                 </p>
 
                                 <div class="widget-call">
@@ -299,12 +298,9 @@
                                 <!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li>
-                                        <a href="{{ path('service') }}">{{'Our Services'|trans}}</a>
-                                    </li>
-                                    <li>
+                                    {# <li>
                                         <a href="#">{{'How to shop on Lest'|trans}}</a>
-                                    </li>
+                                    </li> #}
                                     <li>
                                         <a href="{{ path('faq') }}">{{'FAQ'|trans}}</a>
                                     </li>
@@ -448,7 +444,7 @@
                             </li>
                             {% for item in categories.all %}
                             <li>
-                                <a href="{{path('articles_category',{category:item.slug|lower}) }}">{{ item.title }}</a>
+                                <a href="{{path('articles_category',{category:item.slug}) }}" >{{ item.title }}</a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -461,17 +457,8 @@
             <!-- End .tab-content -->
 
             <div class="social-icons">
-                <a href="#" class="social-icon" target="_blank" title="Facebook">
+                <a href="{{ site.facebook }}" class="social-icon" target="_blank" title="Facebook">
                     <i class="icon-facebook-f"></i>
-                </a>
-                <a href="#" class="social-icon" target="_blank" title="Twitter">
-                    <i class="icon-twitter"></i>
-                </a>
-                <a href="#" class="social-icon" target="_blank" title="Instagram">
-                    <i class="icon-instagram"></i>
-                </a>
-                <a href="#" class="social-icon" target="_blank" title="Youtube">
-                    <i class="icon-youtube"></i>
                 </a>
             </div>
             <!-- End .social-icons -->

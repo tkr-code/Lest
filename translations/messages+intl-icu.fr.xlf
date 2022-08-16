@@ -91,7 +91,7 @@
       </trans-unit>
       <trans-unit id="E8ou4km" resname="Canceled">
         <source>Canceled</source>
-        <target>Anuller</target>
+        <target>Annuler</target>
       </trans-unit>
       <trans-unit id="Iqlw0uW" resname="Completed">
         <source>Completed</source>
@@ -1080,7 +1080,7 @@
       </trans-unit>
       <trans-unit id="vko3pnY" resname="All rights reserved">
         <source>All rights reserved</source>
-        <target>__All rights reserved</target>
+        <target>Tous droits réservés</target>
       </trans-unit>
       <trans-unit id="Tds_loA" resname="completed">
         <source>completed</source>
@@ -1096,11 +1096,31 @@
       </trans-unit>
       <trans-unit id="8S.eaEs" resname="canceled">
         <source>canceled</source>
-        <target>anuller</target>
+        <target>annuler</target>
       </trans-unit>
       <trans-unit id="Z.ZGrMk" resname="If you don't receive an email please check your spam folder">
         <source>If you don't receive an email please check your spam folder</source>
         <target>Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier spam</target>
+      </trans-unit>
+      <trans-unit id="u92.A1p" resname="Edit password">
+        <source>Edit password</source>
+        <target>Modifier le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="DIfgDv2" resname="Ajouter un gérant">
+        <source>Ajouter un gérant</source>
+        <target>Ajouter un gérant</target>
+      </trans-unit>
+      <trans-unit id="ozbpOqU" resname="Order Info">
+        <source>Order Info</source>
+        <target>Information de la commande</target>
+      </trans-unit>
+      <trans-unit id="2ZJsUeL" resname="Add order">
+        <source>Add order</source>
+        <target>Ajouter une commande</target>
+      </trans-unit>
+      <trans-unit id="GXZu1sy" resname="Cancel">
+        <source>Cancel</source>
+        <target>Annuler</target>
       </trans-unit>
     </body>
   </file>

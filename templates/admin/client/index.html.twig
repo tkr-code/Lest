@@ -64,7 +64,7 @@
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Manage client',[{path:path('order_index'),name:'Manage orders'}])}}
+{{ utils.breadcrumb('Listes des clients') }}
 {% endblock %}
 {% block title %}Client
 {% endblock %}
@@ -82,11 +82,13 @@
 				</div>
 			</div>
 			<div class="card-body">
+				{% if is_granted('ROLE_ADMIN') %}
 				<div class="btn-group">
 					<a class="btn btn-primary" href="{{ path('admin_client_new') }}">New client
 						<i class="fa fa-plus"></i>
 					</a>
 				</div>
+				{% endif %}
 				<hr>
 				<table id="datatable_1" class="table">
 					<thead>

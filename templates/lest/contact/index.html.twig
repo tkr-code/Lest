@@ -65,7 +65,13 @@
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button class="btn btn-outline-primary-2 btn-minwidth-sm" type="submit">{{'Send Message'|trans }} <i class="icon-long-arrow-right"></i></button>
+                            <button type="submit" class="g-recaptcha btn btn-outline-primary-2 btn-minwidth-sm" 
+                                data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI" 
+                                data-callback='onSubmit'>
+                                {{'Send Message'|trans }} <i class="icon-long-arrow-right"></i>
+                            </button>
+                            {# <button class="btn btn-outline-primary-2 btn-minwidth-sm" type="submit">
+                            </button> #}
                         </div>
                     </div>
                     {{ form_widget(form_contact) }}

@@ -22,7 +22,22 @@ class ContactController extends AbstractController
         $formContact = $this->createForm(ContactType::class);
         $contact = $formContact->handleRequest($request);
 
+        $reCAPTCHA_secret_key="6Lf5x_ceAAAAADml1QNfCFcx_TZ-sWYo6_9euqeV";
+        $g_recaptcha_response="";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $globaals = $this->get('twig')->getGlobals();
+
         if($formContact->isSubmitted() && $formContact->isValid()){
+            $g_recaptcha_response = $request->request->get('g-recaptcha-response');
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+        . urlencode($reCAPTCHA_secret_key) . '&response=' 
+        . urlencode($g_recaptcha_response) . '&remoteip=' 
+        . urlencode($ip);
+        $response = file_get_contents($url);
+        $responeKey = json_decode($response,true);
+        if($responeKey['success']){
+
+        
             $email = (new TemplatedEmail())
                 ->from($contact->get('email')->getData())
                 ->to('contact@lest.sn')
@@ -41,6 +56,11 @@ class ContactController extends AbstractController
             $message = $translator->trans('Email send');
             $this->addFlash('success',$message);
             return $this->redirectToRoute('contact');
+            }elseif($responeKey['error-codes']){
+                $this->addFlash('errors','Captcha invalide');
+              }else{
+                $this->addFlash('errors','Une erreur est survenu');
+              }
         }
         return $this->renderForm('lest/contact/index.html.twig', [
             'form_contact' =>$formContact

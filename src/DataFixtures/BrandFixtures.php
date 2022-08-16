@@ -13,7 +13,7 @@ class BrandFixtures extends Fixture implements DependentFixtureInterface
     {
         $brands =[
             'Hp','Dell','Lenovo','Toshiba','Asus','Acer','Apple','Microsoft','Razer','Huawei','Alienware',
-            'MSI','Samsung'
+            'MSI','Samsung','Imation','Sandisk'
         ];
         foreach ($brands as $key => $value) {
             $brand = new Brand();

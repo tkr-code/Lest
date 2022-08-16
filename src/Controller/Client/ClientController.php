@@ -121,6 +121,8 @@ class ClientController extends AbstractController
         //montant de la livraison
         $shippingAmount = $street->getShippingAmount()->getAmount();
         $shipping->setAmount($shippingAmount);
+        $order->setShipping($shippingAmount);
+        $order->setShippingState('Waiting');
         $order->setAdjustmentsTotal($shippingAmount);
         $order->setTotal($order->getTotal() + $order->getAdjustmentsTotal());
         //statut de la livraison

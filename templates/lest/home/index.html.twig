@@ -73,19 +73,19 @@
 									<!-- End .h3 intro-subtitle -->
 									<h1 class="intro-title">
 										Hp Elitebook
-										<br>Folio
+										<br>Folio G1
 									</h1>
 									<!-- End .intro-title -->
 
 									<div class="intro-price">
-										<sup class="intro-old-price">200 000 FCFA</sup>
+										<sup class="intro-old-price">{{slide2.price|number_format(0,'',' ')}} FCFA</sup>
 										<span class="text-primary">
-											180 000<sup>FCFA</sup>
+											{{ slide2.newPrice|number_format(0,'',' ') }}<sup>FCFA</sup>
 										</span>
 									</div>
 									<!-- End .intro-price -->
 
-									<a href="{{ path('articles') }}" class="btn btn-primary btn-round">
+									<a href="{{ path('articles_show', { category: slide2.category.slug, slug: slide2.slug, id: slide2.id}) }}" class="btn btn-primary btn-round">
 										<span>{{'Click Here'|trans}}</span>
 										<i class="icon-long-arrow-right"></i>
 									</a>
@@ -190,7 +190,7 @@
 		<div class="cat-blocks-container">
 			<div class="row">
 				<div class="col-6 col-sm-4 col-lg-2">
-					<a href="{{path('articles_category',{category:'ordinateurs'}) }}" class="cat-block">
+					<a href="{{path('articles_category',{category:'ordinateur-portable'}) }}" class="cat-block">
 						<figure>
 							<span>
 								<img class="mobile-cat" src="{{ asset('img/cats/1.png') }}" alt="Category image">
@@ -339,11 +339,7 @@
 		<div class="heading text-center my-5">
 			<img src="{{ asset('img/lest-logo.png') }}" class="mx-auto" width="100px" alt="Lest">
 			<h2 class="title-sm">Les Spécialistes de la technologies</h2><!-- End .title -->
-			<p class="text-center">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus
-				libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.
-				Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices
-				sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu,
-				fermentum et, dapibus sed, urna.</p>
+			<p class="text-center">Lest est dans l'étude des outils et des techniques informatiques, en matière d'outils et de savoir-faire. Il comprend la vente en ligne, le développement de logiciels, l'installation de parcs informatiques et éventuellement la maintenance informatique</p>
 		</div>
 	</div>
 	<div class="container">

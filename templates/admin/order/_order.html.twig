@@ -97,7 +97,9 @@
                 </tr>
                 <tr>
                     <th>{{'Shipping'|trans}}:</th>
-                    <td>{{ (order.deliverySpace)? order.deliverySpace.street.shippingAmount.amount| number_format(0,'.',' ') :'0' |number_format(0,'.',' ') }} {{ site.current_name }} </td>
+                    <td>{{ (order.deliverySpace)?  '(' ~ order.deliverySpace.street.name ~ ') ' ~ order.shipping| number_format(0,'.',' ') :'0' |number_format(0,'.',' ') }}
+                        {{ site.current_name }}
+                    </td>
                 </tr>
                 <tr>
                     <th>{{'Total'|trans}}:</th>
