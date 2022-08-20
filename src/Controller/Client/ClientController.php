@@ -145,7 +145,7 @@ class ClientController extends AbstractController
         $order->setNumber($orderService->voiceNumber($order->getId()));
         $entityManager->flush();
 
-        $this->addFlash('success', 'Merci. Votre commande a été recu.');
+        $this->addFlash('success', 'Merci. Votre commande a été reçu.');
         $session->set('panier', []);
         $user = $this->getUser();
         

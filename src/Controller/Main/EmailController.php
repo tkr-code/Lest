@@ -43,27 +43,19 @@ class EmailController extends AbstractController
             }
     }
     /**
-     * @Route("gestion-compte/edit-email", name="edit_email")
-     */
-    public function editEmail(): Response
-    {
-        return $this->render('main/edit-email.html.twig', [
-        ]);
-    }
-    /**
      * @Route("/send/edit-email", name="send_edit_email", methods={"GET","POST"} )
      */
     public function editEmailResponse(Request $request):Response
     {
         $user = $this->getUser();
         $email = (new TemplatedEmail())
-            ->from(new Address('malick.tounkara.1@gmail.com', 'app.tkr'))
+            ->from(new Address('contact@lest.sn', 'lest.sn'))
             ->to($user->getEmail())
             ->subject("Modiifer l'email")
             ->htmlTemplate('email/reset-email.html.twig')
             ->context([
                 'user'=>$this->getUser(),
-                'theme'=> $this->emailService->theme(8),
+                'theme'=> $this->emailService->theme(3),
             ]);
         try
         {
@@ -98,7 +90,7 @@ class EmailController extends AbstractController
     {
         $user = $this->getUser();
         $email = (new TemplatedEmail())
-            ->from(new Address('malick.tounkara.1@gmail.com', 'app.tkr'))
+            ->from(new Address('contact@lest.sn', 'lest.sn'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
             ->htmlTemplate('email/delete-account.html.twig')

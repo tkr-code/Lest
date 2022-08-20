@@ -84,6 +84,7 @@ class MainController extends AbstractController
         
         return $this->redirect($request->headers->get('referer'));
     }
+
     /**
      * @Route("gestion-user/delete/{id}/{key}", name="client_user_delete", methods={"GET"})
      */
@@ -94,9 +95,7 @@ class MainController extends AbstractController
                 'No product found for id '.$client
             );
         }
-        if($client->getUser()->getStatus() == 'Delete'){
-            
-        }
+
         $is_valide = true;
         if($key  == $client->getUser()->getCle())
         {

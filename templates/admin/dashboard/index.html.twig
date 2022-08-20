@@ -100,7 +100,7 @@
             path:path('article_index'),
             bg:'bg-info',
             count:productOnline|default('0'),
-            icon:'fas fa-star'
+            icon:"fas fa-store-alt"
             }) }}
         </div>
         <!-- /.col -->
@@ -127,6 +127,7 @@
             icon:'fas fa-shopping-cart'
             }) }}
         </div>
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="col-12 col-sm-6 col-md-3">
             {{ cards.infoBox({
             name:'Gérants',
@@ -136,6 +137,7 @@
             icon:'fas fa-user-secret'
             }) }}
         </div>
+        {% endif %}
     </div>
     <!-- /.row -->
     <div class="row">

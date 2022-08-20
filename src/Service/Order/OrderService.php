@@ -27,20 +27,47 @@ class OrderService extends AbstractController{
         $this->emailService = $emailService;
     }
 
+    public function stateTranslate(Order $order){
+        $etat = '';
+        switch ($order->getState()) {
+            case 'canceled':
+                $etat = 'Anuller';
+                break;
+            case 'shipping':
+                $etat = 'Livraison';
+                break;
+            case 'waiting':
+                $etat = 'En attente';
+                break;
+            case 'in progress':
+                $etat = 'En cour';
+                break;
+            
+            default:
+                $etat = $order->getState();
+                break;
+        }
+        return $etat;
+    }
+
     public function orderSendToEmail(Order $order, $pdf= false){
+        $theme = ($order->getState() == 'completed')? '7':'4';
+        $page = ($order->getState() == 'completed')? 'facture':'order';
+                
         $fichier = $order->getFacture().'.pdf';
         $email =  (new TemplatedEmail())
             ->from(new Address('contact@lest.sn', 'lest.sn'))
             ->to($order->getUser()->getEmail())
             ->subject('Lest - Avis de facture')
-            ->htmlTemplate('email/order.html.twig');
+            ->htmlTemplate('email/'.$page.'.html.twig');
             if($pdf){
                 $email->attachFromPath($this->getParameter('order_pdf_directory') .DIRECTORY_SEPARATOR.$fichier,$fichier,'application/pdf');                
             }
             $email->context([
                 'user'=>$order->getUser(),
-                'theme' => $this->emailService->theme(4),
+                'theme' => $this->emailService->theme($theme),
                 'order' => $order,
+                'etat'=>$this->stateTranslate($order)
             ]);
             return $email;
     }

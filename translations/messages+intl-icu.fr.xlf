@@ -1122,6 +1122,15 @@
         <source>Cancel</source>
         <target>Annuler</target>
       </trans-unit>
+      <trans-unit id="dABiZ2o" resname="shipping">
+        <source>shipping</source>
+        <target>Livraison</target>
+      </trans-unit>
+      
+      <trans-unit id="xYWQvNn" resname="Edit your email">
+        <source>Edit your email</source>
+        <target>Modifier votre email</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

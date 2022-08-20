@@ -368,10 +368,10 @@
 		// open modal add
 		$(document).on('click', '#modal-add-phone', function () {
 			$('#modal-default').modal('show')
-			let body = '<div class="form-group">' 
-				+ '<input id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">' 
-				+ '<small id="help-tel-phone" class="text-danger"></small></div>' + '<div class="form-group">' 
-				+ '<label>Numero whatsapp ?</label> ' + '<input type="checkbox" id="isWhatsapp"></div>' 
+			let body = '<div class="form-group">'
+				+ '<input id="tel-phone" type="text" placeholder="Entrer le numero" class="form-control phone">'
+				+ '<small id="help-tel-phone" class="text-danger"></small></div>' + '<div class="form-group">'
+				+ '<label>Numero whatsapp ?</label> ' + '<input type="checkbox" id="isWhatsapp"></div>'
 				+ '<button id="btn-add-phone" token="  {{ csrf_token('add-phone - item') }}" class="btn btn-primary">Ajouter</button>'
 			$('#modal-default .modal-title').html('Ajouter un numéro')
 			$('#modal-default .modal-body').html(body)
@@ -508,47 +508,6 @@
 		})
 		// delete account end
 
-
-		// send email start
-		$(document).on('click', '#btn-edit-email', function () {
-			Swal.fire({
-				title: 'Etes vous sûr?',
-				text: "Vous etes sur le point d'envoyer un email de modification d'email ! ",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				cancelButtonText: 'Fermer',
-				confirmButtonText: 'Oui, je confirme!'
-			}).then((result) => {
-				if (result.isConfirmed) { // ajax
-					$.ajax({
-						url: "{{ path('send_edit_email') }}",
-						method: "POST",
-						dataType: 'json',
-						data: {},
-						beforeSend: function () {
-							$('.loader-edit-email').css('display', 'initial')
-							$('#btn-edit-email').css('display', 'none')
-						},
-						success: function (data) {
-							if (data == 'success') { } else {
-								Swal.fire({
-									icon: 'success',
-									title: 'Your work has been saved',
-									showConfirmButton: false,
-									timer: 1500
-								})
-							}
-							$('.loader-edit-email').css('display', 'none')
-							$('#btn-edit-email').css('display', 'initial')
-							$('.alert-edit-email').css('display', 'initial')
-						}
-					})
-					// ./ajax end
-				}
-			})
-		})
 		// send email end
 		$(document).on('click', '#btn-editor', function () {
 			$('#js-editor').animate({

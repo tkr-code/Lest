@@ -367,6 +367,7 @@ class OrderController extends AbstractController
                     {
                     $payment = $order->getPayment();
                     $payment->setState('completed');
+                    $order->setState($state);
                     $order->setPayment($payment);
                     $order->setCheckoutCompletedAt(new \DateTime());
                     foreach ($order->getOrderItem()->getValues() as $key => $value) {
@@ -377,9 +378,9 @@ class OrderController extends AbstractController
                         $articleBuy->setQuantity($value->getQuantity());
                         $this->getDoctrine()->getManager()->persist($articleBuy);
                     }
+                    $order->setIsImmuable(false);
+                    $mailer->send($orderService->orderSendToEmail($order));
                 }
-                $order->setIsImmuable(false);
-                $mailer->send($orderService->orderSendToEmail($order));
             }
             $order->setState($state);
             $entityManager->flush();

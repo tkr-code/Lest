@@ -1,10 +1,5 @@
 {% extends "lest/base.html.twig" %}
 {% block main %}
-<style>
-	@media screen and (max-width: 767px) {
-		
-	}
-</style>
 <main class="main">
 	<div class="intro-section pt-3 pb-3 mb-2">
 		<div class="container">
@@ -356,26 +351,34 @@
 
 			<div class="heading-right">
 				<ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
+					{% if articles.ordinateurs is not empty %}
 					<li class="nav-item">
 						<a class="nav-link active" id="top-ordinateurs-link" data-toggle="tab"
 							href="#top-ordinateurs-tab" role="tab" aria-controls="top-ordinateurs-tab"
 							aria-selected="false">Ordinateurs</a>
 					</li>
+					{% endif %}
+					{% if articles.cle_usb is not empty %}
 					<li class="nav-item">
 						<a class="nav-link" id="top-cle-usb-link" data-toggle="tab" href="#top-cle-usb-tab" role="tab"
 							aria-controls="top-cle-usb-tab" aria-selected="false">Clé Usb</a>
 					</li>
+					{% endif %}
+					{% if articles.ordinateurs is not empty %}
 					<li class="nav-item">
 						<a class="nav-link" id="top-claviers_souris-link" data-toggle="tab"
 							href="#top-claviers_souris-tab" role="tab" aria-controls="top-claviers_souris-tab"
 							aria-selected="false">Claviers et Souris</a>
 					</li>
+					{% endif %}
+					{% if articles.ordinateurs is not empty %}
 					<li class="nav-item">
 						<a class="nav-link" id="top-imprimante_accessoires-link" data-toggle="tab"
 							href="#top-imprimante_accessoires-tab" role="tab"
 							aria-controls="top-imprimante_accessoires-tab" aria-selected="false">Imprimante et
 							accessoires</a>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 			<!-- End .heading-right -->
@@ -383,6 +386,7 @@
 		<!-- End .heading -->
 
 		<div class="tab-content tab-content-carousel just-action-icons-sm">
+			{% if articles.ordinateurs is not empty %}
 			<div class="tab-pane p-0 fade show active" id="top-ordinateurs-tab" role="tabpanel"
 				aria-labelledby="top-ordinateurs-link">
 				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
@@ -418,6 +422,8 @@
 				<!-- End .owl-carousel -->
 			</div>
 			<!-- .End .tab-pane -->
+			{% endif %}
+			{% if articles.cle_usb is not empty %}
 			<div class="tab-pane p-0 fade" id="top-cle-usb-tab" role="tabpanel" aria-labelledby="top-cle-usb-link">
 				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
 					data-owl-options='{
@@ -452,6 +458,8 @@
 				<!-- End .owl-carousel -->
 			</div>
 			<!-- .End .tab-pane -->
+			{% endif %}
+			{% if articles.claviers_souris is not empty %}
 			<div class="tab-pane p-0 fade" id="top-claviers_souris-tab" role="tabpanel"
 				aria-labelledby="top-claviers_souris-link">
 				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
@@ -487,6 +495,8 @@
 				<!-- End .owl-carousel -->
 			</div>
 			<!-- .End .tab-pane -->
+			{% endif %}
+			{% if articles.imprimante_accessoires is not empty %}
 			<div class="tab-pane p-0 fade" id="top-imprimante_accessoires-tab" role="tabpanel"
 				aria-labelledby="top-imprimante_accessoires-link">
 				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
@@ -522,6 +532,8 @@
 				<!-- End .owl-carousel -->
 			</div>
 			<!-- .End .tab-pane -->
+			{% endif %}
+			{% if articles.cle_usb is not empty %}
 			<div class="tab-pane p-0 fade" id="top-acc-tab" role="tabpanel" aria-labelledby="top-acc-link">
 				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
 					data-owl-options='{
@@ -552,6 +564,7 @@
 				<!-- End .owl-carousel -->
 			</div>
 			<!-- .End .tab-pane -->
+			{% endif %}
 		</div>
 		<!-- End .tab-content -->
 	</div>

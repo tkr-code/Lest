@@ -74,7 +74,10 @@
         </div>
         {% endif %}
     </div>
-    {% if order.state != 'canceled' %}
-    <button class="btn-send-order-number btn btn-primary">Actualiser</button>
+    {% if order.state != 'completed' %}
+
+        {% if order.state != 'canceled' %}
+        <button class="btn-send-order-number btn btn-primary">Actualiser</button>
+        {% endif %}
     {% endif %}
 </div>

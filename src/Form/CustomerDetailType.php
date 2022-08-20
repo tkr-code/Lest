@@ -24,7 +24,7 @@ class CustomerDetailType extends AbstractType
                 'label'=>false
             ])
             ->add('phone_number',TextType::class)
-            ->add('email',EmailType::class)
+            // ->add('email',EmailType::class)
         ;
     }
 

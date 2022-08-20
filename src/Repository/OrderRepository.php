@@ -97,7 +97,7 @@ class OrderRepository extends ServiceEntityRepository
         ->orderBy('o.id','desc')
         ->andWhere('o.state <> :state')
         ->andWhere('o.state <> :state2')
-        ->setParameter('state','completd')
+        ->setParameter('state','completed')
         ->setParameter('state2','canceled')
         ->setMaxResults(10)
         ->getQuery()

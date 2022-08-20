@@ -9,6 +9,7 @@ use App\Repository\ClientRepository;
 use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailService;
+use App\Service\Order\OrderService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,7 @@ class EmailTestController extends AbstractController
     {
 
         $user = $userRepository->findOneBy([
-            'email'=>'clienttest@lest.sn'
+            'email'=>'test@email.com'
         ]);
         if($user){
             $this->user = $user;
@@ -54,16 +55,26 @@ class EmailTestController extends AbstractController
         ]);
     }
     /**
-     * @Route("/email/order", name="email_order")
+     * @Route("/email/order/{id}", name="email_order")
      */
-    public function order(OrderRepository $orderRepository): Response
+    public function order(OrderRepository $orderRepository, OrderService $orderService, Order $order): Response
     {
-        $order = $orderRepository->findOneBy([
-            'number'=>'000001'
-        ]);
         return $this->render('email/order.html.twig',[
             'theme'=>$this->emailService->theme(4),
             'order'=>$order,
+            'etat'=>$orderService->stateTranslate($order),
+            'user'=>$this->user 
+        ]);
+    }
+    /**
+     * @Route("/email/facture/{id}", name="email_facture")
+     */
+    public function facture(OrderService $orderService, OrderRepository $orderRepository, Order $order): Response
+    {
+        return $this->render('email/facture.html.twig',[
+            'theme'=>$this->emailService->theme(4),
+            'order'=>$order,
+            'etat'=>$orderService->stateTranslate($order),
             'user'=>$this->user 
         ]);
     }
@@ -75,6 +86,17 @@ class EmailTestController extends AbstractController
         $user = $userRepository->find(103);
         return $this->render('email/new-user.html.twig',[
             'theme'=>$this->emailService->theme(5),
+            'user'=>$user,
+            'password'=>'password' 
+        ]);
+    }
+    /**
+     * @Route("/email/edit-email/{id}", name="email_edit_email")
+     */
+    public function editEmail(User $user): Response
+    {
+        return $this->render('email/reset-email.html.twig',[
+            'theme'=>$this->emailService->theme(3),
             'user'=>$user,
             'password'=>'password' 
         ]);

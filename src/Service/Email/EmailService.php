@@ -50,8 +50,8 @@ class EmailService
             // modifier l'email
             $introduction = '';
             $button_link = null;
-            $button_text = 'Modifier votre e-mail';
-              $titre = 'Veuillez modifier e-mail';
+            $button_text = 'Modifier mon email';
+              $titre = 'Veuillez modifier email';
               $message = 'Étiez-vous à l’origine de la modfication de votre compte lest ? Si oui, voici le lien de modification.';
             break;
           case '4':
@@ -60,7 +60,7 @@ class EmailService
             $button_link = null;
             $button_text = null;
               $titre = 'Avis de facture';
-              $message = 'Une facture à été générée';
+              $message = 'Une facture a été générée';
             break;
           case '5':
             // confirmaion user
@@ -85,6 +85,14 @@ class EmailService
             $button_text = null;
               $titre = "Message visiteur";
               $message = 'Un nouveau message a été crée.';
+            break;
+          case '7':
+            // facture
+            $introduction = '';
+            $button_link =null ;
+            $button_text = null;
+              $titre = "Message visiteur";
+              $message = 'Reçu de paiement.';
             break;
 
           default:

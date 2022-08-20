@@ -22,7 +22,7 @@
         {% elseif etat == 'canceled' %}
         <span class="badge badge-danger">{{'canceled'|trans}}</span>
         {% elseif etat == 'shipping' %}
-        <span class="badge badge-danger">{{'shipping'|trans}}</span>
+        <span class="badge badge-warning">{{'shipping'|trans}}</span>
         {% else %}
         <span class="badge">{{etat}}</span>
     {% endif %}
