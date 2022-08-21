@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
             ->setLastName($value['last_name']);
             $user->setEmail($value['email']);
             $user->setStatus('Activer');
+            $user->setIsVerified(true);
             $user->setCle('123456');
             $user->setPhoneNumber('770000000');
             $user->setPassword($this->passwordEncoder->hashPassword($user,'password'))

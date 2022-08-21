@@ -146,6 +146,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_verified;
+
 
     public function __construct()
     {
@@ -428,12 +433,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastLoginAt(): ?\DateTimeInterface
+    public function getLastLoginAt(): ?\DateTime
     {
         return $this->last_login_at;
     }
 
-    public function setLastLoginAt(?\DateTimeInterface $last_login_at): self
+    public function setLastLoginAt(?\DateTime $last_login_at): self
     {
         $this->last_login_at = $last_login_at;
 
@@ -514,6 +519,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
 
         return $this;
     }

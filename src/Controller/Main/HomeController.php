@@ -30,7 +30,7 @@ class HomeController extends AbstractController
             ]),
             'articles'=>
             [
-                'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateurs','Meilleurs ventes'),
+                'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateur portable','Meilleurs ventes'),
                 'cle_usb'=>$articleRepository->findCategoryTitle('clé usb','Meilleurs ventes'),
                 'claviers_souris'=>$articleRepository->findCategoryTitle('claviers et souris','Meilleurs ventes'),
                 'imprimante_accessoires'=>$articleRepository->findCategoryTitle('imprimante et accessoires','Meilleurs ventes'),

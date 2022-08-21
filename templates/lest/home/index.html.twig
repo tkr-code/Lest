@@ -341,6 +341,7 @@
 		<hr class="mt-3 mb-6">
 	</div>
 
+	
 	<div class="container top">
 		<div class="heading heading-flex mb-3">
 			<div class="heading-left">
@@ -364,14 +365,14 @@
 							aria-controls="top-cle-usb-tab" aria-selected="false">Clé Usb</a>
 					</li>
 					{% endif %}
-					{% if articles.ordinateurs is not empty %}
+					{% if articles.claviers_souris is not empty %}
 					<li class="nav-item">
 						<a class="nav-link" id="top-claviers_souris-link" data-toggle="tab"
 							href="#top-claviers_souris-tab" role="tab" aria-controls="top-claviers_souris-tab"
 							aria-selected="false">Claviers et Souris</a>
 					</li>
 					{% endif %}
-					{% if articles.ordinateurs is not empty %}
+					{% if articles.imprimante_accessoires is not empty %}
 					<li class="nav-item">
 						<a class="nav-link" id="top-imprimante_accessoires-link" data-toggle="tab"
 							href="#top-imprimante_accessoires-tab" role="tab"
@@ -533,41 +534,11 @@
 			</div>
 			<!-- .End .tab-pane -->
 			{% endif %}
-			{% if articles.cle_usb is not empty %}
-			<div class="tab-pane p-0 fade" id="top-acc-tab" role="tabpanel" aria-labelledby="top-acc-link">
-				<div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
-					data-owl-options='{
-					"nav": true,
-					"dots": false,
-					"margin": 20,
-					"loop": false,
-					"autoplay":true,
-					"autoplayTimeout":4000,
-					"responsive": {
-						"0": {
-							"items":2
-						},
-						"480": {
-							"items":2
-						},
-						"768": {
-							"items":3
-						},
-						"992": {
-							"items":4
-						},
-						"1200": {
-							"items":5
-						}
-					}
-				}'></div>
-				<!-- End .owl-carousel -->
-			</div>
-			<!-- .End .tab-pane -->
-			{% endif %}
 		</div>
 		<!-- End .tab-content -->
 	</div>
+	
+	{% if articles.populaires is not empty %}
 	<div class="container">
 		<hr class="mt-3 mb-6">
 	</div>
@@ -620,6 +591,7 @@
 		</div>
 		<!-- End .tab-content -->
 	</div>
+	{% endif %}
 	<div class="text-center">
 		<a href="{{ path('articles') }}" class="btn btn-primary btn-round">
 			<span>Voir Tous nos produits</span>

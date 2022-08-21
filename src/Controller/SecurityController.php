@@ -13,6 +13,7 @@ use App\Form\ArticleSearchType;
 use App\Form\RegistrationFormType;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 class SecurityController extends AbstractController
 {
@@ -21,16 +22,19 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('home');
-        }
-        $search = new ArticleSearch();
-        $formSearch = $this->createForm(ArticleSearchType::class,$search);
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('home');
+        // }
+        // $search = new ArticleSearch();
+        // $formSearch = $this->createForm(ArticleSearchType::class,$search);
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        throw new CustomUserMessageAuthenticationException(
+            'Please verify your account before logging in.'
+        );
 
         // FORM DE CREATION DE COMPTE
         $user = new User();
@@ -40,7 +44,7 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername, 
             'error' => $error,
             'users'=>$userRepository->findAll(),
-            'form'=>$formSearch,
+            // 'form'=>$formSearch,
             'registrationForm'=>$registrationForm
         ]);
     }

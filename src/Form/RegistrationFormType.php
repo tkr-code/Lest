@@ -59,7 +59,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label'=>'J\'acceptes <a href="#a-modifier-en-production">les conditions d\'utilisateurs et des cookies</a>',
+                'label'=>'J\'acceptes <a target="_blank" href="https://lest.sn/lest/public/doc/Conditions.pdf">les conditions d\'utilisateurs et des cookies</a>',
                 'mapped' => false,
                 'label_html' => true,
                 'constraints' => [
