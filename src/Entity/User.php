@@ -160,6 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->favoris = new ArrayCollection();
         $this->phones = new ArrayCollection();
         $this->status = 'Activer';
+        $this->is_verified = false;
 
     }
 

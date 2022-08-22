@@ -69,7 +69,6 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
@@ -83,14 +82,16 @@ class RegistrationController extends AbstractController
                         ])
             );
 
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get("security.token_storage")->setToken($token);
+            //Se connecter automatiquement
+            // $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+            // $this->get("security.token_storage")->setToken($token);
 
             $event =  new SecurityEvents($request);
             $eventDispatcherInterface->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
-            $this->addFlash('success','Votre compte a été enregistré. Vous pouvez poursuivre vos achats');
+            $this->addFlash('info','Un email de confirmation vous a été envoyé, Merci de vérifier votre boite de méssagerie');
+            // $this->addFlash('success','Votre compte a été enregistré. Vous pouvez poursuivre vos achats');
             // do anything else you need here, like send an email
-            return $this->redirectToRoute('articles');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/lest.html.twig', [

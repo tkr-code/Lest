@@ -22,9 +22,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils, UserRepository $userRepository): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('home');
-        // }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
         // $search = new ArticleSearch();
         // $formSearch = $this->createForm(ArticleSearchType::class,$search);
 
@@ -32,9 +32,6 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        throw new CustomUserMessageAuthenticationException(
-            'Please verify your account before logging in.'
-        );
 
         // FORM DE CREATION DE COMPTE
         $user = new User();

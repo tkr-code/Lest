@@ -625,11 +625,11 @@
       </trans-unit>
       <trans-unit id="F7WctIl" resname="Cheers!">
         <source>Cheers!</source>
-        <target>Santé!!</target>
+        <target>Santé!</target>
       </trans-unit>
       <trans-unit id="ITaQX9q" resname="Confirm my Email">
         <source>Confirm my Email</source>
-        <target>Confirmer mon email</target>
+        <target>Confirmez mon email</target>
       </trans-unit>
       <trans-unit id="4O3_s6c" resname="Reset password">
         <source>Reset password</source>

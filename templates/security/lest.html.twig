@@ -1,4 +1,6 @@
 {% extends "lest/base.html.twig" %}
+{% import "macros/alertes.html.twig" as alerte %}
+
 {% block main %}
 <main class="main">
 	<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -29,6 +31,12 @@
 						<div class="tab-pane fade show active" id="signin-2" role="tabpanel"
 							aria-labelledby="signin-tab-2">
 							<form method="post">
+								{% for item in app.flashes('success') %}
+								{{ alerte.alert(item,'success')}}
+								{% endfor %}
+								{% for item in app.flashes('info') %}
+								{{ alerte.alert(item,'info')}}
+								{% endfor %}
 								{% if error %}
 								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security')
 									}}</div>

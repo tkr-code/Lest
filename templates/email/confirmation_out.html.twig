@@ -4,13 +4,12 @@
 		{{'Please confirm your email address by clicking the following link'|trans}}:
 		<br><br>
 		{{'This link will expire in'|trans}}
-		<a style="color:#5F5F5F" href="{{ signedUrl|default('#') }}">Confirmer mon Email</a>.
+		{# <a style="color:#5F5F5F" href="{{ signedUrl|default('#') }}">Confirmer mon Email</a>. #}
 		{{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 	</p>
 	<p>
 		{{'Cheers!'|trans}}
 	</p>
-
 
 {% endblock %}
 {% block btn_path %}
