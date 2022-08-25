@@ -67,6 +67,16 @@ class EmailTestController extends AbstractController
         ]);
     }
     /**
+     * @Route("/email/notification/{id}", name="email_order_notification")
+     */
+    public function orderNotification(OrderRepository $orderRepository, OrderService $orderService, Order $order): Response
+    {
+        return $this->render('email/order_notiification.html.twig',[
+            'theme'=>$this->emailService->theme(8),
+            'order'=>$order 
+        ]);
+    }
+    /**
      * @Route("/email/facture/{id}", name="email_facture")
      */
     public function facture(OrderService $orderService, OrderRepository $orderRepository, Order $order): Response

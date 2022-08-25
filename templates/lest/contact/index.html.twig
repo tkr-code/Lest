@@ -2,6 +2,13 @@
 
 {% block javascripts %}
 {% endblock %}
+{% block head %}
+ <script>
+function onSubmit(token) {
+         document.getElementById("contact-form").submit();
+       }
+</script> 
+{% endblock %}
 {% block main %}
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -32,6 +39,7 @@
                     </div><!-- End .text-center -->
                     {{ form_start(form_contact,{
                     'attr':{
+                    id:'contact-form',
                     'novalidate':'novalidate',
                     'class':'form-contact contact_form align-items-end'
                     }
@@ -66,7 +74,7 @@
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
                             <button type="submit" class="g-recaptcha btn btn-outline-primary-2 btn-minwidth-sm" 
-                                data-sitekey="6Lf5x_ceAAAAAGo5ObTVmBQva3GcIV8nzhmu2xlI" 
+                                data-sitekey="6LfDomMhAAAAAHVQGcmpEZUbJ-5XsGPq63w_7vw9" 
                                 data-callback='onSubmit'>
                                 {{'Send Message'|trans }} <i class="icon-long-arrow-right"></i>
                             </button>
@@ -76,6 +84,7 @@
                     </div>
                     {{ form_widget(form_contact) }}
                     {{ form_end(form_contact) }}
+                    <script>onload();</script>
 
                 </div><!-- End .col-md-9 col-lg-7 -->
             </div><!-- End .row -->

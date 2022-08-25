@@ -56,7 +56,7 @@ class OrderService extends AbstractController{
                 
         $fichier = $order->getFacture().'.pdf';
         $email =  (new TemplatedEmail())
-            ->from(new Address('contact@lest.sn', 'lest.sn'))
+            ->from(new Address('contact@lest.sn', 'lest - Facture'))
             ->to($order->getUser()->getEmail())
             ->subject('Lest - Avis de facture')
             ->htmlTemplate('email/'.$page.'.html.twig');
@@ -68,6 +68,18 @@ class OrderService extends AbstractController{
                 'theme' => $this->emailService->theme($theme),
                 'order' => $order,
                 'etat'=>$this->stateTranslate($order)
+            ]);
+            return $email;
+    }
+    public function orderSendNotification(Order $order){
+        $email =  (new TemplatedEmail())
+            ->from(new Address('contact@lest.sn', 'lest - #'. $order->getNumber()))
+            ->to('contact@lest.sn')
+            ->subject('Lest - Commande N°'.$order->getNumber().' en attente')
+            ->htmlTemplate('email/order_notiification.html.twig');
+            $email->context([
+                'theme' => $this->emailService->theme(8),
+                'order' => $order,
             ]);
             return $email;
     }

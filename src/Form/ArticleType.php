@@ -108,7 +108,7 @@ class ArticleType extends AbstractType
                 ])
             ->add('images',FileType::class,[
                 'label'=>'Ajouter une ou plusieurs images (*)',
-                'multiple'=>true,
+                'multiple'=>'multiple',
                 'mapped'=>false,
                 'constraints'=>[],
                 ])

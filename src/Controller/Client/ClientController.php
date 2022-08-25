@@ -150,6 +150,7 @@ class ClientController extends AbstractController
         $user = $this->getUser();
         
         $mailer->send($orderService->orderSendToEmail($order)); // envoi la commande par email
+        $mailer->send($orderService->orderSendNotification($order));//mail de notification d'une commande en attente
         
         return $this->redirectToRoute('client_confirmation', ['id' => $order->getId()], Response::HTTP_SEE_OTHER);
     }

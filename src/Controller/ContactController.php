@@ -22,10 +22,10 @@ class ContactController extends AbstractController
         $formContact = $this->createForm(ContactType::class);
         $contact = $formContact->handleRequest($request);
 
-        $reCAPTCHA_secret_key="6Lf5x_ceAAAAADml1QNfCFcx_TZ-sWYo6_9euqeV";
+        $reCAPTCHA_secret_key="6LfDomMhAAAAAG1cNp7cAYHiI6NBvfdsM-ItcCru";
         $g_recaptcha_response="";
         $ip = $_SERVER['REMOTE_ADDR'];
-        $globaals = $this->get('twig')->getGlobals();
+        $globals = $this->get('twig')->getGlobals();
 
         if($formContact->isSubmitted() && $formContact->isValid()){
             $g_recaptcha_response = $request->request->get('g-recaptcha-response');
@@ -35,12 +35,10 @@ class ContactController extends AbstractController
         . urlencode($ip);
         $response = file_get_contents($url);
         $responeKey = json_decode($response,true);
-        if($responeKey['success']){
-
-        
+        if($responeKey['success']){        
             $email = (new TemplatedEmail())
                 ->from($contact->get('email')->getData())
-                ->to('contact@lest.sn')
+                ->to($globals['site']['email'])
                 ->subject('Contact depuis le site malick tounkara')
                 ->htmlTemplate('email/contact.html.twig')
                 ->context([

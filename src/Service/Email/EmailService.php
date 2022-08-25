@@ -91,8 +91,16 @@ class EmailService
             $introduction = '';
             $button_link =null ;
             $button_text = null;
-              $titre = "Message visiteur";
+              $titre = "Avis de facture";
               $message = 'Reçu de paiement.';
+            break;
+          case '8':
+            // facture
+            $introduction = '';
+            $button_link =null ;
+            $button_text = null;
+              $titre = "Nouvelle commande";
+              $message = 'Une commande est en attente.';
             break;
 
           default:
