@@ -89,12 +89,17 @@
 
 		<div class="product-nav product-nav-thumbs">
 			{% for item in item.images|slice(1,4) %}
-			<a href="#" {{ loop.index==0 ? 'class="active"' :'' }}>
+			<a type="button" href="#" {{ loop.index==0 ? 'class="active"' :'' }}>
 				<img src="{{ asset('img/article/' ~ item.name ) }}" alt="">
 			</a>
 			{% endfor %}
 		</div>
 		<!-- End .product-nav -->
 	</div>
+	{% if is_granted('ROLE_EDITOR') %}
+	<a href="{{ path('article_edit',{id: item.id} ) }}" class="p-2 text-success">
+		<i class="fas fa-pencil-alt text-success"></i> Modifier
+	</a>
+	{% endif %}
 	<!-- End .product-body -->
 </div>

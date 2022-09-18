@@ -101,10 +101,6 @@
         <source>Description</source>
         <target>Description</target>
       </trans-unit>
-      <trans-unit id="xDY3y18" resname="Caractéristique">
-        <source>Caractéristique</source>
-        <target>__Caractéristique</target>
-      </trans-unit>
       <trans-unit id="T8c922M" resname="Email send">
         <source>Email send</source>
         <target>Emailr envoyé</target>
@@ -173,10 +169,6 @@
         <source>Order Facturation</source>
         <target>Facturation de la commande</target>
       </trans-unit>
-      <trans-unit id="tIeN1q5" resname="Full nam">
-        <source>Full nam</source>
-        <target>__Full nam</target>
-      </trans-unit>
       <trans-unit id="SeltfN9" resname="Amount">
         <source>Amount</source>
         <target>Montant</target>
@@ -196,10 +188,6 @@
       <trans-unit id="T1j3H0b" resname="Order confirmation">
         <source>Order confirmation</source>
         <target>Confirmation de la commande</target>
-      </trans-unit>
-      <trans-unit id="a9BhVZZ" resname="Mes achats">
-        <source>Mes achats</source>
-        <target>__Mes achats</target>
       </trans-unit>
       <trans-unit id="0Aqua3_" resname="Shop">
         <source>Shop</source>
@@ -601,7 +589,7 @@
       </trans-unit>
       <trans-unit id="HT8RAix" resname="Billing Address">
         <source>Billing Address</source>
-        <target>__Billing Address</target>
+        <target>Address de </target>
       </trans-unit>
       <trans-unit id="biRHD87" resname="Shipping Address">
         <source>Shipping Address</source>
@@ -982,14 +970,6 @@
         <source>Send password reset email</source>
         <target>Envoyer un courriel de réinitialisation du mot de passe</target>
       </trans-unit>
-      <trans-unit id="zJO1KsS" resname="Article cree">
-        <source>Article cree</source>
-        <target>__Article cree</target>
-      </trans-unit>
-      <trans-unit id="L.WZgUO" resname="Tous">
-        <source>Tous</source>
-        <target>__Tous</target>
-      </trans-unit>
       <trans-unit id="puhknd." resname="View All&#10;                                    Orders">
         <source>View All
                                     Orders</source>
@@ -1072,11 +1052,11 @@
       </trans-unit>
       <trans-unit id="U0M9PNE" resname="back to list">
         <source>back to list</source>
-        <target>__back to list</target>
+        <target>Retour à la liste</target>
       </trans-unit>
       <trans-unit id="aoMq9J3" resname="log out">
         <source>log out</source>
-        <target>__log out</target>
+        <target>Se déconnecter</target>
       </trans-unit>
       <trans-unit id="vko3pnY" resname="All rights reserved">
         <source>All rights reserved</source>
@@ -1126,10 +1106,25 @@
         <source>shipping</source>
         <target>Livraison</target>
       </trans-unit>
-      
       <trans-unit id="xYWQvNn" resname="Edit your email">
         <source>Edit your email</source>
         <target>Modifier votre email</target>
+      </trans-unit>
+      <trans-unit id="zJO1KsS" resname="Article cree">
+        <source>Article cree</source>
+        <target>__Article cree</target>
+      </trans-unit>
+      <trans-unit id="qaeCoSj" resname="Edit Article">
+        <source>Edit Article</source>
+        <target>Modifier l'article</target>
+      </trans-unit>
+      <trans-unit id="L.WZgUO" resname="Tous">
+        <source>Tous</source>
+        <target>__Tous</target>
+      </trans-unit>
+      <trans-unit id="xDY3y18" resname="Caractéristique">
+        <source>Caractéristique</source>
+        <target>__Caractéristique</target>
       </trans-unit>
     </body>
   </file>

@@ -37,6 +37,17 @@ class ArticleOptionController extends AbstractController
             ]);
     }
 
+     /**
+     * @Route("/article-option-get/{id}", name="article_option_edit_get", methods={"GET","POST"})
+     */
+    public function ArticleOptionGet(ArticleOption $articleOption): Response
+    {
+        return new JsonResponse([$this->render('admin/article_option/_form_modal.html.twig', [
+                'option' => $articleOption,
+                ])->getContent()
+            ]);
+    }
+
     /**
      * @Route("/new", name="article_option_new", methods={"GET","POST"})
      */
@@ -70,6 +81,19 @@ class ArticleOptionController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/edit", name="article_option_edit_ajax", methods={"GET","POST"})
+     */
+    public function editOptionAjax(Request $request, ArticleOption $articleOption): Response
+    {
+        if($request->request->get('edit_article_option') == "edit_article_option" ){
+            $articleOption->setTitle($request->request->get('title'))->setContent($request->request->get('content'));
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return new JsonResponse(true);
+        }
+        return new JsonResponse(false);
+    }
     /**
      * @Route("/{id}/edit/{idArticle}/article", name="article_option_edit", methods={"GET","POST"})
      */

@@ -4,14 +4,22 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"title","description"}, flags={"fulltext"})})
+ * @ApiResource(
+ *  normalizationContext={"groups"={"list:article"}},
+ *  collectionOperations={"get"},
+ *  itemOperations={"get"}
+ * )
  */
 class Article
 {
@@ -34,6 +42,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @[Groups(['conference:list', 'conference:item'])]
      */
     private $id;
 
@@ -44,6 +53,7 @@ class Article
      * )
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
+     * @Groups({"list:article"})
      */
     private $title;
     

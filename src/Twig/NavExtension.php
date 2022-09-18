@@ -54,7 +54,7 @@ class NavExtension extends AbstractExtension
                                 'path' => 'home'
                             ],
                             [
-                                'name' => 'Produits',
+                                'name' => 'Boutique',
                                 'path' => 'articles'
                             ],
                             [

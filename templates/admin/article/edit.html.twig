@@ -11,10 +11,10 @@
 {% endblock %}
 
 {% block breadcrumb %}
-{{ utils.breadcrumb('Ajouter un produit',[
+{{ utils.breadcrumb('Modifier un produit',[
 {
 path:path('article_index'),
-name:'Manage Articles'
+name:'Listes des articles'
 }
 ])}}
 {% endblock %}
@@ -25,7 +25,7 @@ name:'Manage Articles'
 	<div class="col-md-12">
 		<div class="card card-outline card-primary">
 			<div class="card-header">
-				<div class="card-title">{{ 'Edit Article' }}</div>
+				<div class="card-title">{{ 'Edit Article'|trans }}</div>
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -98,7 +98,7 @@ name:'Manage Articles'
 												<div class="row gallery-2">
 													{% for image in article.images %}
 													<div class="col-lg-3 col-md-4 col-xs-6">
-														<img src="{{ asset('/img/article/' ~ image.name)}}"
+														<img src="{{ asset('img/article/' ~ image.name)}}"
 															class="zoom img-fluid " alt="">
 														<a class="btn btn-image-delete position-absolute btn-image-delete text-danger text-center"
 															href="{{ path('article_delete_image', {id: image.id}) }}"

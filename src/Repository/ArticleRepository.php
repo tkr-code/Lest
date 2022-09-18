@@ -31,6 +31,7 @@ class ArticleRepository extends ServiceEntityRepository
     {
         $query = $this->findQueryBuilder()
         ->AndWhere('p.enabled = true');
+        
         if($mots != null){
             $query->andWhere('MATCH_AGAINST(p.title, p.description) AGAINST(:mots boolean) > 0')
             ->setParameter('mots',$mots);

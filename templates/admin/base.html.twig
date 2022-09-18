@@ -35,6 +35,7 @@
   {% block head %}{% endblock %}
 
 </head>
+
 <body
   class="{{ app.request.attributes.get('_route') == 'admin' ? 'hold-transition sidebar-mini layout-fixed' : 'sidebar-mini sidebar-collapse' }}">
   <div class="js-loader js-loader-hide">
@@ -321,6 +322,103 @@
           },
           error: function () {
             swalError()
+          }
+        })
+      })
+
+      //MODIFIER L'OPTION DE L'ARTICLE
+      $(document).on('click', '#btn-edit-artice-option', function (e) {
+        e.preventDefault()
+        let href = $(this).data('path')
+        let nom = $('#nom_edit').val()
+        let valeur = $('#valeur_edit').val()
+        if (nom == '') {
+          let text = 'Veuillez remplir le champ nom !'
+          Swal.fire(
+            'Oups',
+            text,
+            'error'
+          )
+          $('#help_nom_edit').text(text)
+          return
+        }
+        if (valeur == '') {
+          let text = 'Veuillez remplir le champ valeur !'
+          Swal.fire(
+            'Oups',
+            text,
+            'error'
+          )
+          $('#help_valeur_edit').text(text)
+          return
+        }
+        $.ajax({
+          url: href,
+          method: 'post',
+          type: 'json',
+          data: {
+            edit_article_option: 'edit_article_option',
+            title: nom,
+            content: valeur
+          },
+          beforeSend: function () {
+            $('.js-loader-text').text('Modification en cour ...')
+            $('.js-loader').css('display', 'flex')
+          },
+          success: function (data) {
+            if (data) {
+              loadArticleOption()
+              $('#help_nom_edit').text('')
+              $('#nom_edit').val('')
+              $('#valeur_edit').val('')
+              $('#modal-default').modal('hide')
+              swal.fire({
+                title: 'Bien joué',
+                icon: 'success',
+                text: 'La caractéristique a été modifié.',
+                showConfirmButton: false,
+                timer: 1700
+              })
+            }
+            else {
+              // $('#help_nom').text(data.error)
+              $('#error').text('Une erreur a été détecté !')
+              swal.fire({
+                title: 'Oups !',
+                icon: 'error',
+                text: 'Une erreur a été détecté !',
+                showConfirmButton: false,
+                timer: 1700
+              })
+            }
+            $('.js-loader').css('display', 'none')
+          },
+          error: function () {
+            swalError()
+          }
+        })
+      })
+      //CHARGE LA MODAL DE L'OPTION DE L'ARTICLE
+      $(document).on('click', '.btn-edit-modal-option', function (e) {
+        e.preventDefault()
+        $('#modal-default').modal('show')
+        $('#modal-default .modal-title').html('Modifier la caractéristique.')
+        let href = $(this).data('path')
+        $.ajax({
+          url: href,
+          method: 'POST',
+          type: 'json',
+          data: {},
+          beforeSend: function () {
+            $('.modal-loader').css('display', 'flex')
+          },
+          success: function (data) {
+            $('#modal-default .modal-body').html(data)
+            $('.modal-loader').css('display', 'none')
+          },
+          error: function () {
+            $('.modal-loader').css('display', 'none')
+            alert('Chargement impossible')
           }
         })
       })

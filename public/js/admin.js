@@ -1,80 +1,56 @@
 $(document).ready(function () {
 
-    $(document).on('click','.btn-image-delete',function(e){
+    //SUPPRIMER UEN IMAGE DE PRODUIT
+    $(document).on('click', '.btn-image-delete', function (e) {
         e.preventDefault()
         let href = $(this).attr('href')
         let token = $(this).data('token')
         let div = $(this).closest('div')
         Swal.fire({
-        title: 'Etes vous sûr?',
-        text: "Voulez vous supprimr cettre image ?",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Fermer',
-        confirmButtonText: 'Oui, je confirme!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-            url: href,
-            method: 'DELETE',
-            type: 'json',
-            data: {
-                _token:token
-            },
-            beforeSend: function () {
-                $('.js-loader-text').text("Suppression de l'image en cour ...")
-                $('.js-loader').css('display', 'flex')
-            },
-            success: function (data) {
-                $('.js-loader').css('display', 'none')
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Supression réussie !',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    div.remove()
-                } else {
-                    alert('Une erreur est servenue')
-                }
-            },
-            error: function () {
-                $('.js-loader').css('display', 'none')
-                alert('Une erreur est servenue')
-            }
-        })
-        }
-    })
-        
-    })
-    $(document).on('click', '.btn-edit-modal-option', function (e) {
-        e.preventDefault()
-        $('#modal-default').modal('show')
-        let href = $(this).data('path')
-        $.ajax({
-            url: href,
-            method: 'POST',
-            type: 'json',
-            data: {
-                modal: 'create'
-            },
-            beforeSend: function () {
-                $('.modal-loader').css('display', 'flex')
-            },
-            success: function (data) {
-                $('#modal-default .modal-title').html('Modifier la date émmission')
-                $('#modal-default .modal-body').html(data.content)
-                $('.modal-loader').css('display', 'none')
-            },
-            error: function () {
-                $('.modal-loader').css('display', 'none')
-                alert('Chargement impossible')
+            title: 'Etes vous sûr?',
+            text: "Voulez vous supprimr cettre image ?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Fermer',
+            confirmButtonText: 'Oui, je confirme!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: href,
+                    method: 'DELETE',
+                    type: 'json',
+                    data: {
+                        _token: token
+                    },
+                    beforeSend: function () {
+                        $('.js-loader-text').text("Suppression de l'image en cour ...")
+                        $('.js-loader').css('display', 'flex')
+                    },
+                    success: function (data) {
+                        $('.js-loader').css('display', 'none')
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Supression réussie !',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            div.remove()
+                        } else {
+                            alert('Une erreur est servenue')
+                        }
+                    },
+                    error: function () {
+                        $('.js-loader').css('display', 'none')
+                        alert('Une erreur est servenue')
+                    }
+                })
             }
         })
     })
+
     //copier un produit
     $(document).on('click', '.btn-copy', function (e) {
         e.preventDefault()
