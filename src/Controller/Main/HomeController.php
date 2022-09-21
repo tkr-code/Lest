@@ -21,6 +21,7 @@ class HomeController extends AbstractController
      */
     public function home(Request $request, ArticleRepository $articleRepository): Response
     {
+        // dd($articleRepository->findCategoryOrdinateurHome());
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
       return  $this->renderForm("lest/home/index.html.twig", [
@@ -30,6 +31,7 @@ class HomeController extends AbstractController
             ]),
             'articles'=>
             [
+                'home'=>$articleRepository->findCategoryOrdinateurHome(),
                 'ordinateurs'=>$articleRepository->findCategoryTitle('ordinateur portable','Meilleurs ventes'),
                 'cle_usb'=>$articleRepository->findCategoryTitle('clé usb','Meilleurs ventes'),
                 'claviers_souris'=>$articleRepository->findCategoryTitle('claviers et souris','Meilleurs ventes'),

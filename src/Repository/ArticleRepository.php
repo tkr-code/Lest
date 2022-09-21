@@ -75,6 +75,21 @@ class ArticleRepository extends ServiceEntityRepository
             }
             return $query->getQuery()->getResult();
     }
+    public function findCategoryOrdinateurHome(int $max = 6){
+        $etat = '';
+        $query = $this->findQueryBuilder();
+        $query->addSelect('RAND() as HIDDEN rand')->orderBy('rand');
+        $query->AndWhere('p.enabled = true');
+        $query->leftJoin('p.category', 'c');
+            $query->andWhere('c.title = :title');
+            $query->setParameter('title','Ordinateur portable');
+            if(!empty($etat)){
+                $query->andWhere('p.etat = :etat');
+                $query->setParameter('etat',$etat);
+            }
+            $query->setMaxResults($max);
+            return $query->getQuery()->getResult();
+    }
     public function showPagination(){
         $query = $this->findQueryBuilder();
         // $query->
@@ -137,6 +152,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    
     public function findAllOff()
     {
         return $this->findQueryBuilder()
