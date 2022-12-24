@@ -5,9 +5,16 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ApiResource(
+ *  normalizationContext={"groups"={"image:list"}},
+ *  collectionOperations={"get"},
+ *  itemOperations={"get"}
+ * )
  */
 class Comment
 {
@@ -35,11 +42,14 @@ class Comment
      *     min = 10,
      *     minMessage = "Ce titre est trop court",
      * )
+     * @Groups({"comment:list","article:list"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"comment:list","article:list"})
+     * 
      */
     private $created_at;
 

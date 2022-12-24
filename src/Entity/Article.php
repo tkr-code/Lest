@@ -15,8 +15,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @ORM\Table(name="article", indexes={@ORM\Index(columns={"title","description"}, flags={"fulltext"})})
+ * @UniqueEntity(
+ *  fields="ref",
+ *  message="Cette reférénce existe !"
+ * )
  * @ApiResource(
- *  normalizationContext={"groups"={"list:article"}},
+ *  normalizationContext={"groups"={"article:list"}},
+ *  paginationItemsPerPage=5,
  *  collectionOperations={"get"},
  *  itemOperations={"get"}
  * )
@@ -42,7 +47,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @[Groups(['conference:list', 'conference:item'])]
+     * @Groups({"article:list"})
      */
     private $id;
 
@@ -53,7 +58,7 @@ class Article
      * )
      * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
-     * @Groups({"list:article"})
+     * @Groups({"article:list"})
      */
     private $title;
     
@@ -61,17 +66,20 @@ class Article
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="float")
+     * @Groups({"article:list"})
      */
     private $price;
 
     /**
      * @Assert\NotBlank()
      * @ORM\Column(type="text")
+     * @Groups({"article:list"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime" ,options={"default"="CURRENT_TIMESTAMP"})
+     * @Groups({"article:list"})
      */
     private $created_at;
 
@@ -83,6 +91,7 @@ class Article
     /**
      * 
      * @ORM\Column(type="boolean")
+     * @Groups({"article:list"})
      */
     private $enabled;
 
@@ -90,16 +99,19 @@ class Article
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=true)
+     * @Groups({"article:list"})
      */
     private $category;
 
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="produit", orphanRemoval=true, cascade={"persist"})
+     * @Groups({"article:list"})
      */
     private $images;
 
     /**
      * @ORM\OneToMany(targetEntity=ArticleOption::class, mappedBy="article", orphanRemoval=true)
+     * @Groups({"article:list"})
      */
     private $options;
 
@@ -116,6 +128,7 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     * @Groups({"article:list"})
      */
     private $comments;
 
@@ -130,6 +143,7 @@ class Article
     private $favori;
 
     /**
+     * 
      * @ORM\OneToMany(targetEntity=ArticleBuy::class, mappedBy="article", orphanRemoval=true)
      */
     private $articleBuys;
@@ -142,23 +156,32 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"article:list"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"article:list"})
      */
     private $reduction;
 
     /**
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="articles")
+     * @Groups({"article:list"})
      */
     private $brand;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"article:list"})
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ref;
 
 
     public function __construct()
@@ -522,6 +545,19 @@ class Article
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+       return $this->ref;
+    }
+
+    public function setRef(?string $ref): self
+    {
+      $ref = sprintf("%03s", $ref);
+        $this->ref = $ref;
 
         return $this;
     }

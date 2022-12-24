@@ -21,13 +21,12 @@ class HomeController extends AbstractController
      */
     public function home(Request $request, ArticleRepository $articleRepository): Response
     {
-        // dd($articleRepository->findCategoryOrdinateurHome());
         $search = new ArticleSearch();
         $form = $this->createForm(ArticleSearchType::class,$search)->handleRequest($request);
       return  $this->renderForm("lest/home/index.html.twig", [
             'form'=>$form,
             'slide2'=>$articleRepository->findOneBy([
-                'title'=>'Hp elitebook Folio G1'
+                'ref'=>'001'
             ]),
             'articles'=>
             [

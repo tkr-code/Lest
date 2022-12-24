@@ -80,14 +80,14 @@
               </table>
                 <div class="btn-group">
                   {% if app.session.get('panier') != [] %}
-                  {% if is_granted('ROLE_CLIENT') %}
+                  {# {% if is_granted('ROLE_CLIENT') %}
                     <a href="{{ path('order_client_shipping') }}" class="btn btn-lg ml-1 rounded btn-primary" type="submit">
                       Commander
                     </a>
                     {% else %}
                     <a href="{{ path('app_login') }}" class="btn btn-lg ml-1 rounded btn-primary" type="submit">
                       Commander
-                    </a>
+                    </a> #}
                   {% endif %}
 
                   <a href="{{ path('cart_clear') }}" class="btn-danger btn-lg ml-1">

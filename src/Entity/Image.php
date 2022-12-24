@@ -4,9 +4,16 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
+ * @ApiResource(
+ *  normalizationContext={"groups"={"image:list"}},
+ *  collectionOperations={"get"},
+ *  itemOperations={"get"}
+ * )
  */
 class Image
 {
@@ -19,6 +26,7 @@ class Image
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"image:list","article:list"})
      */
     private $name;
 

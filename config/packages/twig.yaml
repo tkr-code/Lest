@@ -31,7 +31,9 @@ twig:
             pays: 'Sénégal'
             whatsapp: "https://api.whatsapp.com/send?phone=221778010646&text=Salut, je vous contacte depuis votre site lest.sn"
             facebook: 'https://www.facebook.com/Les-Spécialistes-de-la-Technologie-LEST-575426226469195/'
-
+        GOOGLE_CLIENT_ID: '%env(GOOGLE_CLIENT_ID)%'
+        GOOGLE_CLIENT_SECRET: '%env(GOOGLE_CLIENT_SECRET)%'
+        GOOGLE_LOGIN_URL: '%env(GOOGLE_LOGIN_URL)%'
 when@test:
     twig:
         strict_variables: true

@@ -107,6 +107,9 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
+            $ref =  sprintf("%03s", $article->getId());
+            $article->setRef($ref);
+            $entityManager->flush();
             $message = $translator->trans('Article cree');
             $this->addFlash('success', "L'article a été crée.");
             return $this->redirectToRoute('article_new_add_option', ['id' => $article->getId()], Response::HTTP_SEE_OTHER);

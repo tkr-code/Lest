@@ -14,9 +14,15 @@ use App\Form\RegistrationFormType;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-
+use Symfony\Component\HttpFoundation\Request;
 class SecurityController extends AbstractController
 {
+    /**
+     * @Route("/oaut/se-connecter-avec-google",name="app_login_google")
+     */
+    public function connection_avec_google(Request $request){
+        dd($request);
+    }
     /**
      * @Route("/login", name="app_login")
      */

@@ -4,9 +4,15 @@ namespace App\Entity;
 
 use App\Repository\ArticleOptionRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=ArticleOptionRepository::class)
+ *  * @ApiResource(
+ *  normalizationContext={"groups"={"article_option:list"}},
+ *  collectionOperations={"get"},
+ *  itemOperations={"get"}
+ * )
  */
 class ArticleOption
 {
@@ -19,11 +25,13 @@ class ArticleOption
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"article_option:list","article:list"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"article_option:list","article:list"})
      */
     private $content;
 
